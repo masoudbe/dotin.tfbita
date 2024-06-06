@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CategoryElement.
+    -->
+    <changeSet id="20240606191117-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="order_reg_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__order_reg_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="request_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__request_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="import_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__import_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="operation_typ_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__operation_typ_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_provision_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__currency_provision_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_tool_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__payment_tool_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="activity_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__activity_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="owner_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__owner_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="external_customer_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__external_customer_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__transport_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_supplier_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__currency_supplier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="purchase_from_other_resources"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_purchase_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__status_purchase_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="purchase_from_other_resources"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_vehicle_type_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__transport_vehicle_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20240606103124"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "evidenceCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencySupplierDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "purchaseRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "orderRegistrationAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "requestDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "confirmationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchaseNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchaseCurrencyName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "PurchaseFromOtherResources",
+  "relationships": [
+    {
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "orderRegistrationInfo",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -15,7 +15,14 @@
         "task": "Task",
         "employee": "Employee",
         "job": "Job",
-        "jobHistory": "Job History"
+        "jobHistory": "Job History",
+        "orderRegistrationInfo": "Order Registration Info",
+        "categoryElement": "Category Element",
+        "custom": "Custom",
+        "licenceInfo": "Licence Info",
+        "orderRegServ": "Order Reg Serv",
+        "product": "Product",
+        "purchaseFromOtherResources": "Purchase From Other Resources"
       },
       "account": {
         "main": "حساب",

@@ -1,0 +1,30 @@
+{
+  "tfbitaApp": {
+    "orderRegServ": {
+      "home": {
+        "title": "Order Reg Servs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Order Reg Serv",
+        "createOrEditLabel": "Create or edit a Order Reg Serv",
+        "notFound": "No Order Reg Servs found"
+      },
+      "created": "A new Order Reg Serv is created with identifier {{ param }}",
+      "updated": "A Order Reg Serv is updated with identifier {{ param }}",
+      "deleted": "A Order Reg Serv is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Order Reg Serv {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Reg Serv"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "currencyAmount": "Currency Amount",
+      "unit": "Unit",
+      "title": "Title",
+      "code": "Code",
+      "orderRegistrationInfo": "Order Registration Info",
+      "licenceInfo": "Licence Info"
+    }
+  }
+}

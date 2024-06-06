@@ -1,0 +1,73 @@
+{
+  "tfbitaApp": {
+    "orderRegistrationInfo": {
+      "home": {
+        "title": "Order Registration Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Order Registration Info",
+        "createOrEditLabel": "Create or edit a Order Registration Info",
+        "notFound": "No Order Registration Infos found"
+      },
+      "created": "A new Order Registration Info is created with identifier {{ param }}",
+      "updated": "A Order Registration Info is updated with identifier {{ param }}",
+      "deleted": "A Order Registration Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Order Registration Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Registration Info"
+      },
+      "id": "ID",
+      "orderRegNum": "Order Reg Num",
+      "startOrderRegDate": "Start Order Reg Date",
+      "endOrderRegDate": "End Order Reg Date",
+      "requestNumber": "Request Number",
+      "bankCode": "Bank Code",
+      "branchCode": "Branch Code",
+      "customerNumber": "Customer Number",
+      "applicantNationalcode": "Applicant Nationalcode",
+      "performaNumber": "Performa Number",
+      "performaDate": "Performa Date",
+      "performaExpiryDate": "Performa Expiry Date",
+      "performaDatePersian": "Performa Date Persian",
+      "performaExpiryDatePersian": "Performa Expiry Date Persian",
+      "infoSubmissionDate": "Info Submission Date",
+      "sellerName": "Seller Name",
+      "beneficiaryCountry": "Beneficiary Country",
+      "sourceCountry": "Source Country",
+      "multipleTransportable": "Multiple Transportable",
+      "deliveryTimeOfGoods": "Delivery Time Of Goods",
+      "totalWeightInKg": "Total Weight In Kg",
+      "possibilityCarrying": "Possibility Carrying",
+      "possibilityClearance": "Possibility Clearance",
+      "ableAddServiceInProductOrder": "Able Add Service In Product Order",
+      "freeZone": "Free Zone",
+      "currencyCode": "Currency Code",
+      "fobAmount": "Fob Amount",
+      "discount": "Discount",
+      "shipmentCost": "Shipment Cost",
+      "othrCost": "Othr Cost",
+      "totalAmount": "Total Amount",
+      "isFile": "Is File",
+      "fileNumber": "File Number",
+      "extended": "Extended",
+      "updated": "Updated",
+      "generateFromService": "Generate From Service",
+      "certificateNumber": "Certificate Number",
+      "centralBankCode": "Central Bank Code",
+      "isMigrational": "Is Migrational",
+      "externalCustomer": "External Customer",
+      "sumRedemptionDuration": "Sum Redemption Duration",
+      "extendedDayNumber": "Extended Day Number",
+      "mainGroupProductCode": "Main Group Product Code",
+      "producerCountries": "Producer Countries",
+      "excelFile": "Excel File",
+      "commissionTransactionNumber": "Commission Transaction Number",
+      "licenceInfo": "Licence Info",
+      "orderRegServ": "Order Reg Serv",
+      "purchaseFromOtherResources": "Purchase From Other Resources",
+      "custom": "Custom",
+      "productInfo": "Product Info"
+    }
+  }
+}

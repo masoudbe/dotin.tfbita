@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240606103120"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latinName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tempId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Custom",
+  "relationships": [
+    {
+      "otherEntityName": "orderRegistrationInfo",
+      "otherEntityRelationshipName": "custom",
+      "relationshipName": "orderRegistrationInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

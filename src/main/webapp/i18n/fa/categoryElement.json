@@ -1,0 +1,40 @@
+{
+  "tfbitaApp": {
+    "categoryElement": {
+      "home": {
+        "title": "Category Elements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Category Element",
+        "createOrEditLabel": "Create or edit a Category Element",
+        "notFound": "No Category Elements found"
+      },
+      "created": "A new Category Element is created with identifier {{ param }}",
+      "updated": "A Category Element is updated with identifier {{ param }}",
+      "deleted": "A Category Element is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Category Element {{ id }}?"
+      },
+      "detail": {
+        "title": "Category Element"
+      },
+      "id": "ID",
+      "value": "Value",
+      "categoryName": "Category Name",
+      "code": "Code",
+      "orderRegType": "Order Reg Type",
+      "requestType": "Request Type",
+      "importType": "Import Type",
+      "operationTyp": "Operation Typ",
+      "currencyProvisionType": "Currency Provision Type",
+      "paymentTool": "Payment Tool",
+      "activityType": "Activity Type",
+      "ownerType": "Owner Type",
+      "status": "Status",
+      "externalCustomerType": "External Customer Type",
+      "transportType": "Transport Type",
+      "currencySupplier": "Currency Supplier",
+      "statusPurchase": "Status Purchase",
+      "transportVehicleType": "Transport Vehicle Type"
+    }
+  }
+}

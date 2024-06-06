@@ -1,0 +1,164 @@
+{
+  "annotations": {
+    "changelogDate": "20240606093145"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categoryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CategoryElement",
+  "relationships": [
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "orderRegType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "requestType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "importType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "operationTyp",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "currencyProvisionType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "paymentTool",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "activityType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "ownerType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "status",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "externalCustomerType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "transportType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "purchaseFromOtherResources",
+      "relationshipName": "currencySupplier",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "purchaseFromOtherResources",
+      "relationshipName": "statusPurchase",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "transportVehicleType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

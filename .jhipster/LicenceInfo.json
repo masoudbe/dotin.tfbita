@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20240606103121"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "organizationLicence",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "licenceNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "licenceDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "havingProduct",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "havingService",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "creditDate",
+      "fieldType": "String"
+    }
+  ],
+  "name": "LicenceInfo",
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "relationshipName": "product",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "orderRegServ",
+      "otherEntityRelationshipName": "licenceInfo",
+      "relationshipName": "orderRegServ",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "orderRegistrationInfo",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

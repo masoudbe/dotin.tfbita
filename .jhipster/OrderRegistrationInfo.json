@@ -1,0 +1,229 @@
+{
+  "annotations": {
+    "changelogDate": "20240606093144"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "orderRegNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startOrderRegDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "endOrderRegDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "requestNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bankCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "applicantNationalcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaExpiryDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaDatePersian",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaExpiryDatePersian",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "infoSubmissionDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sellerName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "beneficiaryCountry",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sourceCountry",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "multipleTransportable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "deliveryTimeOfGoods",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalWeightInKg",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "possibilityCarrying",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "possibilityClearance",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "ableAddServiceInProductOrder",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "freeZone",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "currencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fobAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "shipmentCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "othrCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "isFile",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "fileNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extended",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "updated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "generateFromService",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "certificateNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "centralBankCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isMigrational",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "externalCustomer",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "sumRedemptionDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "extendedDayNumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "mainGroupProductCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "producerCountries",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "excelFile",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "commissionTransactionNumber",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OrderRegistrationInfo",
+  "relationships": [
+    {
+      "otherEntityName": "licenceInfo",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "licenceInfo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "orderRegServ",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "orderRegServ",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "purchaseFromOtherResources",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "purchaseFromOtherResources",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "custom",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "custom",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "productInfo",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

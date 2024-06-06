@@ -11,6 +11,13 @@ import Task from './task';
 import Employee from './employee';
 import Job from './job';
 import JobHistory from './job-history';
+import OrderRegistrationInfo from './order-registration-info';
+import CategoryElement from './category-element';
+import Custom from './custom';
+import LicenceInfo from './licence-info';
+import OrderRegServ from './order-reg-serv';
+import Product from './product';
+import PurchaseFromOtherResources from './purchase-from-other-resources';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -26,6 +33,13 @@ export default () => {
         <Route path="employee/*" element={<Employee />} />
         <Route path="job/*" element={<Job />} />
         <Route path="job-history/*" element={<JobHistory />} />
+        <Route path="order-registration-info/*" element={<OrderRegistrationInfo />} />
+        <Route path="category-element/*" element={<CategoryElement />} />
+        <Route path="custom/*" element={<Custom />} />
+        <Route path="licence-info/*" element={<LicenceInfo />} />
+        <Route path="order-reg-serv/*" element={<OrderRegServ />} />
+        <Route path="product/*" element={<Product />} />
+        <Route path="purchase-from-other-resources/*" element={<PurchaseFromOtherResources />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

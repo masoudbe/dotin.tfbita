@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20240606103123"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "topicCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attributeValueGroupName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Product",
+  "relationships": [
+    {
+      "otherEntityName": "orderRegistrationInfo",
+      "otherEntityRelationshipName": "productInfo",
+      "relationshipName": "orderRegistrationInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

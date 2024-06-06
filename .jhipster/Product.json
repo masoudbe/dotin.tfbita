@@ -3,6 +3,7 @@
     "changelogDate": "20240606103123"
   },
   "applications": "*",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "code",
@@ -39,5 +40,6 @@
       "relationshipType": "many-to-many"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceClass"
 }

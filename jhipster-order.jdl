@@ -130,5 +130,5 @@ relationship ManyToMany {
                  	Product{orderRegistrationInfo} to OrderRegistrationInfo{productInfo}
 }
 
-
+use mapstruct for OrderRegistrationInfo,PurchaseFromOtherResources,LicenceInfo,Product,OrderRegServ,Custom
 use serviceImpl for OrderRegistrationInfo

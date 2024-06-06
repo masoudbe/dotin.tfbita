@@ -10,6 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.LicenceInfo;
 import com.dotin.tfbita.repository.LicenceInfoRepository;
+import com.dotin.tfbita.service.dto.LicenceInfoDTO;
+import com.dotin.tfbita.service.mapper.LicenceInfoMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
@@ -60,6 +62,9 @@ class LicenceInfoResourceIT {
 
     @Autowired
     private LicenceInfoRepository licenceInfoRepository;
+
+    @Autowired
+    private LicenceInfoMapper licenceInfoMapper;
 
     @Autowired
     private EntityManager em;
@@ -113,18 +118,20 @@ class LicenceInfoResourceIT {
     void createLicenceInfo() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the LicenceInfo
-        var returnedLicenceInfo = om.readValue(
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+        var returnedLicenceInfoDTO = om.readValue(
             restLicenceInfoMockMvc
-                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfo)))
+                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfoDTO)))
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            LicenceInfo.class
+            LicenceInfoDTO.class
         );
 
         // Validate the LicenceInfo in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedLicenceInfo = licenceInfoMapper.toEntity(returnedLicenceInfoDTO);
         assertLicenceInfoUpdatableFieldsEquals(returnedLicenceInfo, getPersistedLicenceInfo(returnedLicenceInfo));
     }
 
@@ -133,12 +140,13 @@ class LicenceInfoResourceIT {
     void createLicenceInfoWithExistingId() throws Exception {
         // Create the LicenceInfo with an existing ID
         licenceInfo.setId(1L);
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restLicenceInfoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfo)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the LicenceInfo in the database
@@ -211,12 +219,13 @@ class LicenceInfoResourceIT {
             .havingProduct(UPDATED_HAVING_PRODUCT)
             .havingService(UPDATED_HAVING_SERVICE)
             .creditDate(UPDATED_CREDIT_DATE);
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(updatedLicenceInfo);
 
         restLicenceInfoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedLicenceInfo.getId())
+                put(ENTITY_API_URL_ID, licenceInfoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedLicenceInfo))
+                    .content(om.writeValueAsBytes(licenceInfoDTO))
             )
             .andExpect(status().isOk());
 
@@ -231,12 +240,15 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, licenceInfo.getId())
+                put(ENTITY_API_URL_ID, licenceInfoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(licenceInfo))
+                    .content(om.writeValueAsBytes(licenceInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -250,12 +262,15 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(licenceInfo))
+                    .content(om.writeValueAsBytes(licenceInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -269,9 +284,12 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfo)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(licenceInfoDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LicenceInfo in the database
@@ -349,12 +367,15 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, licenceInfo.getId())
+                patch(ENTITY_API_URL_ID, licenceInfoDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(licenceInfo))
+                    .content(om.writeValueAsBytes(licenceInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -368,12 +389,15 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(licenceInfo))
+                    .content(om.writeValueAsBytes(licenceInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -387,9 +411,12 @@ class LicenceInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         licenceInfo.setId(longCount.incrementAndGet());
 
+        // Create the LicenceInfo
+        LicenceInfoDTO licenceInfoDTO = licenceInfoMapper.toDto(licenceInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLicenceInfoMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(licenceInfo)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(licenceInfoDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LicenceInfo in the database

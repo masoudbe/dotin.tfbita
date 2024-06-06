@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.repository.OrderRegistrationInfoRepository;
+import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
+import com.dotin.tfbita.service.mapper.OrderRegistrationInfoMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -184,6 +186,9 @@ class OrderRegistrationInfoResourceIT {
     private OrderRegistrationInfoRepository orderRegistrationInfoRepository;
 
     @Autowired
+    private OrderRegistrationInfoMapper orderRegistrationInfoMapper;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -315,18 +320,22 @@ class OrderRegistrationInfoResourceIT {
     void createOrderRegistrationInfo() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the OrderRegistrationInfo
-        var returnedOrderRegistrationInfo = om.readValue(
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+        var returnedOrderRegistrationInfoDTO = om.readValue(
             restOrderRegistrationInfoMockMvc
-                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfo)))
+                .perform(
+                    post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfoDTO))
+                )
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            OrderRegistrationInfo.class
+            OrderRegistrationInfoDTO.class
         );
 
         // Validate the OrderRegistrationInfo in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedOrderRegistrationInfo = orderRegistrationInfoMapper.toEntity(returnedOrderRegistrationInfoDTO);
         assertOrderRegistrationInfoUpdatableFieldsEquals(
             returnedOrderRegistrationInfo,
             getPersistedOrderRegistrationInfo(returnedOrderRegistrationInfo)
@@ -338,12 +347,13 @@ class OrderRegistrationInfoResourceIT {
     void createOrderRegistrationInfoWithExistingId() throws Exception {
         // Create the OrderRegistrationInfo with an existing ID
         orderRegistrationInfo.setId(1L);
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOrderRegistrationInfoMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfo)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the OrderRegistrationInfo in the database
@@ -540,12 +550,13 @@ class OrderRegistrationInfoResourceIT {
             .excelFile(UPDATED_EXCEL_FILE)
             .excelFileContentType(UPDATED_EXCEL_FILE_CONTENT_TYPE)
             .commissionTransactionNumber(UPDATED_COMMISSION_TRANSACTION_NUMBER);
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(updatedOrderRegistrationInfo);
 
         restOrderRegistrationInfoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedOrderRegistrationInfo.getId())
+                put(ENTITY_API_URL_ID, orderRegistrationInfoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedOrderRegistrationInfo))
+                    .content(om.writeValueAsBytes(orderRegistrationInfoDTO))
             )
             .andExpect(status().isOk());
 
@@ -560,12 +571,15 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, orderRegistrationInfo.getId())
+                put(ENTITY_API_URL_ID, orderRegistrationInfoDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(orderRegistrationInfo))
+                    .content(om.writeValueAsBytes(orderRegistrationInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -579,12 +593,15 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(orderRegistrationInfo))
+                    .content(om.writeValueAsBytes(orderRegistrationInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -598,9 +615,12 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfo)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegistrationInfoDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the OrderRegistrationInfo in the database
@@ -751,12 +771,15 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, orderRegistrationInfo.getId())
+                patch(ENTITY_API_URL_ID, orderRegistrationInfoDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(orderRegistrationInfo))
+                    .content(om.writeValueAsBytes(orderRegistrationInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -770,12 +793,15 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(orderRegistrationInfo))
+                    .content(om.writeValueAsBytes(orderRegistrationInfoDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -789,9 +815,14 @@ class OrderRegistrationInfoResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegistrationInfo.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegistrationInfo
+        OrderRegistrationInfoDTO orderRegistrationInfoDTO = orderRegistrationInfoMapper.toDto(orderRegistrationInfo);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegistrationInfoMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(orderRegistrationInfo)))
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(orderRegistrationInfoDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the OrderRegistrationInfo in the database

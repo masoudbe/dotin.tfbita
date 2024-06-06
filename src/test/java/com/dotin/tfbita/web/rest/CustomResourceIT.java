@@ -11,6 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.Custom;
 import com.dotin.tfbita.repository.CustomRepository;
+import com.dotin.tfbita.service.CustomService;
+import com.dotin.tfbita.service.dto.CustomDTO;
+import com.dotin.tfbita.service.mapper.CustomMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
@@ -67,6 +70,12 @@ class CustomResourceIT {
     private CustomRepository customRepositoryMock;
 
     @Autowired
+    private CustomMapper customMapper;
+
+    @Mock
+    private CustomService customServiceMock;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -114,18 +123,20 @@ class CustomResourceIT {
     void createCustom() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the Custom
-        var returnedCustom = om.readValue(
+        CustomDTO customDTO = customMapper.toDto(custom);
+        var returnedCustomDTO = om.readValue(
             restCustomMockMvc
-                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(custom)))
+                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(customDTO)))
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            Custom.class
+            CustomDTO.class
         );
 
         // Validate the Custom in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedCustom = customMapper.toEntity(returnedCustomDTO);
         assertCustomUpdatableFieldsEquals(returnedCustom, getPersistedCustom(returnedCustom));
     }
 
@@ -134,12 +145,13 @@ class CustomResourceIT {
     void createCustomWithExistingId() throws Exception {
         // Create the Custom with an existing ID
         custom.setId(1L);
+        CustomDTO customDTO = customMapper.toDto(custom);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCustomMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(custom)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(customDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Custom in the database
@@ -166,16 +178,16 @@ class CustomResourceIT {
 
     @SuppressWarnings({ "unchecked" })
     void getAllCustomsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(customRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(customServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restCustomMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
 
-        verify(customRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(customServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({ "unchecked" })
     void getAllCustomsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(customRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(customServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restCustomMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
         verify(customRepositoryMock, times(1)).findAll(any(Pageable.class));
@@ -219,12 +231,11 @@ class CustomResourceIT {
         // Disconnect from session so that the updates on updatedCustom are not directly saved in db
         em.detach(updatedCustom);
         updatedCustom.modificationDate(UPDATED_MODIFICATION_DATE).latinName(UPDATED_LATIN_NAME).name(UPDATED_NAME).tempId(UPDATED_TEMP_ID);
+        CustomDTO customDTO = customMapper.toDto(updatedCustom);
 
         restCustomMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedCustom.getId())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedCustom))
+                put(ENTITY_API_URL_ID, customDTO.getId()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(customDTO))
             )
             .andExpect(status().isOk());
 
@@ -239,9 +250,14 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCustomMockMvc
-            .perform(put(ENTITY_API_URL_ID, custom.getId()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(custom)))
+            .perform(
+                put(ENTITY_API_URL_ID, customDTO.getId()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(customDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Custom in the database
@@ -254,12 +270,15 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCustomMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(custom))
+                    .content(om.writeValueAsBytes(customDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -273,9 +292,12 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCustomMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(custom)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(customDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Custom in the database
@@ -348,10 +370,15 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCustomMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, custom.getId()).contentType("application/merge-patch+json").content(om.writeValueAsBytes(custom))
+                patch(ENTITY_API_URL_ID, customDTO.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(om.writeValueAsBytes(customDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -365,12 +392,15 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCustomMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(custom))
+                    .content(om.writeValueAsBytes(customDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -384,9 +414,12 @@ class CustomResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         custom.setId(longCount.incrementAndGet());
 
+        // Create the Custom
+        CustomDTO customDTO = customMapper.toDto(custom);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCustomMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(custom)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(customDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Custom in the database

@@ -1,6 +1,6 @@
 package com.dotin.tfbita.service;
 
-import com.dotin.tfbita.domain.OrderRegistrationInfo;
+import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,33 +11,33 @@ public interface OrderRegistrationInfoService {
     /**
      * Save a orderRegistrationInfo.
      *
-     * @param orderRegistrationInfo the entity to save.
+     * @param orderRegistrationInfoDTO the entity to save.
      * @return the persisted entity.
      */
-    OrderRegistrationInfo save(OrderRegistrationInfo orderRegistrationInfo);
+    OrderRegistrationInfoDTO save(OrderRegistrationInfoDTO orderRegistrationInfoDTO);
 
     /**
      * Updates a orderRegistrationInfo.
      *
-     * @param orderRegistrationInfo the entity to update.
+     * @param orderRegistrationInfoDTO the entity to update.
      * @return the persisted entity.
      */
-    OrderRegistrationInfo update(OrderRegistrationInfo orderRegistrationInfo);
+    OrderRegistrationInfoDTO update(OrderRegistrationInfoDTO orderRegistrationInfoDTO);
 
     /**
      * Partially updates a orderRegistrationInfo.
      *
-     * @param orderRegistrationInfo the entity to update partially.
+     * @param orderRegistrationInfoDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<OrderRegistrationInfo> partialUpdate(OrderRegistrationInfo orderRegistrationInfo);
+    Optional<OrderRegistrationInfoDTO> partialUpdate(OrderRegistrationInfoDTO orderRegistrationInfoDTO);
 
     /**
      * Get all the orderRegistrationInfos.
      *
      * @return the list of entities.
      */
-    List<OrderRegistrationInfo> findAll();
+    List<OrderRegistrationInfoDTO> findAll();
 
     /**
      * Get the "id" orderRegistrationInfo.
@@ -45,7 +45,7 @@ public interface OrderRegistrationInfoService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<OrderRegistrationInfo> findOne(Long id);
+    Optional<OrderRegistrationInfoDTO> findOne(Long id);
 
     /**
      * Delete the "id" orderRegistrationInfo.

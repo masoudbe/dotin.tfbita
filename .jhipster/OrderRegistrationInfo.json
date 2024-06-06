@@ -3,6 +3,7 @@
     "changelogDate": "20240606093144"
   },
   "applications": "*",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "orderRegNum",

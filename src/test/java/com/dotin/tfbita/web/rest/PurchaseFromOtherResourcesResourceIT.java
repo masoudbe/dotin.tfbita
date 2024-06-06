@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.PurchaseFromOtherResources;
 import com.dotin.tfbita.repository.PurchaseFromOtherResourcesRepository;
+import com.dotin.tfbita.service.dto.PurchaseFromOtherResourcesDTO;
+import com.dotin.tfbita.service.mapper.PurchaseFromOtherResourcesMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -76,6 +78,9 @@ class PurchaseFromOtherResourcesResourceIT {
     private PurchaseFromOtherResourcesRepository purchaseFromOtherResourcesRepository;
 
     @Autowired
+    private PurchaseFromOtherResourcesMapper purchaseFromOtherResourcesMapper;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -135,20 +140,24 @@ class PurchaseFromOtherResourcesResourceIT {
     void createPurchaseFromOtherResources() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the PurchaseFromOtherResources
-        var returnedPurchaseFromOtherResources = om.readValue(
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+        var returnedPurchaseFromOtherResourcesDTO = om.readValue(
             restPurchaseFromOtherResourcesMockMvc
                 .perform(
-                    post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(purchaseFromOtherResources))
+                    post(ENTITY_API_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
                 )
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            PurchaseFromOtherResources.class
+            PurchaseFromOtherResourcesDTO.class
         );
 
         // Validate the PurchaseFromOtherResources in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedPurchaseFromOtherResources = purchaseFromOtherResourcesMapper.toEntity(returnedPurchaseFromOtherResourcesDTO);
         assertPurchaseFromOtherResourcesUpdatableFieldsEquals(
             returnedPurchaseFromOtherResources,
             getPersistedPurchaseFromOtherResources(returnedPurchaseFromOtherResources)
@@ -160,12 +169,15 @@ class PurchaseFromOtherResourcesResourceIT {
     void createPurchaseFromOtherResourcesWithExistingId() throws Exception {
         // Create the PurchaseFromOtherResources with an existing ID
         purchaseFromOtherResources.setId(1L);
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restPurchaseFromOtherResourcesMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(purchaseFromOtherResources)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the PurchaseFromOtherResources in the database
@@ -252,12 +264,15 @@ class PurchaseFromOtherResourcesResourceIT {
             .description(UPDATED_DESCRIPTION)
             .purchaseNumber(UPDATED_PURCHASE_NUMBER)
             .purchaseCurrencyName(UPDATED_PURCHASE_CURRENCY_NAME);
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(
+            updatedPurchaseFromOtherResources
+        );
 
         restPurchaseFromOtherResourcesMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedPurchaseFromOtherResources.getId())
+                put(ENTITY_API_URL_ID, purchaseFromOtherResourcesDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedPurchaseFromOtherResources))
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isOk());
 
@@ -272,12 +287,15 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, purchaseFromOtherResources.getId())
+                put(ENTITY_API_URL_ID, purchaseFromOtherResourcesDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(purchaseFromOtherResources))
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -291,12 +309,15 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(purchaseFromOtherResources))
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -310,9 +331,14 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(purchaseFromOtherResources)))
+            .perform(
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the PurchaseFromOtherResources in the database
@@ -400,12 +426,15 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, purchaseFromOtherResources.getId())
+                patch(ENTITY_API_URL_ID, purchaseFromOtherResourcesDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(purchaseFromOtherResources))
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -419,12 +448,15 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(purchaseFromOtherResources))
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -438,10 +470,15 @@ class PurchaseFromOtherResourcesResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         purchaseFromOtherResources.setId(longCount.incrementAndGet());
 
+        // Create the PurchaseFromOtherResources
+        PurchaseFromOtherResourcesDTO purchaseFromOtherResourcesDTO = purchaseFromOtherResourcesMapper.toDto(purchaseFromOtherResources);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPurchaseFromOtherResourcesMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(purchaseFromOtherResources))
+                patch(ENTITY_API_URL)
+                    .contentType("application/merge-patch+json")
+                    .content(om.writeValueAsBytes(purchaseFromOtherResourcesDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 

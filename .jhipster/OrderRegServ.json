@@ -3,6 +3,7 @@
     "changelogDate": "20240606103122"
   },
   "applications": "*",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "amount",
@@ -41,5 +42,6 @@
       "relationshipType": "one-to-many"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceClass"
 }

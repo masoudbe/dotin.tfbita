@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.OrderRegServ;
 import com.dotin.tfbita.repository.OrderRegServRepository;
+import com.dotin.tfbita.service.dto.OrderRegServDTO;
+import com.dotin.tfbita.service.mapper.OrderRegServMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -59,6 +61,9 @@ class OrderRegServResourceIT {
 
     @Autowired
     private OrderRegServRepository orderRegServRepository;
+
+    @Autowired
+    private OrderRegServMapper orderRegServMapper;
 
     @Autowired
     private EntityManager em;
@@ -110,18 +115,20 @@ class OrderRegServResourceIT {
     void createOrderRegServ() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the OrderRegServ
-        var returnedOrderRegServ = om.readValue(
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+        var returnedOrderRegServDTO = om.readValue(
             restOrderRegServMockMvc
-                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServ)))
+                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServDTO)))
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            OrderRegServ.class
+            OrderRegServDTO.class
         );
 
         // Validate the OrderRegServ in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedOrderRegServ = orderRegServMapper.toEntity(returnedOrderRegServDTO);
         assertOrderRegServUpdatableFieldsEquals(returnedOrderRegServ, getPersistedOrderRegServ(returnedOrderRegServ));
     }
 
@@ -130,12 +137,13 @@ class OrderRegServResourceIT {
     void createOrderRegServWithExistingId() throws Exception {
         // Create the OrderRegServ with an existing ID
         orderRegServ.setId(1L);
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOrderRegServMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServ)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the OrderRegServ in the database
@@ -205,12 +213,13 @@ class OrderRegServResourceIT {
             .unit(UPDATED_UNIT)
             .title(UPDATED_TITLE)
             .code(UPDATED_CODE);
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(updatedOrderRegServ);
 
         restOrderRegServMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedOrderRegServ.getId())
+                put(ENTITY_API_URL_ID, orderRegServDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedOrderRegServ))
+                    .content(om.writeValueAsBytes(orderRegServDTO))
             )
             .andExpect(status().isOk());
 
@@ -225,12 +234,15 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, orderRegServ.getId())
+                put(ENTITY_API_URL_ID, orderRegServDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(orderRegServ))
+                    .content(om.writeValueAsBytes(orderRegServDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -244,12 +256,15 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(orderRegServ))
+                    .content(om.writeValueAsBytes(orderRegServDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -263,9 +278,12 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServ)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(orderRegServDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the OrderRegServ in the database
@@ -342,12 +360,15 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, orderRegServ.getId())
+                patch(ENTITY_API_URL_ID, orderRegServDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(orderRegServ))
+                    .content(om.writeValueAsBytes(orderRegServDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -361,12 +382,15 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(orderRegServ))
+                    .content(om.writeValueAsBytes(orderRegServDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -380,9 +404,12 @@ class OrderRegServResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         orderRegServ.setId(longCount.incrementAndGet());
 
+        // Create the OrderRegServ
+        OrderRegServDTO orderRegServDTO = orderRegServMapper.toDto(orderRegServ);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOrderRegServMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(orderRegServ)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(orderRegServDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the OrderRegServ in the database

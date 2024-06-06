@@ -1,8 +1,8 @@
 package com.dotin.tfbita.web.rest;
 
-import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.repository.OrderRegistrationInfoRepository;
 import com.dotin.tfbita.service.OrderRegistrationInfoService;
+import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
 import com.dotin.tfbita.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -46,43 +46,44 @@ public class OrderRegistrationInfoResource {
     /**
      * {@code POST  /order-registration-infos} : Create a new orderRegistrationInfo.
      *
-     * @param orderRegistrationInfo the orderRegistrationInfo to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new orderRegistrationInfo, or with status {@code 400 (Bad Request)} if the orderRegistrationInfo has already an ID.
+     * @param orderRegistrationInfoDTO the orderRegistrationInfoDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new orderRegistrationInfoDTO, or with status {@code 400 (Bad Request)} if the orderRegistrationInfo has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<OrderRegistrationInfo> createOrderRegistrationInfo(@RequestBody OrderRegistrationInfo orderRegistrationInfo)
-        throws URISyntaxException {
-        log.debug("REST request to save OrderRegistrationInfo : {}", orderRegistrationInfo);
-        if (orderRegistrationInfo.getId() != null) {
+    public ResponseEntity<OrderRegistrationInfoDTO> createOrderRegistrationInfo(
+        @RequestBody OrderRegistrationInfoDTO orderRegistrationInfoDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to save OrderRegistrationInfo : {}", orderRegistrationInfoDTO);
+        if (orderRegistrationInfoDTO.getId() != null) {
             throw new BadRequestAlertException("A new orderRegistrationInfo cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        orderRegistrationInfo = orderRegistrationInfoService.save(orderRegistrationInfo);
-        return ResponseEntity.created(new URI("/api/order-registration-infos/" + orderRegistrationInfo.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfo.getId().toString()))
-            .body(orderRegistrationInfo);
+        orderRegistrationInfoDTO = orderRegistrationInfoService.save(orderRegistrationInfoDTO);
+        return ResponseEntity.created(new URI("/api/order-registration-infos/" + orderRegistrationInfoDTO.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfoDTO.getId().toString()))
+            .body(orderRegistrationInfoDTO);
     }
 
     /**
      * {@code PUT  /order-registration-infos/:id} : Updates an existing orderRegistrationInfo.
      *
-     * @param id the id of the orderRegistrationInfo to save.
-     * @param orderRegistrationInfo the orderRegistrationInfo to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated orderRegistrationInfo,
-     * or with status {@code 400 (Bad Request)} if the orderRegistrationInfo is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the orderRegistrationInfo couldn't be updated.
+     * @param id the id of the orderRegistrationInfoDTO to save.
+     * @param orderRegistrationInfoDTO the orderRegistrationInfoDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated orderRegistrationInfoDTO,
+     * or with status {@code 400 (Bad Request)} if the orderRegistrationInfoDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the orderRegistrationInfoDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<OrderRegistrationInfo> updateOrderRegistrationInfo(
+    public ResponseEntity<OrderRegistrationInfoDTO> updateOrderRegistrationInfo(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody OrderRegistrationInfo orderRegistrationInfo
+        @RequestBody OrderRegistrationInfoDTO orderRegistrationInfoDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update OrderRegistrationInfo : {}, {}", id, orderRegistrationInfo);
-        if (orderRegistrationInfo.getId() == null) {
+        log.debug("REST request to update OrderRegistrationInfo : {}, {}", id, orderRegistrationInfoDTO);
+        if (orderRegistrationInfoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, orderRegistrationInfo.getId())) {
+        if (!Objects.equals(id, orderRegistrationInfoDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -90,33 +91,33 @@ public class OrderRegistrationInfoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        orderRegistrationInfo = orderRegistrationInfoService.update(orderRegistrationInfo);
+        orderRegistrationInfoDTO = orderRegistrationInfoService.update(orderRegistrationInfoDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfo.getId().toString()))
-            .body(orderRegistrationInfo);
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfoDTO.getId().toString()))
+            .body(orderRegistrationInfoDTO);
     }
 
     /**
      * {@code PATCH  /order-registration-infos/:id} : Partial updates given fields of an existing orderRegistrationInfo, field will ignore if it is null
      *
-     * @param id the id of the orderRegistrationInfo to save.
-     * @param orderRegistrationInfo the orderRegistrationInfo to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated orderRegistrationInfo,
-     * or with status {@code 400 (Bad Request)} if the orderRegistrationInfo is not valid,
-     * or with status {@code 404 (Not Found)} if the orderRegistrationInfo is not found,
-     * or with status {@code 500 (Internal Server Error)} if the orderRegistrationInfo couldn't be updated.
+     * @param id the id of the orderRegistrationInfoDTO to save.
+     * @param orderRegistrationInfoDTO the orderRegistrationInfoDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated orderRegistrationInfoDTO,
+     * or with status {@code 400 (Bad Request)} if the orderRegistrationInfoDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the orderRegistrationInfoDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the orderRegistrationInfoDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<OrderRegistrationInfo> partialUpdateOrderRegistrationInfo(
+    public ResponseEntity<OrderRegistrationInfoDTO> partialUpdateOrderRegistrationInfo(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody OrderRegistrationInfo orderRegistrationInfo
+        @RequestBody OrderRegistrationInfoDTO orderRegistrationInfoDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update OrderRegistrationInfo partially : {}, {}", id, orderRegistrationInfo);
-        if (orderRegistrationInfo.getId() == null) {
+        log.debug("REST request to partial update OrderRegistrationInfo partially : {}, {}", id, orderRegistrationInfoDTO);
+        if (orderRegistrationInfoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, orderRegistrationInfo.getId())) {
+        if (!Objects.equals(id, orderRegistrationInfoDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -124,11 +125,11 @@ public class OrderRegistrationInfoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<OrderRegistrationInfo> result = orderRegistrationInfoService.partialUpdate(orderRegistrationInfo);
+        Optional<OrderRegistrationInfoDTO> result = orderRegistrationInfoService.partialUpdate(orderRegistrationInfoDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfo.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, orderRegistrationInfoDTO.getId().toString())
         );
     }
 
@@ -138,7 +139,7 @@ public class OrderRegistrationInfoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of orderRegistrationInfos in body.
      */
     @GetMapping("")
-    public List<OrderRegistrationInfo> getAllOrderRegistrationInfos() {
+    public List<OrderRegistrationInfoDTO> getAllOrderRegistrationInfos() {
         log.debug("REST request to get all OrderRegistrationInfos");
         return orderRegistrationInfoService.findAll();
     }
@@ -146,20 +147,20 @@ public class OrderRegistrationInfoResource {
     /**
      * {@code GET  /order-registration-infos/:id} : get the "id" orderRegistrationInfo.
      *
-     * @param id the id of the orderRegistrationInfo to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the orderRegistrationInfo, or with status {@code 404 (Not Found)}.
+     * @param id the id of the orderRegistrationInfoDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the orderRegistrationInfoDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<OrderRegistrationInfo> getOrderRegistrationInfo(@PathVariable("id") Long id) {
+    public ResponseEntity<OrderRegistrationInfoDTO> getOrderRegistrationInfo(@PathVariable("id") Long id) {
         log.debug("REST request to get OrderRegistrationInfo : {}", id);
-        Optional<OrderRegistrationInfo> orderRegistrationInfo = orderRegistrationInfoService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(orderRegistrationInfo);
+        Optional<OrderRegistrationInfoDTO> orderRegistrationInfoDTO = orderRegistrationInfoService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(orderRegistrationInfoDTO);
     }
 
     /**
      * {@code DELETE  /order-registration-infos/:id} : delete the "id" orderRegistrationInfo.
      *
-     * @param id the id of the orderRegistrationInfo to delete.
+     * @param id the id of the orderRegistrationInfoDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")

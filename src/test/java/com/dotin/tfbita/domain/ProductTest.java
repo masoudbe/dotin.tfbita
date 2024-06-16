@@ -1,5 +1,7 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,5 +43,35 @@ class ProductTest {
 
         product.setOrderRegistrationInfos(new HashSet<>());
         assertThat(product.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+    }
+
+    @Test
+    void draftTest() throws Exception {
+        Product product = getProductRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        product.addDraft(draftBack);
+        assertThat(product.getDrafts()).containsOnly(draftBack);
+
+        product.removeDraft(draftBack);
+        assertThat(product.getDrafts()).doesNotContain(draftBack);
+
+        product.drafts(new HashSet<>(Set.of(draftBack)));
+        assertThat(product.getDrafts()).containsOnly(draftBack);
+
+        product.setDrafts(new HashSet<>());
+        assertThat(product.getDrafts()).doesNotContain(draftBack);
+    }
+
+    @Test
+    void draftProductInfosTest() throws Exception {
+        Product product = getProductRandomSampleGenerator();
+        DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
+
+        product.setDraftProductInfos(draftReceiptBack);
+        assertThat(product.getDraftProductInfos()).isEqualTo(draftReceiptBack);
+
+        product.draftProductInfos(null);
+        assertThat(product.getDraftProductInfos()).isNull();
     }
 }

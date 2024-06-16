@@ -1,6 +1,7 @@
 package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.CustomTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +27,18 @@ class CustomTest {
     }
 
     @Test
+    void loadSwitchPlaceTest() throws Exception {
+        Custom custom = getCustomRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        custom.setLoadSwitchPlace(draftBack);
+        assertThat(custom.getLoadSwitchPlace()).isEqualTo(draftBack);
+
+        custom.loadSwitchPlace(null);
+        assertThat(custom.getLoadSwitchPlace()).isNull();
+    }
+
+    @Test
     void orderRegistrationInfoTest() throws Exception {
         Custom custom = getCustomRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
@@ -41,5 +54,23 @@ class CustomTest {
 
         custom.setOrderRegistrationInfos(new HashSet<>());
         assertThat(custom.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+    }
+
+    @Test
+    void draftTest() throws Exception {
+        Custom custom = getCustomRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        custom.addDraft(draftBack);
+        assertThat(custom.getDrafts()).containsOnly(draftBack);
+
+        custom.removeDraft(draftBack);
+        assertThat(custom.getDrafts()).doesNotContain(draftBack);
+
+        custom.drafts(new HashSet<>(Set.of(draftBack)));
+        assertThat(custom.getDrafts()).containsOnly(draftBack);
+
+        custom.setDrafts(new HashSet<>());
+        assertThat(custom.getDrafts()).doesNotContain(draftBack);
     }
 }

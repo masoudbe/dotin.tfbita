@@ -118,8 +118,7 @@ export const LicenceInfo = () => {
                   <Translate contentKey="tfbitaApp.licenceInfo.orderRegServ">Order Reg Serv</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.licenceInfo.orderRegistrationInfo">Order Registration Info</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.licenceInfo.licenceInfo">Licence Info</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -147,10 +146,8 @@ export const LicenceInfo = () => {
                     )}
                   </td>
                   <td>
-                    {licenceInfo.orderRegistrationInfo ? (
-                      <Link to={`/order-registration-info/${licenceInfo.orderRegistrationInfo.id}`}>
-                        {licenceInfo.orderRegistrationInfo.id}
-                      </Link>
+                    {licenceInfo.licenceInfo ? (
+                      <Link to={`/order-registration-info/${licenceInfo.licenceInfo.id}`}>{licenceInfo.licenceInfo.id}</Link>
                     ) : (
                       ''
                     )}

@@ -50,14 +50,14 @@ class LicenceInfoTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void licenceInfoTest() throws Exception {
         LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
-        licenceInfo.setOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(licenceInfo.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfoBack);
+        licenceInfo.setLicenceInfo(orderRegistrationInfoBack);
+        assertThat(licenceInfo.getLicenceInfo()).isEqualTo(orderRegistrationInfoBack);
 
-        licenceInfo.orderRegistrationInfo(null);
-        assertThat(licenceInfo.getOrderRegistrationInfo()).isNull();
+        licenceInfo.licenceInfo(null);
+        assertThat(licenceInfo.getLicenceInfo()).isNull();
     }
 }

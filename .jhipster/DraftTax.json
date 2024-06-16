@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082907"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "orderRegCurrencyAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "mainAccountCurrencyAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "letterNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returnTaxesAmount",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "orderRegRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "mainAccountRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "documentTransactionNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returnDocumentTransactionNumber",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftTax",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "taxes",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

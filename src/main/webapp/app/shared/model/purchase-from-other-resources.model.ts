@@ -12,7 +12,7 @@ export interface IPurchaseFromOtherResources {
   description?: string | null;
   purchaseNumber?: string | null;
   purchaseCurrencyName?: string | null;
-  orderRegistrationInfo?: IOrderRegistrationInfo | null;
+  purchaseFromOtherResources?: IOrderRegistrationInfo | null;
 }
 
 export const defaultValue: Readonly<IPurchaseFromOtherResources> = {};

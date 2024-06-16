@@ -17,7 +17,7 @@ import org.mapstruct.*;
 public interface LicenceInfoMapper extends EntityMapper<LicenceInfoDTO, LicenceInfo> {
     @Mapping(target = "product", source = "product", qualifiedByName = "productId")
     @Mapping(target = "orderRegServ", source = "orderRegServ", qualifiedByName = "orderRegServId")
-    @Mapping(target = "orderRegistrationInfo", source = "orderRegistrationInfo", qualifiedByName = "orderRegistrationInfoId")
+    @Mapping(target = "licenceInfo", source = "licenceInfo", qualifiedByName = "orderRegistrationInfoId")
     LicenceInfoDTO toDto(LicenceInfo s);
 
     @Named("productId")

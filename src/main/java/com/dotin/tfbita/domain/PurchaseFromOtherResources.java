@@ -56,7 +56,7 @@ public class PurchaseFromOtherResources implements Serializable {
         value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
         allowSetters = true
     )
-    private OrderRegistrationInfo orderRegistrationInfo;
+    private OrderRegistrationInfo purchaseFromOtherResources;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -203,16 +203,16 @@ public class PurchaseFromOtherResources implements Serializable {
         this.purchaseCurrencyName = purchaseCurrencyName;
     }
 
-    public OrderRegistrationInfo getOrderRegistrationInfo() {
-        return this.orderRegistrationInfo;
+    public OrderRegistrationInfo getPurchaseFromOtherResources() {
+        return this.purchaseFromOtherResources;
     }
 
-    public void setOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfo = orderRegistrationInfo;
+    public void setPurchaseFromOtherResources(OrderRegistrationInfo orderRegistrationInfo) {
+        this.purchaseFromOtherResources = orderRegistrationInfo;
     }
 
-    public PurchaseFromOtherResources orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.setOrderRegistrationInfo(orderRegistrationInfo);
+    public PurchaseFromOtherResources purchaseFromOtherResources(OrderRegistrationInfo orderRegistrationInfo) {
+        this.setPurchaseFromOtherResources(orderRegistrationInfo);
         return this;
     }
 

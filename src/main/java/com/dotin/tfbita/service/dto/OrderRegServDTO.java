@@ -22,7 +22,7 @@ public class OrderRegServDTO implements Serializable {
 
     private String code;
 
-    private OrderRegistrationInfoDTO orderRegistrationInfo;
+    private OrderRegistrationInfoDTO orderRegService;
 
     public Long getId() {
         return id;
@@ -72,12 +72,12 @@ public class OrderRegServDTO implements Serializable {
         this.code = code;
     }
 
-    public OrderRegistrationInfoDTO getOrderRegistrationInfo() {
-        return orderRegistrationInfo;
+    public OrderRegistrationInfoDTO getOrderRegService() {
+        return orderRegService;
     }
 
-    public void setOrderRegistrationInfo(OrderRegistrationInfoDTO orderRegistrationInfo) {
-        this.orderRegistrationInfo = orderRegistrationInfo;
+    public void setOrderRegService(OrderRegistrationInfoDTO orderRegService) {
+        this.orderRegService = orderRegService;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class OrderRegServDTO implements Serializable {
             ", unit='" + getUnit() + "'" +
             ", title='" + getTitle() + "'" +
             ", code='" + getCode() + "'" +
-            ", orderRegistrationInfo=" + getOrderRegistrationInfo() +
+            ", orderRegService=" + getOrderRegService() +
             "}";
     }
 }

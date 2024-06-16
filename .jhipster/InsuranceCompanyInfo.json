@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082902"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "InsuranceCompanyInfo",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "insuranceCompanyInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

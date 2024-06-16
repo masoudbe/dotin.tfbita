@@ -1,4 +1,6 @@
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
+import { IDraft } from 'app/shared/model/draft.model';
+import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
 
 export interface IProduct {
   id?: number;
@@ -9,6 +11,8 @@ export interface IProduct {
   topicCode?: string | null;
   attributeValueGroupName?: string | null;
   orderRegistrationInfos?: IOrderRegistrationInfo[] | null;
+  drafts?: IDraft[] | null;
+  draftProductInfos?: IDraftReceipt | null;
 }
 
 export const defaultValue: Readonly<IProduct> = {};

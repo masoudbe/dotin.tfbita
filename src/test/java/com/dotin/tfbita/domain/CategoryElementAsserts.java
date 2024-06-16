@@ -80,6 +80,51 @@ public class CategoryElementAsserts {
             .satisfies(e -> assertThat(e.getStatusPurchase()).as("check statusPurchase").isEqualTo(actual.getStatusPurchase()))
             .satisfies(
                 e -> assertThat(e.getTransportVehicleType()).as("check transportVehicleType").isEqualTo(actual.getTransportVehicleType())
-            );
+            )
+            .satisfies(e -> assertThat(e.getFreightLetterType()).as("check freightLetterType").isEqualTo(actual.getFreightLetterType()))
+            .satisfies(e -> assertThat(e.getActionCode()).as("check actionCode").isEqualTo(actual.getActionCode()))
+            .satisfies(e -> assertThat(e.getOwnershipCode()).as("check ownershipCode").isEqualTo(actual.getOwnershipCode()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCurrencyContainerPlace())
+                        .as("check currencyContainerPlace")
+                        .isEqualTo(actual.getCurrencyContainerPlace())
+            )
+            .satisfies(e -> assertThat(e.getDraftSource()).as("check draftSource").isEqualTo(actual.getDraftSource()))
+            .satisfies(
+                e -> assertThat(e.getChargedExchangeBroker()).as("check chargedExchangeBroker").isEqualTo(actual.getChargedExchangeBroker())
+            )
+            .satisfies(e -> assertThat(e.getImpartType()).as("check impartType").isEqualTo(actual.getImpartType()))
+            .satisfies(
+                e -> assertThat(e.getInsuranceLetterType()).as("check insuranceLetterType").isEqualTo(actual.getInsuranceLetterType())
+            )
+            .satisfies(e -> assertThat(e.getAdvisorDepositType()).as("check advisorDepositType").isEqualTo(actual.getAdvisorDepositType()))
+            .satisfies(
+                e ->
+                    assertThat(e.getInterfaceAdvisorDepositType())
+                        .as("check interfaceAdvisorDepositType")
+                        .isEqualTo(actual.getInterfaceAdvisorDepositType())
+            )
+            .satisfies(e -> assertThat(e.getPaymentType()).as("check paymentType").isEqualTo(actual.getPaymentType()))
+            .satisfies(e -> assertThat(e.getDealType()).as("check dealType").isEqualTo(actual.getDealType()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCoveringAdvisorDepositType())
+                        .as("check coveringAdvisorDepositType")
+                        .isEqualTo(actual.getCoveringAdvisorDepositType())
+            )
+            .satisfies(e -> assertThat(e.getDepositType()).as("check depositType").isEqualTo(actual.getDepositType()))
+            .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
+            .satisfies(e -> assertThat(e.getSecondaryType()).as("check secondaryType").isEqualTo(actual.getSecondaryType()))
+            .satisfies(e -> assertThat(e.getDivision()).as("check division").isEqualTo(actual.getDivision()))
+            .satisfies(e -> assertThat(e.getProductDimension()).as("check productDimension").isEqualTo(actual.getProductDimension()))
+            .satisfies(e -> assertThat(e.getStateOfDocuments()).as("check stateOfDocuments").isEqualTo(actual.getStateOfDocuments()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCurrencyProvisionFileType())
+                        .as("check currencyProvisionFileType")
+                        .isEqualTo(actual.getCurrencyProvisionFileType())
+            )
+            .satisfies(e -> assertThat(e.getStatusDraft()).as("check statusDraft").isEqualTo(actual.getStatusDraft()));
     }
 }

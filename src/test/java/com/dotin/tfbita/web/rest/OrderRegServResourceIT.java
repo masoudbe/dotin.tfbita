@@ -302,7 +302,7 @@ class OrderRegServResourceIT {
         OrderRegServ partialUpdatedOrderRegServ = new OrderRegServ();
         partialUpdatedOrderRegServ.setId(orderRegServ.getId());
 
-        partialUpdatedOrderRegServ.currencyAmount(UPDATED_CURRENCY_AMOUNT).unit(UPDATED_UNIT).code(UPDATED_CODE);
+        partialUpdatedOrderRegServ.amount(UPDATED_AMOUNT).currencyAmount(UPDATED_CURRENCY_AMOUNT).title(UPDATED_TITLE).code(UPDATED_CODE);
 
         restOrderRegServMockMvc
             .perform(

@@ -10,9 +10,9 @@
     -->
     <changeSet id="20240606191122-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+        <addForeignKeyConstraint baseColumnNames="purchase_from_other_resources_id"
                                  baseTableName="purchase_from_other_resources"
-                                 constraintName="fk_purchase_from_other_resources__order_registration_info_id"
+                                 constraintName="fk_purchase_from_other_resource__purchase_from_other_reso_2f_id"
                                  referencedColumnNames="id"
                                  referencedTableName="order_registration_info"
                                  />

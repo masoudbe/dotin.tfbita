@@ -14,7 +14,20 @@
         "orderRegServ": "Order Reg Serv",
         "product": "Product",
         "licenceInfo": "Licence Info",
-        "purchaseFromOtherResources": "Purchase From Other Resources"
+        "purchaseFromOtherResources": "Purchase From Other Resources",
+        "draft": "Draft",
+        "serviceTariff": "Service Tariff",
+        "draftStatusInfo": "Draft Status Info",
+        "draftReceipt": "Draft Receipt",
+        "draftCustomJustification": "Draft Custom Justification",
+        "draftFactor": "Draft Factor",
+        "draftUsedAssurance": "Draft Used Assurance",
+        "insuranceCompanyInfo": "Insurance Company Info",
+        "advisorDefinition": "Advisor Definition",
+        "draftType": "Draft Type",
+        "auditCompanyInfo": "Audit Company Info",
+        "draftExtend": "Draft Extend",
+        "draftTax": "Draft Tax"
       },
       "account": {
         "main": "Account",

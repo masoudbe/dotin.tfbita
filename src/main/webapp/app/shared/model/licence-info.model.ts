@@ -12,7 +12,7 @@ export interface ILicenceInfo {
   creditDate?: string | null;
   product?: IProduct | null;
   orderRegServ?: IOrderRegServ | null;
-  orderRegistrationInfo?: IOrderRegistrationInfo | null;
+  licenceInfo?: IOrderRegistrationInfo | null;
 }
 
 export const defaultValue: Readonly<ILicenceInfo> = {

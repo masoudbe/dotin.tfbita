@@ -62,9 +62,9 @@ export const OrderRegServDetail = () => {
           </dt>
           <dd>{orderRegServEntity.code}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.orderRegServ.orderRegistrationInfo">Order Registration Info</Translate>
+            <Translate contentKey="tfbitaApp.orderRegServ.orderRegService">Order Reg Service</Translate>
           </dt>
-          <dd>{orderRegServEntity.orderRegistrationInfo ? orderRegServEntity.orderRegistrationInfo.id : ''}</dd>
+          <dd>{orderRegServEntity.orderRegService ? orderRegServEntity.orderRegService.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/order-reg-serv" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -104,7 +104,10 @@ public class PurchaseFromOtherResourcesAsserts {
         assertThat(expected)
             .as("Verify PurchaseFromOtherResources relationships")
             .satisfies(
-                e -> assertThat(e.getOrderRegistrationInfo()).as("check orderRegistrationInfo").isEqualTo(actual.getOrderRegistrationInfo())
+                e ->
+                    assertThat(e.getPurchaseFromOtherResources())
+                        .as("check purchaseFromOtherResources")
+                        .isEqualTo(actual.getPurchaseFromOtherResources())
             );
     }
 }

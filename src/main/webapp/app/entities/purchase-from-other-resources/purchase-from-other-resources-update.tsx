@@ -65,7 +65,7 @@ export const PurchaseFromOtherResourcesUpdate = () => {
     const entity = {
       ...purchaseFromOtherResourcesEntity,
       ...values,
-      orderRegistrationInfo: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegistrationInfo?.toString()),
+      purchaseFromOtherResources: orderRegistrationInfos.find(it => it.id.toString() === values.purchaseFromOtherResources?.toString()),
     };
 
     if (isNew) {
@@ -80,7 +80,7 @@ export const PurchaseFromOtherResourcesUpdate = () => {
       ? {}
       : {
           ...purchaseFromOtherResourcesEntity,
-          orderRegistrationInfo: purchaseFromOtherResourcesEntity?.orderRegistrationInfo?.id,
+          purchaseFromOtherResources: purchaseFromOtherResourcesEntity?.purchaseFromOtherResources?.id,
         };
 
   return (
@@ -181,10 +181,10 @@ export const PurchaseFromOtherResourcesUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="purchase-from-other-resources-orderRegistrationInfo"
-                name="orderRegistrationInfo"
-                data-cy="orderRegistrationInfo"
-                label={translate('tfbitaApp.purchaseFromOtherResources.orderRegistrationInfo')}
+                id="purchase-from-other-resources-purchaseFromOtherResources"
+                name="purchaseFromOtherResources"
+                data-cy="purchaseFromOtherResources"
+                label={translate('tfbitaApp.purchaseFromOtherResources.purchaseFromOtherResources')}
                 type="select"
               >
                 <option value="" key="0" />

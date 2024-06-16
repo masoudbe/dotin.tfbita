@@ -24,6 +24,19 @@
     <include file="config/liquibase/changelog/20240606191120_added_entity_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240606191121_added_entity_LicenceInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240606191122_added_entity_PurchaseFromOtherResources.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082855_added_entity_Draft.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082856_added_entity_ServiceTariff.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082857_added_entity_DraftStatusInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082858_added_entity_DraftReceipt.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082859_added_entity_DraftCustomJustification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082900_added_entity_DraftFactor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082901_added_entity_DraftUsedAssurance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082902_added_entity_InsuranceCompanyInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082903_added_entity_AdvisorDefinition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082904_added_entity_DraftType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082905_added_entity_AuditCompanyInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082906_added_entity_DraftExtend.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082907_added_entity_DraftTax.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20240606191117_added_entity_constraints_CategoryElement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240606191118_added_entity_constraints_Custom.xml" relativeToChangelogFile="false"/>
@@ -31,6 +44,18 @@
     <include file="config/liquibase/changelog/20240606191120_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240606191121_added_entity_constraints_LicenceInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240606191122_added_entity_constraints_PurchaseFromOtherResources.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082856_added_entity_constraints_ServiceTariff.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082857_added_entity_constraints_DraftStatusInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082858_added_entity_constraints_DraftReceipt.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082859_added_entity_constraints_DraftCustomJustification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082900_added_entity_constraints_DraftFactor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082901_added_entity_constraints_DraftUsedAssurance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082902_added_entity_constraints_InsuranceCompanyInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082903_added_entity_constraints_AdvisorDefinition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082904_added_entity_constraints_DraftType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082905_added_entity_constraints_AuditCompanyInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082906_added_entity_constraints_DraftExtend.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240616082907_added_entity_constraints_DraftTax.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

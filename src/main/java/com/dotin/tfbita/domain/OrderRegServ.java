@@ -43,10 +43,10 @@ public class OrderRegServ implements Serializable {
         value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
         allowSetters = true
     )
-    private OrderRegistrationInfo orderRegistrationInfo;
+    private OrderRegistrationInfo orderRegService;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegServ")
-    @JsonIgnoreProperties(value = { "product", "orderRegServ", "orderRegistrationInfo" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "product", "orderRegServ", "licenceInfo" }, allowSetters = true)
     private Set<LicenceInfo> licenceInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -129,16 +129,16 @@ public class OrderRegServ implements Serializable {
         this.code = code;
     }
 
-    public OrderRegistrationInfo getOrderRegistrationInfo() {
-        return this.orderRegistrationInfo;
+    public OrderRegistrationInfo getOrderRegService() {
+        return this.orderRegService;
     }
 
-    public void setOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfo = orderRegistrationInfo;
+    public void setOrderRegService(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegService = orderRegistrationInfo;
     }
 
-    public OrderRegServ orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.setOrderRegistrationInfo(orderRegistrationInfo);
+    public OrderRegServ orderRegService(OrderRegistrationInfo orderRegistrationInfo) {
+        this.setOrderRegService(orderRegistrationInfo);
         return this;
     }
 

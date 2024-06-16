@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082903"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "caption",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryIsoCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "depositNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "swiftCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bankCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "defaultCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AdvisorDefinition",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "advisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "interfaceAdvisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "coveringBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

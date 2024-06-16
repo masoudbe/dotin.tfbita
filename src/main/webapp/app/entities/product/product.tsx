@@ -113,6 +113,13 @@ export const Product = () => {
                   <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.product.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.product.draftProductInfos">Draft Product Infos</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -139,6 +146,23 @@ export const Product = () => {
                           </span>
                         ))
                       : null}
+                  </td>
+                  <td>
+                    {product.drafts
+                      ? product.drafts.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/draft/${val.id}`}>{val.id}</Link>
+                            {j === product.drafts.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {product.draftProductInfos ? (
+                      <Link to={`/draft-receipt/${product.draftProductInfos.id}`}>{product.draftProductInfos.id}</Link>
+                    ) : (
+                      ''
+                    )}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

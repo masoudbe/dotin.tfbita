@@ -24,14 +24,14 @@ class PurchaseFromOtherResourcesTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void purchaseFromOtherResourcesTest() throws Exception {
         PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
-        purchaseFromOtherResources.setOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(purchaseFromOtherResources.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfoBack);
+        purchaseFromOtherResources.setPurchaseFromOtherResources(orderRegistrationInfoBack);
+        assertThat(purchaseFromOtherResources.getPurchaseFromOtherResources()).isEqualTo(orderRegistrationInfoBack);
 
-        purchaseFromOtherResources.orderRegistrationInfo(null);
-        assertThat(purchaseFromOtherResources.getOrderRegistrationInfo()).isNull();
+        purchaseFromOtherResources.purchaseFromOtherResources(null);
+        assertThat(purchaseFromOtherResources.getPurchaseFromOtherResources()).isNull();
     }
 }

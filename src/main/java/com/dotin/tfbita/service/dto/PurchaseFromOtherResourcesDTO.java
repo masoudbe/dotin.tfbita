@@ -32,7 +32,7 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
 
     private String purchaseCurrencyName;
 
-    private OrderRegistrationInfoDTO orderRegistrationInfo;
+    private OrderRegistrationInfoDTO purchaseFromOtherResources;
 
     public Long getId() {
         return id;
@@ -122,12 +122,12 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
         this.purchaseCurrencyName = purchaseCurrencyName;
     }
 
-    public OrderRegistrationInfoDTO getOrderRegistrationInfo() {
-        return orderRegistrationInfo;
+    public OrderRegistrationInfoDTO getPurchaseFromOtherResources() {
+        return purchaseFromOtherResources;
     }
 
-    public void setOrderRegistrationInfo(OrderRegistrationInfoDTO orderRegistrationInfo) {
-        this.orderRegistrationInfo = orderRegistrationInfo;
+    public void setPurchaseFromOtherResources(OrderRegistrationInfoDTO purchaseFromOtherResources) {
+        this.purchaseFromOtherResources = purchaseFromOtherResources;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", purchaseNumber='" + getPurchaseNumber() + "'" +
             ", purchaseCurrencyName='" + getPurchaseCurrencyName() + "'" +
-            ", orderRegistrationInfo=" + getOrderRegistrationInfo() +
+            ", purchaseFromOtherResources=" + getPurchaseFromOtherResources() +
             "}";
     }
 }

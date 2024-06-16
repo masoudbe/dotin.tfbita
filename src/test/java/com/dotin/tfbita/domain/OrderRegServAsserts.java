@@ -70,8 +70,6 @@ public class OrderRegServAsserts {
     public static void assertOrderRegServUpdatableRelationshipsEquals(OrderRegServ expected, OrderRegServ actual) {
         assertThat(expected)
             .as("Verify OrderRegServ relationships")
-            .satisfies(
-                e -> assertThat(e.getOrderRegistrationInfo()).as("check orderRegistrationInfo").isEqualTo(actual.getOrderRegistrationInfo())
-            );
+            .satisfies(e -> assertThat(e.getOrderRegService()).as("check orderRegService").isEqualTo(actual.getOrderRegService()));
     }
 }

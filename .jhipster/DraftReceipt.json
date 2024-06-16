@@ -1,0 +1,179 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082858"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerDeliverDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deleteDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverDuration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "delivered",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "documentTransactionEffectiveDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterStampCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "issueDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issueDocument",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "productAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receiptAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receiptDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "row",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "serial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transportRow",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "paymentCurrencyRateTypeDesc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentItemTypeDesc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "netWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "grossWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalNetWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalGrossWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "letterNumberTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterDateTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fobAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "shippingFare",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "inspectionCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "deadlineSubmitDocumentDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyProvisionFile",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "isMigrational",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "otherCost",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "DraftReceipt",
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "draftProductInfos",
+      "relationshipName": "product",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "receipts",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftCustomJustification",
+      "otherEntityRelationshipName": "draftReceipts",
+      "relationshipName": "draftCustomJustification",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

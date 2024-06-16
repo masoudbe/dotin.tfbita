@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082904"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "alarmTime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disableDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hasAssurance",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasSanction",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "latestCreditSerial",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "portal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "usable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "defaultCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountInfoCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "topicInfoCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftType",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "relationshipName": "draftType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

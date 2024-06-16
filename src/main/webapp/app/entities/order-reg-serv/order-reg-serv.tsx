@@ -108,7 +108,7 @@ export const OrderRegServ = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.orderRegServ.orderRegistrationInfo">Order Registration Info</Translate>{' '}
+                  <Translate contentKey="tfbitaApp.orderRegServ.orderRegService">Order Reg Service</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -128,10 +128,8 @@ export const OrderRegServ = () => {
                   <td>{orderRegServ.title}</td>
                   <td>{orderRegServ.code}</td>
                   <td>
-                    {orderRegServ.orderRegistrationInfo ? (
-                      <Link to={`/order-registration-info/${orderRegServ.orderRegistrationInfo.id}`}>
-                        {orderRegServ.orderRegistrationInfo.id}
-                      </Link>
+                    {orderRegServ.orderRegService ? (
+                      <Link to={`/order-registration-info/${orderRegServ.orderRegService.id}`}>{orderRegServ.orderRegService.id}</Link>
                     ) : (
                       ''
                     )}

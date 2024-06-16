@@ -39,11 +39,11 @@ public class LicenceInfo implements Serializable {
     private String creditDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegistrationInfo", "licenceInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegService", "licenceInfos" }, allowSetters = true)
     private OrderRegServ orderRegServ;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -51,7 +51,7 @@ public class LicenceInfo implements Serializable {
         value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
         allowSetters = true
     )
-    private OrderRegistrationInfo orderRegistrationInfo;
+    private OrderRegistrationInfo licenceInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -172,16 +172,16 @@ public class LicenceInfo implements Serializable {
         return this;
     }
 
-    public OrderRegistrationInfo getOrderRegistrationInfo() {
-        return this.orderRegistrationInfo;
+    public OrderRegistrationInfo getLicenceInfo() {
+        return this.licenceInfo;
     }
 
-    public void setOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfo = orderRegistrationInfo;
+    public void setLicenceInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.licenceInfo = orderRegistrationInfo;
     }
 
-    public LicenceInfo orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.setOrderRegistrationInfo(orderRegistrationInfo);
+    public LicenceInfo licenceInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.setLicenceInfo(orderRegistrationInfo);
         return this;
     }
 

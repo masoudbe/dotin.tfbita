@@ -10,6 +10,10 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
+import { IDraft } from 'app/shared/model/draft.model';
+import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
+import { getEntities as getDraftReceipts } from 'app/entities/draft-receipt/draft-receipt.reducer';
 import { IProduct } from 'app/shared/model/product.model';
 import { getEntity, updateEntity, createEntity, reset } from './product.reducer';
 
@@ -22,6 +26,8 @@ export const ProductUpdate = () => {
   const isNew = id === undefined;
 
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
+  const drafts = useAppSelector(state => state.draft.entities);
+  const draftReceipts = useAppSelector(state => state.draftReceipt.entities);
   const productEntity = useAppSelector(state => state.product.entity);
   const loading = useAppSelector(state => state.product.loading);
   const updating = useAppSelector(state => state.product.updating);
@@ -39,6 +45,8 @@ export const ProductUpdate = () => {
     }
 
     dispatch(getOrderRegistrationInfos({}));
+    dispatch(getDrafts({}));
+    dispatch(getDraftReceipts({}));
   }, []);
 
   useEffect(() => {
@@ -57,6 +65,8 @@ export const ProductUpdate = () => {
       ...productEntity,
       ...values,
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
+      drafts: mapIdList(values.drafts),
+      draftProductInfos: draftReceipts.find(it => it.id.toString() === values.draftProductInfos?.toString()),
     };
 
     if (isNew) {
@@ -72,6 +82,8 @@ export const ProductUpdate = () => {
       : {
           ...productEntity,
           orderRegistrationInfos: productEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
+          drafts: productEntity?.drafts?.map(e => e.id.toString()),
+          draftProductInfos: productEntity?.draftProductInfos?.id,
         };
 
   return (
@@ -140,6 +152,39 @@ export const ProductUpdate = () => {
                 <option value="" key="0" />
                 {orderRegistrationInfos
                   ? orderRegistrationInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.product.draft')}
+                id="product-draft"
+                data-cy="draft"
+                type="select"
+                multiple
+                name="drafts"
+              >
+                <option value="" key="0" />
+                {drafts
+                  ? drafts.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="product-draftProductInfos"
+                name="draftProductInfos"
+                data-cy="draftProductInfos"
+                label={translate('tfbitaApp.product.draftProductInfos')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftReceipts
+                  ? draftReceipts.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

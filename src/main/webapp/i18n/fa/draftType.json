@@ -1,0 +1,37 @@
+{
+  "tfbitaApp": {
+    "draftType": {
+      "home": {
+        "title": "Draft Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Type",
+        "createOrEditLabel": "Create or edit a Draft Type",
+        "notFound": "No Draft Types found"
+      },
+      "created": "A new Draft Type is created with identifier {{ param }}",
+      "updated": "A Draft Type is updated with identifier {{ param }}",
+      "deleted": "A Draft Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Type"
+      },
+      "id": "ID",
+      "alarmTime": "Alarm Time",
+      "code": "Code",
+      "disableDate": "Disable Date",
+      "duration": "Duration",
+      "hasAssurance": "Has Assurance",
+      "hasSanction": "Has Sanction",
+      "latestCreditSerial": "Latest Credit Serial",
+      "name": "Name",
+      "portal": "Portal",
+      "usable": "Usable",
+      "defaultCurrencyCode": "Default Currency Code",
+      "accountInfoCode": "Account Info Code",
+      "topicInfoCode": "Topic Info Code",
+      "draftType": "Draft Type"
+    }
+  }
+}

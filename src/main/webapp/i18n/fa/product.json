@@ -24,7 +24,9 @@
       "description": "Description",
       "topicCode": "Topic Code",
       "attributeValueGroupName": "Attribute Value Group Name",
-      "orderRegistrationInfo": "Order Registration Info"
+      "orderRegistrationInfo": "Order Registration Info",
+      "draft": "Draft",
+      "draftProductInfos": "Draft Product Infos"
     }
   }
 }

@@ -62,7 +62,7 @@ export const OrderRegServUpdate = () => {
     const entity = {
       ...orderRegServEntity,
       ...values,
-      orderRegistrationInfo: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegistrationInfo?.toString()),
+      orderRegService: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegService?.toString()),
     };
 
     if (isNew) {
@@ -77,7 +77,7 @@ export const OrderRegServUpdate = () => {
       ? {}
       : {
           ...orderRegServEntity,
-          orderRegistrationInfo: orderRegServEntity?.orderRegistrationInfo?.id,
+          orderRegService: orderRegServEntity?.orderRegService?.id,
         };
 
   return (
@@ -141,10 +141,10 @@ export const OrderRegServUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="order-reg-serv-orderRegistrationInfo"
-                name="orderRegistrationInfo"
-                data-cy="orderRegistrationInfo"
-                label={translate('tfbitaApp.orderRegServ.orderRegistrationInfo')}
+                id="order-reg-serv-orderRegService"
+                name="orderRegService"
+                data-cy="orderRegService"
+                label={translate('tfbitaApp.orderRegServ.orderRegService')}
                 type="select"
               >
                 <option value="" key="0" />

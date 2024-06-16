@@ -27,6 +27,10 @@ public class ProductDTO implements Serializable {
 
     private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
 
+    private Set<DraftDTO> drafts = new HashSet<>();
+
+    private DraftReceiptDTO draftProductInfos;
+
     public Long getId() {
         return id;
     }
@@ -91,6 +95,22 @@ public class ProductDTO implements Serializable {
         this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
+    public Set<DraftDTO> getDrafts() {
+        return drafts;
+    }
+
+    public void setDrafts(Set<DraftDTO> drafts) {
+        this.drafts = drafts;
+    }
+
+    public DraftReceiptDTO getDraftProductInfos() {
+        return draftProductInfos;
+    }
+
+    public void setDraftProductInfos(DraftReceiptDTO draftProductInfos) {
+        this.draftProductInfos = draftProductInfos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -124,6 +144,8 @@ public class ProductDTO implements Serializable {
             ", topicCode='" + getTopicCode() + "'" +
             ", attributeValueGroupName='" + getAttributeValueGroupName() + "'" +
             ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
+            ", drafts=" + getDrafts() +
+            ", draftProductInfos=" + getDraftProductInfos() +
             "}";
     }
 }

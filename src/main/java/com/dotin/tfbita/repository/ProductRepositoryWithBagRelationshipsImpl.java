@@ -24,7 +24,7 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
 
     @Override
     public Optional<Product> fetchBagRelationships(Optional<Product> product) {
-        return product.map(this::fetchOrderRegistrationInfos);
+        return product.map(this::fetchOrderRegistrationInfos).map(this::fetchDrafts);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
 
     @Override
     public List<Product> fetchBagRelationships(List<Product> products) {
-        return Optional.of(products).map(this::fetchOrderRegistrationInfos).orElse(Collections.emptyList());
+        return Optional.of(products).map(this::fetchOrderRegistrationInfos).map(this::fetchDrafts).orElse(Collections.emptyList());
     }
 
     Product fetchOrderRegistrationInfos(Product result) {
@@ -55,6 +55,24 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
                 "select product from Product product left join fetch product.orderRegistrationInfos where product in :products",
                 Product.class
             )
+            .setParameter(PRODUCTS_PARAMETER, products)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    Product fetchDrafts(Product result) {
+        return entityManager
+            .createQuery("select product from Product product left join fetch product.drafts where product.id = :id", Product.class)
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<Product> fetchDrafts(List<Product> products) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, products.size()).forEach(index -> order.put(products.get(index).getId(), index));
+        List<Product> result = entityManager
+            .createQuery("select product from Product product left join fetch product.drafts where product in :products", Product.class)
             .setParameter(PRODUCTS_PARAMETER, products)
             .getResultList();
         Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));

@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IDraft } from 'app/shared/model/draft.model';
+import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
 import { ICustom } from 'app/shared/model/custom.model';
@@ -21,6 +23,7 @@ export const CustomUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const drafts = useAppSelector(state => state.draft.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
   const customEntity = useAppSelector(state => state.custom.entity);
   const loading = useAppSelector(state => state.custom.loading);
@@ -38,6 +41,7 @@ export const CustomUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getDrafts({}));
     dispatch(getOrderRegistrationInfos({}));
   }, []);
 
@@ -59,7 +63,9 @@ export const CustomUpdate = () => {
     const entity = {
       ...customEntity,
       ...values,
+      loadSwitchPlace: drafts.find(it => it.id.toString() === values.loadSwitchPlace?.toString()),
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
+      drafts: mapIdList(values.drafts),
     };
 
     if (isNew) {
@@ -74,7 +80,9 @@ export const CustomUpdate = () => {
       ? {}
       : {
           ...customEntity,
+          loadSwitchPlace: customEntity?.loadSwitchPlace?.id,
           orderRegistrationInfos: customEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
+          drafts: customEntity?.drafts?.map(e => e.id.toString()),
         };
 
   return (
@@ -119,6 +127,22 @@ export const CustomUpdate = () => {
               <ValidatedField label={translate('tfbitaApp.custom.name')} id="custom-name" name="name" data-cy="name" type="text" />
               <ValidatedField label={translate('tfbitaApp.custom.tempId')} id="custom-tempId" name="tempId" data-cy="tempId" type="text" />
               <ValidatedField
+                id="custom-loadSwitchPlace"
+                name="loadSwitchPlace"
+                data-cy="loadSwitchPlace"
+                label={translate('tfbitaApp.custom.loadSwitchPlace')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {drafts
+                  ? drafts.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
                 label={translate('tfbitaApp.custom.orderRegistrationInfo')}
                 id="custom-orderRegistrationInfo"
                 data-cy="orderRegistrationInfo"
@@ -129,6 +153,23 @@ export const CustomUpdate = () => {
                 <option value="" key="0" />
                 {orderRegistrationInfos
                   ? orderRegistrationInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.custom.draft')}
+                id="custom-draft"
+                data-cy="draft"
+                type="select"
+                multiple
+                name="drafts"
+              >
+                <option value="" key="0" />
+                {drafts
+                  ? drafts.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

@@ -10,6 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.CategoryElement;
 import com.dotin.tfbita.repository.CategoryElementRepository;
+import com.dotin.tfbita.service.dto.CategoryElementDTO;
+import com.dotin.tfbita.service.mapper.CategoryElementMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
@@ -53,6 +55,9 @@ class CategoryElementResourceIT {
     private CategoryElementRepository categoryElementRepository;
 
     @Autowired
+    private CategoryElementMapper categoryElementMapper;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -92,18 +97,20 @@ class CategoryElementResourceIT {
     void createCategoryElement() throws Exception {
         long databaseSizeBeforeCreate = getRepositoryCount();
         // Create the CategoryElement
-        var returnedCategoryElement = om.readValue(
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+        var returnedCategoryElementDTO = om.readValue(
             restCategoryElementMockMvc
-                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElement)))
+                .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElementDTO)))
                 .andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString(),
-            CategoryElement.class
+            CategoryElementDTO.class
         );
 
         // Validate the CategoryElement in the database
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
+        var returnedCategoryElement = categoryElementMapper.toEntity(returnedCategoryElementDTO);
         assertCategoryElementUpdatableFieldsEquals(returnedCategoryElement, getPersistedCategoryElement(returnedCategoryElement));
     }
 
@@ -112,12 +119,13 @@ class CategoryElementResourceIT {
     void createCategoryElementWithExistingId() throws Exception {
         // Create the CategoryElement with an existing ID
         categoryElement.setId(1L);
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCategoryElementMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElement)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElementDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the CategoryElement in the database
@@ -178,12 +186,13 @@ class CategoryElementResourceIT {
         // Disconnect from session so that the updates on updatedCategoryElement are not directly saved in db
         em.detach(updatedCategoryElement);
         updatedCategoryElement.value(UPDATED_VALUE).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(updatedCategoryElement);
 
         restCategoryElementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedCategoryElement.getId())
+                put(ENTITY_API_URL_ID, categoryElementDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(updatedCategoryElement))
+                    .content(om.writeValueAsBytes(categoryElementDTO))
             )
             .andExpect(status().isOk());
 
@@ -198,12 +207,15 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, categoryElement.getId())
+                put(ENTITY_API_URL_ID, categoryElementDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(categoryElement))
+                    .content(om.writeValueAsBytes(categoryElementDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -217,12 +229,15 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(om.writeValueAsBytes(categoryElement))
+                    .content(om.writeValueAsBytes(categoryElementDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -236,9 +251,12 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElement)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(categoryElementDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the CategoryElement in the database
@@ -313,12 +331,15 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, categoryElement.getId())
+                patch(ENTITY_API_URL_ID, categoryElementDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(categoryElement))
+                    .content(om.writeValueAsBytes(categoryElementDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -332,12 +353,15 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(om.writeValueAsBytes(categoryElement))
+                    .content(om.writeValueAsBytes(categoryElementDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -351,9 +375,12 @@ class CategoryElementResourceIT {
         long databaseSizeBeforeUpdate = getRepositoryCount();
         categoryElement.setId(longCount.incrementAndGet());
 
+        // Create the CategoryElement
+        CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(categoryElement);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCategoryElementMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(categoryElement)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(om.writeValueAsBytes(categoryElementDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the CategoryElement in the database

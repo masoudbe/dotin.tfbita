@@ -56,6 +56,10 @@ export const CustomDetail = () => {
           </dt>
           <dd>{customEntity.tempId}</dd>
           <dt>
+            <Translate contentKey="tfbitaApp.custom.loadSwitchPlace">Load Switch Place</Translate>
+          </dt>
+          <dd>{customEntity.loadSwitchPlace ? customEntity.loadSwitchPlace.id : ''}</dd>
+          <dt>
             <Translate contentKey="tfbitaApp.custom.orderRegistrationInfo">Order Registration Info</Translate>
           </dt>
           <dd>
@@ -64,6 +68,19 @@ export const CustomDetail = () => {
                   <span key={val.id}>
                     <a>{val.id}</a>
                     {customEntity.orderRegistrationInfos && i === customEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.custom.draft">Draft</Translate>
+          </dt>
+          <dd>
+            {customEntity.drafts
+              ? customEntity.drafts.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {customEntity.drafts && i === customEntity.drafts.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}

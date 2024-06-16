@@ -38,6 +38,19 @@
       "relationshipName": "orderRegistrationInfo",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "products",
+      "relationshipName": "draft",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "draftReceipt",
+      "relationshipName": "draftProductInfos",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",

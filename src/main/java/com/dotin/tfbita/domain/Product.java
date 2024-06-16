@@ -52,6 +52,32 @@ public class Product implements Serializable {
     )
     private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_product__draft",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "draft_id")
+    )
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Set<Draft> drafts = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
+    private DraftReceipt draftProductInfos;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -165,6 +191,42 @@ public class Product implements Serializable {
 
     public Product removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
         this.orderRegistrationInfos.remove(orderRegistrationInfo);
+        return this;
+    }
+
+    public Set<Draft> getDrafts() {
+        return this.drafts;
+    }
+
+    public void setDrafts(Set<Draft> drafts) {
+        this.drafts = drafts;
+    }
+
+    public Product drafts(Set<Draft> drafts) {
+        this.setDrafts(drafts);
+        return this;
+    }
+
+    public Product addDraft(Draft draft) {
+        this.drafts.add(draft);
+        return this;
+    }
+
+    public Product removeDraft(Draft draft) {
+        this.drafts.remove(draft);
+        return this;
+    }
+
+    public DraftReceipt getDraftProductInfos() {
+        return this.draftProductInfos;
+    }
+
+    public void setDraftProductInfos(DraftReceipt draftReceipt) {
+        this.draftProductInfos = draftReceipt;
+    }
+
+    public Product draftProductInfos(DraftReceipt draftReceipt) {
+        this.setDraftProductInfos(draftReceipt);
         return this;
     }
 

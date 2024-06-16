@@ -1,0 +1,25 @@
+{
+  "tfbitaApp": {
+    "draftCustomJustification": {
+      "home": {
+        "title": "Draft Custom Justifications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Custom Justification",
+        "createOrEditLabel": "Create or edit a Draft Custom Justification",
+        "notFound": "No Draft Custom Justifications found"
+      },
+      "created": "A new Draft Custom Justification is created with identifier {{ param }}",
+      "updated": "A Draft Custom Justification is updated with identifier {{ param }}",
+      "deleted": "A Draft Custom Justification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Custom Justification {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Custom Justification"
+      },
+      "id": "ID",
+      "draftReceipts": "Draft Receipts",
+      "draftJustifications": "Draft Justifications"
+    }
+  }
+}

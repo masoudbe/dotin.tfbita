@@ -336,7 +336,7 @@ class ProductResourceIT {
         Product partialUpdatedProduct = new Product();
         partialUpdatedProduct.setId(product.getId());
 
-        partialUpdatedProduct.description(UPDATED_DESCRIPTION);
+        partialUpdatedProduct.name(UPDATED_NAME);
 
         restProductMockMvc
             .perform(

@@ -162,24 +162,24 @@ public class OrderRegistrationInfo implements Serializable {
     @Column(name = "commission_transaction_number")
     private String commissionTransactionNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
-    @JsonIgnoreProperties(value = { "product", "orderRegServ", "orderRegistrationInfo" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "licenceInfo")
+    @JsonIgnoreProperties(value = { "product", "orderRegServ", "licenceInfo" }, allowSetters = true)
     private Set<LicenceInfo> licenceInfos = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfo", "licenceInfos" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegService")
+    @JsonIgnoreProperties(value = { "orderRegService", "licenceInfos" }, allowSetters = true)
     private Set<OrderRegServ> orderRegServs = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfo" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseFromOtherResources")
+    @JsonIgnoreProperties(value = { "purchaseFromOtherResources" }, allowSetters = true)
     private Set<PurchaseFromOtherResources> purchaseFromOtherResources = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfos")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "loadSwitchPlace", "orderRegistrationInfos", "drafts" }, allowSetters = true)
     private Set<Custom> customs = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfos")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
     private Set<Product> productInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -801,10 +801,10 @@ public class OrderRegistrationInfo implements Serializable {
 
     public void setLicenceInfos(Set<LicenceInfo> licenceInfos) {
         if (this.licenceInfos != null) {
-            this.licenceInfos.forEach(i -> i.setOrderRegistrationInfo(null));
+            this.licenceInfos.forEach(i -> i.setLicenceInfo(null));
         }
         if (licenceInfos != null) {
-            licenceInfos.forEach(i -> i.setOrderRegistrationInfo(this));
+            licenceInfos.forEach(i -> i.setLicenceInfo(this));
         }
         this.licenceInfos = licenceInfos;
     }
@@ -816,13 +816,13 @@ public class OrderRegistrationInfo implements Serializable {
 
     public OrderRegistrationInfo addLicenceInfo(LicenceInfo licenceInfo) {
         this.licenceInfos.add(licenceInfo);
-        licenceInfo.setOrderRegistrationInfo(this);
+        licenceInfo.setLicenceInfo(this);
         return this;
     }
 
     public OrderRegistrationInfo removeLicenceInfo(LicenceInfo licenceInfo) {
         this.licenceInfos.remove(licenceInfo);
-        licenceInfo.setOrderRegistrationInfo(null);
+        licenceInfo.setLicenceInfo(null);
         return this;
     }
 
@@ -832,10 +832,10 @@ public class OrderRegistrationInfo implements Serializable {
 
     public void setOrderRegServs(Set<OrderRegServ> orderRegServs) {
         if (this.orderRegServs != null) {
-            this.orderRegServs.forEach(i -> i.setOrderRegistrationInfo(null));
+            this.orderRegServs.forEach(i -> i.setOrderRegService(null));
         }
         if (orderRegServs != null) {
-            orderRegServs.forEach(i -> i.setOrderRegistrationInfo(this));
+            orderRegServs.forEach(i -> i.setOrderRegService(this));
         }
         this.orderRegServs = orderRegServs;
     }
@@ -847,13 +847,13 @@ public class OrderRegistrationInfo implements Serializable {
 
     public OrderRegistrationInfo addOrderRegServ(OrderRegServ orderRegServ) {
         this.orderRegServs.add(orderRegServ);
-        orderRegServ.setOrderRegistrationInfo(this);
+        orderRegServ.setOrderRegService(this);
         return this;
     }
 
     public OrderRegistrationInfo removeOrderRegServ(OrderRegServ orderRegServ) {
         this.orderRegServs.remove(orderRegServ);
-        orderRegServ.setOrderRegistrationInfo(null);
+        orderRegServ.setOrderRegService(null);
         return this;
     }
 
@@ -863,10 +863,10 @@ public class OrderRegistrationInfo implements Serializable {
 
     public void setPurchaseFromOtherResources(Set<PurchaseFromOtherResources> purchaseFromOtherResources) {
         if (this.purchaseFromOtherResources != null) {
-            this.purchaseFromOtherResources.forEach(i -> i.setOrderRegistrationInfo(null));
+            this.purchaseFromOtherResources.forEach(i -> i.setPurchaseFromOtherResources(null));
         }
         if (purchaseFromOtherResources != null) {
-            purchaseFromOtherResources.forEach(i -> i.setOrderRegistrationInfo(this));
+            purchaseFromOtherResources.forEach(i -> i.setPurchaseFromOtherResources(this));
         }
         this.purchaseFromOtherResources = purchaseFromOtherResources;
     }
@@ -878,13 +878,13 @@ public class OrderRegistrationInfo implements Serializable {
 
     public OrderRegistrationInfo addPurchaseFromOtherResources(PurchaseFromOtherResources purchaseFromOtherResources) {
         this.purchaseFromOtherResources.add(purchaseFromOtherResources);
-        purchaseFromOtherResources.setOrderRegistrationInfo(this);
+        purchaseFromOtherResources.setPurchaseFromOtherResources(this);
         return this;
     }
 
     public OrderRegistrationInfo removePurchaseFromOtherResources(PurchaseFromOtherResources purchaseFromOtherResources) {
         this.purchaseFromOtherResources.remove(purchaseFromOtherResources);
-        purchaseFromOtherResources.setOrderRegistrationInfo(null);
+        purchaseFromOtherResources.setPurchaseFromOtherResources(null);
         return this;
     }
 

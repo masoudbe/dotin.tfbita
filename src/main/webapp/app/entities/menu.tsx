@@ -28,6 +28,45 @@ const EntitiesMenu = () => {
       <MenuItem icon="asterisk" to="/purchase-from-other-resources">
         <Translate contentKey="global.menu.entities.purchaseFromOtherResources" />
       </MenuItem>
+      <MenuItem icon="asterisk" to="/draft">
+        <Translate contentKey="global.menu.entities.draft" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/service-tariff">
+        <Translate contentKey="global.menu.entities.serviceTariff" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-status-info">
+        <Translate contentKey="global.menu.entities.draftStatusInfo" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-receipt">
+        <Translate contentKey="global.menu.entities.draftReceipt" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-custom-justification">
+        <Translate contentKey="global.menu.entities.draftCustomJustification" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-factor">
+        <Translate contentKey="global.menu.entities.draftFactor" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-used-assurance">
+        <Translate contentKey="global.menu.entities.draftUsedAssurance" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/insurance-company-info">
+        <Translate contentKey="global.menu.entities.insuranceCompanyInfo" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/advisor-definition">
+        <Translate contentKey="global.menu.entities.advisorDefinition" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-type">
+        <Translate contentKey="global.menu.entities.draftType" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/audit-company-info">
+        <Translate contentKey="global.menu.entities.auditCompanyInfo" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-extend">
+        <Translate contentKey="global.menu.entities.draftExtend" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/draft-tax">
+        <Translate contentKey="global.menu.entities.draftTax" />
+      </MenuItem>
       {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
     </>
   );

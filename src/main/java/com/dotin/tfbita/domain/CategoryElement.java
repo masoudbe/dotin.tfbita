@@ -107,11 +107,11 @@ public class CategoryElement implements Serializable {
     private OrderRegistrationInfo transportType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegistrationInfo" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "purchaseFromOtherResources" }, allowSetters = true)
     private PurchaseFromOtherResources currencySupplier;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegistrationInfo" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "purchaseFromOtherResources" }, allowSetters = true)
     private PurchaseFromOtherResources statusPurchase;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -120,6 +120,259 @@ public class CategoryElement implements Serializable {
         allowSetters = true
     )
     private OrderRegistrationInfo transportVehicleType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft freightLetterType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft actionCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft ownershipCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft currencyContainerPlace;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft draftSource;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft chargedExchangeBroker;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft impartType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft insuranceLetterType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft advisorDepositType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft interfaceAdvisorDepositType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft paymentType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft dealType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft coveringAdvisorDepositType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "advisingBank", "interfaceAdvisingBank", "coveringBank" }, allowSetters = true)
+    private AdvisorDefinition depositType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "draftType" }, allowSetters = true)
+    private DraftType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "draftType" }, allowSetters = true)
+    private DraftType secondaryType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "draftType" }, allowSetters = true)
+    private DraftType division;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
+    private DraftReceipt productDimension;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
+    private DraftReceipt stateOfDocuments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
+    private DraftReceipt currencyProvisionFileType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "statusInfo" }, allowSetters = true)
+    private DraftStatusInfo statusDraft;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -354,6 +607,279 @@ public class CategoryElement implements Serializable {
 
     public CategoryElement transportVehicleType(OrderRegistrationInfo orderRegistrationInfo) {
         this.setTransportVehicleType(orderRegistrationInfo);
+        return this;
+    }
+
+    public Draft getFreightLetterType() {
+        return this.freightLetterType;
+    }
+
+    public void setFreightLetterType(Draft draft) {
+        this.freightLetterType = draft;
+    }
+
+    public CategoryElement freightLetterType(Draft draft) {
+        this.setFreightLetterType(draft);
+        return this;
+    }
+
+    public Draft getActionCode() {
+        return this.actionCode;
+    }
+
+    public void setActionCode(Draft draft) {
+        this.actionCode = draft;
+    }
+
+    public CategoryElement actionCode(Draft draft) {
+        this.setActionCode(draft);
+        return this;
+    }
+
+    public Draft getOwnershipCode() {
+        return this.ownershipCode;
+    }
+
+    public void setOwnershipCode(Draft draft) {
+        this.ownershipCode = draft;
+    }
+
+    public CategoryElement ownershipCode(Draft draft) {
+        this.setOwnershipCode(draft);
+        return this;
+    }
+
+    public Draft getCurrencyContainerPlace() {
+        return this.currencyContainerPlace;
+    }
+
+    public void setCurrencyContainerPlace(Draft draft) {
+        this.currencyContainerPlace = draft;
+    }
+
+    public CategoryElement currencyContainerPlace(Draft draft) {
+        this.setCurrencyContainerPlace(draft);
+        return this;
+    }
+
+    public Draft getDraftSource() {
+        return this.draftSource;
+    }
+
+    public void setDraftSource(Draft draft) {
+        this.draftSource = draft;
+    }
+
+    public CategoryElement draftSource(Draft draft) {
+        this.setDraftSource(draft);
+        return this;
+    }
+
+    public Draft getChargedExchangeBroker() {
+        return this.chargedExchangeBroker;
+    }
+
+    public void setChargedExchangeBroker(Draft draft) {
+        this.chargedExchangeBroker = draft;
+    }
+
+    public CategoryElement chargedExchangeBroker(Draft draft) {
+        this.setChargedExchangeBroker(draft);
+        return this;
+    }
+
+    public Draft getImpartType() {
+        return this.impartType;
+    }
+
+    public void setImpartType(Draft draft) {
+        this.impartType = draft;
+    }
+
+    public CategoryElement impartType(Draft draft) {
+        this.setImpartType(draft);
+        return this;
+    }
+
+    public Draft getInsuranceLetterType() {
+        return this.insuranceLetterType;
+    }
+
+    public void setInsuranceLetterType(Draft draft) {
+        this.insuranceLetterType = draft;
+    }
+
+    public CategoryElement insuranceLetterType(Draft draft) {
+        this.setInsuranceLetterType(draft);
+        return this;
+    }
+
+    public Draft getAdvisorDepositType() {
+        return this.advisorDepositType;
+    }
+
+    public void setAdvisorDepositType(Draft draft) {
+        this.advisorDepositType = draft;
+    }
+
+    public CategoryElement advisorDepositType(Draft draft) {
+        this.setAdvisorDepositType(draft);
+        return this;
+    }
+
+    public Draft getInterfaceAdvisorDepositType() {
+        return this.interfaceAdvisorDepositType;
+    }
+
+    public void setInterfaceAdvisorDepositType(Draft draft) {
+        this.interfaceAdvisorDepositType = draft;
+    }
+
+    public CategoryElement interfaceAdvisorDepositType(Draft draft) {
+        this.setInterfaceAdvisorDepositType(draft);
+        return this;
+    }
+
+    public Draft getPaymentType() {
+        return this.paymentType;
+    }
+
+    public void setPaymentType(Draft draft) {
+        this.paymentType = draft;
+    }
+
+    public CategoryElement paymentType(Draft draft) {
+        this.setPaymentType(draft);
+        return this;
+    }
+
+    public Draft getDealType() {
+        return this.dealType;
+    }
+
+    public void setDealType(Draft draft) {
+        this.dealType = draft;
+    }
+
+    public CategoryElement dealType(Draft draft) {
+        this.setDealType(draft);
+        return this;
+    }
+
+    public Draft getCoveringAdvisorDepositType() {
+        return this.coveringAdvisorDepositType;
+    }
+
+    public void setCoveringAdvisorDepositType(Draft draft) {
+        this.coveringAdvisorDepositType = draft;
+    }
+
+    public CategoryElement coveringAdvisorDepositType(Draft draft) {
+        this.setCoveringAdvisorDepositType(draft);
+        return this;
+    }
+
+    public AdvisorDefinition getDepositType() {
+        return this.depositType;
+    }
+
+    public void setDepositType(AdvisorDefinition advisorDefinition) {
+        this.depositType = advisorDefinition;
+    }
+
+    public CategoryElement depositType(AdvisorDefinition advisorDefinition) {
+        this.setDepositType(advisorDefinition);
+        return this;
+    }
+
+    public DraftType getType() {
+        return this.type;
+    }
+
+    public void setType(DraftType draftType) {
+        this.type = draftType;
+    }
+
+    public CategoryElement type(DraftType draftType) {
+        this.setType(draftType);
+        return this;
+    }
+
+    public DraftType getSecondaryType() {
+        return this.secondaryType;
+    }
+
+    public void setSecondaryType(DraftType draftType) {
+        this.secondaryType = draftType;
+    }
+
+    public CategoryElement secondaryType(DraftType draftType) {
+        this.setSecondaryType(draftType);
+        return this;
+    }
+
+    public DraftType getDivision() {
+        return this.division;
+    }
+
+    public void setDivision(DraftType draftType) {
+        this.division = draftType;
+    }
+
+    public CategoryElement division(DraftType draftType) {
+        this.setDivision(draftType);
+        return this;
+    }
+
+    public DraftReceipt getProductDimension() {
+        return this.productDimension;
+    }
+
+    public void setProductDimension(DraftReceipt draftReceipt) {
+        this.productDimension = draftReceipt;
+    }
+
+    public CategoryElement productDimension(DraftReceipt draftReceipt) {
+        this.setProductDimension(draftReceipt);
+        return this;
+    }
+
+    public DraftReceipt getStateOfDocuments() {
+        return this.stateOfDocuments;
+    }
+
+    public void setStateOfDocuments(DraftReceipt draftReceipt) {
+        this.stateOfDocuments = draftReceipt;
+    }
+
+    public CategoryElement stateOfDocuments(DraftReceipt draftReceipt) {
+        this.setStateOfDocuments(draftReceipt);
+        return this;
+    }
+
+    public DraftReceipt getCurrencyProvisionFileType() {
+        return this.currencyProvisionFileType;
+    }
+
+    public void setCurrencyProvisionFileType(DraftReceipt draftReceipt) {
+        this.currencyProvisionFileType = draftReceipt;
+    }
+
+    public CategoryElement currencyProvisionFileType(DraftReceipt draftReceipt) {
+        this.setCurrencyProvisionFileType(draftReceipt);
+        return this;
+    }
+
+    public DraftStatusInfo getStatusDraft() {
+        return this.statusDraft;
+    }
+
+    public void setStatusDraft(DraftStatusInfo draftStatusInfo) {
+        this.statusDraft = draftStatusInfo;
+    }
+
+    public CategoryElement statusDraft(DraftStatusInfo draftStatusInfo) {
+        this.setStatusDraft(draftStatusInfo);
         return this;
     }
 

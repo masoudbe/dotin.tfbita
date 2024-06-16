@@ -1,5 +1,10 @@
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { IPurchaseFromOtherResources } from 'app/shared/model/purchase-from-other-resources.model';
+import { IDraft } from 'app/shared/model/draft.model';
+import { IAdvisorDefinition } from 'app/shared/model/advisor-definition.model';
+import { IDraftType } from 'app/shared/model/draft-type.model';
+import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
+import { IDraftStatusInfo } from 'app/shared/model/draft-status-info.model';
 
 export interface ICategoryElement {
   id?: number;
@@ -20,6 +25,27 @@ export interface ICategoryElement {
   currencySupplier?: IPurchaseFromOtherResources | null;
   statusPurchase?: IPurchaseFromOtherResources | null;
   transportVehicleType?: IOrderRegistrationInfo | null;
+  freightLetterType?: IDraft | null;
+  actionCode?: IDraft | null;
+  ownershipCode?: IDraft | null;
+  currencyContainerPlace?: IDraft | null;
+  draftSource?: IDraft | null;
+  chargedExchangeBroker?: IDraft | null;
+  impartType?: IDraft | null;
+  insuranceLetterType?: IDraft | null;
+  advisorDepositType?: IDraft | null;
+  interfaceAdvisorDepositType?: IDraft | null;
+  paymentType?: IDraft | null;
+  dealType?: IDraft | null;
+  coveringAdvisorDepositType?: IDraft | null;
+  depositType?: IAdvisorDefinition | null;
+  type?: IDraftType | null;
+  secondaryType?: IDraftType | null;
+  division?: IDraftType | null;
+  productDimension?: IDraftReceipt | null;
+  stateOfDocuments?: IDraftReceipt | null;
+  currencyProvisionFileType?: IDraftReceipt | null;
+  statusDraft?: IDraftStatusInfo | null;
 }
 
 export const defaultValue: Readonly<ICategoryElement> = {};

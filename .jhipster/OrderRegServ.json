@@ -30,7 +30,7 @@
   "relationships": [
     {
       "otherEntityName": "orderRegistrationInfo",
-      "relationshipName": "orderRegistrationInfo",
+      "relationshipName": "orderRegService",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     },

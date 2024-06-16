@@ -23,7 +23,7 @@
       "unit": "Unit",
       "title": "Title",
       "code": "Code",
-      "orderRegistrationInfo": "Order Registration Info",
+      "orderRegService": "Order Reg Service",
       "licenceInfo": "Licence Info"
     }
   }

@@ -103,8 +103,14 @@ export const Custom = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('tempId')} />
                 </th>
                 <th>
+                  <Translate contentKey="tfbitaApp.custom.loadSwitchPlace">Load Switch Place</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="tfbitaApp.custom.orderRegistrationInfo">Order Registration Info</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.custom.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -122,11 +128,24 @@ export const Custom = () => {
                   <td>{custom.name}</td>
                   <td>{custom.tempId}</td>
                   <td>
+                    {custom.loadSwitchPlace ? <Link to={`/draft/${custom.loadSwitchPlace.id}`}>{custom.loadSwitchPlace.id}</Link> : ''}
+                  </td>
+                  <td>
                     {custom.orderRegistrationInfos
                       ? custom.orderRegistrationInfos.map((val, j) => (
                           <span key={j}>
                             <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
                             {j === custom.orderRegistrationInfos.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {custom.drafts
+                      ? custom.drafts.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/draft/${val.id}`}>{val.id}</Link>
+                            {j === custom.drafts.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

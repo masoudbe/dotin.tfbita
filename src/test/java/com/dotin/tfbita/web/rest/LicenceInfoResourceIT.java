@@ -308,7 +308,11 @@ class LicenceInfoResourceIT {
         LicenceInfo partialUpdatedLicenceInfo = new LicenceInfo();
         partialUpdatedLicenceInfo.setId(licenceInfo.getId());
 
-        partialUpdatedLicenceInfo.havingService(UPDATED_HAVING_SERVICE).creditDate(UPDATED_CREDIT_DATE);
+        partialUpdatedLicenceInfo
+            .organizationLicence(UPDATED_ORGANIZATION_LICENCE)
+            .havingProduct(UPDATED_HAVING_PRODUCT)
+            .havingService(UPDATED_HAVING_SERVICE)
+            .creditDate(UPDATED_CREDIT_DATE);
 
         restLicenceInfoMockMvc
             .perform(

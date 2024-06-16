@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "insuranceCompanyInfo": {
+      "home": {
+        "title": "Insurance Company Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Insurance Company Info",
+        "createOrEditLabel": "Create or edit a Insurance Company Info",
+        "notFound": "No Insurance Company Infos found"
+      },
+      "created": "A new Insurance Company Info is created with identifier {{ param }}",
+      "updated": "A Insurance Company Info is updated with identifier {{ param }}",
+      "deleted": "A Insurance Company Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Insurance Company Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Insurance Company Info"
+      },
+      "id": "ID",
+      "modificationDate": "Modification Date",
+      "name": "Name",
+      "insuranceCompanyInfo": "Insurance Company Info"
+    }
+  }
+}

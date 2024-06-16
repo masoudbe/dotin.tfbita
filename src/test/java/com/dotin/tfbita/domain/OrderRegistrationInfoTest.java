@@ -36,19 +36,19 @@ class OrderRegistrationInfoTest {
 
         orderRegistrationInfo.addLicenceInfo(licenceInfoBack);
         assertThat(orderRegistrationInfo.getLicenceInfos()).containsOnly(licenceInfoBack);
-        assertThat(licenceInfoBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(licenceInfoBack.getLicenceInfo()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.removeLicenceInfo(licenceInfoBack);
         assertThat(orderRegistrationInfo.getLicenceInfos()).doesNotContain(licenceInfoBack);
-        assertThat(licenceInfoBack.getOrderRegistrationInfo()).isNull();
+        assertThat(licenceInfoBack.getLicenceInfo()).isNull();
 
         orderRegistrationInfo.licenceInfos(new HashSet<>(Set.of(licenceInfoBack)));
         assertThat(orderRegistrationInfo.getLicenceInfos()).containsOnly(licenceInfoBack);
-        assertThat(licenceInfoBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(licenceInfoBack.getLicenceInfo()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.setLicenceInfos(new HashSet<>());
         assertThat(orderRegistrationInfo.getLicenceInfos()).doesNotContain(licenceInfoBack);
-        assertThat(licenceInfoBack.getOrderRegistrationInfo()).isNull();
+        assertThat(licenceInfoBack.getLicenceInfo()).isNull();
     }
 
     @Test
@@ -58,19 +58,19 @@ class OrderRegistrationInfoTest {
 
         orderRegistrationInfo.addOrderRegServ(orderRegServBack);
         assertThat(orderRegistrationInfo.getOrderRegServs()).containsOnly(orderRegServBack);
-        assertThat(orderRegServBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(orderRegServBack.getOrderRegService()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.removeOrderRegServ(orderRegServBack);
         assertThat(orderRegistrationInfo.getOrderRegServs()).doesNotContain(orderRegServBack);
-        assertThat(orderRegServBack.getOrderRegistrationInfo()).isNull();
+        assertThat(orderRegServBack.getOrderRegService()).isNull();
 
         orderRegistrationInfo.orderRegServs(new HashSet<>(Set.of(orderRegServBack)));
         assertThat(orderRegistrationInfo.getOrderRegServs()).containsOnly(orderRegServBack);
-        assertThat(orderRegServBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(orderRegServBack.getOrderRegService()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.setOrderRegServs(new HashSet<>());
         assertThat(orderRegistrationInfo.getOrderRegServs()).doesNotContain(orderRegServBack);
-        assertThat(orderRegServBack.getOrderRegistrationInfo()).isNull();
+        assertThat(orderRegServBack.getOrderRegService()).isNull();
     }
 
     @Test
@@ -80,19 +80,19 @@ class OrderRegistrationInfoTest {
 
         orderRegistrationInfo.addPurchaseFromOtherResources(purchaseFromOtherResourcesBack);
         assertThat(orderRegistrationInfo.getPurchaseFromOtherResources()).containsOnly(purchaseFromOtherResourcesBack);
-        assertThat(purchaseFromOtherResourcesBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(purchaseFromOtherResourcesBack.getPurchaseFromOtherResources()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.removePurchaseFromOtherResources(purchaseFromOtherResourcesBack);
         assertThat(orderRegistrationInfo.getPurchaseFromOtherResources()).doesNotContain(purchaseFromOtherResourcesBack);
-        assertThat(purchaseFromOtherResourcesBack.getOrderRegistrationInfo()).isNull();
+        assertThat(purchaseFromOtherResourcesBack.getPurchaseFromOtherResources()).isNull();
 
         orderRegistrationInfo.purchaseFromOtherResources(new HashSet<>(Set.of(purchaseFromOtherResourcesBack)));
         assertThat(orderRegistrationInfo.getPurchaseFromOtherResources()).containsOnly(purchaseFromOtherResourcesBack);
-        assertThat(purchaseFromOtherResourcesBack.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfo);
+        assertThat(purchaseFromOtherResourcesBack.getPurchaseFromOtherResources()).isEqualTo(orderRegistrationInfo);
 
         orderRegistrationInfo.setPurchaseFromOtherResources(new HashSet<>());
         assertThat(orderRegistrationInfo.getPurchaseFromOtherResources()).doesNotContain(purchaseFromOtherResourcesBack);
-        assertThat(purchaseFromOtherResourcesBack.getOrderRegistrationInfo()).isNull();
+        assertThat(purchaseFromOtherResourcesBack.getPurchaseFromOtherResources()).isNull();
     }
 
     @Test

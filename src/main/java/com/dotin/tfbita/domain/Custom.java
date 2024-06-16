@@ -34,6 +34,23 @@ public class Custom implements Serializable {
     @Column(name = "temp_id")
     private Long tempId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Draft loadSwitchPlace;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "rel_custom__order_registration_info",
@@ -45,6 +62,28 @@ public class Custom implements Serializable {
         allowSetters = true
     )
     private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_custom__draft",
+        joinColumns = @JoinColumn(name = "custom_id"),
+        inverseJoinColumns = @JoinColumn(name = "draft_id")
+    )
+    @JsonIgnoreProperties(
+        value = {
+            "draftReceipts",
+            "draftUsedAssurances",
+            "draftFactors",
+            "draftCustomJustifications",
+            "draftExtends",
+            "draftTaxes",
+            "customs",
+            "products",
+            "services",
+        },
+        allowSetters = true
+    )
+    private Set<Draft> drafts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -113,6 +152,19 @@ public class Custom implements Serializable {
         this.tempId = tempId;
     }
 
+    public Draft getLoadSwitchPlace() {
+        return this.loadSwitchPlace;
+    }
+
+    public void setLoadSwitchPlace(Draft draft) {
+        this.loadSwitchPlace = draft;
+    }
+
+    public Custom loadSwitchPlace(Draft draft) {
+        this.setLoadSwitchPlace(draft);
+        return this;
+    }
+
     public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
         return this.orderRegistrationInfos;
     }
@@ -133,6 +185,29 @@ public class Custom implements Serializable {
 
     public Custom removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
         this.orderRegistrationInfos.remove(orderRegistrationInfo);
+        return this;
+    }
+
+    public Set<Draft> getDrafts() {
+        return this.drafts;
+    }
+
+    public void setDrafts(Set<Draft> drafts) {
+        this.drafts = drafts;
+    }
+
+    public Custom drafts(Set<Draft> drafts) {
+        this.setDrafts(drafts);
+        return this;
+    }
+
+    public Custom addDraft(Draft draft) {
+        this.drafts.add(draft);
+        return this;
+    }
+
+    public Custom removeDraft(Draft draft) {
+        this.drafts.remove(draft);
         return this;
     }
 

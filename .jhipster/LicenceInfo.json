@@ -47,7 +47,7 @@
     },
     {
       "otherEntityName": "orderRegistrationInfo",
-      "relationshipName": "orderRegistrationInfo",
+      "relationshipName": "licenceInfo",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

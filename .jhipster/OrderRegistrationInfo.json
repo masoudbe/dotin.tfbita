@@ -191,21 +191,21 @@
   "relationships": [
     {
       "otherEntityName": "licenceInfo",
-      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "otherEntityRelationshipName": "licenceInfo",
       "relationshipName": "licenceInfo",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "orderRegServ",
-      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "otherEntityRelationshipName": "orderRegService",
       "relationshipName": "orderRegServ",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "purchaseFromOtherResources",
-      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "otherEntityRelationshipName": "purchaseFromOtherResources",
       "relationshipName": "purchaseFromOtherResources",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"

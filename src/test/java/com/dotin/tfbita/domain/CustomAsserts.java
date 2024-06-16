@@ -62,11 +62,13 @@ public class CustomAsserts {
     public static void assertCustomUpdatableRelationshipsEquals(Custom expected, Custom actual) {
         assertThat(expected)
             .as("Verify Custom relationships")
+            .satisfies(e -> assertThat(e.getLoadSwitchPlace()).as("check loadSwitchPlace").isEqualTo(actual.getLoadSwitchPlace()))
             .satisfies(
                 e ->
                     assertThat(e.getOrderRegistrationInfos())
                         .as("check orderRegistrationInfos")
                         .isEqualTo(actual.getOrderRegistrationInfos())
-            );
+            )
+            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()));
     }
 }

@@ -23,5 +23,26 @@
                                  referencedColumnNames="id"
                                  referencedTableName="order_registration_info"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="rel_product__draft"
+                                 constraintName="fk_rel_product__draft__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_product__draft"
+                                 constraintName="fk_rel_product__draft__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_product_infos_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product__draft_product_infos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_receipt"
+                                 />
     </changeSet>
 </databaseChangeLog>

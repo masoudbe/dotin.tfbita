@@ -1,6 +1,11 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.AdvisorDefinitionTestSamples.*;
 import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
+import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
+import static com.dotin.tfbita.domain.DraftStatusInfoTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTypeTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.PurchaseFromOtherResourcesTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -190,5 +195,257 @@ class CategoryElementTest {
 
         categoryElement.transportVehicleType(null);
         assertThat(categoryElement.getTransportVehicleType()).isNull();
+    }
+
+    @Test
+    void freightLetterTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setFreightLetterType(draftBack);
+        assertThat(categoryElement.getFreightLetterType()).isEqualTo(draftBack);
+
+        categoryElement.freightLetterType(null);
+        assertThat(categoryElement.getFreightLetterType()).isNull();
+    }
+
+    @Test
+    void actionCodeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setActionCode(draftBack);
+        assertThat(categoryElement.getActionCode()).isEqualTo(draftBack);
+
+        categoryElement.actionCode(null);
+        assertThat(categoryElement.getActionCode()).isNull();
+    }
+
+    @Test
+    void ownershipCodeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setOwnershipCode(draftBack);
+        assertThat(categoryElement.getOwnershipCode()).isEqualTo(draftBack);
+
+        categoryElement.ownershipCode(null);
+        assertThat(categoryElement.getOwnershipCode()).isNull();
+    }
+
+    @Test
+    void currencyContainerPlaceTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setCurrencyContainerPlace(draftBack);
+        assertThat(categoryElement.getCurrencyContainerPlace()).isEqualTo(draftBack);
+
+        categoryElement.currencyContainerPlace(null);
+        assertThat(categoryElement.getCurrencyContainerPlace()).isNull();
+    }
+
+    @Test
+    void draftSourceTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setDraftSource(draftBack);
+        assertThat(categoryElement.getDraftSource()).isEqualTo(draftBack);
+
+        categoryElement.draftSource(null);
+        assertThat(categoryElement.getDraftSource()).isNull();
+    }
+
+    @Test
+    void chargedExchangeBrokerTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setChargedExchangeBroker(draftBack);
+        assertThat(categoryElement.getChargedExchangeBroker()).isEqualTo(draftBack);
+
+        categoryElement.chargedExchangeBroker(null);
+        assertThat(categoryElement.getChargedExchangeBroker()).isNull();
+    }
+
+    @Test
+    void impartTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setImpartType(draftBack);
+        assertThat(categoryElement.getImpartType()).isEqualTo(draftBack);
+
+        categoryElement.impartType(null);
+        assertThat(categoryElement.getImpartType()).isNull();
+    }
+
+    @Test
+    void insuranceLetterTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setInsuranceLetterType(draftBack);
+        assertThat(categoryElement.getInsuranceLetterType()).isEqualTo(draftBack);
+
+        categoryElement.insuranceLetterType(null);
+        assertThat(categoryElement.getInsuranceLetterType()).isNull();
+    }
+
+    @Test
+    void advisorDepositTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setAdvisorDepositType(draftBack);
+        assertThat(categoryElement.getAdvisorDepositType()).isEqualTo(draftBack);
+
+        categoryElement.advisorDepositType(null);
+        assertThat(categoryElement.getAdvisorDepositType()).isNull();
+    }
+
+    @Test
+    void interfaceAdvisorDepositTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setInterfaceAdvisorDepositType(draftBack);
+        assertThat(categoryElement.getInterfaceAdvisorDepositType()).isEqualTo(draftBack);
+
+        categoryElement.interfaceAdvisorDepositType(null);
+        assertThat(categoryElement.getInterfaceAdvisorDepositType()).isNull();
+    }
+
+    @Test
+    void paymentTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setPaymentType(draftBack);
+        assertThat(categoryElement.getPaymentType()).isEqualTo(draftBack);
+
+        categoryElement.paymentType(null);
+        assertThat(categoryElement.getPaymentType()).isNull();
+    }
+
+    @Test
+    void dealTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setDealType(draftBack);
+        assertThat(categoryElement.getDealType()).isEqualTo(draftBack);
+
+        categoryElement.dealType(null);
+        assertThat(categoryElement.getDealType()).isNull();
+    }
+
+    @Test
+    void coveringAdvisorDepositTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Draft draftBack = getDraftRandomSampleGenerator();
+
+        categoryElement.setCoveringAdvisorDepositType(draftBack);
+        assertThat(categoryElement.getCoveringAdvisorDepositType()).isEqualTo(draftBack);
+
+        categoryElement.coveringAdvisorDepositType(null);
+        assertThat(categoryElement.getCoveringAdvisorDepositType()).isNull();
+    }
+
+    @Test
+    void depositTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        AdvisorDefinition advisorDefinitionBack = getAdvisorDefinitionRandomSampleGenerator();
+
+        categoryElement.setDepositType(advisorDefinitionBack);
+        assertThat(categoryElement.getDepositType()).isEqualTo(advisorDefinitionBack);
+
+        categoryElement.depositType(null);
+        assertThat(categoryElement.getDepositType()).isNull();
+    }
+
+    @Test
+    void typeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftType draftTypeBack = getDraftTypeRandomSampleGenerator();
+
+        categoryElement.setType(draftTypeBack);
+        assertThat(categoryElement.getType()).isEqualTo(draftTypeBack);
+
+        categoryElement.type(null);
+        assertThat(categoryElement.getType()).isNull();
+    }
+
+    @Test
+    void secondaryTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftType draftTypeBack = getDraftTypeRandomSampleGenerator();
+
+        categoryElement.setSecondaryType(draftTypeBack);
+        assertThat(categoryElement.getSecondaryType()).isEqualTo(draftTypeBack);
+
+        categoryElement.secondaryType(null);
+        assertThat(categoryElement.getSecondaryType()).isNull();
+    }
+
+    @Test
+    void divisionTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftType draftTypeBack = getDraftTypeRandomSampleGenerator();
+
+        categoryElement.setDivision(draftTypeBack);
+        assertThat(categoryElement.getDivision()).isEqualTo(draftTypeBack);
+
+        categoryElement.division(null);
+        assertThat(categoryElement.getDivision()).isNull();
+    }
+
+    @Test
+    void productDimensionTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
+
+        categoryElement.setProductDimension(draftReceiptBack);
+        assertThat(categoryElement.getProductDimension()).isEqualTo(draftReceiptBack);
+
+        categoryElement.productDimension(null);
+        assertThat(categoryElement.getProductDimension()).isNull();
+    }
+
+    @Test
+    void stateOfDocumentsTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
+
+        categoryElement.setStateOfDocuments(draftReceiptBack);
+        assertThat(categoryElement.getStateOfDocuments()).isEqualTo(draftReceiptBack);
+
+        categoryElement.stateOfDocuments(null);
+        assertThat(categoryElement.getStateOfDocuments()).isNull();
+    }
+
+    @Test
+    void currencyProvisionFileTypeTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
+
+        categoryElement.setCurrencyProvisionFileType(draftReceiptBack);
+        assertThat(categoryElement.getCurrencyProvisionFileType()).isEqualTo(draftReceiptBack);
+
+        categoryElement.currencyProvisionFileType(null);
+        assertThat(categoryElement.getCurrencyProvisionFileType()).isNull();
+    }
+
+    @Test
+    void statusDraftTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        DraftStatusInfo draftStatusInfoBack = getDraftStatusInfoRandomSampleGenerator();
+
+        categoryElement.setStatusDraft(draftStatusInfoBack);
+        assertThat(categoryElement.getStatusDraft()).isEqualTo(draftStatusInfoBack);
+
+        categoryElement.statusDraft(null);
+        assertThat(categoryElement.getStatusDraft()).isNull();
     }
 }

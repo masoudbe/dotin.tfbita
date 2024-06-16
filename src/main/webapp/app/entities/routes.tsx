@@ -10,6 +10,19 @@ import OrderRegServ from './order-reg-serv';
 import Product from './product';
 import LicenceInfo from './licence-info';
 import PurchaseFromOtherResources from './purchase-from-other-resources';
+import Draft from './draft';
+import ServiceTariff from './service-tariff';
+import DraftStatusInfo from './draft-status-info';
+import DraftReceipt from './draft-receipt';
+import DraftCustomJustification from './draft-custom-justification';
+import DraftFactor from './draft-factor';
+import DraftUsedAssurance from './draft-used-assurance';
+import InsuranceCompanyInfo from './insurance-company-info';
+import AdvisorDefinition from './advisor-definition';
+import DraftType from './draft-type';
+import AuditCompanyInfo from './audit-company-info';
+import DraftExtend from './draft-extend';
+import DraftTax from './draft-tax';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -24,6 +37,19 @@ export default () => {
         <Route path="product/*" element={<Product />} />
         <Route path="licence-info/*" element={<LicenceInfo />} />
         <Route path="purchase-from-other-resources/*" element={<PurchaseFromOtherResources />} />
+        <Route path="draft/*" element={<Draft />} />
+        <Route path="service-tariff/*" element={<ServiceTariff />} />
+        <Route path="draft-status-info/*" element={<DraftStatusInfo />} />
+        <Route path="draft-receipt/*" element={<DraftReceipt />} />
+        <Route path="draft-custom-justification/*" element={<DraftCustomJustification />} />
+        <Route path="draft-factor/*" element={<DraftFactor />} />
+        <Route path="draft-used-assurance/*" element={<DraftUsedAssurance />} />
+        <Route path="insurance-company-info/*" element={<InsuranceCompanyInfo />} />
+        <Route path="advisor-definition/*" element={<AdvisorDefinition />} />
+        <Route path="draft-type/*" element={<DraftType />} />
+        <Route path="audit-company-info/*" element={<AuditCompanyInfo />} />
+        <Route path="draft-extend/*" element={<DraftExtend />} />
+        <Route path="draft-tax/*" element={<DraftTax />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

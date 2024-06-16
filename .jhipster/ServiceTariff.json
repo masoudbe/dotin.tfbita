@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240616082856"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ServiceTariff",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "services",
+      "relationshipName": "draft",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

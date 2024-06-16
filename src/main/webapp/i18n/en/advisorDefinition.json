@@ -1,0 +1,36 @@
+{
+  "tfbitaApp": {
+    "advisorDefinition": {
+      "home": {
+        "title": "Advisor Definitions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Advisor Definition",
+        "createOrEditLabel": "Create or edit a Advisor Definition",
+        "notFound": "No Advisor Definitions found"
+      },
+      "created": "A new Advisor Definition is created with identifier {{ param }}",
+      "updated": "A Advisor Definition is updated with identifier {{ param }}",
+      "deleted": "A Advisor Definition is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Advisor Definition {{ id }}?"
+      },
+      "detail": {
+        "title": "Advisor Definition"
+      },
+      "id": "ID",
+      "caption": "Caption",
+      "code": "Code",
+      "countryIsoCode": "Country Iso Code",
+      "depositNum": "Deposit Num",
+      "swiftCode": "Swift Code",
+      "creditDate": "Credit Date",
+      "bankCode": "Bank Code",
+      "branchCode": "Branch Code",
+      "defaultCurrencyCode": "Default Currency Code",
+      "countryCode": "Country Code",
+      "advisingBank": "Advising Bank",
+      "interfaceAdvisingBank": "Interface Advising Bank",
+      "coveringBank": "Covering Bank"
+    }
+  }
+}

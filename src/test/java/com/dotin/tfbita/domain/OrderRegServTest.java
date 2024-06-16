@@ -27,15 +27,15 @@ class OrderRegServTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void orderRegServiceTest() throws Exception {
         OrderRegServ orderRegServ = getOrderRegServRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
-        orderRegServ.setOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(orderRegServ.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfoBack);
+        orderRegServ.setOrderRegService(orderRegistrationInfoBack);
+        assertThat(orderRegServ.getOrderRegService()).isEqualTo(orderRegistrationInfoBack);
 
-        orderRegServ.orderRegistrationInfo(null);
-        assertThat(orderRegServ.getOrderRegistrationInfo()).isNull();
+        orderRegServ.orderRegService(null);
+        assertThat(orderRegServ.getOrderRegService()).isNull();
     }
 
     @Test

@@ -32,6 +32,9 @@
             <column name="attribute_value_group_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="draft_product_infos_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -48,6 +51,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="product_id, order_registration_info_id" tableName="rel_product__order_registration_info"/>
+
+        <createTable tableName="rel_product__draft">
+            <column name="draft_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, draft_id" tableName="rel_product__draft"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

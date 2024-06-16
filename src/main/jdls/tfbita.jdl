@@ -101,9 +101,9 @@ entity PurchaseFromOtherResources {
 
 
 relationship OneToMany {
-	  OrderRegistrationInfo to LicenceInfo{orderRegistrationInfo}
-      	OrderRegistrationInfo to OrderRegServ{orderRegistrationInfo}
-        	OrderRegistrationInfo to PurchaseFromOtherResources{orderRegistrationInfo}
+	        OrderRegistrationInfo to LicenceInfo{licenceInfo}
+         	OrderRegistrationInfo to OrderRegServ{orderRegService}
+        	OrderRegistrationInfo to PurchaseFromOtherResources{purchaseFromOtherResources}
 }
 
 relationship ManyToOne {
@@ -127,8 +127,294 @@ relationship ManyToOne {
 
 relationship ManyToMany {
 	Custom{orderRegistrationInfo} to OrderRegistrationInfo{custom}
-                 	Product{orderRegistrationInfo} to OrderRegistrationInfo{productInfo}
+    Product{orderRegistrationInfo} to OrderRegistrationInfo{productInfo}
 }
 
 use mapstruct for OrderRegistrationInfo,PurchaseFromOtherResources,LicenceInfo,Product,OrderRegServ,Custom
 use paginate,serviceImpl for OrderRegistrationInfo
+
+
+
+entity Draft {
+	advisorDepositNumber String
+    advisorRequestDeleted Boolean
+    auditCost BigDecimal
+    beneficiaryInfo String
+    branchStampCost BigDecimal
+    centralBankCode String
+    centralBankCodeReference String
+    chargedExchangeBrokerAmount BigDecimal
+    charterAcceptable Boolean 
+    comment String
+    completionDate String
+    coveringBankDepositNumber String
+    currencyExchangeDepositNumber String
+    customerDepositNumber String 
+    deliverDuration Integer
+    discount BigDecimal
+    draftNumber String
+    draftOrderRegProductWorth BigDecimal 
+    draftOrderRegServiceWorth BigDecimal
+    draftOrderRegTotalWorth BigDecimal
+    draftOtherCost BigDecimal
+    hasTransportJustification Boolean
+    insuranceCost BigDecimal
+    insuranceDate String
+    insuranceExpiryDate String 
+    insuranceNumber String
+    interfaceAdvisorDepositNumber String
+    issueDate String
+    issueDraftCommission BigDecimal
+    lastShipmentDate String
+    mainCustomerNumber Long
+    makeCertification Boolean
+    multipleTransportable Boolean
+    orderRegistrationDate String 
+    orderRegistrationExpiryDate String
+    orderRegistrationNumber String 
+    otherCost BigDecimal 
+    paymentAmount BigDecimal
+    performaDate String
+    performaExpiryDate String
+    performaNumber String 
+    postSwiftCost BigDecimal
+    productSourceChangeable Boolean 
+    receiveAllCommission Boolean 
+    registerationJustificationAmount BigDecimal 
+    requestDate String
+    sanctionSerial String 
+    serial Long 
+    shipmentCost BigDecimal
+    sourceTransportPlace String 
+    swiftComment String 
+    transferAmount BigDecimal
+    transportVehicleChangeable Boolean
+	paymentTool String
+    letterNumberTazirat String
+    letterDateTazirat String
+    loanNumber String 
+    isMigrational Boolean
+    isNewCertificate Boolean 
+    isWithoutPayment Boolean 
+	destinationCountryCode String
+	beneficiaryCountryCode String
+	producerCountryCode String
+	branchCode String
+    operationalBranchCode String
+    certificateSenderBranchCode String
+	mainAccountCurrencyCode String 
+    orderRegCurrencyCode String
+	chargedExchangeBrokerCurrency String
+	registerationJustificationCurrencyCode String
+	currencyExchangeInfoTitle String
+    transportationTypeName String	
+	accountInfoCode String
+    customerNumbers Long
+	sanctionSerials String
+  }
+
+entity ServiceTariff {
+    code String 
+    title String
+}
+
+ entity DraftStatusInfo {
+    approved Boolean 
+    draftRequestAccepted Boolean 
+    insuranceCostPaid Boolean 
+    issued Boolean 
+    otherCostsPaid Boolean 
+    postSwiftCostPaied Boolean
+    rejectDescription String 
+    remainAmount BigDecimal 
+    stampCostPaid Boolean 
+}
+
+ entity DraftReceipt  {
+    comment String 
+    customerDeliverDate String
+    date String
+    deleteDate String 
+    deliverDate String 
+    deliverDuration Integer
+    delivered Boolean
+    documentTransactionEffectiveDate String 
+    freightLetterDate String 
+    freightLetterNumber String
+    freightLetterStampCost BigDecimal
+    issueDate String
+    issueDocument Boolean 
+    productAmount BigDecimal 
+    receiptAmount BigDecimal 
+    receiptDate String 
+    row Integer
+    serial String 
+    transportRow String
+    usable Boolean 
+    paymentCurrencyRateTypeDesc String 
+	paymentItemTypeDesc String
+    netWeight BigDecimal
+    grossWeight BigDecimal
+    totalNetWeight BigDecimal 
+    totalGrossWeight BigDecimal 
+    letterNumberTazirat String
+    letterDateTazirat String
+    fobAmount BigDecimal
+    shippingFare BigDecimal 
+    inspectionCost BigDecimal
+    discount BigDecimal
+    deadlineSubmitDocumentDate String 
+    currencyProvisionFile AnyBlob
+    isMigrational Boolean
+	otherCost BigDecimal
+}
+
+entity DraftCustomJustification {
+}
+
+entity  DraftFactor {
+    amount BigDecimal 
+    description String
+    eqAmount BigDecimal 
+    factorDate String 
+    issueDate String 
+    serial String 
+    currencyName String
+}
+entity DraftUsedAssurance {
+    assuranceRateId String 
+    assuranceSerial String 
+    exchangeRate BigDecimal 
+    defaultCurrencyUsedCost BigDecimal 
+    usedCost BigDecimal 
+}
+
+entity InsuranceCompanyInfo {
+    modificationDate String
+    name String
+}
+
+
+entity AdvisorDefinition {
+	caption String
+    code String
+    countryIsoCode String
+    depositNum String
+    swiftCode String
+    creditDate String
+	bankCode String
+	branchCode String
+	defaultCurrencyCode String
+	countryCode String
+}
+
+entity DraftType {
+    alarmTime Integer
+    code String
+    disableDate String
+    duration Integer
+    hasAssurance Boolean
+    hasSanction Boolean
+    latestCreditSerial Long
+    name String
+    portal Boolean
+    usable Boolean
+	defaultCurrencyCode String
+	accountInfoCode String
+	topicInfoCode String
+}
+
+ entity AuditCompanyInfo  {
+    address String 
+    barCodes String 
+    dateOfRegistration String 
+    fax String 
+    floor String 
+    inernationalobserviation String 
+    mainStreet String 
+    mobile String 
+    plaque String 
+    postalCode String
+    registrationNumber String
+    telephone String
+    tempId Long
+    theSideStreet String
+    title String 
+    unit String 
+    city String
+	}
+	
+entity DraftExtend  {
+    date String 
+    duration Integer 
+    time String 
+	}
+	
+entity DraftTax	{
+	orderRegCurrencyAmount BigDecimal
+    mainAccountCurrencyAmount BigDecimal 
+    letterNumber String 
+    letterImage AnyBlob
+    description String 
+    registrationDate String 
+    returnTaxesAmount Boolean 
+    orderRegRate BigDecimal 
+    mainAccountRate BigDecimal 
+    documentTransactionNumber String
+    returnDocumentTransactionNumber String
+	}
+	
+relationship OneToMany {
+	             Draft to DraftReceipt{receipts} 
+				 Draft to DraftUsedAssurance{usedAssurances}  
+	             Draft to DraftFactor{draftFactors}
+                 Draft to DraftCustomJustification{draftJustifications}
+                 Draft to DraftExtend{extensions}
+				 Draft to DraftTax{taxes}
+                 DraftReceipt to Product{draftProductInfos}
+}
+
+relationship ManyToOne {
+     CategoryElement{freightLetterType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+	 CategoryElement{actionCode} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{ownershipCode} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{currencyContainerPlace} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{draftSource} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{chargedExchangeBroker} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{impartType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{insuranceLetterType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{advisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{interfaceAdvisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+	 CategoryElement{paymentType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{dealType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     CategoryElement{coveringAdvisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
+     Custom{loadSwitchPlace} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft	
+     CategoryElement{depositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") AdvisorDefinition	
+     AdvisorDefinition{advisingBank} to Draft
+     AdvisorDefinition{interfaceAdvisingBank} to Draft	
+     AdvisorDefinition{coveringBank} to  Draft	
+	 CategoryElement{type} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType
+     CategoryElement{secondaryType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType
+     CategoryElement{division} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType	
+	 DraftType{draftType} to Draft
+     InsuranceCompanyInfo{insuranceCompanyInfo} to Draft
+	 AuditCompanyInfo{auditCompanyInfo} to Draft
+     CategoryElement{productDimension} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt
+     CategoryElement{stateOfDocuments} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt
+     CategoryElement{currencyProvisionFileType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt	
+     CategoryElement{statusDraft} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftStatusInfo	
+     DraftStatusInfo{statusInfo} to Draft	 
+		
+}
+
+relationship ManyToMany {
+	    Custom{draft} to Draft{custom}
+		Product{draft} to Draft{products}
+		ServiceTariff{draft} to Draft{services} 
+        DraftCustomJustification{draftReceipts} to DraftReceipt{draftCustomJustification} 	
+}
+
+use mapstruct for *
+use paginate,serviceImpl for Draft,DraftReceipt,DraftType,DraftCustomJustification
+
+

@@ -3,6 +3,7 @@
     "changelogDate": "20240606191117"
   },
   "applications": "*",
+  "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "value",
@@ -158,7 +159,218 @@
       "relationshipName": "transportVehicleType",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "freightLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "actionCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "ownershipCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "currencyContainerPlace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "draftSource",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "chargedExchangeBroker",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "impartType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "insuranceLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "advisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "interfaceAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "paymentType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "dealType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draft",
+      "relationshipName": "coveringAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "depositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftType",
+      "relationshipName": "type",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftType",
+      "relationshipName": "secondaryType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftType",
+      "relationshipName": "division",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftReceipt",
+      "relationshipName": "productDimension",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftReceipt",
+      "relationshipName": "stateOfDocuments",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftReceipt",
+      "relationshipName": "currencyProvisionFileType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "options": {
+        "onDelete": "SET NULL",
+        "onUpdate": "CASCADE"
+      },
+      "otherEntityName": "draftStatusInfo",
+      "relationshipName": "statusDraft",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceClass"
 }

@@ -76,9 +76,9 @@ export const LicenceInfoDetail = () => {
           </dt>
           <dd>{licenceInfoEntity.orderRegServ ? licenceInfoEntity.orderRegServ.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.licenceInfo.orderRegistrationInfo">Order Registration Info</Translate>
+            <Translate contentKey="tfbitaApp.licenceInfo.licenceInfo">Licence Info</Translate>
           </dt>
-          <dd>{licenceInfoEntity.orderRegistrationInfo ? licenceInfoEntity.orderRegistrationInfo.id : ''}</dd>
+          <dd>{licenceInfoEntity.licenceInfo ? licenceInfoEntity.licenceInfo.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/licence-info" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

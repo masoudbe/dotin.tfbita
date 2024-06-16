@@ -66,7 +66,7 @@ export const LicenceInfoUpdate = () => {
       ...values,
       product: products.find(it => it.id.toString() === values.product?.toString()),
       orderRegServ: orderRegServs.find(it => it.id.toString() === values.orderRegServ?.toString()),
-      orderRegistrationInfo: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegistrationInfo?.toString()),
+      licenceInfo: orderRegistrationInfos.find(it => it.id.toString() === values.licenceInfo?.toString()),
     };
 
     if (isNew) {
@@ -83,7 +83,7 @@ export const LicenceInfoUpdate = () => {
           ...licenceInfoEntity,
           product: licenceInfoEntity?.product?.id,
           orderRegServ: licenceInfoEntity?.orderRegServ?.id,
-          orderRegistrationInfo: licenceInfoEntity?.orderRegistrationInfo?.id,
+          licenceInfo: licenceInfoEntity?.licenceInfo?.id,
         };
 
   return (
@@ -188,10 +188,10 @@ export const LicenceInfoUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="licence-info-orderRegistrationInfo"
-                name="orderRegistrationInfo"
-                data-cy="orderRegistrationInfo"
-                label={translate('tfbitaApp.licenceInfo.orderRegistrationInfo')}
+                id="licence-info-licenceInfo"
+                name="licenceInfo"
+                data-cy="licenceInfo"
+                label={translate('tfbitaApp.licenceInfo.licenceInfo')}
                 type="select"
               >
                 <option value="" key="0" />

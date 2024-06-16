@@ -147,6 +147,79 @@ export const CategoryElement = () => {
                   <Translate contentKey="tfbitaApp.categoryElement.transportVehicleType">Transport Vehicle Type</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.freightLetterType">Freight Letter Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.actionCode">Action Code</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.ownershipCode">Ownership Code</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.currencyContainerPlace">Currency Container Place</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.draftSource">Draft Source</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.chargedExchangeBroker">Charged Exchange Broker</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.impartType">Impart Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.insuranceLetterType">Insurance Letter Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.advisorDepositType">Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.interfaceAdvisorDepositType">Interface Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.paymentType">Payment Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.dealType">Deal Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.coveringAdvisorDepositType">Covering Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.depositType">Deposit Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.type">Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.secondaryType">Secondary Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.division">Division</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.productDimension">Product Dimension</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.stateOfDocuments">State Of Documents</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.currencyProvisionFileType">Currency Provision File Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.statusDraft">Status Draft</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -265,6 +338,155 @@ export const CategoryElement = () => {
                       <Link to={`/order-registration-info/${categoryElement.transportVehicleType.id}`}>
                         {categoryElement.transportVehicleType.id}
                       </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.freightLetterType ? (
+                      <Link to={`/draft/${categoryElement.freightLetterType.id}`}>{categoryElement.freightLetterType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.actionCode ? (
+                      <Link to={`/draft/${categoryElement.actionCode.id}`}>{categoryElement.actionCode.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.ownershipCode ? (
+                      <Link to={`/draft/${categoryElement.ownershipCode.id}`}>{categoryElement.ownershipCode.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.currencyContainerPlace ? (
+                      <Link to={`/draft/${categoryElement.currencyContainerPlace.id}`}>{categoryElement.currencyContainerPlace.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.draftSource ? (
+                      <Link to={`/draft/${categoryElement.draftSource.id}`}>{categoryElement.draftSource.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.chargedExchangeBroker ? (
+                      <Link to={`/draft/${categoryElement.chargedExchangeBroker.id}`}>{categoryElement.chargedExchangeBroker.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.impartType ? (
+                      <Link to={`/draft/${categoryElement.impartType.id}`}>{categoryElement.impartType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.insuranceLetterType ? (
+                      <Link to={`/draft/${categoryElement.insuranceLetterType.id}`}>{categoryElement.insuranceLetterType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.advisorDepositType ? (
+                      <Link to={`/draft/${categoryElement.advisorDepositType.id}`}>{categoryElement.advisorDepositType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.interfaceAdvisorDepositType ? (
+                      <Link to={`/draft/${categoryElement.interfaceAdvisorDepositType.id}`}>
+                        {categoryElement.interfaceAdvisorDepositType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.paymentType ? (
+                      <Link to={`/draft/${categoryElement.paymentType.id}`}>{categoryElement.paymentType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.dealType ? (
+                      <Link to={`/draft/${categoryElement.dealType.id}`}>{categoryElement.dealType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.coveringAdvisorDepositType ? (
+                      <Link to={`/draft/${categoryElement.coveringAdvisorDepositType.id}`}>
+                        {categoryElement.coveringAdvisorDepositType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.depositType ? (
+                      <Link to={`/advisor-definition/${categoryElement.depositType.id}`}>{categoryElement.depositType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.type ? <Link to={`/draft-type/${categoryElement.type.id}`}>{categoryElement.type.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {categoryElement.secondaryType ? (
+                      <Link to={`/draft-type/${categoryElement.secondaryType.id}`}>{categoryElement.secondaryType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.division ? (
+                      <Link to={`/draft-type/${categoryElement.division.id}`}>{categoryElement.division.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.productDimension ? (
+                      <Link to={`/draft-receipt/${categoryElement.productDimension.id}`}>{categoryElement.productDimension.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.stateOfDocuments ? (
+                      <Link to={`/draft-receipt/${categoryElement.stateOfDocuments.id}`}>{categoryElement.stateOfDocuments.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.currencyProvisionFileType ? (
+                      <Link to={`/draft-receipt/${categoryElement.currencyProvisionFileType.id}`}>
+                        {categoryElement.currencyProvisionFileType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.statusDraft ? (
+                      <Link to={`/draft-status-info/${categoryElement.statusDraft.id}`}>{categoryElement.statusDraft.id}</Link>
                     ) : (
                       ''
                     )}

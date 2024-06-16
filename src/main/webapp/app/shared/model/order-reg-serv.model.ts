@@ -7,7 +7,7 @@ export interface IOrderRegServ {
   unit?: string | null;
   title?: string | null;
   code?: string | null;
-  orderRegistrationInfo?: IOrderRegistrationInfo | null;
+  orderRegService?: IOrderRegistrationInfo | null;
 }
 
 export const defaultValue: Readonly<IOrderRegServ> = {};

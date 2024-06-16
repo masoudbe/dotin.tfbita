@@ -11,7 +11,7 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface OrderRegServMapper extends EntityMapper<OrderRegServDTO, OrderRegServ> {
-    @Mapping(target = "orderRegistrationInfo", source = "orderRegistrationInfo", qualifiedByName = "orderRegistrationInfoId")
+    @Mapping(target = "orderRegService", source = "orderRegService", qualifiedByName = "orderRegistrationInfoId")
     OrderRegServDTO toDto(OrderRegServ s);
 
     @Named("orderRegistrationInfoId")

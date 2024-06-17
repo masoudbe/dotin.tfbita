@@ -324,5 +324,12 @@
                                  onDelete="SET NULL"
                                  onUpdate="CASCADE"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="category_element_id"
+                                 baseTableName="category_element"
+                                 constraintName="fk_category_element__category_element_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"
+                                 />
     </changeSet>
 </databaseChangeLog>

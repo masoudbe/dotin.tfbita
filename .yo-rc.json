@@ -43,13 +43,14 @@
       "DraftType",
       "AuditCompanyInfo",
       "DraftExtend",
-      "DraftTax"
+      "DraftTax",
+      "Category"
     ],
     "feignClient": null,
     "jhipsterVersion": "8.4.0",
     "jwtSecretKey": "NWNmZjg5ZGFiZTliZmMwZGU3YTNmM2ZlODZmODE1YmY4YmZhNTI5ZWIxYTA0ZGIzMzM4OWM2NWMzZDkzNzkyOGU0ODM3NWI5MjIxOWYwMTY2OTNiYmJkNzRhYmI0NTYyMDUxMDdjOTIxNTBmNjY3NDNmYmJkNDM0OWUzZmMzY2E=",
     "languages": ["en", "fa"],
-    "lastLiquibaseTimestamp": 1718526547000,
+    "lastLiquibaseTimestamp": 1718577368000,
     "messageBroker": false,
     "microfrontend": null,
     "microfrontends": [],

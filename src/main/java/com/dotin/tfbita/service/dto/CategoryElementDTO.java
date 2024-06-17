@@ -87,6 +87,8 @@ public class CategoryElementDTO implements Serializable {
 
     private DraftStatusInfoDTO statusDraft;
 
+    private CategoryDTO categoryElement;
+
     public Long getId() {
         return id;
     }
@@ -399,6 +401,14 @@ public class CategoryElementDTO implements Serializable {
         this.statusDraft = statusDraft;
     }
 
+    public CategoryDTO getCategoryElement() {
+        return categoryElement;
+    }
+
+    public void setCategoryElement(CategoryDTO categoryElement) {
+        this.categoryElement = categoryElement;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -463,6 +473,7 @@ public class CategoryElementDTO implements Serializable {
             ", stateOfDocuments=" + getStateOfDocuments() +
             ", currencyProvisionFileType=" + getCurrencyProvisionFileType() +
             ", statusDraft=" + getStatusDraft() +
+            ", categoryElement=" + getCategoryElement() +
             "}";
     }
 }

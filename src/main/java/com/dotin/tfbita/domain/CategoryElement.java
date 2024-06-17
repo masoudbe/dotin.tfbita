@@ -130,6 +130,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -147,6 +148,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -164,6 +166,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -181,6 +184,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -198,6 +202,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -215,6 +220,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -232,6 +238,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -249,6 +256,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -266,6 +274,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -283,6 +292,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -300,6 +310,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -317,6 +328,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -334,6 +346,7 @@ public class CategoryElement implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",
@@ -373,6 +386,10 @@ public class CategoryElement implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "statusInfo" }, allowSetters = true)
     private DraftStatusInfo statusDraft;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "categoryElements" }, allowSetters = true)
+    private Category categoryElement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -880,6 +897,19 @@ public class CategoryElement implements Serializable {
 
     public CategoryElement statusDraft(DraftStatusInfo draftStatusInfo) {
         this.setStatusDraft(draftStatusInfo);
+        return this;
+    }
+
+    public Category getCategoryElement() {
+        return this.categoryElement;
+    }
+
+    public void setCategoryElement(Category category) {
+        this.categoryElement = category;
+    }
+
+    public CategoryElement categoryElement(Category category) {
+        this.setCategoryElement(category);
         return this;
     }
 

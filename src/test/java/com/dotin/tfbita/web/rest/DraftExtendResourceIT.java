@@ -275,8 +275,6 @@ class DraftExtendResourceIT {
         DraftExtend partialUpdatedDraftExtend = new DraftExtend();
         partialUpdatedDraftExtend.setId(draftExtend.getId());
 
-        partialUpdatedDraftExtend.duration(UPDATED_DURATION);
-
         restDraftExtendMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDraftExtend.getId())

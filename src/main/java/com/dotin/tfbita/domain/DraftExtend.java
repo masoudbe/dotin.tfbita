@@ -38,6 +38,7 @@ public class DraftExtend implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",

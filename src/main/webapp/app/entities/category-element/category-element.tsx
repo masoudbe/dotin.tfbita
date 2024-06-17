@@ -220,6 +220,10 @@ export const CategoryElement = () => {
                 <th>
                   <Translate contentKey="tfbitaApp.categoryElement.statusDraft">Status Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.categoryElement.categoryElement">Category Element</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -487,6 +491,13 @@ export const CategoryElement = () => {
                   <td>
                     {categoryElement.statusDraft ? (
                       <Link to={`/draft-status-info/${categoryElement.statusDraft.id}`}>{categoryElement.statusDraft.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {categoryElement.categoryElement ? (
+                      <Link to={`/category/${categoryElement.categoryElement.id}`}>{categoryElement.categoryElement.id}</Link>
                     ) : (
                       ''
                     )}

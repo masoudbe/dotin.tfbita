@@ -125,6 +125,7 @@ public class CategoryElementAsserts {
                         .as("check currencyProvisionFileType")
                         .isEqualTo(actual.getCurrencyProvisionFileType())
             )
-            .satisfies(e -> assertThat(e.getStatusDraft()).as("check statusDraft").isEqualTo(actual.getStatusDraft()));
+            .satisfies(e -> assertThat(e.getStatusDraft()).as("check statusDraft").isEqualTo(actual.getStatusDraft()))
+            .satisfies(e -> assertThat(e.getCategoryElement()).as("check categoryElement").isEqualTo(actual.getCategoryElement()));
     }
 }

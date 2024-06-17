@@ -23,6 +23,7 @@ import DraftType from './draft-type';
 import AuditCompanyInfo from './audit-company-info';
 import DraftExtend from './draft-extend';
 import DraftTax from './draft-tax';
+import Category from './category';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -50,6 +51,7 @@ export default () => {
         <Route path="audit-company-info/*" element={<AuditCompanyInfo />} />
         <Route path="draft-extend/*" element={<DraftExtend />} />
         <Route path="draft-tax/*" element={<DraftTax />} />
+        <Route path="category/*" element={<Category />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

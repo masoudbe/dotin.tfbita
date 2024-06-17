@@ -318,7 +318,7 @@ class DraftFactorResourceIT {
         DraftFactor partialUpdatedDraftFactor = new DraftFactor();
         partialUpdatedDraftFactor.setId(draftFactor.getId());
 
-        partialUpdatedDraftFactor.amount(UPDATED_AMOUNT).issueDate(UPDATED_ISSUE_DATE);
+        partialUpdatedDraftFactor.description(UPDATED_DESCRIPTION).factorDate(UPDATED_FACTOR_DATE);
 
         restDraftFactorMockMvc
             .perform(

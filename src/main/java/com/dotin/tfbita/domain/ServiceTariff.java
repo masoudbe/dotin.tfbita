@@ -42,6 +42,7 @@ public class ServiceTariff implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",

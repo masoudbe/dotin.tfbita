@@ -272,6 +272,10 @@ public class Draft implements Serializable {
     @JsonIgnoreProperties(value = { "taxes" }, allowSetters = true)
     private Set<DraftTax> draftTaxes = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "statusInfo")
+    @JsonIgnoreProperties(value = { "statusInfo" }, allowSetters = true)
+    private Set<DraftStatusInfo> draftStatusInfos = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drafts")
     @JsonIgnoreProperties(value = { "loadSwitchPlace", "orderRegistrationInfos", "drafts" }, allowSetters = true)
     private Set<Custom> customs = new HashSet<>();
@@ -1457,6 +1461,37 @@ public class Draft implements Serializable {
     public Draft removeDraftTax(DraftTax draftTax) {
         this.draftTaxes.remove(draftTax);
         draftTax.setTaxes(null);
+        return this;
+    }
+
+    public Set<DraftStatusInfo> getDraftStatusInfos() {
+        return this.draftStatusInfos;
+    }
+
+    public void setDraftStatusInfos(Set<DraftStatusInfo> draftStatusInfos) {
+        if (this.draftStatusInfos != null) {
+            this.draftStatusInfos.forEach(i -> i.setStatusInfo(null));
+        }
+        if (draftStatusInfos != null) {
+            draftStatusInfos.forEach(i -> i.setStatusInfo(this));
+        }
+        this.draftStatusInfos = draftStatusInfos;
+    }
+
+    public Draft draftStatusInfos(Set<DraftStatusInfo> draftStatusInfos) {
+        this.setDraftStatusInfos(draftStatusInfos);
+        return this;
+    }
+
+    public Draft addDraftStatusInfo(DraftStatusInfo draftStatusInfo) {
+        this.draftStatusInfos.add(draftStatusInfo);
+        draftStatusInfo.setStatusInfo(this);
+        return this;
+    }
+
+    public Draft removeDraftStatusInfo(DraftStatusInfo draftStatusInfo) {
+        this.draftStatusInfos.remove(draftStatusInfo);
+        draftStatusInfo.setStatusInfo(null);
         return this;
     }
 

@@ -335,9 +335,8 @@ class DraftStatusInfoResourceIT {
         partialUpdatedDraftStatusInfo.setId(draftStatusInfo.getId());
 
         partialUpdatedDraftStatusInfo
-            .otherCostsPaid(UPDATED_OTHER_COSTS_PAID)
-            .postSwiftCostPaied(UPDATED_POST_SWIFT_COST_PAIED)
-            .rejectDescription(UPDATED_REJECT_DESCRIPTION)
+            .approved(UPDATED_APPROVED)
+            .insuranceCostPaid(UPDATED_INSURANCE_COST_PAID)
             .remainAmount(UPDATED_REMAIN_AMOUNT)
             .stampCostPaid(UPDATED_STAMP_COST_PAID);
 

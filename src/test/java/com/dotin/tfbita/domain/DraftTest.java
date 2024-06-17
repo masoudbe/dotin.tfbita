@@ -5,6 +5,7 @@ import static com.dotin.tfbita.domain.DraftCustomJustificationTestSamples.*;
 import static com.dotin.tfbita.domain.DraftExtendTestSamples.*;
 import static com.dotin.tfbita.domain.DraftFactorTestSamples.*;
 import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
+import static com.dotin.tfbita.domain.DraftStatusInfoTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTaxTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static com.dotin.tfbita.domain.DraftUsedAssuranceTestSamples.*;
@@ -163,6 +164,28 @@ class DraftTest {
         draft.setDraftTaxes(new HashSet<>());
         assertThat(draft.getDraftTaxes()).doesNotContain(draftTaxBack);
         assertThat(draftTaxBack.getTaxes()).isNull();
+    }
+
+    @Test
+    void draftStatusInfoTest() throws Exception {
+        Draft draft = getDraftRandomSampleGenerator();
+        DraftStatusInfo draftStatusInfoBack = getDraftStatusInfoRandomSampleGenerator();
+
+        draft.addDraftStatusInfo(draftStatusInfoBack);
+        assertThat(draft.getDraftStatusInfos()).containsOnly(draftStatusInfoBack);
+        assertThat(draftStatusInfoBack.getStatusInfo()).isEqualTo(draft);
+
+        draft.removeDraftStatusInfo(draftStatusInfoBack);
+        assertThat(draft.getDraftStatusInfos()).doesNotContain(draftStatusInfoBack);
+        assertThat(draftStatusInfoBack.getStatusInfo()).isNull();
+
+        draft.draftStatusInfos(new HashSet<>(Set.of(draftStatusInfoBack)));
+        assertThat(draft.getDraftStatusInfos()).containsOnly(draftStatusInfoBack);
+        assertThat(draftStatusInfoBack.getStatusInfo()).isEqualTo(draft);
+
+        draft.setDraftStatusInfos(new HashSet<>());
+        assertThat(draft.getDraftStatusInfos()).doesNotContain(draftStatusInfoBack);
+        assertThat(draftStatusInfoBack.getStatusInfo()).isNull();
     }
 
     @Test

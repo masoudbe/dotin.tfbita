@@ -306,6 +306,7 @@ class DraftUsedAssuranceResourceIT {
         partialUpdatedDraftUsedAssurance.setId(draftUsedAssurance.getId());
 
         partialUpdatedDraftUsedAssurance
+            .assuranceRateId(UPDATED_ASSURANCE_RATE_ID)
             .assuranceSerial(UPDATED_ASSURANCE_SERIAL)
             .defaultCurrencyUsedCost(UPDATED_DEFAULT_CURRENCY_USED_COST)
             .usedCost(UPDATED_USED_COST);

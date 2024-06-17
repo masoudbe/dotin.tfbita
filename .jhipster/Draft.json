@@ -351,6 +351,13 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityName": "draftStatusInfo",
+      "otherEntityRelationshipName": "statusInfo",
+      "relationshipName": "draftStatusInfo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
       "otherEntityName": "custom",
       "otherEntityRelationshipName": "draft",
       "relationshipName": "custom",

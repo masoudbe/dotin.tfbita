@@ -5,6 +5,7 @@ import { IAdvisorDefinition } from 'app/shared/model/advisor-definition.model';
 import { IDraftType } from 'app/shared/model/draft-type.model';
 import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
 import { IDraftStatusInfo } from 'app/shared/model/draft-status-info.model';
+import { ICategory } from 'app/shared/model/category.model';
 
 export interface ICategoryElement {
   id?: number;
@@ -46,6 +47,7 @@ export interface ICategoryElement {
   stateOfDocuments?: IDraftReceipt | null;
   currencyProvisionFileType?: IDraftReceipt | null;
   statusDraft?: IDraftStatusInfo | null;
+  categoryElement?: ICategory | null;
 }
 
 export const defaultValue: Readonly<ICategoryElement> = {};

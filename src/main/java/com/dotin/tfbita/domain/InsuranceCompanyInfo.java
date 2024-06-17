@@ -35,6 +35,7 @@ public class InsuranceCompanyInfo implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",

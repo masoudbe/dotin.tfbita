@@ -148,6 +148,7 @@ public class DraftReceipt implements Serializable {
             "draftCustomJustifications",
             "draftExtends",
             "draftTaxes",
+            "draftStatusInfos",
             "customs",
             "products",
             "services",

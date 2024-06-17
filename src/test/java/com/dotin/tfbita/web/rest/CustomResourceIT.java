@@ -316,7 +316,7 @@ class CustomResourceIT {
         Custom partialUpdatedCustom = new Custom();
         partialUpdatedCustom.setId(custom.getId());
 
-        partialUpdatedCustom.modificationDate(UPDATED_MODIFICATION_DATE).latinName(UPDATED_LATIN_NAME).name(UPDATED_NAME);
+        partialUpdatedCustom.name(UPDATED_NAME).tempId(UPDATED_TEMP_ID);
 
         restCustomMockMvc
             .perform(

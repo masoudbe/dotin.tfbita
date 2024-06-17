@@ -640,30 +640,28 @@ class OrderRegistrationInfoResourceIT {
         partialUpdatedOrderRegistrationInfo.setId(orderRegistrationInfo.getId());
 
         partialUpdatedOrderRegistrationInfo
-            .orderRegNum(UPDATED_ORDER_REG_NUM)
             .startOrderRegDate(UPDATED_START_ORDER_REG_DATE)
-            .requestNumber(UPDATED_REQUEST_NUMBER)
-            .bankCode(UPDATED_BANK_CODE)
-            .branchCode(UPDATED_BRANCH_CODE)
-            .performaNumber(UPDATED_PERFORMA_NUMBER)
+            .customerNumber(UPDATED_CUSTOMER_NUMBER)
             .performaDate(UPDATED_PERFORMA_DATE)
-            .performaDatePersian(UPDATED_PERFORMA_DATE_PERSIAN)
-            .sellerName(UPDATED_SELLER_NAME)
+            .beneficiaryCountry(UPDATED_BENEFICIARY_COUNTRY)
+            .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
             .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)
             .totalWeightInKg(UPDATED_TOTAL_WEIGHT_IN_KG)
-            .freeZone(UPDATED_FREE_ZONE)
+            .possibilityClearance(UPDATED_POSSIBILITY_CLEARANCE)
             .currencyCode(UPDATED_CURRENCY_CODE)
             .fobAmount(UPDATED_FOB_AMOUNT)
-            .discount(UPDATED_DISCOUNT)
             .shipmentCost(UPDATED_SHIPMENT_COST)
             .othrCost(UPDATED_OTHR_COST)
-            .totalAmount(UPDATED_TOTAL_AMOUNT)
-            .updated(UPDATED_UPDATED)
+            .fileNumber(UPDATED_FILE_NUMBER)
+            .extended(UPDATED_EXTENDED)
             .generateFromService(UPDATED_GENERATE_FROM_SERVICE)
             .certificateNumber(UPDATED_CERTIFICATE_NUMBER)
+            .centralBankCode(UPDATED_CENTRAL_BANK_CODE)
+            .externalCustomer(UPDATED_EXTERNAL_CUSTOMER)
             .sumRedemptionDuration(UPDATED_SUM_REDEMPTION_DURATION)
-            .producerCountries(UPDATED_PRODUCER_COUNTRIES)
-            .commissionTransactionNumber(UPDATED_COMMISSION_TRANSACTION_NUMBER);
+            .extendedDayNumber(UPDATED_EXTENDED_DAY_NUMBER)
+            .mainGroupProductCode(UPDATED_MAIN_GROUP_PRODUCT_CODE)
+            .producerCountries(UPDATED_PRODUCER_COUNTRIES);
 
         restOrderRegistrationInfoMockMvc
             .perform(

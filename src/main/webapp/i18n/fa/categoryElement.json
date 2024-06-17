@@ -55,7 +55,8 @@
       "productDimension": "Product Dimension",
       "stateOfDocuments": "State Of Documents",
       "currencyProvisionFileType": "Currency Provision File Type",
-      "statusDraft": "Status Draft"
+      "statusDraft": "Status Draft",
+      "categoryElement": "Category Element"
     }
   }
 }

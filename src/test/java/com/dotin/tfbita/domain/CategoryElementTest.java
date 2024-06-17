@@ -2,6 +2,7 @@ package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.AdvisorDefinitionTestSamples.*;
 import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
+import static com.dotin.tfbita.domain.CategoryTestSamples.*;
 import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
 import static com.dotin.tfbita.domain.DraftStatusInfoTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
@@ -447,5 +448,17 @@ class CategoryElementTest {
 
         categoryElement.statusDraft(null);
         assertThat(categoryElement.getStatusDraft()).isNull();
+    }
+
+    @Test
+    void categoryElementTest() throws Exception {
+        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
+        Category categoryBack = getCategoryRandomSampleGenerator();
+
+        categoryElement.setCategoryElement(categoryBack);
+        assertThat(categoryElement.getCategoryElement()).isEqualTo(categoryBack);
+
+        categoryElement.categoryElement(null);
+        assertThat(categoryElement.getCategoryElement()).isNull();
     }
 }

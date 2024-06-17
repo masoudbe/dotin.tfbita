@@ -47,10 +47,10 @@
     {
       "otherEntityName": "draft",
       "relationshipName": "statusInfo",
-      "relationshipSide": "left",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceClass"
+  "service": "serviceImpl"
 }

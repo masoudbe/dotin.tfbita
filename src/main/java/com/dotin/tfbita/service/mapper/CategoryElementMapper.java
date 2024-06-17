@@ -1,6 +1,7 @@
 package com.dotin.tfbita.service.mapper;
 
 import com.dotin.tfbita.domain.AdvisorDefinition;
+import com.dotin.tfbita.domain.Category;
 import com.dotin.tfbita.domain.CategoryElement;
 import com.dotin.tfbita.domain.Draft;
 import com.dotin.tfbita.domain.DraftReceipt;
@@ -9,6 +10,7 @@ import com.dotin.tfbita.domain.DraftType;
 import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.domain.PurchaseFromOtherResources;
 import com.dotin.tfbita.service.dto.AdvisorDefinitionDTO;
+import com.dotin.tfbita.service.dto.CategoryDTO;
 import com.dotin.tfbita.service.dto.CategoryElementDTO;
 import com.dotin.tfbita.service.dto.DraftDTO;
 import com.dotin.tfbita.service.dto.DraftReceiptDTO;
@@ -58,6 +60,7 @@ public interface CategoryElementMapper extends EntityMapper<CategoryElementDTO, 
     @Mapping(target = "stateOfDocuments", source = "stateOfDocuments", qualifiedByName = "draftReceiptId")
     @Mapping(target = "currencyProvisionFileType", source = "currencyProvisionFileType", qualifiedByName = "draftReceiptId")
     @Mapping(target = "statusDraft", source = "statusDraft", qualifiedByName = "draftStatusInfoId")
+    @Mapping(target = "categoryElement", source = "categoryElement", qualifiedByName = "categoryId")
     CategoryElementDTO toDto(CategoryElement s);
 
     @Named("orderRegistrationInfoId")
@@ -94,4 +97,9 @@ public interface CategoryElementMapper extends EntityMapper<CategoryElementDTO, 
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     DraftStatusInfoDTO toDtoDraftStatusInfoId(DraftStatusInfo draftStatusInfo);
+
+    @Named("categoryId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    CategoryDTO toDtoCategoryId(Category category);
 }

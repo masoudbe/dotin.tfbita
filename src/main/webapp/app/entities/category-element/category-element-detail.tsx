@@ -189,6 +189,10 @@ export const CategoryElementDetail = () => {
             <Translate contentKey="tfbitaApp.categoryElement.statusDraft">Status Draft</Translate>
           </dt>
           <dd>{categoryElementEntity.statusDraft ? categoryElementEntity.statusDraft.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.categoryElement.categoryElement">Category Element</Translate>
+          </dt>
+          <dd>{categoryElementEntity.categoryElement ? categoryElementEntity.categoryElement.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/category-element" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

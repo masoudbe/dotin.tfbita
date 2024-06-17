@@ -366,13 +366,12 @@ class DraftTypeResourceIT {
 
         partialUpdatedDraftType
             .alarmTime(UPDATED_ALARM_TIME)
+            .duration(UPDATED_DURATION)
             .hasAssurance(UPDATED_HAS_ASSURANCE)
-            .name(UPDATED_NAME)
+            .hasSanction(UPDATED_HAS_SANCTION)
             .portal(UPDATED_PORTAL)
             .usable(UPDATED_USABLE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .topicInfoCode(UPDATED_TOPIC_INFO_CODE);
+            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
 
         restDraftTypeMockMvc
             .perform(

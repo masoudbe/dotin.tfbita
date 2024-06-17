@@ -22,6 +22,8 @@ import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
 import { getEntities as getDraftReceipts } from 'app/entities/draft-receipt/draft-receipt.reducer';
 import { IDraftStatusInfo } from 'app/shared/model/draft-status-info.model';
 import { getEntities as getDraftStatusInfos } from 'app/entities/draft-status-info/draft-status-info.reducer';
+import { ICategory } from 'app/shared/model/category.model';
+import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { ICategoryElement } from 'app/shared/model/category-element.model';
 import { getEntity, updateEntity, createEntity, reset } from './category-element.reducer';
 
@@ -40,6 +42,7 @@ export const CategoryElementUpdate = () => {
   const draftTypes = useAppSelector(state => state.draftType.entities);
   const draftReceipts = useAppSelector(state => state.draftReceipt.entities);
   const draftStatusInfos = useAppSelector(state => state.draftStatusInfo.entities);
+  const categories = useAppSelector(state => state.category.entities);
   const categoryElementEntity = useAppSelector(state => state.categoryElement.entity);
   const loading = useAppSelector(state => state.categoryElement.loading);
   const updating = useAppSelector(state => state.categoryElement.updating);
@@ -63,6 +66,7 @@ export const CategoryElementUpdate = () => {
     dispatch(getDraftTypes({}));
     dispatch(getDraftReceipts({}));
     dispatch(getDraftStatusInfos({}));
+    dispatch(getCategories({}));
   }, []);
 
   useEffect(() => {
@@ -115,6 +119,7 @@ export const CategoryElementUpdate = () => {
       stateOfDocuments: draftReceipts.find(it => it.id.toString() === values.stateOfDocuments?.toString()),
       currencyProvisionFileType: draftReceipts.find(it => it.id.toString() === values.currencyProvisionFileType?.toString()),
       statusDraft: draftStatusInfos.find(it => it.id.toString() === values.statusDraft?.toString()),
+      categoryElement: categories.find(it => it.id.toString() === values.categoryElement?.toString()),
     };
 
     if (isNew) {
@@ -164,6 +169,7 @@ export const CategoryElementUpdate = () => {
           stateOfDocuments: categoryElementEntity?.stateOfDocuments?.id,
           currencyProvisionFileType: categoryElementEntity?.currencyProvisionFileType?.id,
           statusDraft: categoryElementEntity?.statusDraft?.id,
+          categoryElement: categoryElementEntity?.categoryElement?.id,
         };
 
   return (
@@ -766,6 +772,22 @@ export const CategoryElementUpdate = () => {
                 <option value="" key="0" />
                 {draftStatusInfos
                   ? draftStatusInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="category-element-categoryElement"
+                name="categoryElement"
+                data-cy="categoryElement"
+                label={translate('tfbitaApp.categoryElement.categoryElement')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categories
+                  ? categories.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

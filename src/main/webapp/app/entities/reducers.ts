@@ -18,6 +18,7 @@ import draftType from 'app/entities/draft-type/draft-type.reducer';
 import auditCompanyInfo from 'app/entities/audit-company-info/audit-company-info.reducer';
 import draftExtend from 'app/entities/draft-extend/draft-extend.reducer';
 import draftTax from 'app/entities/draft-tax/draft-tax.reducer';
+import category from 'app/entities/category/category.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -41,6 +42,7 @@ const entitiesReducers = {
   auditCompanyInfo,
   draftExtend,
   draftTax,
+  category,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

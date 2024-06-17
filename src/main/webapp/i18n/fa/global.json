@@ -27,7 +27,8 @@
         "draftType": "Draft Type",
         "auditCompanyInfo": "Audit Company Info",
         "draftExtend": "Draft Extend",
-        "draftTax": "Draft Tax"
+        "draftTax": "Draft Tax",
+        "category": "Category"
       },
       "account": {
         "main": "حساب",

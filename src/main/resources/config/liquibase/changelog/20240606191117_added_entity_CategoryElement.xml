@@ -128,6 +128,9 @@
             <column name="status_draft_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="category_element_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

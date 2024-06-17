@@ -343,8 +343,9 @@ class AdvisorDefinitionResourceIT {
         partialUpdatedAdvisorDefinition
             .code(UPDATED_CODE)
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
+            .depositNum(UPDATED_DEPOSIT_NUM)
             .creditDate(UPDATED_CREDIT_DATE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
+            .branchCode(UPDATED_BRANCH_CODE);
 
         restAdvisorDefinitionMockMvc
             .perform(

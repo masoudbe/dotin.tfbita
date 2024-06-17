@@ -1,13 +1,15 @@
 package com.dotin.tfbita.service.impl;
 
 import com.dotin.tfbita.domain.Draft;
+import com.dotin.tfbita.domain.DraftStatusInfo;
 import com.dotin.tfbita.repository.DraftRepository;
 import com.dotin.tfbita.service.DraftService;
+import com.dotin.tfbita.service.DraftStatusInfoService;
 import com.dotin.tfbita.service.dto.DraftDTO;
+import com.dotin.tfbita.service.dto.DraftStatusInfoDTO;
 import com.dotin.tfbita.service.mapper.DraftMapper;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import com.dotin.tfbita.service.mapper.DraftStatusInfoMapper;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +29,20 @@ public class DraftServiceImpl implements DraftService {
 
     private final DraftMapper draftMapper;
 
-    public DraftServiceImpl(DraftRepository draftRepository, DraftMapper draftMapper) {
+    private final DraftStatusInfoMapper draftStatusInfoMapper;
+
+    private final DraftStatusInfoService draftStatusInfoService;
+
+    public DraftServiceImpl(
+        DraftRepository draftRepository,
+        DraftMapper draftMapper,
+        DraftStatusInfoMapper draftStatusInfo,
+        DraftStatusInfoService draftStatusInfoService
+    ) {
         this.draftRepository = draftRepository;
         this.draftMapper = draftMapper;
+        this.draftStatusInfoMapper = draftStatusInfo;
+        this.draftStatusInfoService = draftStatusInfoService;
     }
 
     @Override
@@ -81,5 +94,26 @@ public class DraftServiceImpl implements DraftService {
     public void delete(Long id) {
         log.debug("Request to delete Draft : {}", id);
         draftRepository.deleteById(id);
+    }
+
+    @Override
+    public void confirm(Long id) {
+        log.debug("Request to confirm Draft : {}", id);
+        Optional<Draft> draft = draftRepository.findById(id);
+        DraftStatusInfoDTO statusInfo = new DraftStatusInfoDTO();
+        Set<DraftStatusInfo> statusInfoList = new HashSet<>();
+        Draft result = new Draft();
+        DraftDTO resultDTO = new DraftDTO();
+        if (draft.isPresent()) {
+            result = draft.get();
+            resultDTO = draftMapper.toDto(result);
+            statusInfo.setApproved(Boolean.TRUE);
+            statusInfo.setStatusInfo(resultDTO);
+            statusInfoList.add((draftStatusInfoMapper.toEntity(statusInfo)));
+            result.setDraftStatusInfos(statusInfoList);
+        }
+        draftStatusInfoService.save(statusInfo);
+        update(draftMapper.toDto(result));
+        save(resultDTO);
     }
 }

@@ -281,7 +281,7 @@ class InsuranceCompanyInfoResourceIT {
         InsuranceCompanyInfo partialUpdatedInsuranceCompanyInfo = new InsuranceCompanyInfo();
         partialUpdatedInsuranceCompanyInfo.setId(insuranceCompanyInfo.getId());
 
-        partialUpdatedInsuranceCompanyInfo.name(UPDATED_NAME);
+        partialUpdatedInsuranceCompanyInfo.modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
 
         restInsuranceCompanyInfoMockMvc
             .perform(

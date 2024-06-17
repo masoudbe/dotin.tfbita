@@ -359,15 +359,10 @@ class DraftTaxResourceIT {
         partialUpdatedDraftTax.setId(draftTax.getId());
 
         partialUpdatedDraftTax
-            .orderRegCurrencyAmount(UPDATED_ORDER_REG_CURRENCY_AMOUNT)
-            .mainAccountCurrencyAmount(UPDATED_MAIN_ACCOUNT_CURRENCY_AMOUNT)
-            .letterNumber(UPDATED_LETTER_NUMBER)
-            .description(UPDATED_DESCRIPTION)
             .registrationDate(UPDATED_REGISTRATION_DATE)
             .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT)
             .orderRegRate(UPDATED_ORDER_REG_RATE)
-            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE)
-            .returnDocumentTransactionNumber(UPDATED_RETURN_DOCUMENT_TRANSACTION_NUMBER);
+            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
 
         restDraftTaxMockMvc
             .perform(

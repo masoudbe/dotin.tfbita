@@ -1,0 +1,20 @@
+
+entity PurchaseFromOtherResources {
+	evidenceCode String
+    currencySupplierDescription String
+    amount BigDecimal
+	purchaseRate BigDecimal
+    orderRegistrationAmount BigDecimal
+    requestDate String
+    confirmationDate String
+	description String
+	purchaseNumber String
+	purchaseCurrencyName String
+}
+
+relationship ManyToOne {
+          PurchaseFromOtherResources{currencySupplier} to CategoryElement 
+          PurchaseFromOtherResources{status} to CategoryElement 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for PurchaseFromOtherResources

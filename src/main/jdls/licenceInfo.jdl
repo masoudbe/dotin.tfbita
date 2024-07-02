@@ -1,0 +1,21 @@
+entity LicenceInfo {
+	organizationLicence String
+    licenceNumber String
+    licenceDate String
+    havingProduct Boolean
+    havingService Boolean
+    creditDate String
+}
+
+entity ServiceTariff {
+	code String
+    title String
+}
+
+relationship ManyToOne {
+      LicenceInfo{product} to Product 
+      LicenceInfo{service} to ServiceTariff 
+      LicenceInfo{orderRegistrationInfo} to OrderRegistrationInfo{licenceInfo} 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass  for *

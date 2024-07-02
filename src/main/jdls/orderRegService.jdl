@@ -1,0 +1,16 @@
+entity OrderRegService {
+	amount BigDecimal
+    currencyAmount BigDecimal
+    unit String
+}
+
+entity ServiceTariff {
+	code String
+    title String
+}
+
+relationship ManyToOne {
+      OrderRegService{serviceTariff} to ServiceTariff 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for OrderRegService

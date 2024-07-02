@@ -1,0 +1,53 @@
+entity Product {
+	code String
+    modificationDate String
+    name String
+}
+
+entity ProductType {
+	description String
+    modificationDate String
+    topicCode String
+}
+
+entity AttributeValue {
+	value String
+    customValue String
+    attributeValueGroupName String
+}
+
+entity TypeAttribute {
+	necessary Boolean
+    isUnique Boolean
+}
+
+entity AttributeValueGroup {
+	mandatory Boolean
+    name String
+}
+
+entity Attribute {
+	modificationDate String
+    name String
+}
+
+relationship OneToMany {
+      Product{attributeValues} to AttributeValue
+      AttributeValueGroup{values} to AttributeValue
+}
+
+relationship ManyToOne {
+      Product{productType} to ProductType 
+      AttributeValue{typeAttribute} to TypeAttribute
+      AttributeValue{attributeValueGroup} to AttributeValueGroup{values}
+      TypeAttribute{attribute} to Attribute
+      AttributeValueGroup{attribute} to Attribute
+      Attribute{format} to CategoryElement
+      Attribute{type} to CategoryElement
+}
+
+relationship ManyToMany {
+      ProductType{productTypeAttributes} to TypeAttribute
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass  for *

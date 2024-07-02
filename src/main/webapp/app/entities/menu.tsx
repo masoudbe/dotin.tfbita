@@ -70,6 +70,36 @@ const EntitiesMenu = () => {
       <MenuItem icon="asterisk" to="/category">
         <Translate contentKey="global.menu.entities.category" />
       </MenuItem>
+      <MenuItem icon="asterisk" to="/product-type">
+        <Translate contentKey="global.menu.entities.productType" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/attribute-value">
+        <Translate contentKey="global.menu.entities.attributeValue" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/type-attribute">
+        <Translate contentKey="global.menu.entities.typeAttribute" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/attribute-value-group">
+        <Translate contentKey="global.menu.entities.attributeValueGroup" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/attribute">
+        <Translate contentKey="global.menu.entities.attribute" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/order-reg-service">
+        <Translate contentKey="global.menu.entities.orderRegService" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/objective-category">
+        <Translate contentKey="global.menu.entities.objectiveCategory" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/objective-category-element">
+        <Translate contentKey="global.menu.entities.objectiveCategoryElement" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/transportation-type">
+        <Translate contentKey="global.menu.entities.transportationType" />
+      </MenuItem>
+      <MenuItem icon="asterisk" to="/string-value">
+        <Translate contentKey="global.menu.entities.stringValue" />
+      </MenuItem>
       {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
     </>
   );

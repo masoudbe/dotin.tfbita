@@ -28,7 +28,9 @@
       "description": "Description",
       "purchaseNumber": "Purchase Number",
       "purchaseCurrencyName": "Purchase Currency Name",
-      "purchaseFromOtherResources": "Purchase From Other Resources"
+      "currencySupplier": "Currency Supplier",
+      "status": "Status",
+      "orderRegistrationInfo": "Order Registration Info"
     }
   }
 }

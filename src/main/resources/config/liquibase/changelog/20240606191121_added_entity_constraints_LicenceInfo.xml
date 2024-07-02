@@ -17,18 +17,25 @@
                                  referencedTableName="product"
                                  />
 
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_tariff"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__order_registration_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="order_reg_serv_id"
                                  baseTableName="licence_info"
                                  constraintName="fk_licence_info__order_reg_serv_id"
                                  referencedColumnNames="id"
                                  referencedTableName="order_reg_serv"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="licence_info_id"
-                                 baseTableName="licence_info"
-                                 constraintName="fk_licence_info__licence_info_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="order_registration_info"
                                  />
     </changeSet>
 </databaseChangeLog>

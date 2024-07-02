@@ -115,10 +115,14 @@ export const LicenceInfo = () => {
                   <Translate contentKey="tfbitaApp.licenceInfo.product">Product</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.licenceInfo.orderRegServ">Order Reg Serv</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.licenceInfo.service">Service</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.licenceInfo.licenceInfo">Licence Info</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.licenceInfo.orderRegistrationInfo">Order Registration Info</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.licenceInfo.orderRegServ">Order Reg Serv</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -139,15 +143,20 @@ export const LicenceInfo = () => {
                   <td>{licenceInfo.creditDate}</td>
                   <td>{licenceInfo.product ? <Link to={`/product/${licenceInfo.product.id}`}>{licenceInfo.product.id}</Link> : ''}</td>
                   <td>
-                    {licenceInfo.orderRegServ ? (
-                      <Link to={`/order-reg-serv/${licenceInfo.orderRegServ.id}`}>{licenceInfo.orderRegServ.id}</Link>
+                    {licenceInfo.service ? <Link to={`/service-tariff/${licenceInfo.service.id}`}>{licenceInfo.service.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {licenceInfo.orderRegistrationInfo ? (
+                      <Link to={`/order-registration-info/${licenceInfo.orderRegistrationInfo.id}`}>
+                        {licenceInfo.orderRegistrationInfo.id}
+                      </Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {licenceInfo.licenceInfo ? (
-                      <Link to={`/order-registration-info/${licenceInfo.licenceInfo.id}`}>{licenceInfo.licenceInfo.id}</Link>
+                    {licenceInfo.orderRegServ ? (
+                      <Link to={`/order-reg-serv/${licenceInfo.orderRegServ.id}`}>{licenceInfo.orderRegServ.id}</Link>
                     ) : (
                       ''
                     )}

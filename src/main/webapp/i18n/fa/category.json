@@ -20,7 +20,7 @@
       "id": "ID",
       "name": "Name",
       "code": "Code",
-      "categoryElement": "Category Element"
+      "possibleValues": "Possible Values"
     }
   }
 }

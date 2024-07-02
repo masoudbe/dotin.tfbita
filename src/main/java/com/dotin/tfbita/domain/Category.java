@@ -28,49 +28,9 @@ public class Category implements Serializable {
     @Column(name = "code")
     private String code;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryElement")
-    @JsonIgnoreProperties(
-        value = {
-            "orderRegType",
-            "requestType",
-            "importType",
-            "operationTyp",
-            "currencyProvisionType",
-            "paymentTool",
-            "activityType",
-            "ownerType",
-            "status",
-            "externalCustomerType",
-            "transportType",
-            "currencySupplier",
-            "statusPurchase",
-            "transportVehicleType",
-            "freightLetterType",
-            "actionCode",
-            "ownershipCode",
-            "currencyContainerPlace",
-            "draftSource",
-            "chargedExchangeBroker",
-            "impartType",
-            "insuranceLetterType",
-            "advisorDepositType",
-            "interfaceAdvisorDepositType",
-            "paymentType",
-            "dealType",
-            "coveringAdvisorDepositType",
-            "depositType",
-            "type",
-            "secondaryType",
-            "division",
-            "productDimension",
-            "stateOfDocuments",
-            "currencyProvisionFileType",
-            "statusDraft",
-            "categoryElement",
-        },
-        allowSetters = true
-    )
-    private Set<CategoryElement> categoryElements = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private Set<CategoryElement> possibleValues = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -113,34 +73,34 @@ public class Category implements Serializable {
         this.code = code;
     }
 
-    public Set<CategoryElement> getCategoryElements() {
-        return this.categoryElements;
+    public Set<CategoryElement> getPossibleValues() {
+        return this.possibleValues;
     }
 
-    public void setCategoryElements(Set<CategoryElement> categoryElements) {
-        if (this.categoryElements != null) {
-            this.categoryElements.forEach(i -> i.setCategoryElement(null));
+    public void setPossibleValues(Set<CategoryElement> categoryElements) {
+        if (this.possibleValues != null) {
+            this.possibleValues.forEach(i -> i.setCategory(null));
         }
         if (categoryElements != null) {
-            categoryElements.forEach(i -> i.setCategoryElement(this));
+            categoryElements.forEach(i -> i.setCategory(this));
         }
-        this.categoryElements = categoryElements;
+        this.possibleValues = categoryElements;
     }
 
-    public Category categoryElements(Set<CategoryElement> categoryElements) {
-        this.setCategoryElements(categoryElements);
+    public Category possibleValues(Set<CategoryElement> categoryElements) {
+        this.setPossibleValues(categoryElements);
         return this;
     }
 
-    public Category addCategoryElement(CategoryElement categoryElement) {
-        this.categoryElements.add(categoryElement);
-        categoryElement.setCategoryElement(this);
+    public Category addPossibleValues(CategoryElement categoryElement) {
+        this.possibleValues.add(categoryElement);
+        categoryElement.setCategory(this);
         return this;
     }
 
-    public Category removeCategoryElement(CategoryElement categoryElement) {
-        this.categoryElements.remove(categoryElement);
-        categoryElement.setCategoryElement(null);
+    public Category removePossibleValues(CategoryElement categoryElement) {
+        this.possibleValues.remove(categoryElement);
+        categoryElement.setCategory(null);
         return this;
     }
 

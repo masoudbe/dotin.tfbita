@@ -1,3 +1,4 @@
+import { IProductType } from 'app/shared/model/product-type.model';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { IDraft } from 'app/shared/model/draft.model';
 import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
@@ -7,9 +8,7 @@ export interface IProduct {
   code?: string | null;
   modificationDate?: string | null;
   name?: string | null;
-  description?: string | null;
-  topicCode?: string | null;
-  attributeValueGroupName?: string | null;
+  productType?: IProductType | null;
   orderRegistrationInfos?: IOrderRegistrationInfo[] | null;
   drafts?: IDraft[] | null;
   draftProductInfos?: IDraftReceipt | null;

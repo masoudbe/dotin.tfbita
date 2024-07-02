@@ -34,36 +34,6 @@ public class Custom implements Serializable {
     @Column(name = "temp_id")
     private Long tempId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft loadSwitchPlace;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_custom__order_registration_info",
-        joinColumns = @JoinColumn(name = "custom_id"),
-        inverseJoinColumns = @JoinColumn(name = "order_registration_info_id")
-    )
-    @JsonIgnoreProperties(
-        value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
-        allowSetters = true
-    )
-    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "rel_custom__draft",
@@ -152,42 +122,6 @@ public class Custom implements Serializable {
 
     public void setTempId(Long tempId) {
         this.tempId = tempId;
-    }
-
-    public Draft getLoadSwitchPlace() {
-        return this.loadSwitchPlace;
-    }
-
-    public void setLoadSwitchPlace(Draft draft) {
-        this.loadSwitchPlace = draft;
-    }
-
-    public Custom loadSwitchPlace(Draft draft) {
-        this.setLoadSwitchPlace(draft);
-        return this;
-    }
-
-    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
-        return this.orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        this.orderRegistrationInfos = orderRegistrationInfos;
-    }
-
-    public Custom orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        this.setOrderRegistrationInfos(orderRegistrationInfos);
-        return this;
-    }
-
-    public Custom addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.add(orderRegistrationInfo);
-        return this;
-    }
-
-    public Custom removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.remove(orderRegistrationInfo);
-        return this;
     }
 
     public Set<Draft> getDrafts() {

@@ -52,11 +52,40 @@ public class PurchaseFromOtherResources implements Serializable {
     private String purchaseCurrencyName;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement currencySupplier;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
+        value = {
+            "serviceInfos",
+            "purchaseFromOtherResourcesLists",
+            "orderRegType",
+            "requestType",
+            "importType",
+            "operationType",
+            "currencyProvisionType",
+            "paymentTool",
+            "activityType",
+            "ownerType",
+            "status",
+            "externalCustomerType",
+            "transportType",
+            "destCoustomers",
+            "cargoPlaceCustoms",
+            "entranceBorders",
+            "transportVehicleTypes",
+            "productInfos",
+            "commissionTransactionNumbers",
+            "licenceInfos",
+        },
         allowSetters = true
     )
-    private OrderRegistrationInfo purchaseFromOtherResources;
+    private OrderRegistrationInfo orderRegistrationInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -203,16 +232,42 @@ public class PurchaseFromOtherResources implements Serializable {
         this.purchaseCurrencyName = purchaseCurrencyName;
     }
 
-    public OrderRegistrationInfo getPurchaseFromOtherResources() {
-        return this.purchaseFromOtherResources;
+    public CategoryElement getCurrencySupplier() {
+        return this.currencySupplier;
     }
 
-    public void setPurchaseFromOtherResources(OrderRegistrationInfo orderRegistrationInfo) {
-        this.purchaseFromOtherResources = orderRegistrationInfo;
+    public void setCurrencySupplier(CategoryElement categoryElement) {
+        this.currencySupplier = categoryElement;
     }
 
-    public PurchaseFromOtherResources purchaseFromOtherResources(OrderRegistrationInfo orderRegistrationInfo) {
-        this.setPurchaseFromOtherResources(orderRegistrationInfo);
+    public PurchaseFromOtherResources currencySupplier(CategoryElement categoryElement) {
+        this.setCurrencySupplier(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(CategoryElement categoryElement) {
+        this.status = categoryElement;
+    }
+
+    public PurchaseFromOtherResources status(CategoryElement categoryElement) {
+        this.setStatus(categoryElement);
+        return this;
+    }
+
+    public OrderRegistrationInfo getOrderRegistrationInfo() {
+        return this.orderRegistrationInfo;
+    }
+
+    public void setOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfo = orderRegistrationInfo;
+    }
+
+    public PurchaseFromOtherResources orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.setOrderRegistrationInfo(orderRegistrationInfo);
         return this;
     }
 

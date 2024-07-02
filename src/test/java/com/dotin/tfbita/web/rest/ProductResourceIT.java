@@ -51,15 +51,6 @@ class ProductResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TOPIC_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_TOPIC_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_ATTRIBUTE_VALUE_GROUP_NAME = "BBBBBBBBBB";
-
     private static final String ENTITY_API_URL = "/api/products";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -96,13 +87,7 @@ class ProductResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Product createEntity(EntityManager em) {
-        Product product = new Product()
-            .code(DEFAULT_CODE)
-            .modificationDate(DEFAULT_MODIFICATION_DATE)
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION)
-            .topicCode(DEFAULT_TOPIC_CODE)
-            .attributeValueGroupName(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME);
+        Product product = new Product().code(DEFAULT_CODE).modificationDate(DEFAULT_MODIFICATION_DATE).name(DEFAULT_NAME);
         return product;
     }
 
@@ -113,13 +98,7 @@ class ProductResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Product createUpdatedEntity(EntityManager em) {
-        Product product = new Product()
-            .code(UPDATED_CODE)
-            .modificationDate(UPDATED_MODIFICATION_DATE)
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .topicCode(UPDATED_TOPIC_CODE)
-            .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
+        Product product = new Product().code(UPDATED_CODE).modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
         return product;
     }
 
@@ -182,10 +161,7 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].modificationDate").value(hasItem(DEFAULT_MODIFICATION_DATE)))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].topicCode").value(hasItem(DEFAULT_TOPIC_CODE)))
-            .andExpect(jsonPath("$.[*].attributeValueGroupName").value(hasItem(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -219,10 +195,7 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.modificationDate").value(DEFAULT_MODIFICATION_DATE))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.topicCode").value(DEFAULT_TOPIC_CODE))
-            .andExpect(jsonPath("$.attributeValueGroupName").value(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
@@ -244,13 +217,7 @@ class ProductResourceIT {
         Product updatedProduct = productRepository.findById(product.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedProduct are not directly saved in db
         em.detach(updatedProduct);
-        updatedProduct
-            .code(UPDATED_CODE)
-            .modificationDate(UPDATED_MODIFICATION_DATE)
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .topicCode(UPDATED_TOPIC_CODE)
-            .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
+        updatedProduct.code(UPDATED_CODE).modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
         ProductDTO productDTO = productMapper.toDto(updatedProduct);
 
         restProductMockMvc
@@ -336,7 +303,7 @@ class ProductResourceIT {
         Product partialUpdatedProduct = new Product();
         partialUpdatedProduct.setId(product.getId());
 
-        partialUpdatedProduct.modificationDate(UPDATED_MODIFICATION_DATE).topicCode(UPDATED_TOPIC_CODE);
+        partialUpdatedProduct.code(UPDATED_CODE).modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
 
         restProductMockMvc
             .perform(
@@ -364,13 +331,7 @@ class ProductResourceIT {
         Product partialUpdatedProduct = new Product();
         partialUpdatedProduct.setId(product.getId());
 
-        partialUpdatedProduct
-            .code(UPDATED_CODE)
-            .modificationDate(UPDATED_MODIFICATION_DATE)
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .topicCode(UPDATED_TOPIC_CODE)
-            .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
+        partialUpdatedProduct.code(UPDATED_CODE).modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
 
         restProductMockMvc
             .perform(

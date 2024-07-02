@@ -153,9 +153,13 @@ export const OrderRegistrationInfo = () => {
                   <Translate contentKey="tfbitaApp.orderRegistrationInfo.sellerName">Seller Name</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('sellerName')} />
                 </th>
-                <th className="hand" onClick={sort('beneficiaryCountry')}>
-                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.beneficiaryCountry">Beneficiary Country</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('beneficiaryCountry')} />
+                <th className="hand" onClick={sort('beneficiaryCountryCode')}>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.beneficiaryCountryCode">Beneficiary Country Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('beneficiaryCountryCode')} />
+                </th>
+                <th className="hand" onClick={sort('producerCountriesCode')}>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.producerCountriesCode">Producer Countries Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('producerCountriesCode')} />
                 </th>
                 <th className="hand" onClick={sort('sourceCountry')}>
                   <Translate contentKey="tfbitaApp.orderRegistrationInfo.sourceCountry">Source Country</Translate>{' '}
@@ -278,10 +282,70 @@ export const OrderRegistrationInfo = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('commissionTransactionNumber')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.custom">Custom</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.orderRegType">Order Reg Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.requestType">Request Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.importType">Import Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.operationType">Operation Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.currencyProvisionType">Currency Provision Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.paymentTool">Payment Tool</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.activityType">Activity Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.ownerType">Owner Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.status">Status</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.externalCustomerType">External Customer Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportType">Transport Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.destCoustomers">Dest Coustomers</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.cargoPlaceCustoms">Cargo Place Customs</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.entranceBorders">Entrance Borders</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.orderRegistrationInfo.productInfo">Product Info</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.commissionTransactionNumber">
+                    Commission Transaction Number
+                  </Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -310,7 +374,8 @@ export const OrderRegistrationInfo = () => {
                   <td>{orderRegistrationInfo.performaExpiryDatePersian}</td>
                   <td>{orderRegistrationInfo.infoSubmissionDate}</td>
                   <td>{orderRegistrationInfo.sellerName}</td>
-                  <td>{orderRegistrationInfo.beneficiaryCountry}</td>
+                  <td>{orderRegistrationInfo.beneficiaryCountryCode}</td>
+                  <td>{orderRegistrationInfo.producerCountriesCode}</td>
                   <td>{orderRegistrationInfo.sourceCountry}</td>
                   <td>{orderRegistrationInfo.multipleTransportable ? 'true' : 'false'}</td>
                   <td>{orderRegistrationInfo.deliveryTimeOfGoods}</td>
@@ -355,11 +420,117 @@ export const OrderRegistrationInfo = () => {
                   </td>
                   <td>{orderRegistrationInfo.commissionTransactionNumber}</td>
                   <td>
-                    {orderRegistrationInfo.customs
-                      ? orderRegistrationInfo.customs.map((val, j) => (
+                    {orderRegistrationInfo.orderRegType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.orderRegType.id}`}>{orderRegistrationInfo.orderRegType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.requestType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.requestType.id}`}>{orderRegistrationInfo.requestType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.importType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.importType.id}`}>{orderRegistrationInfo.importType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.operationType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.operationType.id}`}>
+                        {orderRegistrationInfo.operationType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.currencyProvisionType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.currencyProvisionType.id}`}>
+                        {orderRegistrationInfo.currencyProvisionType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.paymentTool ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.paymentTool.id}`}>{orderRegistrationInfo.paymentTool.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.activityType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.activityType.id}`}>{orderRegistrationInfo.activityType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.ownerType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.ownerType.id}`}>{orderRegistrationInfo.ownerType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.status ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.status.id}`}>{orderRegistrationInfo.status.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.externalCustomerType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.externalCustomerType.id}`}>
+                        {orderRegistrationInfo.externalCustomerType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.transportType ? (
+                      <Link to={`/transportation-type/${orderRegistrationInfo.transportType.id}`}>
+                        {orderRegistrationInfo.transportType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.destCoustomers ? (
+                      <Link to={`/custom/${orderRegistrationInfo.destCoustomers.id}`}>{orderRegistrationInfo.destCoustomers.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.cargoPlaceCustoms ? (
+                      <Link to={`/custom/${orderRegistrationInfo.cargoPlaceCustoms.id}`}>{orderRegistrationInfo.cargoPlaceCustoms.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.entranceBorders ? (
+                      <Link to={`/custom/${orderRegistrationInfo.entranceBorders.id}`}>{orderRegistrationInfo.entranceBorders.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.transportVehicleTypes
+                      ? orderRegistrationInfo.transportVehicleTypes.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/custom/${val.id}`}>{val.id}</Link>
-                            {j === orderRegistrationInfo.customs.length - 1 ? '' : ', '}
+                            <Link to={`/category-element/${val.id}`}>{val.id}</Link>
+                            {j === orderRegistrationInfo.transportVehicleTypes.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}
@@ -370,6 +541,16 @@ export const OrderRegistrationInfo = () => {
                           <span key={j}>
                             <Link to={`/product/${val.id}`}>{val.id}</Link>
                             {j === orderRegistrationInfo.productInfos.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {orderRegistrationInfo.commissionTransactionNumbers
+                      ? orderRegistrationInfo.commissionTransactionNumbers.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/string-value/${val.id}`}>{val.id}</Link>
+                            {j === orderRegistrationInfo.commissionTransactionNumbers.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

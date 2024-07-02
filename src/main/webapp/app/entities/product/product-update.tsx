@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IProductType } from 'app/shared/model/product-type.model';
+import { getEntities as getProductTypes } from 'app/entities/product-type/product-type.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
 import { IDraft } from 'app/shared/model/draft.model';
@@ -25,6 +27,7 @@ export const ProductUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const productTypes = useAppSelector(state => state.productType.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
   const drafts = useAppSelector(state => state.draft.entities);
   const draftReceipts = useAppSelector(state => state.draftReceipt.entities);
@@ -44,6 +47,7 @@ export const ProductUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getProductTypes({}));
     dispatch(getOrderRegistrationInfos({}));
     dispatch(getDrafts({}));
     dispatch(getDraftReceipts({}));
@@ -64,6 +68,7 @@ export const ProductUpdate = () => {
     const entity = {
       ...productEntity,
       ...values,
+      productType: productTypes.find(it => it.id.toString() === values.productType?.toString()),
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
       drafts: mapIdList(values.drafts),
       draftProductInfos: draftReceipts.find(it => it.id.toString() === values.draftProductInfos?.toString()),
@@ -81,6 +86,7 @@ export const ProductUpdate = () => {
       ? {}
       : {
           ...productEntity,
+          productType: productEntity?.productType?.id,
           orderRegistrationInfos: productEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
           drafts: productEntity?.drafts?.map(e => e.id.toString()),
           draftProductInfos: productEntity?.draftProductInfos?.id,
@@ -121,26 +127,21 @@ export const ProductUpdate = () => {
               />
               <ValidatedField label={translate('tfbitaApp.product.name')} id="product-name" name="name" data-cy="name" type="text" />
               <ValidatedField
-                label={translate('tfbitaApp.product.description')}
-                id="product-description"
-                name="description"
-                data-cy="description"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.product.topicCode')}
-                id="product-topicCode"
-                name="topicCode"
-                data-cy="topicCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.product.attributeValueGroupName')}
-                id="product-attributeValueGroupName"
-                name="attributeValueGroupName"
-                data-cy="attributeValueGroupName"
-                type="text"
-              />
+                id="product-productType"
+                name="productType"
+                data-cy="productType"
+                label={translate('tfbitaApp.product.productType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {productTypes
+                  ? productTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
                 label={translate('tfbitaApp.product.orderRegistrationInfo')}
                 id="product-orderRegistrationInfo"

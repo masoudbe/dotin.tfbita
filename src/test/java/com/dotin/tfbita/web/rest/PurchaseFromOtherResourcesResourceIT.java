@@ -358,11 +358,9 @@ class PurchaseFromOtherResourcesResourceIT {
         partialUpdatedPurchaseFromOtherResources.setId(purchaseFromOtherResources.getId());
 
         partialUpdatedPurchaseFromOtherResources
+            .evidenceCode(UPDATED_EVIDENCE_CODE)
             .currencySupplierDescription(UPDATED_CURRENCY_SUPPLIER_DESCRIPTION)
-            .amount(UPDATED_AMOUNT)
-            .orderRegistrationAmount(UPDATED_ORDER_REGISTRATION_AMOUNT)
-            .purchaseNumber(UPDATED_PURCHASE_NUMBER)
-            .purchaseCurrencyName(UPDATED_PURCHASE_CURRENCY_NAME);
+            .confirmationDate(UPDATED_CONFIRMATION_DATE);
 
         restPurchaseFromOtherResourcesMockMvc
             .perform(

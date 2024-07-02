@@ -5,24 +5,32 @@ import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.dotin.tfbita.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.repository.OrderRegistrationInfoRepository;
+import com.dotin.tfbita.service.OrderRegistrationInfoService;
 import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
 import com.dotin.tfbita.service.mapper.OrderRegistrationInfoMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link OrderRegistrationInfoResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class OrderRegistrationInfoResourceIT {
@@ -81,8 +90,11 @@ class OrderRegistrationInfoResourceIT {
     private static final String DEFAULT_SELLER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_SELLER_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_BENEFICIARY_COUNTRY = "AAAAAAAAAA";
-    private static final String UPDATED_BENEFICIARY_COUNTRY = "BBBBBBBBBB";
+    private static final String DEFAULT_BENEFICIARY_COUNTRY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_BENEFICIARY_COUNTRY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PRODUCER_COUNTRIES_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_PRODUCER_COUNTRIES_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_SOURCE_COUNTRY = "AAAAAAAAAA";
     private static final String UPDATED_SOURCE_COUNTRY = "BBBBBBBBBB";
@@ -185,8 +197,14 @@ class OrderRegistrationInfoResourceIT {
     @Autowired
     private OrderRegistrationInfoRepository orderRegistrationInfoRepository;
 
+    @Mock
+    private OrderRegistrationInfoRepository orderRegistrationInfoRepositoryMock;
+
     @Autowired
     private OrderRegistrationInfoMapper orderRegistrationInfoMapper;
+
+    @Mock
+    private OrderRegistrationInfoService orderRegistrationInfoServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -219,7 +237,8 @@ class OrderRegistrationInfoResourceIT {
             .performaExpiryDatePersian(DEFAULT_PERFORMA_EXPIRY_DATE_PERSIAN)
             .infoSubmissionDate(DEFAULT_INFO_SUBMISSION_DATE)
             .sellerName(DEFAULT_SELLER_NAME)
-            .beneficiaryCountry(DEFAULT_BENEFICIARY_COUNTRY)
+            .beneficiaryCountryCode(DEFAULT_BENEFICIARY_COUNTRY_CODE)
+            .producerCountriesCode(DEFAULT_PRODUCER_COUNTRIES_CODE)
             .sourceCountry(DEFAULT_SOURCE_COUNTRY)
             .multipleTransportable(DEFAULT_MULTIPLE_TRANSPORTABLE)
             .deliveryTimeOfGoods(DEFAULT_DELIVERY_TIME_OF_GOODS)
@@ -276,7 +295,8 @@ class OrderRegistrationInfoResourceIT {
             .performaExpiryDatePersian(UPDATED_PERFORMA_EXPIRY_DATE_PERSIAN)
             .infoSubmissionDate(UPDATED_INFO_SUBMISSION_DATE)
             .sellerName(UPDATED_SELLER_NAME)
-            .beneficiaryCountry(UPDATED_BENEFICIARY_COUNTRY)
+            .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
+            .producerCountriesCode(UPDATED_PRODUCER_COUNTRIES_CODE)
             .sourceCountry(UPDATED_SOURCE_COUNTRY)
             .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
             .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)
@@ -387,7 +407,8 @@ class OrderRegistrationInfoResourceIT {
             .andExpect(jsonPath("$.[*].performaExpiryDatePersian").value(hasItem(DEFAULT_PERFORMA_EXPIRY_DATE_PERSIAN)))
             .andExpect(jsonPath("$.[*].infoSubmissionDate").value(hasItem(DEFAULT_INFO_SUBMISSION_DATE)))
             .andExpect(jsonPath("$.[*].sellerName").value(hasItem(DEFAULT_SELLER_NAME)))
-            .andExpect(jsonPath("$.[*].beneficiaryCountry").value(hasItem(DEFAULT_BENEFICIARY_COUNTRY)))
+            .andExpect(jsonPath("$.[*].beneficiaryCountryCode").value(hasItem(DEFAULT_BENEFICIARY_COUNTRY_CODE)))
+            .andExpect(jsonPath("$.[*].producerCountriesCode").value(hasItem(DEFAULT_PRODUCER_COUNTRIES_CODE)))
             .andExpect(jsonPath("$.[*].sourceCountry").value(hasItem(DEFAULT_SOURCE_COUNTRY)))
             .andExpect(jsonPath("$.[*].multipleTransportable").value(hasItem(DEFAULT_MULTIPLE_TRANSPORTABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].deliveryTimeOfGoods").value(hasItem(DEFAULT_DELIVERY_TIME_OF_GOODS)))
@@ -422,6 +443,23 @@ class OrderRegistrationInfoResourceIT {
             .andExpect(jsonPath("$.[*].commissionTransactionNumber").value(hasItem(DEFAULT_COMMISSION_TRANSACTION_NUMBER)));
     }
 
+    @SuppressWarnings({ "unchecked" })
+    void getAllOrderRegistrationInfosWithEagerRelationshipsIsEnabled() throws Exception {
+        when(orderRegistrationInfoServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOrderRegistrationInfoMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(orderRegistrationInfoServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOrderRegistrationInfosWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(orderRegistrationInfoServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOrderRegistrationInfoMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(orderRegistrationInfoRepositoryMock, times(1)).findAll(any(Pageable.class));
+    }
+
     @Test
     @Transactional
     void getOrderRegistrationInfo() throws Exception {
@@ -449,7 +487,8 @@ class OrderRegistrationInfoResourceIT {
             .andExpect(jsonPath("$.performaExpiryDatePersian").value(DEFAULT_PERFORMA_EXPIRY_DATE_PERSIAN))
             .andExpect(jsonPath("$.infoSubmissionDate").value(DEFAULT_INFO_SUBMISSION_DATE))
             .andExpect(jsonPath("$.sellerName").value(DEFAULT_SELLER_NAME))
-            .andExpect(jsonPath("$.beneficiaryCountry").value(DEFAULT_BENEFICIARY_COUNTRY))
+            .andExpect(jsonPath("$.beneficiaryCountryCode").value(DEFAULT_BENEFICIARY_COUNTRY_CODE))
+            .andExpect(jsonPath("$.producerCountriesCode").value(DEFAULT_PRODUCER_COUNTRIES_CODE))
             .andExpect(jsonPath("$.sourceCountry").value(DEFAULT_SOURCE_COUNTRY))
             .andExpect(jsonPath("$.multipleTransportable").value(DEFAULT_MULTIPLE_TRANSPORTABLE.booleanValue()))
             .andExpect(jsonPath("$.deliveryTimeOfGoods").value(DEFAULT_DELIVERY_TIME_OF_GOODS))
@@ -519,7 +558,8 @@ class OrderRegistrationInfoResourceIT {
             .performaExpiryDatePersian(UPDATED_PERFORMA_EXPIRY_DATE_PERSIAN)
             .infoSubmissionDate(UPDATED_INFO_SUBMISSION_DATE)
             .sellerName(UPDATED_SELLER_NAME)
-            .beneficiaryCountry(UPDATED_BENEFICIARY_COUNTRY)
+            .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
+            .producerCountriesCode(UPDATED_PRODUCER_COUNTRIES_CODE)
             .sourceCountry(UPDATED_SOURCE_COUNTRY)
             .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
             .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)
@@ -641,26 +681,26 @@ class OrderRegistrationInfoResourceIT {
 
         partialUpdatedOrderRegistrationInfo
             .startOrderRegDate(UPDATED_START_ORDER_REG_DATE)
+            .requestNumber(UPDATED_REQUEST_NUMBER)
+            .bankCode(UPDATED_BANK_CODE)
+            .branchCode(UPDATED_BRANCH_CODE)
             .customerNumber(UPDATED_CUSTOMER_NUMBER)
+            .applicantNationalcode(UPDATED_APPLICANT_NATIONALCODE)
+            .performaNumber(UPDATED_PERFORMA_NUMBER)
             .performaDate(UPDATED_PERFORMA_DATE)
-            .beneficiaryCountry(UPDATED_BENEFICIARY_COUNTRY)
-            .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
-            .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)
-            .totalWeightInKg(UPDATED_TOTAL_WEIGHT_IN_KG)
-            .possibilityClearance(UPDATED_POSSIBILITY_CLEARANCE)
+            .performaExpiryDate(UPDATED_PERFORMA_EXPIRY_DATE)
+            .performaDatePersian(UPDATED_PERFORMA_DATE_PERSIAN)
+            .performaExpiryDatePersian(UPDATED_PERFORMA_EXPIRY_DATE_PERSIAN)
+            .infoSubmissionDate(UPDATED_INFO_SUBMISSION_DATE)
+            .sourceCountry(UPDATED_SOURCE_COUNTRY)
             .currencyCode(UPDATED_CURRENCY_CODE)
-            .fobAmount(UPDATED_FOB_AMOUNT)
             .shipmentCost(UPDATED_SHIPMENT_COST)
-            .othrCost(UPDATED_OTHR_COST)
-            .fileNumber(UPDATED_FILE_NUMBER)
+            .isFile(UPDATED_IS_FILE)
             .extended(UPDATED_EXTENDED)
+            .updated(UPDATED_UPDATED)
             .generateFromService(UPDATED_GENERATE_FROM_SERVICE)
             .certificateNumber(UPDATED_CERTIFICATE_NUMBER)
-            .centralBankCode(UPDATED_CENTRAL_BANK_CODE)
-            .externalCustomer(UPDATED_EXTERNAL_CUSTOMER)
-            .sumRedemptionDuration(UPDATED_SUM_REDEMPTION_DURATION)
             .extendedDayNumber(UPDATED_EXTENDED_DAY_NUMBER)
-            .mainGroupProductCode(UPDATED_MAIN_GROUP_PRODUCT_CODE)
             .producerCountries(UPDATED_PRODUCER_COUNTRIES);
 
         restOrderRegistrationInfoMockMvc
@@ -708,7 +748,8 @@ class OrderRegistrationInfoResourceIT {
             .performaExpiryDatePersian(UPDATED_PERFORMA_EXPIRY_DATE_PERSIAN)
             .infoSubmissionDate(UPDATED_INFO_SUBMISSION_DATE)
             .sellerName(UPDATED_SELLER_NAME)
-            .beneficiaryCountry(UPDATED_BENEFICIARY_COUNTRY)
+            .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
+            .producerCountriesCode(UPDATED_PRODUCER_COUNTRIES_CODE)
             .sourceCountry(UPDATED_SOURCE_COUNTRY)
             .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
             .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)

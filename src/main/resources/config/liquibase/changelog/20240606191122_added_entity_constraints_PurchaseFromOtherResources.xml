@@ -10,9 +10,23 @@
     -->
     <changeSet id="20240606191122-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="purchase_from_other_resources_id"
+        <addForeignKeyConstraint baseColumnNames="currency_supplier_id"
                                  baseTableName="purchase_from_other_resources"
-                                 constraintName="fk_purchase_from_other_resource__purchase_from_other_reso_2f_id"
+                                 constraintName="fk_purchase_from_other_resources__currency_supplier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="purchase_from_other_resources"
+                                 constraintName="fk_purchase_from_other_resources__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="purchase_from_other_resources"
+                                 constraintName="fk_purchase_from_other_resources__order_registration_info_id"
                                  referencedColumnNames="id"
                                  referencedTableName="order_registration_info"
                                  />

@@ -10,10 +10,12 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IProduct } from 'app/shared/model/product.model';
 import { getEntities as getProducts } from 'app/entities/product/product.reducer';
-import { IOrderRegServ } from 'app/shared/model/order-reg-serv.model';
-import { getEntities as getOrderRegServs } from 'app/entities/order-reg-serv/order-reg-serv.reducer';
+import { IServiceTariff } from 'app/shared/model/service-tariff.model';
+import { getEntities as getServiceTariffs } from 'app/entities/service-tariff/service-tariff.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
+import { IOrderRegServ } from 'app/shared/model/order-reg-serv.model';
+import { getEntities as getOrderRegServs } from 'app/entities/order-reg-serv/order-reg-serv.reducer';
 import { ILicenceInfo } from 'app/shared/model/licence-info.model';
 import { getEntity, updateEntity, createEntity, reset } from './licence-info.reducer';
 
@@ -26,8 +28,9 @@ export const LicenceInfoUpdate = () => {
   const isNew = id === undefined;
 
   const products = useAppSelector(state => state.product.entities);
-  const orderRegServs = useAppSelector(state => state.orderRegServ.entities);
+  const serviceTariffs = useAppSelector(state => state.serviceTariff.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
+  const orderRegServs = useAppSelector(state => state.orderRegServ.entities);
   const licenceInfoEntity = useAppSelector(state => state.licenceInfo.entity);
   const loading = useAppSelector(state => state.licenceInfo.loading);
   const updating = useAppSelector(state => state.licenceInfo.updating);
@@ -45,8 +48,9 @@ export const LicenceInfoUpdate = () => {
     }
 
     dispatch(getProducts({}));
-    dispatch(getOrderRegServs({}));
+    dispatch(getServiceTariffs({}));
     dispatch(getOrderRegistrationInfos({}));
+    dispatch(getOrderRegServs({}));
   }, []);
 
   useEffect(() => {
@@ -65,8 +69,9 @@ export const LicenceInfoUpdate = () => {
       ...licenceInfoEntity,
       ...values,
       product: products.find(it => it.id.toString() === values.product?.toString()),
+      service: serviceTariffs.find(it => it.id.toString() === values.service?.toString()),
+      orderRegistrationInfo: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegistrationInfo?.toString()),
       orderRegServ: orderRegServs.find(it => it.id.toString() === values.orderRegServ?.toString()),
-      licenceInfo: orderRegistrationInfos.find(it => it.id.toString() === values.licenceInfo?.toString()),
     };
 
     if (isNew) {
@@ -82,8 +87,9 @@ export const LicenceInfoUpdate = () => {
       : {
           ...licenceInfoEntity,
           product: licenceInfoEntity?.product?.id,
+          service: licenceInfoEntity?.service?.id,
+          orderRegistrationInfo: licenceInfoEntity?.orderRegistrationInfo?.id,
           orderRegServ: licenceInfoEntity?.orderRegServ?.id,
-          licenceInfo: licenceInfoEntity?.licenceInfo?.id,
         };
 
   return (
@@ -172,6 +178,38 @@ export const LicenceInfoUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
+                id="licence-info-service"
+                name="service"
+                data-cy="service"
+                label={translate('tfbitaApp.licenceInfo.service')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {serviceTariffs
+                  ? serviceTariffs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="licence-info-orderRegistrationInfo"
+                name="orderRegistrationInfo"
+                data-cy="orderRegistrationInfo"
+                label={translate('tfbitaApp.licenceInfo.orderRegistrationInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {orderRegistrationInfos
+                  ? orderRegistrationInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
                 id="licence-info-orderRegServ"
                 name="orderRegServ"
                 data-cy="orderRegServ"
@@ -181,22 +219,6 @@ export const LicenceInfoUpdate = () => {
                 <option value="" key="0" />
                 {orderRegServs
                   ? orderRegServs.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                id="licence-info-licenceInfo"
-                name="licenceInfo"
-                data-cy="licenceInfo"
-                label={translate('tfbitaApp.licenceInfo.licenceInfo')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {orderRegistrationInfos
-                  ? orderRegistrationInfos.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

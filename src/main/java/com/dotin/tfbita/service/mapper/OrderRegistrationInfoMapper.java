@@ -1,11 +1,17 @@
 package com.dotin.tfbita.service.mapper;
 
+import com.dotin.tfbita.domain.CategoryElement;
 import com.dotin.tfbita.domain.Custom;
 import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.domain.Product;
+import com.dotin.tfbita.domain.StringValue;
+import com.dotin.tfbita.domain.TransportationType;
+import com.dotin.tfbita.service.dto.CategoryElementDTO;
 import com.dotin.tfbita.service.dto.CustomDTO;
 import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
 import com.dotin.tfbita.service.dto.ProductDTO;
+import com.dotin.tfbita.service.dto.StringValueDTO;
+import com.dotin.tfbita.service.dto.TransportationTypeDTO;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.mapstruct.*;
@@ -15,25 +21,49 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface OrderRegistrationInfoMapper extends EntityMapper<OrderRegistrationInfoDTO, OrderRegistrationInfo> {
-    @Mapping(target = "customs", source = "customs", qualifiedByName = "customIdSet")
+    @Mapping(target = "orderRegType", source = "orderRegType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "requestType", source = "requestType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "importType", source = "importType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "operationType", source = "operationType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "currencyProvisionType", source = "currencyProvisionType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "paymentTool", source = "paymentTool", qualifiedByName = "categoryElementId")
+    @Mapping(target = "activityType", source = "activityType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "ownerType", source = "ownerType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "status", source = "status", qualifiedByName = "categoryElementId")
+    @Mapping(target = "externalCustomerType", source = "externalCustomerType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "transportType", source = "transportType", qualifiedByName = "transportationTypeId")
+    @Mapping(target = "destCoustomers", source = "destCoustomers", qualifiedByName = "customId")
+    @Mapping(target = "cargoPlaceCustoms", source = "cargoPlaceCustoms", qualifiedByName = "customId")
+    @Mapping(target = "entranceBorders", source = "entranceBorders", qualifiedByName = "customId")
+    @Mapping(target = "transportVehicleTypes", source = "transportVehicleTypes", qualifiedByName = "categoryElementIdSet")
     @Mapping(target = "productInfos", source = "productInfos", qualifiedByName = "productIdSet")
+    @Mapping(target = "commissionTransactionNumbers", source = "commissionTransactionNumbers", qualifiedByName = "stringValueIdSet")
     OrderRegistrationInfoDTO toDto(OrderRegistrationInfo s);
 
-    @Mapping(target = "customs", ignore = true)
-    @Mapping(target = "removeCustom", ignore = true)
-    @Mapping(target = "productInfos", ignore = true)
+    @Mapping(target = "removeTransportVehicleType", ignore = true)
     @Mapping(target = "removeProductInfo", ignore = true)
+    @Mapping(target = "removeCommissionTransactionNumber", ignore = true)
     OrderRegistrationInfo toEntity(OrderRegistrationInfoDTO orderRegistrationInfoDTO);
+
+    @Named("categoryElementId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    CategoryElementDTO toDtoCategoryElementId(CategoryElement categoryElement);
+
+    @Named("categoryElementIdSet")
+    default Set<CategoryElementDTO> toDtoCategoryElementIdSet(Set<CategoryElement> categoryElement) {
+        return categoryElement.stream().map(this::toDtoCategoryElementId).collect(Collectors.toSet());
+    }
+
+    @Named("transportationTypeId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    TransportationTypeDTO toDtoTransportationTypeId(TransportationType transportationType);
 
     @Named("customId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     CustomDTO toDtoCustomId(Custom custom);
-
-    @Named("customIdSet")
-    default Set<CustomDTO> toDtoCustomIdSet(Set<Custom> custom) {
-        return custom.stream().map(this::toDtoCustomId).collect(Collectors.toSet());
-    }
 
     @Named("productId")
     @BeanMapping(ignoreByDefault = true)
@@ -43,5 +73,15 @@ public interface OrderRegistrationInfoMapper extends EntityMapper<OrderRegistrat
     @Named("productIdSet")
     default Set<ProductDTO> toDtoProductIdSet(Set<Product> product) {
         return product.stream().map(this::toDtoProductId).collect(Collectors.toSet());
+    }
+
+    @Named("stringValueId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    StringValueDTO toDtoStringValueId(StringValue stringValue);
+
+    @Named("stringValueIdSet")
+    default Set<StringValueDTO> toDtoStringValueIdSet(Set<StringValue> stringValue) {
+        return stringValue.stream().map(this::toDtoStringValueId).collect(Collectors.toSet());
     }
 }

@@ -94,15 +94,17 @@ export const PurchaseFromOtherResourcesDetail = () => {
           </dt>
           <dd>{purchaseFromOtherResourcesEntity.purchaseCurrencyName}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.purchaseFromOtherResources.purchaseFromOtherResources">
-              Purchase From Other Resources
-            </Translate>
+            <Translate contentKey="tfbitaApp.purchaseFromOtherResources.currencySupplier">Currency Supplier</Translate>
           </dt>
-          <dd>
-            {purchaseFromOtherResourcesEntity.purchaseFromOtherResources
-              ? purchaseFromOtherResourcesEntity.purchaseFromOtherResources.id
-              : ''}
-          </dd>
+          <dd>{purchaseFromOtherResourcesEntity.currencySupplier ? purchaseFromOtherResourcesEntity.currencySupplier.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.purchaseFromOtherResources.status">Status</Translate>
+          </dt>
+          <dd>{purchaseFromOtherResourcesEntity.status ? purchaseFromOtherResourcesEntity.status.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.purchaseFromOtherResources.orderRegistrationInfo">Order Registration Info</Translate>
+          </dt>
+          <dd>{purchaseFromOtherResourcesEntity.orderRegistrationInfo ? purchaseFromOtherResourcesEntity.orderRegistrationInfo.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/purchase-from-other-resources" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

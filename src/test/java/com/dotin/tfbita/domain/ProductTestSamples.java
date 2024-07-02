@@ -10,25 +10,11 @@ public class ProductTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Product getProductSample1() {
-        return new Product()
-            .id(1L)
-            .code("code1")
-            .modificationDate("modificationDate1")
-            .name("name1")
-            .description("description1")
-            .topicCode("topicCode1")
-            .attributeValueGroupName("attributeValueGroupName1");
+        return new Product().id(1L).code("code1").modificationDate("modificationDate1").name("name1");
     }
 
     public static Product getProductSample2() {
-        return new Product()
-            .id(2L)
-            .code("code2")
-            .modificationDate("modificationDate2")
-            .name("name2")
-            .description("description2")
-            .topicCode("topicCode2")
-            .attributeValueGroupName("attributeValueGroupName2");
+        return new Product().id(2L).code("code2").modificationDate("modificationDate2").name("name2");
     }
 
     public static Product getProductRandomSampleGenerator() {
@@ -36,9 +22,6 @@ public class ProductTestSamples {
             .id(longCount.incrementAndGet())
             .code(UUID.randomUUID().toString())
             .modificationDate(UUID.randomUUID().toString())
-            .name(UUID.randomUUID().toString())
-            .description(UUID.randomUUID().toString())
-            .topicCode(UUID.randomUUID().toString())
-            .attributeValueGroupName(UUID.randomUUID().toString());
+            .name(UUID.randomUUID().toString());
     }
 }

@@ -122,11 +122,17 @@ export const OrderRegistrationInfoDetail = () => {
           </dt>
           <dd>{orderRegistrationInfoEntity.sellerName}</dd>
           <dt>
-            <span id="beneficiaryCountry">
-              <Translate contentKey="tfbitaApp.orderRegistrationInfo.beneficiaryCountry">Beneficiary Country</Translate>
+            <span id="beneficiaryCountryCode">
+              <Translate contentKey="tfbitaApp.orderRegistrationInfo.beneficiaryCountryCode">Beneficiary Country Code</Translate>
             </span>
           </dt>
-          <dd>{orderRegistrationInfoEntity.beneficiaryCountry}</dd>
+          <dd>{orderRegistrationInfoEntity.beneficiaryCountryCode}</dd>
+          <dt>
+            <span id="producerCountriesCode">
+              <Translate contentKey="tfbitaApp.orderRegistrationInfo.producerCountriesCode">Producer Countries Code</Translate>
+            </span>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.producerCountriesCode}</dd>
           <dt>
             <span id="sourceCountry">
               <Translate contentKey="tfbitaApp.orderRegistrationInfo.sourceCountry">Source Country</Translate>
@@ -317,14 +323,72 @@ export const OrderRegistrationInfoDetail = () => {
           </dt>
           <dd>{orderRegistrationInfoEntity.commissionTransactionNumber}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.orderRegistrationInfo.custom">Custom</Translate>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.orderRegType">Order Reg Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.orderRegType ? orderRegistrationInfoEntity.orderRegType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.requestType">Request Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.requestType ? orderRegistrationInfoEntity.requestType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.importType">Import Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.importType ? orderRegistrationInfoEntity.importType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.operationType">Operation Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.operationType ? orderRegistrationInfoEntity.operationType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.currencyProvisionType">Currency Provision Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.currencyProvisionType ? orderRegistrationInfoEntity.currencyProvisionType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.paymentTool">Payment Tool</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.paymentTool ? orderRegistrationInfoEntity.paymentTool.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.activityType">Activity Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.activityType ? orderRegistrationInfoEntity.activityType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.ownerType">Owner Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.ownerType ? orderRegistrationInfoEntity.ownerType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.status">Status</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.status ? orderRegistrationInfoEntity.status.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.externalCustomerType">External Customer Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.externalCustomerType ? orderRegistrationInfoEntity.externalCustomerType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportType">Transport Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.transportType ? orderRegistrationInfoEntity.transportType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.destCoustomers">Dest Coustomers</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.destCoustomers ? orderRegistrationInfoEntity.destCoustomers.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.cargoPlaceCustoms">Cargo Place Customs</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.cargoPlaceCustoms ? orderRegistrationInfoEntity.cargoPlaceCustoms.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.entranceBorders">Entrance Borders</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.entranceBorders ? orderRegistrationInfoEntity.entranceBorders.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>
           </dt>
           <dd>
-            {orderRegistrationInfoEntity.customs
-              ? orderRegistrationInfoEntity.customs.map((val, i) => (
+            {orderRegistrationInfoEntity.transportVehicleTypes
+              ? orderRegistrationInfoEntity.transportVehicleTypes.map((val, i) => (
                   <span key={val.id}>
                     <a>{val.id}</a>
-                    {orderRegistrationInfoEntity.customs && i === orderRegistrationInfoEntity.customs.length - 1 ? '' : ', '}
+                    {orderRegistrationInfoEntity.transportVehicleTypes && i === orderRegistrationInfoEntity.transportVehicleTypes.length - 1
+                      ? ''
+                      : ', '}
                   </span>
                 ))
               : null}
@@ -338,6 +402,22 @@ export const OrderRegistrationInfoDetail = () => {
                   <span key={val.id}>
                     <a>{val.id}</a>
                     {orderRegistrationInfoEntity.productInfos && i === orderRegistrationInfoEntity.productInfos.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.commissionTransactionNumber">Commission Transaction Number</Translate>
+          </dt>
+          <dd>
+            {orderRegistrationInfoEntity.commissionTransactionNumbers
+              ? orderRegistrationInfoEntity.commissionTransactionNumbers.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {orderRegistrationInfoEntity.commissionTransactionNumbers &&
+                    i === orderRegistrationInfoEntity.commissionTransactionNumbers.length - 1
+                      ? ''
+                      : ', '}
                   </span>
                 ))
               : null}

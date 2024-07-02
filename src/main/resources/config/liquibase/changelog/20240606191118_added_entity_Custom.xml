@@ -26,25 +26,11 @@
             <column name="temp_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="load_switch_place_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
 
     <changeSet id="20240606191118-1-relations" author="jhipster">
-
-        <createTable tableName="rel_custom__order_registration_info">
-            <column name="order_registration_info_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="custom_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="custom_id, order_registration_info_id" tableName="rel_custom__order_registration_info"/>
 
         <createTable tableName="rel_custom__draft">
             <column name="draft_id" type="bigint">

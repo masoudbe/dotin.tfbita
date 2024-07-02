@@ -26,24 +26,24 @@ class CategoryTest {
     }
 
     @Test
-    void categoryElementTest() throws Exception {
+    void possibleValuesTest() throws Exception {
         Category category = getCategoryRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
-        category.addCategoryElement(categoryElementBack);
-        assertThat(category.getCategoryElements()).containsOnly(categoryElementBack);
-        assertThat(categoryElementBack.getCategoryElement()).isEqualTo(category);
+        category.addPossibleValues(categoryElementBack);
+        assertThat(category.getPossibleValues()).containsOnly(categoryElementBack);
+        assertThat(categoryElementBack.getCategory()).isEqualTo(category);
 
-        category.removeCategoryElement(categoryElementBack);
-        assertThat(category.getCategoryElements()).doesNotContain(categoryElementBack);
-        assertThat(categoryElementBack.getCategoryElement()).isNull();
+        category.removePossibleValues(categoryElementBack);
+        assertThat(category.getPossibleValues()).doesNotContain(categoryElementBack);
+        assertThat(categoryElementBack.getCategory()).isNull();
 
-        category.categoryElements(new HashSet<>(Set.of(categoryElementBack)));
-        assertThat(category.getCategoryElements()).containsOnly(categoryElementBack);
-        assertThat(categoryElementBack.getCategoryElement()).isEqualTo(category);
+        category.possibleValues(new HashSet<>(Set.of(categoryElementBack)));
+        assertThat(category.getPossibleValues()).containsOnly(categoryElementBack);
+        assertThat(categoryElementBack.getCategory()).isEqualTo(category);
 
-        category.setCategoryElements(new HashSet<>());
-        assertThat(category.getCategoryElements()).doesNotContain(categoryElementBack);
-        assertThat(categoryElementBack.getCategoryElement()).isNull();
+        category.setPossibleValues(new HashSet<>());
+        assertThat(category.getPossibleValues()).doesNotContain(categoryElementBack);
+        assertThat(categoryElementBack.getCategory()).isNull();
     }
 }

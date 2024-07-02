@@ -21,9 +21,8 @@
       "code": "Code",
       "modificationDate": "Modification Date",
       "name": "Name",
-      "description": "Description",
-      "topicCode": "Topic Code",
-      "attributeValueGroupName": "Attribute Value Group Name",
+      "attributeValues": "Attribute Values",
+      "productType": "Product Type",
       "orderRegistrationInfo": "Order Registration Info",
       "draft": "Draft",
       "draftProductInfos": "Draft Product Infos"

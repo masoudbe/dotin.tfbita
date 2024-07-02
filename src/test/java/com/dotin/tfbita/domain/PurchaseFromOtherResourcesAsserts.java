@@ -103,11 +103,10 @@ public class PurchaseFromOtherResourcesAsserts {
     ) {
         assertThat(expected)
             .as("Verify PurchaseFromOtherResources relationships")
+            .satisfies(e -> assertThat(e.getCurrencySupplier()).as("check currencySupplier").isEqualTo(actual.getCurrencySupplier()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(
-                e ->
-                    assertThat(e.getPurchaseFromOtherResources())
-                        .as("check purchaseFromOtherResources")
-                        .isEqualTo(actual.getPurchaseFromOtherResources())
+                e -> assertThat(e.getOrderRegistrationInfo()).as("check orderRegistrationInfo").isEqualTo(actual.getOrderRegistrationInfo())
             );
     }
 }

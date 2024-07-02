@@ -8,10 +8,16 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
+import { ITransportationType } from 'app/shared/model/transportation-type.model';
+import { getEntities as getTransportationTypes } from 'app/entities/transportation-type/transportation-type.reducer';
 import { ICustom } from 'app/shared/model/custom.model';
 import { getEntities as getCustoms } from 'app/entities/custom/custom.reducer';
 import { IProduct } from 'app/shared/model/product.model';
 import { getEntities as getProducts } from 'app/entities/product/product.reducer';
+import { IStringValue } from 'app/shared/model/string-value.model';
+import { getEntities as getStringValues } from 'app/entities/string-value/string-value.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntity, updateEntity, createEntity, reset } from './order-registration-info.reducer';
 
@@ -23,8 +29,11 @@ export const OrderRegistrationInfoUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
+  const transportationTypes = useAppSelector(state => state.transportationType.entities);
   const customs = useAppSelector(state => state.custom.entities);
   const products = useAppSelector(state => state.product.entities);
+  const stringValues = useAppSelector(state => state.stringValue.entities);
   const orderRegistrationInfoEntity = useAppSelector(state => state.orderRegistrationInfo.entity);
   const loading = useAppSelector(state => state.orderRegistrationInfo.loading);
   const updating = useAppSelector(state => state.orderRegistrationInfo.updating);
@@ -41,8 +50,11 @@ export const OrderRegistrationInfoUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getCategoryElements({}));
+    dispatch(getTransportationTypes({}));
     dispatch(getCustoms({}));
     dispatch(getProducts({}));
+    dispatch(getStringValues({}));
   }, []);
 
   useEffect(() => {
@@ -87,8 +99,23 @@ export const OrderRegistrationInfoUpdate = () => {
     const entity = {
       ...orderRegistrationInfoEntity,
       ...values,
-      customs: mapIdList(values.customs),
+      orderRegType: categoryElements.find(it => it.id.toString() === values.orderRegType?.toString()),
+      requestType: categoryElements.find(it => it.id.toString() === values.requestType?.toString()),
+      importType: categoryElements.find(it => it.id.toString() === values.importType?.toString()),
+      operationType: categoryElements.find(it => it.id.toString() === values.operationType?.toString()),
+      currencyProvisionType: categoryElements.find(it => it.id.toString() === values.currencyProvisionType?.toString()),
+      paymentTool: categoryElements.find(it => it.id.toString() === values.paymentTool?.toString()),
+      activityType: categoryElements.find(it => it.id.toString() === values.activityType?.toString()),
+      ownerType: categoryElements.find(it => it.id.toString() === values.ownerType?.toString()),
+      status: categoryElements.find(it => it.id.toString() === values.status?.toString()),
+      externalCustomerType: categoryElements.find(it => it.id.toString() === values.externalCustomerType?.toString()),
+      transportType: transportationTypes.find(it => it.id.toString() === values.transportType?.toString()),
+      destCoustomers: customs.find(it => it.id.toString() === values.destCoustomers?.toString()),
+      cargoPlaceCustoms: customs.find(it => it.id.toString() === values.cargoPlaceCustoms?.toString()),
+      entranceBorders: customs.find(it => it.id.toString() === values.entranceBorders?.toString()),
+      transportVehicleTypes: mapIdList(values.transportVehicleTypes),
       productInfos: mapIdList(values.productInfos),
+      commissionTransactionNumbers: mapIdList(values.commissionTransactionNumbers),
     };
 
     if (isNew) {
@@ -103,8 +130,23 @@ export const OrderRegistrationInfoUpdate = () => {
       ? {}
       : {
           ...orderRegistrationInfoEntity,
-          customs: orderRegistrationInfoEntity?.customs?.map(e => e.id.toString()),
+          orderRegType: orderRegistrationInfoEntity?.orderRegType?.id,
+          requestType: orderRegistrationInfoEntity?.requestType?.id,
+          importType: orderRegistrationInfoEntity?.importType?.id,
+          operationType: orderRegistrationInfoEntity?.operationType?.id,
+          currencyProvisionType: orderRegistrationInfoEntity?.currencyProvisionType?.id,
+          paymentTool: orderRegistrationInfoEntity?.paymentTool?.id,
+          activityType: orderRegistrationInfoEntity?.activityType?.id,
+          ownerType: orderRegistrationInfoEntity?.ownerType?.id,
+          status: orderRegistrationInfoEntity?.status?.id,
+          externalCustomerType: orderRegistrationInfoEntity?.externalCustomerType?.id,
+          transportType: orderRegistrationInfoEntity?.transportType?.id,
+          destCoustomers: orderRegistrationInfoEntity?.destCoustomers?.id,
+          cargoPlaceCustoms: orderRegistrationInfoEntity?.cargoPlaceCustoms?.id,
+          entranceBorders: orderRegistrationInfoEntity?.entranceBorders?.id,
+          transportVehicleTypes: orderRegistrationInfoEntity?.transportVehicleTypes?.map(e => e.id.toString()),
           productInfos: orderRegistrationInfoEntity?.productInfos?.map(e => e.id.toString()),
+          commissionTransactionNumbers: orderRegistrationInfoEntity?.commissionTransactionNumbers?.map(e => e.id.toString()),
         };
 
   return (
@@ -240,10 +282,17 @@ export const OrderRegistrationInfoUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.orderRegistrationInfo.beneficiaryCountry')}
-                id="order-registration-info-beneficiaryCountry"
-                name="beneficiaryCountry"
-                data-cy="beneficiaryCountry"
+                label={translate('tfbitaApp.orderRegistrationInfo.beneficiaryCountryCode')}
+                id="order-registration-info-beneficiaryCountryCode"
+                name="beneficiaryCountryCode"
+                data-cy="beneficiaryCountryCode"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.orderRegistrationInfo.producerCountriesCode')}
+                id="order-registration-info-producerCountriesCode"
+                name="producerCountriesCode"
+                data-cy="producerCountriesCode"
                 type="text"
               />
               <ValidatedField
@@ -460,16 +509,240 @@ export const OrderRegistrationInfoUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.orderRegistrationInfo.custom')}
-                id="order-registration-info-custom"
-                data-cy="custom"
+                id="order-registration-info-orderRegType"
+                name="orderRegType"
+                data-cy="orderRegType"
+                label={translate('tfbitaApp.orderRegistrationInfo.orderRegType')}
                 type="select"
-                multiple
-                name="customs"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-requestType"
+                name="requestType"
+                data-cy="requestType"
+                label={translate('tfbitaApp.orderRegistrationInfo.requestType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-importType"
+                name="importType"
+                data-cy="importType"
+                label={translate('tfbitaApp.orderRegistrationInfo.importType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-operationType"
+                name="operationType"
+                data-cy="operationType"
+                label={translate('tfbitaApp.orderRegistrationInfo.operationType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-currencyProvisionType"
+                name="currencyProvisionType"
+                data-cy="currencyProvisionType"
+                label={translate('tfbitaApp.orderRegistrationInfo.currencyProvisionType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-paymentTool"
+                name="paymentTool"
+                data-cy="paymentTool"
+                label={translate('tfbitaApp.orderRegistrationInfo.paymentTool')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-activityType"
+                name="activityType"
+                data-cy="activityType"
+                label={translate('tfbitaApp.orderRegistrationInfo.activityType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-ownerType"
+                name="ownerType"
+                data-cy="ownerType"
+                label={translate('tfbitaApp.orderRegistrationInfo.ownerType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-status"
+                name="status"
+                data-cy="status"
+                label={translate('tfbitaApp.orderRegistrationInfo.status')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-externalCustomerType"
+                name="externalCustomerType"
+                data-cy="externalCustomerType"
+                label={translate('tfbitaApp.orderRegistrationInfo.externalCustomerType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-transportType"
+                name="transportType"
+                data-cy="transportType"
+                label={translate('tfbitaApp.orderRegistrationInfo.transportType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {transportationTypes
+                  ? transportationTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-destCoustomers"
+                name="destCoustomers"
+                data-cy="destCoustomers"
+                label={translate('tfbitaApp.orderRegistrationInfo.destCoustomers')}
+                type="select"
               >
                 <option value="" key="0" />
                 {customs
                   ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-cargoPlaceCustoms"
+                name="cargoPlaceCustoms"
+                data-cy="cargoPlaceCustoms"
+                label={translate('tfbitaApp.orderRegistrationInfo.cargoPlaceCustoms')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {customs
+                  ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="order-registration-info-entranceBorders"
+                name="entranceBorders"
+                data-cy="entranceBorders"
+                label={translate('tfbitaApp.orderRegistrationInfo.entranceBorders')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {customs
+                  ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.orderRegistrationInfo.transportVehicleType')}
+                id="order-registration-info-transportVehicleType"
+                data-cy="transportVehicleType"
+                type="select"
+                multiple
+                name="transportVehicleTypes"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -487,6 +760,23 @@ export const OrderRegistrationInfoUpdate = () => {
                 <option value="" key="0" />
                 {products
                   ? products.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.orderRegistrationInfo.commissionTransactionNumber')}
+                id="order-registration-info-commissionTransactionNumber"
+                data-cy="commissionTransactionNumber"
+                type="select"
+                multiple
+                name="commissionTransactionNumbers"
+              >
+                <option value="" key="0" />
+                {stringValues
+                  ? stringValues.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

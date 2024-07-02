@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
 import { IPurchaseFromOtherResources } from 'app/shared/model/purchase-from-other-resources.model';
@@ -21,6 +23,7 @@ export const PurchaseFromOtherResourcesUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
   const purchaseFromOtherResourcesEntity = useAppSelector(state => state.purchaseFromOtherResources.entity);
   const loading = useAppSelector(state => state.purchaseFromOtherResources.loading);
@@ -38,6 +41,7 @@ export const PurchaseFromOtherResourcesUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getCategoryElements({}));
     dispatch(getOrderRegistrationInfos({}));
   }, []);
 
@@ -65,7 +69,9 @@ export const PurchaseFromOtherResourcesUpdate = () => {
     const entity = {
       ...purchaseFromOtherResourcesEntity,
       ...values,
-      purchaseFromOtherResources: orderRegistrationInfos.find(it => it.id.toString() === values.purchaseFromOtherResources?.toString()),
+      currencySupplier: categoryElements.find(it => it.id.toString() === values.currencySupplier?.toString()),
+      status: categoryElements.find(it => it.id.toString() === values.status?.toString()),
+      orderRegistrationInfo: orderRegistrationInfos.find(it => it.id.toString() === values.orderRegistrationInfo?.toString()),
     };
 
     if (isNew) {
@@ -80,7 +86,9 @@ export const PurchaseFromOtherResourcesUpdate = () => {
       ? {}
       : {
           ...purchaseFromOtherResourcesEntity,
-          purchaseFromOtherResources: purchaseFromOtherResourcesEntity?.purchaseFromOtherResources?.id,
+          currencySupplier: purchaseFromOtherResourcesEntity?.currencySupplier?.id,
+          status: purchaseFromOtherResourcesEntity?.status?.id,
+          orderRegistrationInfo: purchaseFromOtherResourcesEntity?.orderRegistrationInfo?.id,
         };
 
   return (
@@ -181,10 +189,42 @@ export const PurchaseFromOtherResourcesUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="purchase-from-other-resources-purchaseFromOtherResources"
-                name="purchaseFromOtherResources"
-                data-cy="purchaseFromOtherResources"
-                label={translate('tfbitaApp.purchaseFromOtherResources.purchaseFromOtherResources')}
+                id="purchase-from-other-resources-currencySupplier"
+                name="currencySupplier"
+                data-cy="currencySupplier"
+                label={translate('tfbitaApp.purchaseFromOtherResources.currencySupplier')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="purchase-from-other-resources-status"
+                name="status"
+                data-cy="status"
+                label={translate('tfbitaApp.purchaseFromOtherResources.status')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="purchase-from-other-resources-orderRegistrationInfo"
+                name="orderRegistrationInfo"
+                data-cy="orderRegistrationInfo"
+                label={translate('tfbitaApp.purchaseFromOtherResources.orderRegistrationInfo')}
                 type="select"
               >
                 <option value="" key="0" />

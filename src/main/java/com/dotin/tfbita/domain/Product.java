@@ -31,23 +31,38 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonIgnoreProperties(value = { "typeAttribute", "attributeValueGroup", "product" }, allowSetters = true)
+    private Set<AttributeValue> attributeValues = new HashSet<>();
 
-    @Column(name = "topic_code")
-    private String topicCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "productTypeAttributes" }, allowSetters = true)
+    private ProductType productType;
 
-    @Column(name = "attribute_value_group_name")
-    private String attributeValueGroupName;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_product__order_registration_info",
-        joinColumns = @JoinColumn(name = "product_id"),
-        inverseJoinColumns = @JoinColumn(name = "order_registration_info_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productInfos")
     @JsonIgnoreProperties(
-        value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
+        value = {
+            "serviceInfos",
+            "purchaseFromOtherResourcesLists",
+            "orderRegType",
+            "requestType",
+            "importType",
+            "operationType",
+            "currencyProvisionType",
+            "paymentTool",
+            "activityType",
+            "ownerType",
+            "status",
+            "externalCustomerType",
+            "transportType",
+            "destCoustomers",
+            "cargoPlaceCustoms",
+            "entranceBorders",
+            "transportVehicleTypes",
+            "productInfos",
+            "commissionTransactionNumbers",
+            "licenceInfos",
+        },
         allowSetters = true
     )
     private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
@@ -133,43 +148,48 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return this.description;
+    public Set<AttributeValue> getAttributeValues() {
+        return this.attributeValues;
     }
 
-    public Product description(String description) {
-        this.setDescription(description);
+    public void setAttributeValues(Set<AttributeValue> attributeValues) {
+        if (this.attributeValues != null) {
+            this.attributeValues.forEach(i -> i.setProduct(null));
+        }
+        if (attributeValues != null) {
+            attributeValues.forEach(i -> i.setProduct(this));
+        }
+        this.attributeValues = attributeValues;
+    }
+
+    public Product attributeValues(Set<AttributeValue> attributeValues) {
+        this.setAttributeValues(attributeValues);
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTopicCode() {
-        return this.topicCode;
-    }
-
-    public Product topicCode(String topicCode) {
-        this.setTopicCode(topicCode);
+    public Product addAttributeValues(AttributeValue attributeValue) {
+        this.attributeValues.add(attributeValue);
+        attributeValue.setProduct(this);
         return this;
     }
 
-    public void setTopicCode(String topicCode) {
-        this.topicCode = topicCode;
-    }
-
-    public String getAttributeValueGroupName() {
-        return this.attributeValueGroupName;
-    }
-
-    public Product attributeValueGroupName(String attributeValueGroupName) {
-        this.setAttributeValueGroupName(attributeValueGroupName);
+    public Product removeAttributeValues(AttributeValue attributeValue) {
+        this.attributeValues.remove(attributeValue);
+        attributeValue.setProduct(null);
         return this;
     }
 
-    public void setAttributeValueGroupName(String attributeValueGroupName) {
-        this.attributeValueGroupName = attributeValueGroupName;
+    public ProductType getProductType() {
+        return this.productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public Product productType(ProductType productType) {
+        this.setProductType(productType);
+        return this;
     }
 
     public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
@@ -177,6 +197,12 @@ public class Product implements Serializable {
     }
 
     public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
+        if (this.orderRegistrationInfos != null) {
+            this.orderRegistrationInfos.forEach(i -> i.removeProductInfo(this));
+        }
+        if (orderRegistrationInfos != null) {
+            orderRegistrationInfos.forEach(i -> i.addProductInfo(this));
+        }
         this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
@@ -187,11 +213,13 @@ public class Product implements Serializable {
 
     public Product addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
         this.orderRegistrationInfos.add(orderRegistrationInfo);
+        orderRegistrationInfo.getProductInfos().add(this);
         return this;
     }
 
     public Product removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
         this.orderRegistrationInfos.remove(orderRegistrationInfo);
+        orderRegistrationInfo.getProductInfos().remove(this);
         return this;
     }
 
@@ -258,9 +286,6 @@ public class Product implements Serializable {
             ", code='" + getCode() + "'" +
             ", modificationDate='" + getModificationDate() + "'" +
             ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", topicCode='" + getTopicCode() + "'" +
-            ", attributeValueGroupName='" + getAttributeValueGroupName() + "'" +
             "}";
     }
 }

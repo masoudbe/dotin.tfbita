@@ -10,29 +10,6 @@
     -->
     <changeSet id="20240606191118-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="load_switch_place_id"
-                                 baseTableName="custom"
-                                 constraintName="fk_custom__load_switch_place_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="draft"
-                                 onDelete="SET NULL"
-                                 onUpdate="CASCADE"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="custom_id"
-                                 baseTableName="rel_custom__order_registration_info"
-                                 constraintName="fk_rel_custom__order_registration_info__custom_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="custom"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
-                                 baseTableName="rel_custom__order_registration_info"
-                                 constraintName="fk_rel_custom__order_registrati__order_registration_info_42_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="order_registration_info"
-                                 />
-
         <addForeignKeyConstraint baseColumnNames="custom_id"
                                  baseTableName="rel_custom__draft"
                                  constraintName="fk_rel_custom__draft__custom_id"

@@ -21,10 +21,6 @@ public class CustomDTO implements Serializable {
 
     private Long tempId;
 
-    private DraftDTO loadSwitchPlace;
-
-    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
-
     private Set<DraftDTO> drafts = new HashSet<>();
 
     public Long getId() {
@@ -67,22 +63,6 @@ public class CustomDTO implements Serializable {
         this.tempId = tempId;
     }
 
-    public DraftDTO getLoadSwitchPlace() {
-        return loadSwitchPlace;
-    }
-
-    public void setLoadSwitchPlace(DraftDTO loadSwitchPlace) {
-        this.loadSwitchPlace = loadSwitchPlace;
-    }
-
-    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
-        return orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
-        this.orderRegistrationInfos = orderRegistrationInfos;
-    }
-
     public Set<DraftDTO> getDrafts() {
         return drafts;
     }
@@ -121,8 +101,6 @@ public class CustomDTO implements Serializable {
             ", latinName='" + getLatinName() + "'" +
             ", name='" + getName() + "'" +
             ", tempId=" + getTempId() +
-            ", loadSwitchPlace=" + getLoadSwitchPlace() +
-            ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             ", drafts=" + getDrafts() +
             "}";
     }

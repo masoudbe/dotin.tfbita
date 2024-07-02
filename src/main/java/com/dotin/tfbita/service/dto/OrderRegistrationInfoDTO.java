@@ -45,7 +45,9 @@ public class OrderRegistrationInfoDTO implements Serializable {
 
     private String sellerName;
 
-    private String beneficiaryCountry;
+    private String beneficiaryCountryCode;
+
+    private String producerCountriesCode;
 
     private String sourceCountry;
 
@@ -108,9 +110,39 @@ public class OrderRegistrationInfoDTO implements Serializable {
 
     private String commissionTransactionNumber;
 
-    private Set<CustomDTO> customs = new HashSet<>();
+    private CategoryElementDTO orderRegType;
+
+    private CategoryElementDTO requestType;
+
+    private CategoryElementDTO importType;
+
+    private CategoryElementDTO operationType;
+
+    private CategoryElementDTO currencyProvisionType;
+
+    private CategoryElementDTO paymentTool;
+
+    private CategoryElementDTO activityType;
+
+    private CategoryElementDTO ownerType;
+
+    private CategoryElementDTO status;
+
+    private CategoryElementDTO externalCustomerType;
+
+    private TransportationTypeDTO transportType;
+
+    private CustomDTO destCoustomers;
+
+    private CustomDTO cargoPlaceCustoms;
+
+    private CustomDTO entranceBorders;
+
+    private Set<CategoryElementDTO> transportVehicleTypes = new HashSet<>();
 
     private Set<ProductDTO> productInfos = new HashSet<>();
+
+    private Set<StringValueDTO> commissionTransactionNumbers = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -240,12 +272,20 @@ public class OrderRegistrationInfoDTO implements Serializable {
         this.sellerName = sellerName;
     }
 
-    public String getBeneficiaryCountry() {
-        return beneficiaryCountry;
+    public String getBeneficiaryCountryCode() {
+        return beneficiaryCountryCode;
     }
 
-    public void setBeneficiaryCountry(String beneficiaryCountry) {
-        this.beneficiaryCountry = beneficiaryCountry;
+    public void setBeneficiaryCountryCode(String beneficiaryCountryCode) {
+        this.beneficiaryCountryCode = beneficiaryCountryCode;
+    }
+
+    public String getProducerCountriesCode() {
+        return producerCountriesCode;
+    }
+
+    public void setProducerCountriesCode(String producerCountriesCode) {
+        this.producerCountriesCode = producerCountriesCode;
     }
 
     public String getSourceCountry() {
@@ -488,12 +528,124 @@ public class OrderRegistrationInfoDTO implements Serializable {
         this.commissionTransactionNumber = commissionTransactionNumber;
     }
 
-    public Set<CustomDTO> getCustoms() {
-        return customs;
+    public CategoryElementDTO getOrderRegType() {
+        return orderRegType;
     }
 
-    public void setCustoms(Set<CustomDTO> customs) {
-        this.customs = customs;
+    public void setOrderRegType(CategoryElementDTO orderRegType) {
+        this.orderRegType = orderRegType;
+    }
+
+    public CategoryElementDTO getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(CategoryElementDTO requestType) {
+        this.requestType = requestType;
+    }
+
+    public CategoryElementDTO getImportType() {
+        return importType;
+    }
+
+    public void setImportType(CategoryElementDTO importType) {
+        this.importType = importType;
+    }
+
+    public CategoryElementDTO getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(CategoryElementDTO operationType) {
+        this.operationType = operationType;
+    }
+
+    public CategoryElementDTO getCurrencyProvisionType() {
+        return currencyProvisionType;
+    }
+
+    public void setCurrencyProvisionType(CategoryElementDTO currencyProvisionType) {
+        this.currencyProvisionType = currencyProvisionType;
+    }
+
+    public CategoryElementDTO getPaymentTool() {
+        return paymentTool;
+    }
+
+    public void setPaymentTool(CategoryElementDTO paymentTool) {
+        this.paymentTool = paymentTool;
+    }
+
+    public CategoryElementDTO getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(CategoryElementDTO activityType) {
+        this.activityType = activityType;
+    }
+
+    public CategoryElementDTO getOwnerType() {
+        return ownerType;
+    }
+
+    public void setOwnerType(CategoryElementDTO ownerType) {
+        this.ownerType = ownerType;
+    }
+
+    public CategoryElementDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(CategoryElementDTO status) {
+        this.status = status;
+    }
+
+    public CategoryElementDTO getExternalCustomerType() {
+        return externalCustomerType;
+    }
+
+    public void setExternalCustomerType(CategoryElementDTO externalCustomerType) {
+        this.externalCustomerType = externalCustomerType;
+    }
+
+    public TransportationTypeDTO getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(TransportationTypeDTO transportType) {
+        this.transportType = transportType;
+    }
+
+    public CustomDTO getDestCoustomers() {
+        return destCoustomers;
+    }
+
+    public void setDestCoustomers(CustomDTO destCoustomers) {
+        this.destCoustomers = destCoustomers;
+    }
+
+    public CustomDTO getCargoPlaceCustoms() {
+        return cargoPlaceCustoms;
+    }
+
+    public void setCargoPlaceCustoms(CustomDTO cargoPlaceCustoms) {
+        this.cargoPlaceCustoms = cargoPlaceCustoms;
+    }
+
+    public CustomDTO getEntranceBorders() {
+        return entranceBorders;
+    }
+
+    public void setEntranceBorders(CustomDTO entranceBorders) {
+        this.entranceBorders = entranceBorders;
+    }
+
+    public Set<CategoryElementDTO> getTransportVehicleTypes() {
+        return transportVehicleTypes;
+    }
+
+    public void setTransportVehicleTypes(Set<CategoryElementDTO> transportVehicleTypes) {
+        this.transportVehicleTypes = transportVehicleTypes;
     }
 
     public Set<ProductDTO> getProductInfos() {
@@ -502,6 +654,14 @@ public class OrderRegistrationInfoDTO implements Serializable {
 
     public void setProductInfos(Set<ProductDTO> productInfos) {
         this.productInfos = productInfos;
+    }
+
+    public Set<StringValueDTO> getCommissionTransactionNumbers() {
+        return commissionTransactionNumbers;
+    }
+
+    public void setCommissionTransactionNumbers(Set<StringValueDTO> commissionTransactionNumbers) {
+        this.commissionTransactionNumbers = commissionTransactionNumbers;
     }
 
     @Override
@@ -545,7 +705,8 @@ public class OrderRegistrationInfoDTO implements Serializable {
             ", performaExpiryDatePersian='" + getPerformaExpiryDatePersian() + "'" +
             ", infoSubmissionDate='" + getInfoSubmissionDate() + "'" +
             ", sellerName='" + getSellerName() + "'" +
-            ", beneficiaryCountry='" + getBeneficiaryCountry() + "'" +
+            ", beneficiaryCountryCode='" + getBeneficiaryCountryCode() + "'" +
+            ", producerCountriesCode='" + getProducerCountriesCode() + "'" +
             ", sourceCountry='" + getSourceCountry() + "'" +
             ", multipleTransportable='" + getMultipleTransportable() + "'" +
             ", deliveryTimeOfGoods='" + getDeliveryTimeOfGoods() + "'" +
@@ -575,8 +736,23 @@ public class OrderRegistrationInfoDTO implements Serializable {
             ", producerCountries='" + getProducerCountries() + "'" +
             ", excelFile='" + getExcelFile() + "'" +
             ", commissionTransactionNumber='" + getCommissionTransactionNumber() + "'" +
-            ", customs=" + getCustoms() +
+            ", orderRegType=" + getOrderRegType() +
+            ", requestType=" + getRequestType() +
+            ", importType=" + getImportType() +
+            ", operationType=" + getOperationType() +
+            ", currencyProvisionType=" + getCurrencyProvisionType() +
+            ", paymentTool=" + getPaymentTool() +
+            ", activityType=" + getActivityType() +
+            ", ownerType=" + getOwnerType() +
+            ", status=" + getStatus() +
+            ", externalCustomerType=" + getExternalCustomerType() +
+            ", transportType=" + getTransportType() +
+            ", destCoustomers=" + getDestCoustomers() +
+            ", cargoPlaceCustoms=" + getCargoPlaceCustoms() +
+            ", entranceBorders=" + getEntranceBorders() +
+            ", transportVehicleTypes=" + getTransportVehicleTypes() +
             ", productInfos=" + getProductInfos() +
+            ", commissionTransactionNumbers=" + getCommissionTransactionNumbers() +
             "}";
     }
 }

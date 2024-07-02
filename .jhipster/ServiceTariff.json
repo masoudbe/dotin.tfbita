@@ -15,15 +15,7 @@
     }
   ],
   "name": "ServiceTariff",
-  "relationships": [
-    {
-      "otherEntityName": "draft",
-      "otherEntityRelationshipName": "services",
-      "relationshipName": "draft",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"
 }

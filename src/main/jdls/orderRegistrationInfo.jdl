@@ -69,14 +69,14 @@ relationship ManyToOne {
           OrderRegistrationInfo{status} to CategoryElement
           OrderRegistrationInfo{externalCustomerType} to CategoryElement
           OrderRegistrationInfo{transportType} to TransportationType
+          OrderRegistrationInfo{destCoustomers} to Custom
+          OrderRegistrationInfo{cargoPlaceCustoms} to Custom
+          OrderRegistrationInfo{entranceBorders} to Custom
 }
 
 relationship ManyToMany {
       OrderRegistrationInfo{transportVehicleType} to CategoryElement
       OrderRegistrationInfo{productInfo} to Product
-      OrderRegistrationInfo{entranceBorders} to Custom
-      OrderRegistrationInfo{destCoustomers} to Custom
-      OrderRegistrationInfo{cargoPlaceCustoms} to Custom
       OrderRegistrationInfo{commissionTransactionNumber} to StringValue
 }
 

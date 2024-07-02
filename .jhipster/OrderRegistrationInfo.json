@@ -66,7 +66,11 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "beneficiaryCountry",
+      "fieldName": "beneficiaryCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "producerCountriesCode",
       "fieldType": "String"
     },
     {
@@ -190,41 +194,127 @@
   "name": "OrderRegistrationInfo",
   "relationships": [
     {
-      "otherEntityName": "licenceInfo",
-      "otherEntityRelationshipName": "licenceInfo",
-      "relationshipName": "licenceInfo",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "orderRegServ",
-      "otherEntityRelationshipName": "orderRegService",
-      "relationshipName": "orderRegServ",
+      "otherEntityName": "orderRegService",
+      "relationshipName": "serviceInfo",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "purchaseFromOtherResources",
-      "otherEntityRelationshipName": "purchaseFromOtherResources",
-      "relationshipName": "purchaseFromOtherResources",
+      "relationshipName": "purchaseFromOtherResourcesList",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "orderRegType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "requestType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "importType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "operationType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencyProvisionType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "paymentTool",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "activityType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "ownerType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "status",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "externalCustomerType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transportationType",
+      "relationshipName": "transportType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityName": "custom",
-      "otherEntityRelationshipName": "orderRegistrationInfo",
-      "relationshipName": "custom",
-      "relationshipSide": "right",
+      "relationshipName": "destCoustomers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "cargoPlaceCustoms",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "entranceBorders",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "transportVehicleType",
+      "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "product",
-      "otherEntityRelationshipName": "orderRegistrationInfo",
       "relationshipName": "productInfo",
-      "relationshipSide": "right",
+      "relationshipSide": "left",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "stringValue",
+      "relationshipName": "commissionTransactionNumber",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "licenceInfo",
+      "otherEntityRelationshipName": "orderRegistrationInfo",
+      "relationshipName": "licenceInfo",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

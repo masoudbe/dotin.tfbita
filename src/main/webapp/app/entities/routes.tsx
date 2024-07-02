@@ -24,6 +24,16 @@ import AuditCompanyInfo from './audit-company-info';
 import DraftExtend from './draft-extend';
 import DraftTax from './draft-tax';
 import Category from './category';
+import ProductType from './product-type';
+import AttributeValue from './attribute-value';
+import TypeAttribute from './type-attribute';
+import AttributeValueGroup from './attribute-value-group';
+import Attribute from './attribute';
+import OrderRegService from './order-reg-service';
+import ObjectiveCategory from './objective-category';
+import ObjectiveCategoryElement from './objective-category-element';
+import TransportationType from './transportation-type';
+import StringValue from './string-value';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -52,6 +62,16 @@ export default () => {
         <Route path="draft-extend/*" element={<DraftExtend />} />
         <Route path="draft-tax/*" element={<DraftTax />} />
         <Route path="category/*" element={<Category />} />
+        <Route path="product-type/*" element={<ProductType />} />
+        <Route path="attribute-value/*" element={<AttributeValue />} />
+        <Route path="type-attribute/*" element={<TypeAttribute />} />
+        <Route path="attribute-value-group/*" element={<AttributeValueGroup />} />
+        <Route path="attribute/*" element={<Attribute />} />
+        <Route path="order-reg-service/*" element={<OrderRegService />} />
+        <Route path="objective-category/*" element={<ObjectiveCategory />} />
+        <Route path="objective-category-element/*" element={<ObjectiveCategoryElement />} />
+        <Route path="transportation-type/*" element={<TransportationType />} />
+        <Route path="string-value/*" element={<StringValue />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

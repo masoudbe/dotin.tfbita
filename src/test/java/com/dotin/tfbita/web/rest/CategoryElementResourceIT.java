@@ -275,7 +275,7 @@ class CategoryElementResourceIT {
         CategoryElement partialUpdatedCategoryElement = new CategoryElement();
         partialUpdatedCategoryElement.setId(categoryElement.getId());
 
-        partialUpdatedCategoryElement.value(UPDATED_VALUE).categoryName(UPDATED_CATEGORY_NAME);
+        partialUpdatedCategoryElement.value(UPDATED_VALUE).code(UPDATED_CODE);
 
         restCategoryElementMockMvc
             .perform(

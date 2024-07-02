@@ -1,5 +1,6 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.PurchaseFromOtherResourcesTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,14 +25,38 @@ class PurchaseFromOtherResourcesTest {
     }
 
     @Test
-    void purchaseFromOtherResourcesTest() throws Exception {
+    void currencySupplierTest() throws Exception {
+        PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        purchaseFromOtherResources.setCurrencySupplier(categoryElementBack);
+        assertThat(purchaseFromOtherResources.getCurrencySupplier()).isEqualTo(categoryElementBack);
+
+        purchaseFromOtherResources.currencySupplier(null);
+        assertThat(purchaseFromOtherResources.getCurrencySupplier()).isNull();
+    }
+
+    @Test
+    void statusTest() throws Exception {
+        PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        purchaseFromOtherResources.setStatus(categoryElementBack);
+        assertThat(purchaseFromOtherResources.getStatus()).isEqualTo(categoryElementBack);
+
+        purchaseFromOtherResources.status(null);
+        assertThat(purchaseFromOtherResources.getStatus()).isNull();
+    }
+
+    @Test
+    void orderRegistrationInfoTest() throws Exception {
         PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
-        purchaseFromOtherResources.setPurchaseFromOtherResources(orderRegistrationInfoBack);
-        assertThat(purchaseFromOtherResources.getPurchaseFromOtherResources()).isEqualTo(orderRegistrationInfoBack);
+        purchaseFromOtherResources.setOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(purchaseFromOtherResources.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfoBack);
 
-        purchaseFromOtherResources.purchaseFromOtherResources(null);
-        assertThat(purchaseFromOtherResources.getPurchaseFromOtherResources()).isNull();
+        purchaseFromOtherResources.orderRegistrationInfo(null);
+        assertThat(purchaseFromOtherResources.getOrderRegistrationInfo()).isNull();
     }
 }

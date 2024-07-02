@@ -23,32 +23,7 @@
     }
   ],
   "name": "Custom",
-  "relationships": [
-    {
-      "options": {
-        "onDelete": "SET NULL",
-        "onUpdate": "CASCADE"
-      },
-      "otherEntityName": "draft",
-      "relationshipName": "loadSwitchPlace",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "orderRegistrationInfo",
-      "otherEntityRelationshipName": "custom",
-      "relationshipName": "orderRegistrationInfo",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "draft",
-      "otherEntityRelationshipName": "custom",
-      "relationshipName": "draft",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"
 }

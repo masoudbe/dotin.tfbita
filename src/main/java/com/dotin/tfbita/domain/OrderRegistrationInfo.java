@@ -68,8 +68,11 @@ public class OrderRegistrationInfo implements Serializable {
     @Column(name = "seller_name")
     private String sellerName;
 
-    @Column(name = "beneficiary_country")
-    private String beneficiaryCountry;
+    @Column(name = "beneficiary_country_code")
+    private String beneficiaryCountryCode;
+
+    @Column(name = "producer_countries_code")
+    private String producerCountriesCode;
 
     @Column(name = "source_country")
     private String sourceCountry;
@@ -162,25 +165,102 @@ public class OrderRegistrationInfo implements Serializable {
     @Column(name = "commission_transaction_number")
     private String commissionTransactionNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "licenceInfo")
-    @JsonIgnoreProperties(value = { "product", "orderRegServ", "licenceInfo" }, allowSetters = true)
-    private Set<LicenceInfo> licenceInfos = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
+    @JsonIgnoreProperties(value = { "serviceTariff", "orderRegistrationInfo" }, allowSetters = true)
+    private Set<OrderRegService> serviceInfos = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegService")
-    @JsonIgnoreProperties(value = { "orderRegService", "licenceInfos" }, allowSetters = true)
-    private Set<OrderRegServ> orderRegServs = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
+    @JsonIgnoreProperties(value = { "currencySupplier", "status", "orderRegistrationInfo" }, allowSetters = true)
+    private Set<PurchaseFromOtherResources> purchaseFromOtherResourcesLists = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "purchaseFromOtherResources")
-    @JsonIgnoreProperties(value = { "purchaseFromOtherResources" }, allowSetters = true)
-    private Set<PurchaseFromOtherResources> purchaseFromOtherResources = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement orderRegType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfos")
-    @JsonIgnoreProperties(value = { "loadSwitchPlace", "orderRegistrationInfos", "drafts" }, allowSetters = true)
-    private Set<Custom> customs = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement requestType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfos")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement importType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement operationType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement currencyProvisionType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement paymentTool;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement activityType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement ownerType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private CategoryElement externalCustomerType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private TransportationType transportType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private Custom destCoustomers;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private Custom cargoPlaceCustoms;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private Custom entranceBorders;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_order_registration_info__transport_vehicle_type",
+        joinColumns = @JoinColumn(name = "order_registration_info_id"),
+        inverseJoinColumns = @JoinColumn(name = "transport_vehicle_type_id")
+    )
+    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    private Set<CategoryElement> transportVehicleTypes = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_order_registration_info__product_info",
+        joinColumns = @JoinColumn(name = "order_registration_info_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_info_id")
+    )
+    @JsonIgnoreProperties(
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "draftProductInfos" },
+        allowSetters = true
+    )
     private Set<Product> productInfos = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_order_registration_info__commission_transaction_number",
+        joinColumns = @JoinColumn(name = "order_registration_info_id"),
+        inverseJoinColumns = @JoinColumn(name = "commission_transaction_number_id")
+    )
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos" }, allowSetters = true)
+    private Set<StringValue> commissionTransactionNumbers = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
+    @JsonIgnoreProperties(value = { "product", "service", "orderRegistrationInfo", "orderRegServ" }, allowSetters = true)
+    private Set<LicenceInfo> licenceInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -392,17 +472,30 @@ public class OrderRegistrationInfo implements Serializable {
         this.sellerName = sellerName;
     }
 
-    public String getBeneficiaryCountry() {
-        return this.beneficiaryCountry;
+    public String getBeneficiaryCountryCode() {
+        return this.beneficiaryCountryCode;
     }
 
-    public OrderRegistrationInfo beneficiaryCountry(String beneficiaryCountry) {
-        this.setBeneficiaryCountry(beneficiaryCountry);
+    public OrderRegistrationInfo beneficiaryCountryCode(String beneficiaryCountryCode) {
+        this.setBeneficiaryCountryCode(beneficiaryCountryCode);
         return this;
     }
 
-    public void setBeneficiaryCountry(String beneficiaryCountry) {
-        this.beneficiaryCountry = beneficiaryCountry;
+    public void setBeneficiaryCountryCode(String beneficiaryCountryCode) {
+        this.beneficiaryCountryCode = beneficiaryCountryCode;
+    }
+
+    public String getProducerCountriesCode() {
+        return this.producerCountriesCode;
+    }
+
+    public OrderRegistrationInfo producerCountriesCode(String producerCountriesCode) {
+        this.setProducerCountriesCode(producerCountriesCode);
+        return this;
+    }
+
+    public void setProducerCountriesCode(String producerCountriesCode) {
+        this.producerCountriesCode = producerCountriesCode;
     }
 
     public String getSourceCountry() {
@@ -795,16 +888,329 @@ public class OrderRegistrationInfo implements Serializable {
         this.commissionTransactionNumber = commissionTransactionNumber;
     }
 
+    public Set<OrderRegService> getServiceInfos() {
+        return this.serviceInfos;
+    }
+
+    public void setServiceInfos(Set<OrderRegService> orderRegServices) {
+        if (this.serviceInfos != null) {
+            this.serviceInfos.forEach(i -> i.setOrderRegistrationInfo(null));
+        }
+        if (orderRegServices != null) {
+            orderRegServices.forEach(i -> i.setOrderRegistrationInfo(this));
+        }
+        this.serviceInfos = orderRegServices;
+    }
+
+    public OrderRegistrationInfo serviceInfos(Set<OrderRegService> orderRegServices) {
+        this.setServiceInfos(orderRegServices);
+        return this;
+    }
+
+    public OrderRegistrationInfo addServiceInfo(OrderRegService orderRegService) {
+        this.serviceInfos.add(orderRegService);
+        orderRegService.setOrderRegistrationInfo(this);
+        return this;
+    }
+
+    public OrderRegistrationInfo removeServiceInfo(OrderRegService orderRegService) {
+        this.serviceInfos.remove(orderRegService);
+        orderRegService.setOrderRegistrationInfo(null);
+        return this;
+    }
+
+    public Set<PurchaseFromOtherResources> getPurchaseFromOtherResourcesLists() {
+        return this.purchaseFromOtherResourcesLists;
+    }
+
+    public void setPurchaseFromOtherResourcesLists(Set<PurchaseFromOtherResources> purchaseFromOtherResources) {
+        if (this.purchaseFromOtherResourcesLists != null) {
+            this.purchaseFromOtherResourcesLists.forEach(i -> i.setOrderRegistrationInfo(null));
+        }
+        if (purchaseFromOtherResources != null) {
+            purchaseFromOtherResources.forEach(i -> i.setOrderRegistrationInfo(this));
+        }
+        this.purchaseFromOtherResourcesLists = purchaseFromOtherResources;
+    }
+
+    public OrderRegistrationInfo purchaseFromOtherResourcesLists(Set<PurchaseFromOtherResources> purchaseFromOtherResources) {
+        this.setPurchaseFromOtherResourcesLists(purchaseFromOtherResources);
+        return this;
+    }
+
+    public OrderRegistrationInfo addPurchaseFromOtherResourcesList(PurchaseFromOtherResources purchaseFromOtherResources) {
+        this.purchaseFromOtherResourcesLists.add(purchaseFromOtherResources);
+        purchaseFromOtherResources.setOrderRegistrationInfo(this);
+        return this;
+    }
+
+    public OrderRegistrationInfo removePurchaseFromOtherResourcesList(PurchaseFromOtherResources purchaseFromOtherResources) {
+        this.purchaseFromOtherResourcesLists.remove(purchaseFromOtherResources);
+        purchaseFromOtherResources.setOrderRegistrationInfo(null);
+        return this;
+    }
+
+    public CategoryElement getOrderRegType() {
+        return this.orderRegType;
+    }
+
+    public void setOrderRegType(CategoryElement categoryElement) {
+        this.orderRegType = categoryElement;
+    }
+
+    public OrderRegistrationInfo orderRegType(CategoryElement categoryElement) {
+        this.setOrderRegType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getRequestType() {
+        return this.requestType;
+    }
+
+    public void setRequestType(CategoryElement categoryElement) {
+        this.requestType = categoryElement;
+    }
+
+    public OrderRegistrationInfo requestType(CategoryElement categoryElement) {
+        this.setRequestType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getImportType() {
+        return this.importType;
+    }
+
+    public void setImportType(CategoryElement categoryElement) {
+        this.importType = categoryElement;
+    }
+
+    public OrderRegistrationInfo importType(CategoryElement categoryElement) {
+        this.setImportType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getOperationType() {
+        return this.operationType;
+    }
+
+    public void setOperationType(CategoryElement categoryElement) {
+        this.operationType = categoryElement;
+    }
+
+    public OrderRegistrationInfo operationType(CategoryElement categoryElement) {
+        this.setOperationType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getCurrencyProvisionType() {
+        return this.currencyProvisionType;
+    }
+
+    public void setCurrencyProvisionType(CategoryElement categoryElement) {
+        this.currencyProvisionType = categoryElement;
+    }
+
+    public OrderRegistrationInfo currencyProvisionType(CategoryElement categoryElement) {
+        this.setCurrencyProvisionType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getPaymentTool() {
+        return this.paymentTool;
+    }
+
+    public void setPaymentTool(CategoryElement categoryElement) {
+        this.paymentTool = categoryElement;
+    }
+
+    public OrderRegistrationInfo paymentTool(CategoryElement categoryElement) {
+        this.setPaymentTool(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getActivityType() {
+        return this.activityType;
+    }
+
+    public void setActivityType(CategoryElement categoryElement) {
+        this.activityType = categoryElement;
+    }
+
+    public OrderRegistrationInfo activityType(CategoryElement categoryElement) {
+        this.setActivityType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getOwnerType() {
+        return this.ownerType;
+    }
+
+    public void setOwnerType(CategoryElement categoryElement) {
+        this.ownerType = categoryElement;
+    }
+
+    public OrderRegistrationInfo ownerType(CategoryElement categoryElement) {
+        this.setOwnerType(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(CategoryElement categoryElement) {
+        this.status = categoryElement;
+    }
+
+    public OrderRegistrationInfo status(CategoryElement categoryElement) {
+        this.setStatus(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getExternalCustomerType() {
+        return this.externalCustomerType;
+    }
+
+    public void setExternalCustomerType(CategoryElement categoryElement) {
+        this.externalCustomerType = categoryElement;
+    }
+
+    public OrderRegistrationInfo externalCustomerType(CategoryElement categoryElement) {
+        this.setExternalCustomerType(categoryElement);
+        return this;
+    }
+
+    public TransportationType getTransportType() {
+        return this.transportType;
+    }
+
+    public void setTransportType(TransportationType transportationType) {
+        this.transportType = transportationType;
+    }
+
+    public OrderRegistrationInfo transportType(TransportationType transportationType) {
+        this.setTransportType(transportationType);
+        return this;
+    }
+
+    public Custom getDestCoustomers() {
+        return this.destCoustomers;
+    }
+
+    public void setDestCoustomers(Custom custom) {
+        this.destCoustomers = custom;
+    }
+
+    public OrderRegistrationInfo destCoustomers(Custom custom) {
+        this.setDestCoustomers(custom);
+        return this;
+    }
+
+    public Custom getCargoPlaceCustoms() {
+        return this.cargoPlaceCustoms;
+    }
+
+    public void setCargoPlaceCustoms(Custom custom) {
+        this.cargoPlaceCustoms = custom;
+    }
+
+    public OrderRegistrationInfo cargoPlaceCustoms(Custom custom) {
+        this.setCargoPlaceCustoms(custom);
+        return this;
+    }
+
+    public Custom getEntranceBorders() {
+        return this.entranceBorders;
+    }
+
+    public void setEntranceBorders(Custom custom) {
+        this.entranceBorders = custom;
+    }
+
+    public OrderRegistrationInfo entranceBorders(Custom custom) {
+        this.setEntranceBorders(custom);
+        return this;
+    }
+
+    public Set<CategoryElement> getTransportVehicleTypes() {
+        return this.transportVehicleTypes;
+    }
+
+    public void setTransportVehicleTypes(Set<CategoryElement> categoryElements) {
+        this.transportVehicleTypes = categoryElements;
+    }
+
+    public OrderRegistrationInfo transportVehicleTypes(Set<CategoryElement> categoryElements) {
+        this.setTransportVehicleTypes(categoryElements);
+        return this;
+    }
+
+    public OrderRegistrationInfo addTransportVehicleType(CategoryElement categoryElement) {
+        this.transportVehicleTypes.add(categoryElement);
+        return this;
+    }
+
+    public OrderRegistrationInfo removeTransportVehicleType(CategoryElement categoryElement) {
+        this.transportVehicleTypes.remove(categoryElement);
+        return this;
+    }
+
+    public Set<Product> getProductInfos() {
+        return this.productInfos;
+    }
+
+    public void setProductInfos(Set<Product> products) {
+        this.productInfos = products;
+    }
+
+    public OrderRegistrationInfo productInfos(Set<Product> products) {
+        this.setProductInfos(products);
+        return this;
+    }
+
+    public OrderRegistrationInfo addProductInfo(Product product) {
+        this.productInfos.add(product);
+        return this;
+    }
+
+    public OrderRegistrationInfo removeProductInfo(Product product) {
+        this.productInfos.remove(product);
+        return this;
+    }
+
+    public Set<StringValue> getCommissionTransactionNumbers() {
+        return this.commissionTransactionNumbers;
+    }
+
+    public void setCommissionTransactionNumbers(Set<StringValue> stringValues) {
+        this.commissionTransactionNumbers = stringValues;
+    }
+
+    public OrderRegistrationInfo commissionTransactionNumbers(Set<StringValue> stringValues) {
+        this.setCommissionTransactionNumbers(stringValues);
+        return this;
+    }
+
+    public OrderRegistrationInfo addCommissionTransactionNumber(StringValue stringValue) {
+        this.commissionTransactionNumbers.add(stringValue);
+        return this;
+    }
+
+    public OrderRegistrationInfo removeCommissionTransactionNumber(StringValue stringValue) {
+        this.commissionTransactionNumbers.remove(stringValue);
+        return this;
+    }
+
     public Set<LicenceInfo> getLicenceInfos() {
         return this.licenceInfos;
     }
 
     public void setLicenceInfos(Set<LicenceInfo> licenceInfos) {
         if (this.licenceInfos != null) {
-            this.licenceInfos.forEach(i -> i.setLicenceInfo(null));
+            this.licenceInfos.forEach(i -> i.setOrderRegistrationInfo(null));
         }
         if (licenceInfos != null) {
-            licenceInfos.forEach(i -> i.setLicenceInfo(this));
+            licenceInfos.forEach(i -> i.setOrderRegistrationInfo(this));
         }
         this.licenceInfos = licenceInfos;
     }
@@ -816,137 +1222,13 @@ public class OrderRegistrationInfo implements Serializable {
 
     public OrderRegistrationInfo addLicenceInfo(LicenceInfo licenceInfo) {
         this.licenceInfos.add(licenceInfo);
-        licenceInfo.setLicenceInfo(this);
+        licenceInfo.setOrderRegistrationInfo(this);
         return this;
     }
 
     public OrderRegistrationInfo removeLicenceInfo(LicenceInfo licenceInfo) {
         this.licenceInfos.remove(licenceInfo);
-        licenceInfo.setLicenceInfo(null);
-        return this;
-    }
-
-    public Set<OrderRegServ> getOrderRegServs() {
-        return this.orderRegServs;
-    }
-
-    public void setOrderRegServs(Set<OrderRegServ> orderRegServs) {
-        if (this.orderRegServs != null) {
-            this.orderRegServs.forEach(i -> i.setOrderRegService(null));
-        }
-        if (orderRegServs != null) {
-            orderRegServs.forEach(i -> i.setOrderRegService(this));
-        }
-        this.orderRegServs = orderRegServs;
-    }
-
-    public OrderRegistrationInfo orderRegServs(Set<OrderRegServ> orderRegServs) {
-        this.setOrderRegServs(orderRegServs);
-        return this;
-    }
-
-    public OrderRegistrationInfo addOrderRegServ(OrderRegServ orderRegServ) {
-        this.orderRegServs.add(orderRegServ);
-        orderRegServ.setOrderRegService(this);
-        return this;
-    }
-
-    public OrderRegistrationInfo removeOrderRegServ(OrderRegServ orderRegServ) {
-        this.orderRegServs.remove(orderRegServ);
-        orderRegServ.setOrderRegService(null);
-        return this;
-    }
-
-    public Set<PurchaseFromOtherResources> getPurchaseFromOtherResources() {
-        return this.purchaseFromOtherResources;
-    }
-
-    public void setPurchaseFromOtherResources(Set<PurchaseFromOtherResources> purchaseFromOtherResources) {
-        if (this.purchaseFromOtherResources != null) {
-            this.purchaseFromOtherResources.forEach(i -> i.setPurchaseFromOtherResources(null));
-        }
-        if (purchaseFromOtherResources != null) {
-            purchaseFromOtherResources.forEach(i -> i.setPurchaseFromOtherResources(this));
-        }
-        this.purchaseFromOtherResources = purchaseFromOtherResources;
-    }
-
-    public OrderRegistrationInfo purchaseFromOtherResources(Set<PurchaseFromOtherResources> purchaseFromOtherResources) {
-        this.setPurchaseFromOtherResources(purchaseFromOtherResources);
-        return this;
-    }
-
-    public OrderRegistrationInfo addPurchaseFromOtherResources(PurchaseFromOtherResources purchaseFromOtherResources) {
-        this.purchaseFromOtherResources.add(purchaseFromOtherResources);
-        purchaseFromOtherResources.setPurchaseFromOtherResources(this);
-        return this;
-    }
-
-    public OrderRegistrationInfo removePurchaseFromOtherResources(PurchaseFromOtherResources purchaseFromOtherResources) {
-        this.purchaseFromOtherResources.remove(purchaseFromOtherResources);
-        purchaseFromOtherResources.setPurchaseFromOtherResources(null);
-        return this;
-    }
-
-    public Set<Custom> getCustoms() {
-        return this.customs;
-    }
-
-    public void setCustoms(Set<Custom> customs) {
-        if (this.customs != null) {
-            this.customs.forEach(i -> i.removeOrderRegistrationInfo(this));
-        }
-        if (customs != null) {
-            customs.forEach(i -> i.addOrderRegistrationInfo(this));
-        }
-        this.customs = customs;
-    }
-
-    public OrderRegistrationInfo customs(Set<Custom> customs) {
-        this.setCustoms(customs);
-        return this;
-    }
-
-    public OrderRegistrationInfo addCustom(Custom custom) {
-        this.customs.add(custom);
-        custom.getOrderRegistrationInfos().add(this);
-        return this;
-    }
-
-    public OrderRegistrationInfo removeCustom(Custom custom) {
-        this.customs.remove(custom);
-        custom.getOrderRegistrationInfos().remove(this);
-        return this;
-    }
-
-    public Set<Product> getProductInfos() {
-        return this.productInfos;
-    }
-
-    public void setProductInfos(Set<Product> products) {
-        if (this.productInfos != null) {
-            this.productInfos.forEach(i -> i.removeOrderRegistrationInfo(this));
-        }
-        if (products != null) {
-            products.forEach(i -> i.addOrderRegistrationInfo(this));
-        }
-        this.productInfos = products;
-    }
-
-    public OrderRegistrationInfo productInfos(Set<Product> products) {
-        this.setProductInfos(products);
-        return this;
-    }
-
-    public OrderRegistrationInfo addProductInfo(Product product) {
-        this.productInfos.add(product);
-        product.getOrderRegistrationInfos().add(this);
-        return this;
-    }
-
-    public OrderRegistrationInfo removeProductInfo(Product product) {
-        this.productInfos.remove(product);
-        product.getOrderRegistrationInfos().remove(this);
+        licenceInfo.setOrderRegistrationInfo(null);
         return this;
     }
 
@@ -989,7 +1271,8 @@ public class OrderRegistrationInfo implements Serializable {
             ", performaExpiryDatePersian='" + getPerformaExpiryDatePersian() + "'" +
             ", infoSubmissionDate='" + getInfoSubmissionDate() + "'" +
             ", sellerName='" + getSellerName() + "'" +
-            ", beneficiaryCountry='" + getBeneficiaryCountry() + "'" +
+            ", beneficiaryCountryCode='" + getBeneficiaryCountryCode() + "'" +
+            ", producerCountriesCode='" + getProducerCountriesCode() + "'" +
             ", sourceCountry='" + getSourceCountry() + "'" +
             ", multipleTransportable='" + getMultipleTransportable() + "'" +
             ", deliveryTimeOfGoods='" + getDeliveryTimeOfGoods() + "'" +

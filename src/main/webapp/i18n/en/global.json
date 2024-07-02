@@ -28,7 +28,17 @@
         "auditCompanyInfo": "Audit Company Info",
         "draftExtend": "Draft Extend",
         "draftTax": "Draft Tax",
-        "category": "Category"
+        "category": "Category",
+        "productType": "Product Type",
+        "attributeValue": "Attribute Value",
+        "typeAttribute": "Type Attribute",
+        "attributeValueGroup": "Attribute Value Group",
+        "attribute": "Attribute",
+        "orderRegService": "Order Reg Service",
+        "objectiveCategory": "Objective Category",
+        "objectiveCategoryElement": "Objective Category Element",
+        "transportationType": "Transportation Type",
+        "stringValue": "String Value"
       },
       "account": {
         "main": "Account",

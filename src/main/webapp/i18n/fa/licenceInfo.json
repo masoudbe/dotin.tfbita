@@ -25,8 +25,9 @@
       "havingService": "Having Service",
       "creditDate": "Credit Date",
       "product": "Product",
-      "orderRegServ": "Order Reg Serv",
-      "licenceInfo": "Licence Info"
+      "service": "Service",
+      "orderRegistrationInfo": "Order Registration Info",
+      "orderRegServ": "Order Reg Serv"
     }
   }
 }

@@ -1,3 +1,4 @@
+import { ICategoryElement } from 'app/shared/model/category-element.model';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 
 export interface IPurchaseFromOtherResources {
@@ -12,7 +13,9 @@ export interface IPurchaseFromOtherResources {
   description?: string | null;
   purchaseNumber?: string | null;
   purchaseCurrencyName?: string | null;
-  purchaseFromOtherResources?: IOrderRegistrationInfo | null;
+  currencySupplier?: ICategoryElement | null;
+  status?: ICategoryElement | null;
+  orderRegistrationInfo?: IOrderRegistrationInfo | null;
 }
 
 export const defaultValue: Readonly<IPurchaseFromOtherResources> = {};

@@ -49,9 +49,15 @@
   "name": "PurchaseFromOtherResources",
   "relationships": [
     {
-      "otherEntityName": "orderRegistrationInfo",
-      "relationshipName": "purchaseFromOtherResources",
-      "relationshipSide": "right",
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencySupplier",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "status",
+      "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }
   ],

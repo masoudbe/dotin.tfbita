@@ -18,8 +18,8 @@
   "relationships": [
     {
       "otherEntityName": "categoryElement",
-      "otherEntityRelationshipName": "categoryElement",
-      "relationshipName": "categoryElement",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "possibleValues",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     }

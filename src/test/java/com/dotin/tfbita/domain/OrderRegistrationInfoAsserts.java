@@ -78,7 +78,15 @@ public class OrderRegistrationInfoAsserts {
             )
             .satisfies(e -> assertThat(e.getInfoSubmissionDate()).as("check infoSubmissionDate").isEqualTo(actual.getInfoSubmissionDate()))
             .satisfies(e -> assertThat(e.getSellerName()).as("check sellerName").isEqualTo(actual.getSellerName()))
-            .satisfies(e -> assertThat(e.getBeneficiaryCountry()).as("check beneficiaryCountry").isEqualTo(actual.getBeneficiaryCountry()))
+            .satisfies(
+                e ->
+                    assertThat(e.getBeneficiaryCountryCode())
+                        .as("check beneficiaryCountryCode")
+                        .isEqualTo(actual.getBeneficiaryCountryCode())
+            )
+            .satisfies(
+                e -> assertThat(e.getProducerCountriesCode()).as("check producerCountriesCode").isEqualTo(actual.getProducerCountriesCode())
+            )
             .satisfies(e -> assertThat(e.getSourceCountry()).as("check sourceCountry").isEqualTo(actual.getSourceCountry()))
             .satisfies(
                 e -> assertThat(e.getMultipleTransportable()).as("check multipleTransportable").isEqualTo(actual.getMultipleTransportable())
@@ -168,7 +176,33 @@ public class OrderRegistrationInfoAsserts {
     ) {
         assertThat(expected)
             .as("Verify OrderRegistrationInfo relationships")
-            .satisfies(e -> assertThat(e.getCustoms()).as("check customs").isEqualTo(actual.getCustoms()))
-            .satisfies(e -> assertThat(e.getProductInfos()).as("check productInfos").isEqualTo(actual.getProductInfos()));
+            .satisfies(e -> assertThat(e.getOrderRegType()).as("check orderRegType").isEqualTo(actual.getOrderRegType()))
+            .satisfies(e -> assertThat(e.getRequestType()).as("check requestType").isEqualTo(actual.getRequestType()))
+            .satisfies(e -> assertThat(e.getImportType()).as("check importType").isEqualTo(actual.getImportType()))
+            .satisfies(e -> assertThat(e.getOperationType()).as("check operationType").isEqualTo(actual.getOperationType()))
+            .satisfies(
+                e -> assertThat(e.getCurrencyProvisionType()).as("check currencyProvisionType").isEqualTo(actual.getCurrencyProvisionType())
+            )
+            .satisfies(e -> assertThat(e.getPaymentTool()).as("check paymentTool").isEqualTo(actual.getPaymentTool()))
+            .satisfies(e -> assertThat(e.getActivityType()).as("check activityType").isEqualTo(actual.getActivityType()))
+            .satisfies(e -> assertThat(e.getOwnerType()).as("check ownerType").isEqualTo(actual.getOwnerType()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
+            .satisfies(
+                e -> assertThat(e.getExternalCustomerType()).as("check externalCustomerType").isEqualTo(actual.getExternalCustomerType())
+            )
+            .satisfies(e -> assertThat(e.getTransportType()).as("check transportType").isEqualTo(actual.getTransportType()))
+            .satisfies(e -> assertThat(e.getDestCoustomers()).as("check destCoustomers").isEqualTo(actual.getDestCoustomers()))
+            .satisfies(e -> assertThat(e.getCargoPlaceCustoms()).as("check cargoPlaceCustoms").isEqualTo(actual.getCargoPlaceCustoms()))
+            .satisfies(e -> assertThat(e.getEntranceBorders()).as("check entranceBorders").isEqualTo(actual.getEntranceBorders()))
+            .satisfies(
+                e -> assertThat(e.getTransportVehicleTypes()).as("check transportVehicleTypes").isEqualTo(actual.getTransportVehicleTypes())
+            )
+            .satisfies(e -> assertThat(e.getProductInfos()).as("check productInfos").isEqualTo(actual.getProductInfos()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCommissionTransactionNumbers())
+                        .as("check commissionTransactionNumbers")
+                        .isEqualTo(actual.getCommissionTransactionNumbers())
+            );
     }
 }

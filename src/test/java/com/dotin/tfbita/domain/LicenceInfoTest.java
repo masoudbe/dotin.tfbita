@@ -4,6 +4,7 @@ import static com.dotin.tfbita.domain.LicenceInfoTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegServTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.ProductTestSamples.*;
+import static com.dotin.tfbita.domain.ServiceTariffTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
@@ -38,6 +39,30 @@ class LicenceInfoTest {
     }
 
     @Test
+    void serviceTest() throws Exception {
+        LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
+        ServiceTariff serviceTariffBack = getServiceTariffRandomSampleGenerator();
+
+        licenceInfo.setService(serviceTariffBack);
+        assertThat(licenceInfo.getService()).isEqualTo(serviceTariffBack);
+
+        licenceInfo.service(null);
+        assertThat(licenceInfo.getService()).isNull();
+    }
+
+    @Test
+    void orderRegistrationInfoTest() throws Exception {
+        LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
+        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
+
+        licenceInfo.setOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(licenceInfo.getOrderRegistrationInfo()).isEqualTo(orderRegistrationInfoBack);
+
+        licenceInfo.orderRegistrationInfo(null);
+        assertThat(licenceInfo.getOrderRegistrationInfo()).isNull();
+    }
+
+    @Test
     void orderRegServTest() throws Exception {
         LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
         OrderRegServ orderRegServBack = getOrderRegServRandomSampleGenerator();
@@ -47,17 +72,5 @@ class LicenceInfoTest {
 
         licenceInfo.orderRegServ(null);
         assertThat(licenceInfo.getOrderRegServ()).isNull();
-    }
-
-    @Test
-    void licenceInfoTest() throws Exception {
-        LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
-        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
-
-        licenceInfo.setLicenceInfo(orderRegistrationInfoBack);
-        assertThat(licenceInfo.getLicenceInfo()).isEqualTo(orderRegistrationInfoBack);
-
-        licenceInfo.licenceInfo(null);
-        assertThat(licenceInfo.getLicenceInfo()).isNull();
     }
 }

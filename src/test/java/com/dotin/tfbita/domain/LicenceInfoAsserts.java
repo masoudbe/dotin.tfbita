@@ -67,7 +67,10 @@ public class LicenceInfoAsserts {
         assertThat(expected)
             .as("Verify LicenceInfo relationships")
             .satisfies(e -> assertThat(e.getProduct()).as("check product").isEqualTo(actual.getProduct()))
-            .satisfies(e -> assertThat(e.getOrderRegServ()).as("check orderRegServ").isEqualTo(actual.getOrderRegServ()))
-            .satisfies(e -> assertThat(e.getLicenceInfo()).as("check licenceInfo").isEqualTo(actual.getLicenceInfo()));
+            .satisfies(e -> assertThat(e.getService()).as("check service").isEqualTo(actual.getService()))
+            .satisfies(
+                e -> assertThat(e.getOrderRegistrationInfo()).as("check orderRegistrationInfo").isEqualTo(actual.getOrderRegistrationInfo())
+            )
+            .satisfies(e -> assertThat(e.getOrderRegServ()).as("check orderRegServ").isEqualTo(actual.getOrderRegServ()));
     }
 }

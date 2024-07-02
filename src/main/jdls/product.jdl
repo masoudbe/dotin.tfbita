@@ -33,13 +33,12 @@ entity Attribute {
 
 relationship OneToMany {
       Product{attributeValues} to AttributeValue
-      AttributeValueGroup{values} to AttributeValue
+      AttributeValueGroup{values} to AttributeValue{attributeValueGroup}
 }
 
 relationship ManyToOne {
-      Product{productType} to ProductType 
+      Product{productType} to ProductType
       AttributeValue{typeAttribute} to TypeAttribute
-      AttributeValue{attributeValueGroup} to AttributeValueGroup{values}
       TypeAttribute{attribute} to Attribute
       AttributeValueGroup{attribute} to Attribute
       Attribute{format} to CategoryElement

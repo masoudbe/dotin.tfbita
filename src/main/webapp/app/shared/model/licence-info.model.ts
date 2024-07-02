@@ -1,6 +1,7 @@
 import { IProduct } from 'app/shared/model/product.model';
-import { IOrderRegServ } from 'app/shared/model/order-reg-serv.model';
+import { IServiceTariff } from 'app/shared/model/service-tariff.model';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
+import { IOrderRegServ } from 'app/shared/model/order-reg-serv.model';
 
 export interface ILicenceInfo {
   id?: number;
@@ -11,8 +12,9 @@ export interface ILicenceInfo {
   havingService?: boolean | null;
   creditDate?: string | null;
   product?: IProduct | null;
+  service?: IServiceTariff | null;
+  orderRegistrationInfo?: IOrderRegistrationInfo | null;
   orderRegServ?: IOrderRegServ | null;
-  licenceInfo?: IOrderRegistrationInfo | null;
 }
 
 export const defaultValue: Readonly<ILicenceInfo> = {

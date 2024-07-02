@@ -1,5 +1,8 @@
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { ITransportationType } from 'app/shared/model/transportation-type.model';
 import { ICustom } from 'app/shared/model/custom.model';
 import { IProduct } from 'app/shared/model/product.model';
+import { IStringValue } from 'app/shared/model/string-value.model';
 
 export interface IOrderRegistrationInfo {
   id?: number;
@@ -18,7 +21,8 @@ export interface IOrderRegistrationInfo {
   performaExpiryDatePersian?: string | null;
   infoSubmissionDate?: string | null;
   sellerName?: string | null;
-  beneficiaryCountry?: string | null;
+  beneficiaryCountryCode?: string | null;
+  producerCountriesCode?: string | null;
   sourceCountry?: string | null;
   multipleTransportable?: boolean | null;
   deliveryTimeOfGoods?: string | null;
@@ -49,8 +53,23 @@ export interface IOrderRegistrationInfo {
   excelFileContentType?: string | null;
   excelFile?: string | null;
   commissionTransactionNumber?: string | null;
-  customs?: ICustom[] | null;
+  orderRegType?: ICategoryElement | null;
+  requestType?: ICategoryElement | null;
+  importType?: ICategoryElement | null;
+  operationType?: ICategoryElement | null;
+  currencyProvisionType?: ICategoryElement | null;
+  paymentTool?: ICategoryElement | null;
+  activityType?: ICategoryElement | null;
+  ownerType?: ICategoryElement | null;
+  status?: ICategoryElement | null;
+  externalCustomerType?: ICategoryElement | null;
+  transportType?: ITransportationType | null;
+  destCoustomers?: ICustom | null;
+  cargoPlaceCustoms?: ICustom | null;
+  entranceBorders?: ICustom | null;
+  transportVehicleTypes?: ICategoryElement[] | null;
   productInfos?: IProduct[] | null;
+  commissionTransactionNumbers?: IStringValue[] | null;
 }
 
 export const defaultValue: Readonly<IOrderRegistrationInfo> = {

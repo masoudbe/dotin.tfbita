@@ -1,0 +1,27 @@
+{
+  "tfbitaApp": {
+    "typeAttribute": {
+      "home": {
+        "title": "Type Attributes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Attribute",
+        "createOrEditLabel": "Create or edit a Type Attribute",
+        "notFound": "No Type Attributes found"
+      },
+      "created": "A new Type Attribute is created with identifier {{ param }}",
+      "updated": "A Type Attribute is updated with identifier {{ param }}",
+      "deleted": "A Type Attribute is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Attribute {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Attribute"
+      },
+      "id": "ID",
+      "necessary": "Necessary",
+      "isUnique": "Is Unique",
+      "attribute": "Attribute",
+      "productType": "Product Type"
+    }
+  }
+}

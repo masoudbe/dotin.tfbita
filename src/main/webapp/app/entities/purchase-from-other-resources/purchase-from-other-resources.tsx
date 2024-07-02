@@ -138,9 +138,14 @@ export const PurchaseFromOtherResources = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('purchaseCurrencyName')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.purchaseFromOtherResources.purchaseFromOtherResources">
-                    Purchase From Other Resources
-                  </Translate>{' '}
+                  <Translate contentKey="tfbitaApp.purchaseFromOtherResources.currencySupplier">Currency Supplier</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.purchaseFromOtherResources.status">Status</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.purchaseFromOtherResources.orderRegistrationInfo">Order Registration Info</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -165,9 +170,25 @@ export const PurchaseFromOtherResources = () => {
                   <td>{purchaseFromOtherResources.purchaseNumber}</td>
                   <td>{purchaseFromOtherResources.purchaseCurrencyName}</td>
                   <td>
-                    {purchaseFromOtherResources.purchaseFromOtherResources ? (
-                      <Link to={`/order-registration-info/${purchaseFromOtherResources.purchaseFromOtherResources.id}`}>
-                        {purchaseFromOtherResources.purchaseFromOtherResources.id}
+                    {purchaseFromOtherResources.currencySupplier ? (
+                      <Link to={`/category-element/${purchaseFromOtherResources.currencySupplier.id}`}>
+                        {purchaseFromOtherResources.currencySupplier.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {purchaseFromOtherResources.status ? (
+                      <Link to={`/category-element/${purchaseFromOtherResources.status.id}`}>{purchaseFromOtherResources.status.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {purchaseFromOtherResources.orderRegistrationInfo ? (
+                      <Link to={`/order-registration-info/${purchaseFromOtherResources.orderRegistrationInfo.id}`}>
+                        {purchaseFromOtherResources.orderRegistrationInfo.id}
                       </Link>
                     ) : (
                       ''

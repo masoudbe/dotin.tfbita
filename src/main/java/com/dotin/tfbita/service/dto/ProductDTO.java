@@ -19,11 +19,7 @@ public class ProductDTO implements Serializable {
 
     private String name;
 
-    private String description;
-
-    private String topicCode;
-
-    private String attributeValueGroupName;
+    private ProductTypeDTO productType;
 
     private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
 
@@ -63,28 +59,12 @@ public class ProductDTO implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public ProductTypeDTO getProductType() {
+        return productType;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTopicCode() {
-        return topicCode;
-    }
-
-    public void setTopicCode(String topicCode) {
-        this.topicCode = topicCode;
-    }
-
-    public String getAttributeValueGroupName() {
-        return attributeValueGroupName;
-    }
-
-    public void setAttributeValueGroupName(String attributeValueGroupName) {
-        this.attributeValueGroupName = attributeValueGroupName;
+    public void setProductType(ProductTypeDTO productType) {
+        this.productType = productType;
     }
 
     public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
@@ -140,9 +120,7 @@ public class ProductDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", modificationDate='" + getModificationDate() + "'" +
             ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", topicCode='" + getTopicCode() + "'" +
-            ", attributeValueGroupName='" + getAttributeValueGroupName() + "'" +
+            ", productType=" + getProductType() +
             ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             ", drafts=" + getDrafts() +
             ", draftProductInfos=" + getDraftProductInfos() +

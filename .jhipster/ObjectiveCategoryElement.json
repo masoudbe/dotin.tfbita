@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240702210519"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "entityClass",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "entityId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "ObjectiveCategoryElement",
+  "relationships": [
+    {
+      "otherEntityName": "objectiveCategory",
+      "otherEntityRelationshipName": "possibleValues",
+      "relationshipName": "objectiveCategory",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

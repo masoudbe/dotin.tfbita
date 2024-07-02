@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240702201114"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "necessary",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isUnique",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "TypeAttribute",
+  "relationships": [
+    {
+      "otherEntityName": "attribute",
+      "relationshipName": "attribute",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -39,19 +39,47 @@ public class LicenceInfo implements Serializable {
     private String creditDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "draftProductInfos" },
+        allowSetters = true
+    )
     private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private ServiceTariff service;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "serviceInfos",
+            "purchaseFromOtherResourcesLists",
+            "orderRegType",
+            "requestType",
+            "importType",
+            "operationType",
+            "currencyProvisionType",
+            "paymentTool",
+            "activityType",
+            "ownerType",
+            "status",
+            "externalCustomerType",
+            "transportType",
+            "destCoustomers",
+            "cargoPlaceCustoms",
+            "entranceBorders",
+            "transportVehicleTypes",
+            "productInfos",
+            "commissionTransactionNumbers",
+            "licenceInfos",
+        },
+        allowSetters = true
+    )
+    private OrderRegistrationInfo orderRegistrationInfo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "orderRegService", "licenceInfos" }, allowSetters = true)
     private OrderRegServ orderRegServ;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "licenceInfos", "orderRegServs", "purchaseFromOtherResources", "customs", "productInfos" },
-        allowSetters = true
-    )
-    private OrderRegistrationInfo licenceInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -159,6 +187,32 @@ public class LicenceInfo implements Serializable {
         return this;
     }
 
+    public ServiceTariff getService() {
+        return this.service;
+    }
+
+    public void setService(ServiceTariff serviceTariff) {
+        this.service = serviceTariff;
+    }
+
+    public LicenceInfo service(ServiceTariff serviceTariff) {
+        this.setService(serviceTariff);
+        return this;
+    }
+
+    public OrderRegistrationInfo getOrderRegistrationInfo() {
+        return this.orderRegistrationInfo;
+    }
+
+    public void setOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfo = orderRegistrationInfo;
+    }
+
+    public LicenceInfo orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.setOrderRegistrationInfo(orderRegistrationInfo);
+        return this;
+    }
+
     public OrderRegServ getOrderRegServ() {
         return this.orderRegServ;
     }
@@ -169,19 +223,6 @@ public class LicenceInfo implements Serializable {
 
     public LicenceInfo orderRegServ(OrderRegServ orderRegServ) {
         this.setOrderRegServ(orderRegServ);
-        return this;
-    }
-
-    public OrderRegistrationInfo getLicenceInfo() {
-        return this.licenceInfo;
-    }
-
-    public void setLicenceInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.licenceInfo = orderRegistrationInfo;
-    }
-
-    public LicenceInfo licenceInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.setLicenceInfo(orderRegistrationInfo);
         return this;
     }
 

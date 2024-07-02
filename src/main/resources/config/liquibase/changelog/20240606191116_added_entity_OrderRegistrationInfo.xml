@@ -59,7 +59,10 @@
             <column name="seller_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="beneficiary_country" type="varchar(255)">
+            <column name="beneficiary_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="producer_countries_code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="source_country" type="varchar(255)">
@@ -152,8 +155,86 @@
             <column name="commission_transaction_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="order_reg_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="request_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="import_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="operation_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_provision_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_tool_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="activity_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="owner_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="status_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="external_customer_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="transport_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="dest_coustomers_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="cargo_place_customs_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="entrance_borders_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240606191116-1-relations" author="jhipster">
+
+        <createTable tableName="rel_order_registration_info__transport_vehicle_type">
+            <column name="transport_vehicle_type_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_registration_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="order_registration_info_id, transport_vehicle_type_id" tableName="rel_order_registration_info__transport_vehicle_type"/>
+
+        <createTable tableName="rel_order_registration_info__product_info">
+            <column name="product_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_registration_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="order_registration_info_id, product_info_id" tableName="rel_order_registration_info__product_info"/>
+
+        <createTable tableName="rel_order_registration_info__commission_transaction_number">
+            <column name="commission_transaction_number_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_registration_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="order_registration_info_id, commission_transaction_number_id" tableName="rel_order_registration_info__commission_transaction_number"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -188,7 +269,8 @@
             <column name="performa_expiry_date_persian" type="string"/>
             <column name="info_submission_date" type="string"/>
             <column name="seller_name" type="string"/>
-            <column name="beneficiary_country" type="string"/>
+            <column name="beneficiary_country_code" type="string"/>
+            <column name="producer_countries_code" type="string"/>
             <column name="source_country" type="string"/>
             <column name="multiple_transportable" type="boolean"/>
             <column name="delivery_time_of_goods" type="string"/>

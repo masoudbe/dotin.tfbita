@@ -50,23 +50,9 @@ export const ProductDetail = () => {
           </dt>
           <dd>{productEntity.name}</dd>
           <dt>
-            <span id="description">
-              <Translate contentKey="tfbitaApp.product.description">Description</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.product.productType">Product Type</Translate>
           </dt>
-          <dd>{productEntity.description}</dd>
-          <dt>
-            <span id="topicCode">
-              <Translate contentKey="tfbitaApp.product.topicCode">Topic Code</Translate>
-            </span>
-          </dt>
-          <dd>{productEntity.topicCode}</dd>
-          <dt>
-            <span id="attributeValueGroupName">
-              <Translate contentKey="tfbitaApp.product.attributeValueGroupName">Attribute Value Group Name</Translate>
-            </span>
-          </dt>
-          <dd>{productEntity.attributeValueGroupName}</dd>
+          <dd>{productEntity.productType ? productEntity.productType.id : ''}</dd>
           <dt>
             <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>
           </dt>

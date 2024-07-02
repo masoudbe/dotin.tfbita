@@ -16,40 +16,20 @@
     {
       "fieldName": "name",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "description",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "topicCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "attributeValueGroupName",
-      "fieldType": "String"
     }
   ],
   "name": "Product",
   "relationships": [
     {
-      "otherEntityName": "orderRegistrationInfo",
-      "otherEntityRelationshipName": "productInfo",
-      "relationshipName": "orderRegistrationInfo",
+      "otherEntityName": "attributeValue",
+      "relationshipName": "attributeValues",
       "relationshipSide": "left",
-      "relationshipType": "many-to-many"
+      "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "draft",
-      "otherEntityRelationshipName": "products",
-      "relationshipName": "draft",
+      "otherEntityName": "productType",
+      "relationshipName": "productType",
       "relationshipSide": "left",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "draftReceipt",
-      "relationshipName": "draftProductInfos",
-      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],

@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240702201112"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "topicCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ProductType",
+  "relationships": [
+    {
+      "otherEntityName": "typeAttribute",
+      "relationshipName": "productTypeAttributes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

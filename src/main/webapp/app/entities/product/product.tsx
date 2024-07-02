@@ -97,17 +97,8 @@ export const Product = () => {
                 <th className="hand" onClick={sort('name')}>
                   <Translate contentKey="tfbitaApp.product.name">Name</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
-                <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="tfbitaApp.product.description">Description</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
-                </th>
-                <th className="hand" onClick={sort('topicCode')}>
-                  <Translate contentKey="tfbitaApp.product.topicCode">Topic Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('topicCode')} />
-                </th>
-                <th className="hand" onClick={sort('attributeValueGroupName')}>
-                  <Translate contentKey="tfbitaApp.product.attributeValueGroupName">Attribute Value Group Name</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('attributeValueGroupName')} />
+                <th>
+                  <Translate contentKey="tfbitaApp.product.productType">Product Type</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>{' '}
@@ -134,9 +125,7 @@ export const Product = () => {
                   <td>{product.code}</td>
                   <td>{product.modificationDate}</td>
                   <td>{product.name}</td>
-                  <td>{product.description}</td>
-                  <td>{product.topicCode}</td>
-                  <td>{product.attributeValueGroupName}</td>
+                  <td>{product.productType ? <Link to={`/product-type/${product.productType.id}`}>{product.productType.id}</Link> : ''}</td>
                   <td>
                     {product.orderRegistrationInfos
                       ? product.orderRegistrationInfos.map((val, j) => (

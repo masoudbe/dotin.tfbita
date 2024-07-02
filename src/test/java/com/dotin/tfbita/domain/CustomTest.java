@@ -2,7 +2,6 @@ package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.CustomTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
-import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
@@ -24,36 +23,6 @@ class CustomTest {
 
         custom2 = getCustomSample2();
         assertThat(custom1).isNotEqualTo(custom2);
-    }
-
-    @Test
-    void loadSwitchPlaceTest() throws Exception {
-        Custom custom = getCustomRandomSampleGenerator();
-        Draft draftBack = getDraftRandomSampleGenerator();
-
-        custom.setLoadSwitchPlace(draftBack);
-        assertThat(custom.getLoadSwitchPlace()).isEqualTo(draftBack);
-
-        custom.loadSwitchPlace(null);
-        assertThat(custom.getLoadSwitchPlace()).isNull();
-    }
-
-    @Test
-    void orderRegistrationInfoTest() throws Exception {
-        Custom custom = getCustomRandomSampleGenerator();
-        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
-
-        custom.addOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(custom.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-
-        custom.removeOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(custom.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-
-        custom.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
-        assertThat(custom.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-
-        custom.setOrderRegistrationInfos(new HashSet<>());
-        assertThat(custom.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
     }
 
     @Test

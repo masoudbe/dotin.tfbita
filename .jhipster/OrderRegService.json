@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240702210517"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currencyAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OrderRegService",
+  "relationships": [
+    {
+      "otherEntityName": "serviceTariff",
+      "relationshipName": "serviceTariff",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

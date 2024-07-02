@@ -32,7 +32,11 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
 
     private String purchaseCurrencyName;
 
-    private OrderRegistrationInfoDTO purchaseFromOtherResources;
+    private CategoryElementDTO currencySupplier;
+
+    private CategoryElementDTO status;
+
+    private OrderRegistrationInfoDTO orderRegistrationInfo;
 
     public Long getId() {
         return id;
@@ -122,12 +126,28 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
         this.purchaseCurrencyName = purchaseCurrencyName;
     }
 
-    public OrderRegistrationInfoDTO getPurchaseFromOtherResources() {
-        return purchaseFromOtherResources;
+    public CategoryElementDTO getCurrencySupplier() {
+        return currencySupplier;
     }
 
-    public void setPurchaseFromOtherResources(OrderRegistrationInfoDTO purchaseFromOtherResources) {
-        this.purchaseFromOtherResources = purchaseFromOtherResources;
+    public void setCurrencySupplier(CategoryElementDTO currencySupplier) {
+        this.currencySupplier = currencySupplier;
+    }
+
+    public CategoryElementDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(CategoryElementDTO status) {
+        this.status = status;
+    }
+
+    public OrderRegistrationInfoDTO getOrderRegistrationInfo() {
+        return orderRegistrationInfo;
+    }
+
+    public void setOrderRegistrationInfo(OrderRegistrationInfoDTO orderRegistrationInfo) {
+        this.orderRegistrationInfo = orderRegistrationInfo;
     }
 
     @Override
@@ -166,7 +186,9 @@ public class PurchaseFromOtherResourcesDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             ", purchaseNumber='" + getPurchaseNumber() + "'" +
             ", purchaseCurrencyName='" + getPurchaseCurrencyName() + "'" +
-            ", purchaseFromOtherResources=" + getPurchaseFromOtherResources() +
+            ", currencySupplier=" + getCurrencySupplier() +
+            ", status=" + getStatus() +
+            ", orderRegistrationInfo=" + getOrderRegistrationInfo() +
             "}";
     }
 }

@@ -25,9 +25,11 @@ public class LicenceInfoDTO implements Serializable {
 
     private ProductDTO product;
 
-    private OrderRegServDTO orderRegServ;
+    private ServiceTariffDTO service;
 
-    private OrderRegistrationInfoDTO licenceInfo;
+    private OrderRegistrationInfoDTO orderRegistrationInfo;
+
+    private OrderRegServDTO orderRegServ;
 
     public Long getId() {
         return id;
@@ -93,20 +95,28 @@ public class LicenceInfoDTO implements Serializable {
         this.product = product;
     }
 
+    public ServiceTariffDTO getService() {
+        return service;
+    }
+
+    public void setService(ServiceTariffDTO service) {
+        this.service = service;
+    }
+
+    public OrderRegistrationInfoDTO getOrderRegistrationInfo() {
+        return orderRegistrationInfo;
+    }
+
+    public void setOrderRegistrationInfo(OrderRegistrationInfoDTO orderRegistrationInfo) {
+        this.orderRegistrationInfo = orderRegistrationInfo;
+    }
+
     public OrderRegServDTO getOrderRegServ() {
         return orderRegServ;
     }
 
     public void setOrderRegServ(OrderRegServDTO orderRegServ) {
         this.orderRegServ = orderRegServ;
-    }
-
-    public OrderRegistrationInfoDTO getLicenceInfo() {
-        return licenceInfo;
-    }
-
-    public void setLicenceInfo(OrderRegistrationInfoDTO licenceInfo) {
-        this.licenceInfo = licenceInfo;
     }
 
     @Override
@@ -142,8 +152,9 @@ public class LicenceInfoDTO implements Serializable {
             ", havingService='" + getHavingService() + "'" +
             ", creditDate='" + getCreditDate() + "'" +
             ", product=" + getProduct() +
+            ", service=" + getService() +
+            ", orderRegistrationInfo=" + getOrderRegistrationInfo() +
             ", orderRegServ=" + getOrderRegServ() +
-            ", licenceInfo=" + getLicenceInfo() +
             "}";
     }
 }

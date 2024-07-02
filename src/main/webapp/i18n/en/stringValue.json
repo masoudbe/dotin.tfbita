@@ -1,0 +1,25 @@
+{
+  "tfbitaApp": {
+    "stringValue": {
+      "home": {
+        "title": "String Values",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new String Value",
+        "createOrEditLabel": "Create or edit a String Value",
+        "notFound": "No String Values found"
+      },
+      "created": "A new String Value is created with identifier {{ param }}",
+      "updated": "A String Value is updated with identifier {{ param }}",
+      "deleted": "A String Value is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete String Value {{ id }}?"
+      },
+      "detail": {
+        "title": "String Value"
+      },
+      "id": "ID",
+      "value": "Value",
+      "orderRegistrationInfo": "Order Registration Info"
+    }
+  }
+}

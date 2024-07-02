@@ -49,15 +49,7 @@ public class ProductAsserts {
             .as("Verify Product relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
             .satisfies(e -> assertThat(e.getModificationDate()).as("check modificationDate").isEqualTo(actual.getModificationDate()))
-            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
-            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
-            .satisfies(e -> assertThat(e.getTopicCode()).as("check topicCode").isEqualTo(actual.getTopicCode()))
-            .satisfies(
-                e ->
-                    assertThat(e.getAttributeValueGroupName())
-                        .as("check attributeValueGroupName")
-                        .isEqualTo(actual.getAttributeValueGroupName())
-            );
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()));
     }
 
     /**
@@ -69,6 +61,7 @@ public class ProductAsserts {
     public static void assertProductUpdatableRelationshipsEquals(Product expected, Product actual) {
         assertThat(expected)
             .as("Verify Product relationships")
+            .satisfies(e -> assertThat(e.getProductType()).as("check productType").isEqualTo(actual.getProductType()))
             .satisfies(
                 e ->
                     assertThat(e.getOrderRegistrationInfos())

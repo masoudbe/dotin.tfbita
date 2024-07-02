@@ -10,18 +10,11 @@
     -->
     <changeSet id="20240606191120-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="rel_product__order_registration_info"
-                                 constraintName="fk_rel_product__order_registration_info__product_id"
+        <addForeignKeyConstraint baseColumnNames="product_type_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product__product_type_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="product"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
-                                 baseTableName="rel_product__order_registration_info"
-                                 constraintName="fk_rel_product__order_registrat__order_registration_info_0b_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="order_registration_info"
+                                 referencedTableName="product_type"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="product_id"

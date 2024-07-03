@@ -1,0 +1,47 @@
+
+entity DocumentTransaction {
+	currencyExchangeCode String
+    transactionCode String
+}
+
+entity DraftReceiptDocumentTransactionContainer {
+	receiveReceiptCommission Boolean
+}
+
+entity DraftDocumentTransactionContainer {
+}
+
+relationship ManyToOne {
+    DraftReceiptDocumentTransactionContainer{receiptIssueDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{freightLetterStampCostDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{deliverDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledDeliver} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledReceiptIssue} to DocumentTransaction
+	DraftReceiptDocumentTransactionContainer{receiptCommissionDocumentTransactions} to DocumentTransaction
+    DraftDocumentTransactionContainer{issueCommissionDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{paymentDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{settleDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{settleExcessDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{commissionDeleteDraftDocumentTransaction} to DocumentTransaction
+	DraftDocumentTransactionContainer{commissionDraftExtendDocumentTransaction} to DocumentTransaction
+}
+
+
+relationship OneToMany {
+
+	   DraftDocumentTransactionContainer{receipts} to DraftReceiptDocumentTransactionContainer
+       DraftDocumentTransactionContainer{otherDocumentTransactions} to DocumentTransaction
+       DraftDocumentTransactionContainer{canceledJustificationDocumentTransactions} to DocumentTransaction
+       DraftDocumentTransactionContainer{justificationDocumentTransactions} to DocumentTransaction
+       DraftDocumentTransactionContainer{receivedCommisions} to DocumentTransaction
+       DraftDocumentTransactionContainer{canceledDocumentTransactions} to DocumentTransaction
+       DraftDocumentTransactionContainer{returnedDefaultCurrencyCostsDocumentTransactions} to DocumentTransaction
+       DraftDocumentTransactionContainer{defaultCurrencyCostsDocumentTransactions} to DocumentTransaction
+}
+
+
+
+
+
+use paginate,serviceImpl,mapstruct,serviceClass for *
+

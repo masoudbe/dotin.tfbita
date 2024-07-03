@@ -1,0 +1,161 @@
+Subject: [PATCH] TF-20823
+
+خطا بروز برخی مشکلات در قسمت تائید والور حواله 2316275150 ثبت سفارش
+---
+Index: subsystem/lc/src/main/resources/resources/situations/lc/dms/provision/currency/create-currency-provision.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/subsystem/lc/src/main/resources/resources/situations/lc/dms/provision/currency/create-currency-provision.xml b/subsystem/lc/src/main/resources/resources/situations/lc/dms/provision/currency/create-currency-provision.xml
+--- a/subsystem/lc/src/main/resources/resources/situations/lc/dms/provision/currency/create-currency-provision.xml	(revision ddee661dca161e279908a53dc2dcc5bb0ee78ae4)
++++ b/subsystem/lc/src/main/resources/resources/situations/lc/dms/provision/currency/create-currency-provision.xml	(date 1719831931852)
+@@ -158,6 +158,7 @@
+                         </bean>
+                         <collection type="java.util.ArrayList" name="requestRegistrationData">
+                             <bean type="ir.dotin.lc.business.dms.CurrencyProvisionReqRegDataVO">
++                                <primitive type="String" reqParam="dealNumber" valueRequired="false"/>
+                                 <primitive type="String" reqParam="requestSerial" valueRequired="false"/>
+                                 <primitive type="java.math.BigDecimal" reqParam="requestAmount" name="amount" valueRequired="false"/>
+                             </bean>
+Index: model/src/main/resources/change/ddl/lc-ddl.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/src/main/resources/change/ddl/lc-ddl.sql b/model/src/main/resources/change/ddl/lc-ddl.sql
+--- a/model/src/main/resources/change/ddl/lc-ddl.sql	(revision ddee661dca161e279908a53dc2dcc5bb0ee78ae4)
++++ b/model/src/main/resources/change/ddl/lc-ddl.sql	(date 1719834100028)
+@@ -3925,4 +3925,10 @@
+ --Responsible name = a.fardi
+ ALTER TABLE t_draft
+     ADD C_ISWITHOUTPAYMENT  NUMBER(1);
++--**********************************************************************************************************************
++-- Responsible name = m.behnoud
++
++ALTER TABLE T_CURRENCYPROVISIONREQREGD
++    ADD (c_dealNumber VARCHAR2(255 CHAR));
++
+ --**********************************************************************************************************************
+\ No newline at end of file
+Index: subsystem/lc/src/main/webapp/jsps/lc/dms/provision/currency/create-update-view-currency-provision.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/subsystem/lc/src/main/webapp/jsps/lc/dms/provision/currency/create-update-view-currency-provision.jsp b/subsystem/lc/src/main/webapp/jsps/lc/dms/provision/currency/create-update-view-currency-provision.jsp
+--- a/subsystem/lc/src/main/webapp/jsps/lc/dms/provision/currency/create-update-view-currency-provision.jsp	(revision ddee661dca161e279908a53dc2dcc5bb0ee78ae4)
++++ b/subsystem/lc/src/main/webapp/jsps/lc/dms/provision/currency/create-update-view-currency-provision.jsp	(date 1719833766188)
+@@ -531,6 +531,7 @@
+         }
+         function addRequestsValueInputs() {
+             var requestSerials = myResultFrame.document.getElementsByName('serial');
++            var dealNumbers = myResultFrame.document.getElementsByName('dealNumber');
+             var requests = myResultFrame.document.getElementsByName('requests');
+             var requestAmounts = myResultFrame.document.getElementsByName('requestedAmount');
+             var prevSerials = document.getElementsByName('requestSerial');
+@@ -541,6 +542,14 @@
+             }
+             for (var rowIndex = 0; rowIndex < requests.length; rowIndex++) {
+                 if (requests[rowIndex].checked) {
++                    if(dealNumbers[rowIndex] !== undefined) {
++                        var dealNumber = document.createElement("input");
++                        dealNumber.type = "hidden";
++                        dealNumber.name = "dealNumber";
++                        dealNumber.value = dealNumbers[rowIndex].value;
++                        document.forms[0].appendChild(dealNumber);
++                    }
++
+                     var requestSerial = document.createElement("input");
+                     requestSerial.type = "hidden";
+                     requestSerial.name = "requestSerial";
+Index: model/src/main/java/com/fanap/domain/lc/dms/CurrencyProvisionReqRegData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/src/main/java/com/fanap/domain/lc/dms/CurrencyProvisionReqRegData.java b/model/src/main/java/com/fanap/domain/lc/dms/CurrencyProvisionReqRegData.java
+--- a/model/src/main/java/com/fanap/domain/lc/dms/CurrencyProvisionReqRegData.java	(revision ddee661dca161e279908a53dc2dcc5bb0ee78ae4)
++++ b/model/src/main/java/com/fanap/domain/lc/dms/CurrencyProvisionReqRegData.java	(date 1719827952836)
+@@ -15,6 +15,8 @@
+     private BigDecimal commissionPercentage;
+     private BigDecimal payCurrencyAmount;
+     private BigDecimal purchaseRate;
++    private String dealNumber;
++
+     private String requestSerial;
+     private BigDecimal saleRate;
+ 
+@@ -40,7 +42,6 @@
+         this.commissionPercentage = commissionPercentage;
+     }
+ 
+-    
+     @Column(name="c_payCurrencyAmount", precision=38, scale=4)
+     public BigDecimal getPayCurrencyAmount() {
+         return this.payCurrencyAmount;
+@@ -60,6 +61,14 @@
+         this.purchaseRate = purchaseRate;
+     }
+ 
++    @Column(name="c_dealNumber")
++    public String getDealNumber() {
++        return dealNumber;
++    }
++
++    public void setDealNumber(String dealNumber) {
++        this.dealNumber = dealNumber;
++    }
+     
+     @Column(name="c_requestSerial")
+     public String getRequestSerial() {
+@@ -79,7 +88,6 @@
+     public void setSaleRate(BigDecimal saleRate) {
+         this.saleRate = saleRate;
+     }
+-
+ }
+ 
+ 
+Index: subsystem/lc/src/main/java/ir/dotin/lc/business/dms/CurrencyProvisionReqRegDataVO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/subsystem/lc/src/main/java/ir/dotin/lc/business/dms/CurrencyProvisionReqRegDataVO.java b/subsystem/lc/src/main/java/ir/dotin/lc/business/dms/CurrencyProvisionReqRegDataVO.java
+--- a/subsystem/lc/src/main/java/ir/dotin/lc/business/dms/CurrencyProvisionReqRegDataVO.java	(revision ddee661dca161e279908a53dc2dcc5bb0ee78ae4)
++++ b/subsystem/lc/src/main/java/ir/dotin/lc/business/dms/CurrencyProvisionReqRegDataVO.java	(date 1719828221064)
+@@ -10,6 +10,8 @@
+     private BigDecimal amount;
+     private BigDecimal saleRate;
+     private BigDecimal purchaseRate;
++    private String dealNumber;
++
+     private String requestSerial;
+     private BigDecimal commissionPercentage;
+     private Long id;
+@@ -54,6 +56,16 @@
+         this.purchaseRate = purchaseRate;
+     }
+ 
++
++
++    public String getDealNumber() {
++        return dealNumber;
++    }
++
++    public void setDealNumber(String dealNumber) {
++        this.dealNumber = dealNumber;
++    }
++
+     public String getRequestSerial() {
+         return requestSerial;
+     }
+@@ -91,6 +103,7 @@
+         currencyProvisionReqRegData.setCommissionPercentage(this.getCommissionPercentage());
+         currencyProvisionReqRegData.setPayCurrencyAmount(this.getPayCurrencyAmount());
+         currencyProvisionReqRegData.setPurchaseRate(this.getPurchaseRate());
++        currencyProvisionReqRegData.setDealNumber(this.getDealNumber());
+         currencyProvisionReqRegData.setRequestSerial(this.getRequestSerial());
+         currencyProvisionReqRegData.setSaleRate(this.getSaleRate());
+         return currencyProvisionReqRegData;

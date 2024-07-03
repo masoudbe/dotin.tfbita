@@ -1,0 +1,83 @@
+
+entity DraftReceipt  {
+    comment String
+    customerDeliverDate String
+    date String
+    deleteDate String
+    deliverDate String
+    deliverDuration Integer
+    delivered Boolean
+    documentTransactionEffectiveDate String
+    freightLetterDate String
+    freightLetterNumber String
+    freightLetterStampCost BigDecimal
+    issueDate String
+    issueDocument Boolean
+    productAmount BigDecimal
+    receiptAmount BigDecimal
+    receiptDate String
+    row Integer
+    serial String
+    transportRow String
+    usable Boolean
+    netWeight BigDecimal
+    grossWeight BigDecimal
+    totalNetWeight BigDecimal
+    totalGrossWeight BigDecimal
+    letterNumberTazirat String
+    letterDateTazirat String
+    fobAmount BigDecimal
+    shippingFare BigDecimal
+    inspectionCost BigDecimal
+    discount BigDecimal
+    deadlineSubmitDocumentDate String
+    currencyProvisionFile AnyBlob
+    isMigrational Boolean
+	otherCost BigDecimal
+}
+
+entity PaymentCurrencyRateType {
+    description String
+}
+
+entity PaymentItemType {
+    description String
+}
+
+entity DraftProductInfo {
+	productAmount String
+    productDimension String
+}
+
+entity DocumentTransaction {
+    currencyExchangeCode String
+    transactionCode String
+}
+
+entity DraftReceiptDocumentTransactionContainer {
+    receiveReceiptCommission Boolean
+}
+
+relationship ManyToOne {
+    DraftReceipt{productDimension} to CategoryElement 
+    DraftReceipt{stateOfDocuments} to CategoryElement
+    DraftReceipt{currencyProvisionFileType} to CategoryElement
+    DraftReceipt{paymentCurrencyRateType} to PaymentCurrencyRateType
+    DraftReceipt{paymentItem} to PaymentItemType
+    DraftProductInfo{product} to Product
+    DraftReceiptDocumentTransactionContainer{receiptIssueDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{freightLetterStampCostDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{deliverDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledDeliver} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledReceiptIssue} to DocumentTransaction
+    DraftReceipt{documentTransactionContainer} to DraftReceiptDocumentTransactionContainer
+}
+
+relationship OneToMany {
+    DraftReceipt{draftProductInfos} to DraftProductInfo 
+}
+
+relationship ManyToMany {
+    DraftReceiptDocumentTransactionContainer{receiptCommissionDocumentTransactions} to DocumentTransaction 
+}
+use paginate,serviceImpl,mapstruct,serviceClass for *

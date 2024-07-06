@@ -1,7 +1,6 @@
 package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.AuditCompanyInfoTestSamples.*;
-import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
@@ -21,17 +20,5 @@ class AuditCompanyInfoTest {
 
         auditCompanyInfo2 = getAuditCompanyInfoSample2();
         assertThat(auditCompanyInfo1).isNotEqualTo(auditCompanyInfo2);
-    }
-
-    @Test
-    void auditCompanyInfoTest() throws Exception {
-        AuditCompanyInfo auditCompanyInfo = getAuditCompanyInfoRandomSampleGenerator();
-        Draft draftBack = getDraftRandomSampleGenerator();
-
-        auditCompanyInfo.setAuditCompanyInfo(draftBack);
-        assertThat(auditCompanyInfo.getAuditCompanyInfo()).isEqualTo(draftBack);
-
-        auditCompanyInfo.auditCompanyInfo(null);
-        assertThat(auditCompanyInfo.getAuditCompanyInfo()).isNull();
     }
 }

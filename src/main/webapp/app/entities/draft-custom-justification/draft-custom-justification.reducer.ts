@@ -18,10 +18,14 @@ const apiUrl = 'api/draft-custom-justifications';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draftCustomJustification/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraftCustomJustification[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draftCustomJustification/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraftCustomJustification[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draftCustomJustification/fetch_entity',

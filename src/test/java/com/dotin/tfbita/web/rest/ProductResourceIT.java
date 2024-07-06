@@ -4,30 +4,23 @@ import static com.dotin.tfbita.domain.ProductAsserts.*;
 import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.Product;
 import com.dotin.tfbita.repository.ProductRepository;
-import com.dotin.tfbita.service.ProductService;
 import com.dotin.tfbita.service.dto.ProductDTO;
 import com.dotin.tfbita.service.mapper.ProductMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ProductResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ProductResourceIT {
@@ -63,14 +55,8 @@ class ProductResourceIT {
     @Autowired
     private ProductRepository productRepository;
 
-    @Mock
-    private ProductRepository productRepositoryMock;
-
     @Autowired
     private ProductMapper productMapper;
-
-    @Mock
-    private ProductService productServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -79,6 +65,8 @@ class ProductResourceIT {
     private MockMvc restProductMockMvc;
 
     private Product product;
+
+    private Product insertedProduct;
 
     /**
      * Create an entity for this test.
@@ -107,6 +95,14 @@ class ProductResourceIT {
         product = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedProduct != null) {
+            productRepository.delete(insertedProduct);
+            insertedProduct = null;
+        }
+    }
+
     @Test
     @Transactional
     void createProduct() throws Exception {
@@ -127,6 +123,8 @@ class ProductResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedProduct = productMapper.toEntity(returnedProductDTO);
         assertProductUpdatableFieldsEquals(returnedProduct, getPersistedProduct(returnedProduct));
+
+        insertedProduct = returnedProduct;
     }
 
     @Test
@@ -151,7 +149,7 @@ class ProductResourceIT {
     @Transactional
     void getAllProducts() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         // Get all the productList
         restProductMockMvc
@@ -164,28 +162,11 @@ class ProductResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 
-    @SuppressWarnings({ "unchecked" })
-    void getAllProductsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(productServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProductMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(productServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllProductsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(productServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProductMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(productRepositoryMock, times(1)).findAll(any(Pageable.class));
-    }
-
     @Test
     @Transactional
     void getProduct() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         // Get the product
         restProductMockMvc
@@ -209,7 +190,7 @@ class ProductResourceIT {
     @Transactional
     void putExistingProduct() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -295,7 +276,7 @@ class ProductResourceIT {
     @Transactional
     void partialUpdateProductWithPatch() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -303,7 +284,7 @@ class ProductResourceIT {
         Product partialUpdatedProduct = new Product();
         partialUpdatedProduct.setId(product.getId());
 
-        partialUpdatedProduct.code(UPDATED_CODE).modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
+        partialUpdatedProduct.code(UPDATED_CODE);
 
         restProductMockMvc
             .perform(
@@ -323,7 +304,7 @@ class ProductResourceIT {
     @Transactional
     void fullUpdateProductWithPatch() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -413,7 +394,7 @@ class ProductResourceIT {
     @Transactional
     void deleteProduct() throws Exception {
         // Initialize the database
-        productRepository.saveAndFlush(product);
+        insertedProduct = productRepository.saveAndFlush(product);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

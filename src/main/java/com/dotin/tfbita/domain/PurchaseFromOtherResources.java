@@ -52,11 +52,11 @@ public class PurchaseFromOtherResources implements Serializable {
     private String purchaseCurrencyName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement currencySupplier;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,11 +74,11 @@ public class PurchaseFromOtherResources implements Serializable {
             "ownerType",
             "status",
             "externalCustomerType",
+            "transportVehicleType",
             "transportType",
             "destCoustomers",
             "cargoPlaceCustoms",
             "entranceBorders",
-            "transportVehicleTypes",
             "productInfos",
             "commissionTransactionNumbers",
             "licenceInfos",

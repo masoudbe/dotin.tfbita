@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,8 @@ class DraftStatusInfoResourceIT {
 
     private DraftStatusInfo draftStatusInfo;
 
+    private DraftStatusInfo insertedDraftStatusInfo;
+
     /**
      * Create an entity for this test.
      *
@@ -130,6 +133,14 @@ class DraftStatusInfoResourceIT {
         draftStatusInfo = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftStatusInfo != null) {
+            draftStatusInfoRepository.delete(insertedDraftStatusInfo);
+            insertedDraftStatusInfo = null;
+        }
+    }
+
     @Test
     @Transactional
     void createDraftStatusInfo() throws Exception {
@@ -150,6 +161,8 @@ class DraftStatusInfoResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftStatusInfo = draftStatusInfoMapper.toEntity(returnedDraftStatusInfoDTO);
         assertDraftStatusInfoUpdatableFieldsEquals(returnedDraftStatusInfo, getPersistedDraftStatusInfo(returnedDraftStatusInfo));
+
+        insertedDraftStatusInfo = returnedDraftStatusInfo;
     }
 
     @Test
@@ -174,7 +187,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void getAllDraftStatusInfos() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         // Get all the draftStatusInfoList
         restDraftStatusInfoMockMvc
@@ -197,7 +210,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void getDraftStatusInfo() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         // Get the draftStatusInfo
         restDraftStatusInfoMockMvc
@@ -227,7 +240,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void putExistingDraftStatusInfo() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -326,7 +339,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void partialUpdateDraftStatusInfoWithPatch() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -335,9 +348,10 @@ class DraftStatusInfoResourceIT {
         partialUpdatedDraftStatusInfo.setId(draftStatusInfo.getId());
 
         partialUpdatedDraftStatusInfo
-            .approved(UPDATED_APPROVED)
-            .insuranceCostPaid(UPDATED_INSURANCE_COST_PAID)
-            .remainAmount(UPDATED_REMAIN_AMOUNT)
+            .draftRequestAccepted(UPDATED_DRAFT_REQUEST_ACCEPTED)
+            .issued(UPDATED_ISSUED)
+            .otherCostsPaid(UPDATED_OTHER_COSTS_PAID)
+            .postSwiftCostPaied(UPDATED_POST_SWIFT_COST_PAIED)
             .stampCostPaid(UPDATED_STAMP_COST_PAID);
 
         restDraftStatusInfoMockMvc
@@ -361,7 +375,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void fullUpdateDraftStatusInfoWithPatch() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -463,7 +477,7 @@ class DraftStatusInfoResourceIT {
     @Transactional
     void deleteDraftStatusInfo() throws Exception {
         // Initialize the database
-        draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
+        insertedDraftStatusInfo = draftStatusInfoRepository.saveAndFlush(draftStatusInfo);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

@@ -11,7 +11,7 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface DraftUsedAssuranceMapper extends EntityMapper<DraftUsedAssuranceDTO, DraftUsedAssurance> {
-    @Mapping(target = "usedAssurances", source = "usedAssurances", qualifiedByName = "draftId")
+    @Mapping(target = "draft", source = "draft", qualifiedByName = "draftId")
     DraftUsedAssuranceDTO toDto(DraftUsedAssurance s);
 
     @Named("draftId")

@@ -39,26 +39,55 @@ public class DraftFactor implements Serializable {
     @Column(name = "serial")
     private String serial;
 
-    @Column(name = "currency_name")
-    private String currencyName;
+    @Column(name = "currency_code")
+    private String currencyCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
-    private Draft draftFactors;
+    private Draft draft;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -153,29 +182,29 @@ public class DraftFactor implements Serializable {
         this.serial = serial;
     }
 
-    public String getCurrencyName() {
-        return this.currencyName;
+    public String getCurrencyCode() {
+        return this.currencyCode;
     }
 
-    public DraftFactor currencyName(String currencyName) {
-        this.setCurrencyName(currencyName);
+    public DraftFactor currencyCode(String currencyCode) {
+        this.setCurrencyCode(currencyCode);
         return this;
     }
 
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
-    public Draft getDraftFactors() {
-        return this.draftFactors;
+    public Draft getDraft() {
+        return this.draft;
     }
 
-    public void setDraftFactors(Draft draft) {
-        this.draftFactors = draft;
+    public void setDraft(Draft draft) {
+        this.draft = draft;
     }
 
-    public DraftFactor draftFactors(Draft draft) {
-        this.setDraftFactors(draft);
+    public DraftFactor draft(Draft draft) {
+        this.setDraft(draft);
         return this;
     }
 
@@ -209,7 +238,7 @@ public class DraftFactor implements Serializable {
             ", factorDate='" + getFactorDate() + "'" +
             ", issueDate='" + getIssueDate() + "'" +
             ", serial='" + getSerial() + "'" +
-            ", currencyName='" + getCurrencyName() + "'" +
+            ", currencyCode='" + getCurrencyCode() + "'" +
             "}";
     }
 }

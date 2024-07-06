@@ -1,5 +1,6 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.DocumentTransactionTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTaxTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,14 +25,38 @@ class DraftTaxTest {
     }
 
     @Test
-    void taxesTest() throws Exception {
+    void documentTransactionTest() {
+        DraftTax draftTax = getDraftTaxRandomSampleGenerator();
+        DocumentTransaction documentTransactionBack = getDocumentTransactionRandomSampleGenerator();
+
+        draftTax.setDocumentTransaction(documentTransactionBack);
+        assertThat(draftTax.getDocumentTransaction()).isEqualTo(documentTransactionBack);
+
+        draftTax.documentTransaction(null);
+        assertThat(draftTax.getDocumentTransaction()).isNull();
+    }
+
+    @Test
+    void returnDocumentTransactionTest() {
+        DraftTax draftTax = getDraftTaxRandomSampleGenerator();
+        DocumentTransaction documentTransactionBack = getDocumentTransactionRandomSampleGenerator();
+
+        draftTax.setReturnDocumentTransaction(documentTransactionBack);
+        assertThat(draftTax.getReturnDocumentTransaction()).isEqualTo(documentTransactionBack);
+
+        draftTax.returnDocumentTransaction(null);
+        assertThat(draftTax.getReturnDocumentTransaction()).isNull();
+    }
+
+    @Test
+    void draftTest() {
         DraftTax draftTax = getDraftTaxRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftTax.setTaxes(draftBack);
-        assertThat(draftTax.getTaxes()).isEqualTo(draftBack);
+        draftTax.setDraft(draftBack);
+        assertThat(draftTax.getDraft()).isEqualTo(draftBack);
 
-        draftTax.taxes(null);
-        assertThat(draftTax.getTaxes()).isNull();
+        draftTax.draft(null);
+        assertThat(draftTax.getDraft()).isNull();
     }
 }

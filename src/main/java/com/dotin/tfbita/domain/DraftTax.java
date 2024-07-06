@@ -52,29 +52,84 @@ public class DraftTax implements Serializable {
     @Column(name = "main_account_rate", precision = 21, scale = 2)
     private BigDecimal mainAccountRate;
 
-    @Column(name = "document_transaction_number")
-    private String documentTransactionNumber;
-
-    @Column(name = "return_document_transaction_number")
-    private String returnDocumentTransactionNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "otherDocumentTransactionsContainer",
+            "canceledJustificationDocumentContainer",
+            "justificationDocumentTransactionsContainer",
+            "receivedCommisionsContainer",
+            "canceledDocumentTransactionsContainer",
+            "returnedDefaultCurrencyCostsContainer",
+            "defaultCurrencyCostsDocumentContainer",
+            "customJustifications",
+        },
+        allowSetters = true
+    )
+    private DocumentTransaction documentTransaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
+            "otherDocumentTransactionsContainer",
+            "canceledJustificationDocumentContainer",
+            "justificationDocumentTransactionsContainer",
+            "receivedCommisionsContainer",
+            "canceledDocumentTransactionsContainer",
+            "returnedDefaultCurrencyCostsContainer",
+            "defaultCurrencyCostsDocumentContainer",
+            "customJustifications",
         },
         allowSetters = true
     )
-    private Draft taxes;
+    private DocumentTransaction returnDocumentTransaction;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "receipts",
+            "taxes",
+            "extensions",
+            "draftFactors",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
+            "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
+        },
+        allowSetters = true
+    )
+    private Draft draft;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -221,42 +276,42 @@ public class DraftTax implements Serializable {
         this.mainAccountRate = mainAccountRate;
     }
 
-    public String getDocumentTransactionNumber() {
-        return this.documentTransactionNumber;
+    public DocumentTransaction getDocumentTransaction() {
+        return this.documentTransaction;
     }
 
-    public DraftTax documentTransactionNumber(String documentTransactionNumber) {
-        this.setDocumentTransactionNumber(documentTransactionNumber);
+    public void setDocumentTransaction(DocumentTransaction documentTransaction) {
+        this.documentTransaction = documentTransaction;
+    }
+
+    public DraftTax documentTransaction(DocumentTransaction documentTransaction) {
+        this.setDocumentTransaction(documentTransaction);
         return this;
     }
 
-    public void setDocumentTransactionNumber(String documentTransactionNumber) {
-        this.documentTransactionNumber = documentTransactionNumber;
+    public DocumentTransaction getReturnDocumentTransaction() {
+        return this.returnDocumentTransaction;
     }
 
-    public String getReturnDocumentTransactionNumber() {
-        return this.returnDocumentTransactionNumber;
+    public void setReturnDocumentTransaction(DocumentTransaction documentTransaction) {
+        this.returnDocumentTransaction = documentTransaction;
     }
 
-    public DraftTax returnDocumentTransactionNumber(String returnDocumentTransactionNumber) {
-        this.setReturnDocumentTransactionNumber(returnDocumentTransactionNumber);
+    public DraftTax returnDocumentTransaction(DocumentTransaction documentTransaction) {
+        this.setReturnDocumentTransaction(documentTransaction);
         return this;
     }
 
-    public void setReturnDocumentTransactionNumber(String returnDocumentTransactionNumber) {
-        this.returnDocumentTransactionNumber = returnDocumentTransactionNumber;
+    public Draft getDraft() {
+        return this.draft;
     }
 
-    public Draft getTaxes() {
-        return this.taxes;
+    public void setDraft(Draft draft) {
+        this.draft = draft;
     }
 
-    public void setTaxes(Draft draft) {
-        this.taxes = draft;
-    }
-
-    public DraftTax taxes(Draft draft) {
-        this.setTaxes(draft);
+    public DraftTax draft(Draft draft) {
+        this.setDraft(draft);
         return this;
     }
 
@@ -294,8 +349,6 @@ public class DraftTax implements Serializable {
             ", returnTaxesAmount='" + getReturnTaxesAmount() + "'" +
             ", orderRegRate=" + getOrderRegRate() +
             ", mainAccountRate=" + getMainAccountRate() +
-            ", documentTransactionNumber='" + getDocumentTransactionNumber() + "'" +
-            ", returnDocumentTransactionNumber='" + getReturnDocumentTransactionNumber() + "'" +
             "}";
     }
 }

@@ -1,10 +1,18 @@
 package com.dotin.tfbita.domain;
 
-import static com.dotin.tfbita.domain.DraftTestSamples.*;
+import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
+import static com.dotin.tfbita.domain.CreditTypeConditionInfoTestSamples.*;
+import static com.dotin.tfbita.domain.DraftRequestTypeTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTypeAccountInfoTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTypeTestSamples.*;
+import static com.dotin.tfbita.domain.DraftTypeTopicInfoTestSamples.*;
+import static com.dotin.tfbita.domain.ObjectiveCategoryElementTestSamples.*;
+import static com.dotin.tfbita.domain.StringValueTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class DraftTypeTest {
@@ -24,14 +32,116 @@ class DraftTypeTest {
     }
 
     @Test
-    void draftTypeTest() throws Exception {
+    void typeTest() {
         DraftType draftType = getDraftTypeRandomSampleGenerator();
-        Draft draftBack = getDraftRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
-        draftType.setDraftType(draftBack);
-        assertThat(draftType.getDraftType()).isEqualTo(draftBack);
+        draftType.setType(categoryElementBack);
+        assertThat(draftType.getType()).isEqualTo(categoryElementBack);
 
-        draftType.draftType(null);
-        assertThat(draftType.getDraftType()).isNull();
+        draftType.type(null);
+        assertThat(draftType.getType()).isNull();
+    }
+
+    @Test
+    void secondaryTypeTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        draftType.setSecondaryType(categoryElementBack);
+        assertThat(draftType.getSecondaryType()).isEqualTo(categoryElementBack);
+
+        draftType.secondaryType(null);
+        assertThat(draftType.getSecondaryType()).isNull();
+    }
+
+    @Test
+    void divisionTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        draftType.setDivision(categoryElementBack);
+        assertThat(draftType.getDivision()).isEqualTo(categoryElementBack);
+
+        draftType.division(null);
+        assertThat(draftType.getDivision()).isNull();
+    }
+
+    @Test
+    void topicInfoTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        DraftTypeTopicInfo draftTypeTopicInfoBack = getDraftTypeTopicInfoRandomSampleGenerator();
+
+        draftType.setTopicInfo(draftTypeTopicInfoBack);
+        assertThat(draftType.getTopicInfo()).isEqualTo(draftTypeTopicInfoBack);
+
+        draftType.topicInfo(null);
+        assertThat(draftType.getTopicInfo()).isNull();
+    }
+
+    @Test
+    void conditionInfoTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        CreditTypeConditionInfo creditTypeConditionInfoBack = getCreditTypeConditionInfoRandomSampleGenerator();
+
+        draftType.setConditionInfo(creditTypeConditionInfoBack);
+        assertThat(draftType.getConditionInfo()).isEqualTo(creditTypeConditionInfoBack);
+
+        draftType.conditionInfo(null);
+        assertThat(draftType.getConditionInfo()).isNull();
+    }
+
+    @Test
+    void accountInfoTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        DraftTypeAccountInfo draftTypeAccountInfoBack = getDraftTypeAccountInfoRandomSampleGenerator();
+
+        draftType.setAccountInfo(draftTypeAccountInfoBack);
+        assertThat(draftType.getAccountInfo()).isEqualTo(draftTypeAccountInfoBack);
+
+        draftType.accountInfo(null);
+        assertThat(draftType.getAccountInfo()).isNull();
+    }
+
+    @Test
+    void requestTypeTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        DraftRequestType draftRequestTypeBack = getDraftRequestTypeRandomSampleGenerator();
+
+        draftType.setRequestType(draftRequestTypeBack);
+        assertThat(draftType.getRequestType()).isEqualTo(draftRequestTypeBack);
+
+        draftType.requestType(null);
+        assertThat(draftType.getRequestType()).isNull();
+    }
+
+    @Test
+    void acceptableProductTypesTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        ObjectiveCategoryElement objectiveCategoryElementBack = getObjectiveCategoryElementRandomSampleGenerator();
+
+        draftType.setAcceptableProductTypes(objectiveCategoryElementBack);
+        assertThat(draftType.getAcceptableProductTypes()).isEqualTo(objectiveCategoryElementBack);
+
+        draftType.acceptableProductTypes(null);
+        assertThat(draftType.getAcceptableProductTypes()).isNull();
+    }
+
+    @Test
+    void userGroupsTest() {
+        DraftType draftType = getDraftTypeRandomSampleGenerator();
+        StringValue stringValueBack = getStringValueRandomSampleGenerator();
+
+        draftType.addUserGroups(stringValueBack);
+        assertThat(draftType.getUserGroups()).containsOnly(stringValueBack);
+
+        draftType.removeUserGroups(stringValueBack);
+        assertThat(draftType.getUserGroups()).doesNotContain(stringValueBack);
+
+        draftType.userGroups(new HashSet<>(Set.of(stringValueBack)));
+        assertThat(draftType.getUserGroups()).containsOnly(stringValueBack);
+
+        draftType.setUserGroups(new HashSet<>());
+        assertThat(draftType.getUserGroups()).doesNotContain(stringValueBack);
     }
 }

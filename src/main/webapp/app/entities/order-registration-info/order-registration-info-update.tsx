@@ -109,11 +109,11 @@ export const OrderRegistrationInfoUpdate = () => {
       ownerType: categoryElements.find(it => it.id.toString() === values.ownerType?.toString()),
       status: categoryElements.find(it => it.id.toString() === values.status?.toString()),
       externalCustomerType: categoryElements.find(it => it.id.toString() === values.externalCustomerType?.toString()),
+      transportVehicleType: categoryElements.find(it => it.id.toString() === values.transportVehicleType?.toString()),
       transportType: transportationTypes.find(it => it.id.toString() === values.transportType?.toString()),
       destCoustomers: customs.find(it => it.id.toString() === values.destCoustomers?.toString()),
       cargoPlaceCustoms: customs.find(it => it.id.toString() === values.cargoPlaceCustoms?.toString()),
       entranceBorders: customs.find(it => it.id.toString() === values.entranceBorders?.toString()),
-      transportVehicleTypes: mapIdList(values.transportVehicleTypes),
       productInfos: mapIdList(values.productInfos),
       commissionTransactionNumbers: mapIdList(values.commissionTransactionNumbers),
     };
@@ -140,11 +140,11 @@ export const OrderRegistrationInfoUpdate = () => {
           ownerType: orderRegistrationInfoEntity?.ownerType?.id,
           status: orderRegistrationInfoEntity?.status?.id,
           externalCustomerType: orderRegistrationInfoEntity?.externalCustomerType?.id,
+          transportVehicleType: orderRegistrationInfoEntity?.transportVehicleType?.id,
           transportType: orderRegistrationInfoEntity?.transportType?.id,
           destCoustomers: orderRegistrationInfoEntity?.destCoustomers?.id,
           cargoPlaceCustoms: orderRegistrationInfoEntity?.cargoPlaceCustoms?.id,
           entranceBorders: orderRegistrationInfoEntity?.entranceBorders?.id,
-          transportVehicleTypes: orderRegistrationInfoEntity?.transportVehicleTypes?.map(e => e.id.toString()),
           productInfos: orderRegistrationInfoEntity?.productInfos?.map(e => e.id.toString()),
           commissionTransactionNumbers: orderRegistrationInfoEntity?.commissionTransactionNumbers?.map(e => e.id.toString()),
         };
@@ -669,6 +669,22 @@ export const OrderRegistrationInfoUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
+                id="order-registration-info-transportVehicleType"
+                name="transportVehicleType"
+                data-cy="transportVehicleType"
+                label={translate('tfbitaApp.orderRegistrationInfo.transportVehicleType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
                 id="order-registration-info-transportType"
                 name="transportType"
                 data-cy="transportType"
@@ -726,23 +742,6 @@ export const OrderRegistrationInfoUpdate = () => {
                 <option value="" key="0" />
                 {customs
                   ? customs.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                label={translate('tfbitaApp.orderRegistrationInfo.transportVehicleType')}
-                id="order-registration-info-transportVehicleType"
-                data-cy="transportVehicleType"
-                type="select"
-                multiple
-                name="transportVehicleTypes"
-              >
-                <option value="" key="0" />
-                {categoryElements
-                  ? categoryElements.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

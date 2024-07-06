@@ -1,8 +1,8 @@
 package com.dotin.tfbita.service.mapper;
 
-import com.dotin.tfbita.domain.Draft;
+import com.dotin.tfbita.domain.CategoryElement;
 import com.dotin.tfbita.domain.DraftStatusInfo;
-import com.dotin.tfbita.service.dto.DraftDTO;
+import com.dotin.tfbita.service.dto.CategoryElementDTO;
 import com.dotin.tfbita.service.dto.DraftStatusInfoDTO;
 import org.mapstruct.*;
 
@@ -11,11 +11,11 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface DraftStatusInfoMapper extends EntityMapper<DraftStatusInfoDTO, DraftStatusInfo> {
-    @Mapping(target = "statusInfo", source = "statusInfo", qualifiedByName = "draftId")
+    @Mapping(target = "status", source = "status", qualifiedByName = "categoryElementId")
     DraftStatusInfoDTO toDto(DraftStatusInfo s);
 
-    @Named("draftId")
+    @Named("categoryElementId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    DraftDTO toDtoDraftId(Draft draft);
+    CategoryElementDTO toDtoCategoryElementId(CategoryElement categoryElement);
 }

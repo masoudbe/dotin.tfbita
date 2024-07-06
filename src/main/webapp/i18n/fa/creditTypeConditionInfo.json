@@ -1,0 +1,33 @@
+{
+  "tfbitaApp": {
+    "creditTypeConditionInfo": {
+      "home": {
+        "title": "Credit Type Condition Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Credit Type Condition Info",
+        "createOrEditLabel": "Create or edit a Credit Type Condition Info",
+        "notFound": "No Credit Type Condition Infos found"
+      },
+      "created": "A new Credit Type Condition Info is created with identifier {{ param }}",
+      "updated": "A Credit Type Condition Info is updated with identifier {{ param }}",
+      "deleted": "A Credit Type Condition Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Credit Type Condition Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Credit Type Condition Info"
+      },
+      "id": "ID",
+      "durationFrom": "Duration From",
+      "durationTo": "Duration To",
+      "priceFrom": "Price From",
+      "priceTo": "Price To",
+      "justificationDisciplinaryTopic": "Justification Disciplinary Topic",
+      "openDraftDisciplinaryTopic": "Open Draft Disciplinary Topic",
+      "otherCostsTopic": "Other Costs Topic",
+      "postTelegraphSwiftCostsTopic": "Post Telegraph Swift Costs Topic",
+      "conditions": "Conditions",
+      "defaultCondition": "Default Condition"
+    }
+  }
+}

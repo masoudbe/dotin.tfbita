@@ -29,7 +29,7 @@ public class Category implements Serializable {
     private String code;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private Set<CategoryElement> possibleValues = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

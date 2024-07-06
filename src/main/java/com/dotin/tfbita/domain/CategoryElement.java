@@ -3,8 +3,6 @@ package com.dotin.tfbita.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A CategoryElement.
@@ -22,8 +20,8 @@ public class CategoryElement implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "val")
+    private String val;
 
     @Column(name = "category_name")
     private String categoryName;
@@ -34,34 +32,6 @@ public class CategoryElement implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "possibleValues" }, allowSetters = true)
     private Category category;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "transportVehicleTypes")
-    @JsonIgnoreProperties(
-        value = {
-            "serviceInfos",
-            "purchaseFromOtherResourcesLists",
-            "orderRegType",
-            "requestType",
-            "importType",
-            "operationType",
-            "currencyProvisionType",
-            "paymentTool",
-            "activityType",
-            "ownerType",
-            "status",
-            "externalCustomerType",
-            "transportType",
-            "destCoustomers",
-            "cargoPlaceCustoms",
-            "entranceBorders",
-            "transportVehicleTypes",
-            "productInfos",
-            "commissionTransactionNumbers",
-            "licenceInfos",
-        },
-        allowSetters = true
-    )
-    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -78,17 +48,17 @@ public class CategoryElement implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return this.value;
+    public String getVal() {
+        return this.val;
     }
 
-    public CategoryElement value(String value) {
-        this.setValue(value);
+    public CategoryElement val(String val) {
+        this.setVal(val);
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public String getCategoryName() {
@@ -130,37 +100,6 @@ public class CategoryElement implements Serializable {
         return this;
     }
 
-    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
-        return this.orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        if (this.orderRegistrationInfos != null) {
-            this.orderRegistrationInfos.forEach(i -> i.removeTransportVehicleType(this));
-        }
-        if (orderRegistrationInfos != null) {
-            orderRegistrationInfos.forEach(i -> i.addTransportVehicleType(this));
-        }
-        this.orderRegistrationInfos = orderRegistrationInfos;
-    }
-
-    public CategoryElement orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        this.setOrderRegistrationInfos(orderRegistrationInfos);
-        return this;
-    }
-
-    public CategoryElement addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.add(orderRegistrationInfo);
-        orderRegistrationInfo.getTransportVehicleTypes().add(this);
-        return this;
-    }
-
-    public CategoryElement removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.remove(orderRegistrationInfo);
-        orderRegistrationInfo.getTransportVehicleTypes().remove(this);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -185,7 +124,7 @@ public class CategoryElement implements Serializable {
     public String toString() {
         return "CategoryElement{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", val='" + getVal() + "'" +
             ", categoryName='" + getCategoryName() + "'" +
             ", code='" + getCode() + "'" +
             "}";

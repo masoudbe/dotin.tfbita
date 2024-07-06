@@ -157,13 +157,9 @@ export const AuditCompanyInfo = () => {
                   <Translate contentKey="tfbitaApp.auditCompanyInfo.unit">Unit</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('unit')} />
                 </th>
-                <th className="hand" onClick={sort('city')}>
-                  <Translate contentKey="tfbitaApp.auditCompanyInfo.city">City</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('city')} />
-                </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.auditCompanyInfo.auditCompanyInfo">Audit Company Info</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('cityCode')}>
+                  <Translate contentKey="tfbitaApp.auditCompanyInfo.cityCode">City Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cityCode')} />
                 </th>
                 <th />
               </tr>
@@ -192,14 +188,7 @@ export const AuditCompanyInfo = () => {
                   <td>{auditCompanyInfo.theSideStreet}</td>
                   <td>{auditCompanyInfo.title}</td>
                   <td>{auditCompanyInfo.unit}</td>
-                  <td>{auditCompanyInfo.city}</td>
-                  <td>
-                    {auditCompanyInfo.auditCompanyInfo ? (
-                      <Link to={`/draft/${auditCompanyInfo.auditCompanyInfo.id}`}>{auditCompanyInfo.auditCompanyInfo.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+                  <td>{auditCompanyInfo.cityCode}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button

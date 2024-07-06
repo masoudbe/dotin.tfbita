@@ -86,18 +86,6 @@ public class DraftTaxAsserts {
                         .as("check mainAccountRate")
                         .usingComparator(bigDecimalCompareTo)
                         .isEqualTo(actual.getMainAccountRate())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getDocumentTransactionNumber())
-                        .as("check documentTransactionNumber")
-                        .isEqualTo(actual.getDocumentTransactionNumber())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getReturnDocumentTransactionNumber())
-                        .as("check returnDocumentTransactionNumber")
-                        .isEqualTo(actual.getReturnDocumentTransactionNumber())
             );
     }
 
@@ -110,6 +98,15 @@ public class DraftTaxAsserts {
     public static void assertDraftTaxUpdatableRelationshipsEquals(DraftTax expected, DraftTax actual) {
         assertThat(expected)
             .as("Verify DraftTax relationships")
-            .satisfies(e -> assertThat(e.getTaxes()).as("check taxes").isEqualTo(actual.getTaxes()));
+            .satisfies(
+                e -> assertThat(e.getDocumentTransaction()).as("check documentTransaction").isEqualTo(actual.getDocumentTransaction())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getReturnDocumentTransaction())
+                        .as("check returnDocumentTransaction")
+                        .isEqualTo(actual.getReturnDocumentTransaction())
+            )
+            .satisfies(e -> assertThat(e.getDraft()).as("check draft").isEqualTo(actual.getDraft()));
     }
 }

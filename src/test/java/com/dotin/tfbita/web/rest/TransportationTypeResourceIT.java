@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,8 @@ class TransportationTypeResourceIT {
 
     private TransportationType transportationType;
 
+    private TransportationType insertedTransportationType;
+
     /**
      * Create an entity for this test.
      *
@@ -98,6 +101,14 @@ class TransportationTypeResourceIT {
         transportationType = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedTransportationType != null) {
+            transportationTypeRepository.delete(insertedTransportationType);
+            insertedTransportationType = null;
+        }
+    }
+
     @Test
     @Transactional
     void createTransportationType() throws Exception {
@@ -121,6 +132,8 @@ class TransportationTypeResourceIT {
             returnedTransportationType,
             getPersistedTransportationType(returnedTransportationType)
         );
+
+        insertedTransportationType = returnedTransportationType;
     }
 
     @Test
@@ -145,7 +158,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void getAllTransportationTypes() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         // Get all the transportationTypeList
         restTransportationTypeMockMvc
@@ -162,7 +175,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void getTransportationType() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         // Get the transportationType
         restTransportationTypeMockMvc
@@ -186,7 +199,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void putExistingTransportationType() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -276,7 +289,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void partialUpdateTransportationTypeWithPatch() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -307,7 +320,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void fullUpdateTransportationTypeWithPatch() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -400,7 +413,7 @@ class TransportationTypeResourceIT {
     @Transactional
     void deleteTransportationType() throws Exception {
         // Initialize the database
-        transportationTypeRepository.saveAndFlush(transportationType);
+        insertedTransportationType = transportationTypeRepository.saveAndFlush(transportationType);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

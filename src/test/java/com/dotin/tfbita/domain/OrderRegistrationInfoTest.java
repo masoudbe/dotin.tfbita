@@ -33,7 +33,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void serviceInfoTest() throws Exception {
+    void serviceInfoTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         OrderRegService orderRegServiceBack = getOrderRegServiceRandomSampleGenerator();
 
@@ -55,7 +55,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void purchaseFromOtherResourcesListTest() throws Exception {
+    void purchaseFromOtherResourcesListTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         PurchaseFromOtherResources purchaseFromOtherResourcesBack = getPurchaseFromOtherResourcesRandomSampleGenerator();
 
@@ -77,7 +77,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void orderRegTypeTest() throws Exception {
+    void orderRegTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -89,7 +89,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void requestTypeTest() throws Exception {
+    void requestTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -101,7 +101,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void importTypeTest() throws Exception {
+    void importTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -113,7 +113,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void operationTypeTest() throws Exception {
+    void operationTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -125,7 +125,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void currencyProvisionTypeTest() throws Exception {
+    void currencyProvisionTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -137,7 +137,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void paymentToolTest() throws Exception {
+    void paymentToolTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -149,7 +149,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void activityTypeTest() throws Exception {
+    void activityTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -161,7 +161,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void ownerTypeTest() throws Exception {
+    void ownerTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -173,7 +173,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void statusTest() throws Exception {
+    void statusTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -185,7 +185,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void externalCustomerTypeTest() throws Exception {
+    void externalCustomerTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -197,7 +197,19 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void transportTypeTest() throws Exception {
+    void transportVehicleTypeTest() {
+        OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        orderRegistrationInfo.setTransportVehicleType(categoryElementBack);
+        assertThat(orderRegistrationInfo.getTransportVehicleType()).isEqualTo(categoryElementBack);
+
+        orderRegistrationInfo.transportVehicleType(null);
+        assertThat(orderRegistrationInfo.getTransportVehicleType()).isNull();
+    }
+
+    @Test
+    void transportTypeTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         TransportationType transportationTypeBack = getTransportationTypeRandomSampleGenerator();
 
@@ -209,7 +221,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void destCoustomersTest() throws Exception {
+    void destCoustomersTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         Custom customBack = getCustomRandomSampleGenerator();
 
@@ -221,7 +233,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void cargoPlaceCustomsTest() throws Exception {
+    void cargoPlaceCustomsTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         Custom customBack = getCustomRandomSampleGenerator();
 
@@ -233,7 +245,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void entranceBordersTest() throws Exception {
+    void entranceBordersTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         Custom customBack = getCustomRandomSampleGenerator();
 
@@ -245,25 +257,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void transportVehicleTypeTest() throws Exception {
-        OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
-        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
-
-        orderRegistrationInfo.addTransportVehicleType(categoryElementBack);
-        assertThat(orderRegistrationInfo.getTransportVehicleTypes()).containsOnly(categoryElementBack);
-
-        orderRegistrationInfo.removeTransportVehicleType(categoryElementBack);
-        assertThat(orderRegistrationInfo.getTransportVehicleTypes()).doesNotContain(categoryElementBack);
-
-        orderRegistrationInfo.transportVehicleTypes(new HashSet<>(Set.of(categoryElementBack)));
-        assertThat(orderRegistrationInfo.getTransportVehicleTypes()).containsOnly(categoryElementBack);
-
-        orderRegistrationInfo.setTransportVehicleTypes(new HashSet<>());
-        assertThat(orderRegistrationInfo.getTransportVehicleTypes()).doesNotContain(categoryElementBack);
-    }
-
-    @Test
-    void productInfoTest() throws Exception {
+    void productInfoTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         Product productBack = getProductRandomSampleGenerator();
 
@@ -281,7 +275,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void commissionTransactionNumberTest() throws Exception {
+    void commissionTransactionNumberTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         StringValue stringValueBack = getStringValueRandomSampleGenerator();
 
@@ -299,7 +293,7 @@ class OrderRegistrationInfoTest {
     }
 
     @Test
-    void licenceInfoTest() throws Exception {
+    void licenceInfoTest() {
         OrderRegistrationInfo orderRegistrationInfo = getOrderRegistrationInfoRandomSampleGenerator();
         LicenceInfo licenceInfoBack = getLicenceInfoRandomSampleGenerator();
 

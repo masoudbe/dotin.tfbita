@@ -1,0 +1,17 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105908"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "mandatory",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "DraftCertificateType",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -20,8 +20,8 @@ public class AttributeValue implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "val")
+    private String val;
 
     @Column(name = "custom_value")
     private String customValue;
@@ -39,7 +39,7 @@ public class AttributeValue implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "draftProductInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Product product;
@@ -59,17 +59,17 @@ public class AttributeValue implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return this.value;
+    public String getVal() {
+        return this.val;
     }
 
-    public AttributeValue value(String value) {
-        this.setValue(value);
+    public AttributeValue val(String val) {
+        this.setVal(val);
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public String getCustomValue() {
@@ -161,7 +161,7 @@ public class AttributeValue implements Serializable {
     public String toString() {
         return "AttributeValue{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", val='" + getVal() + "'" +
             ", customValue='" + getCustomValue() + "'" +
             ", attributeValueGroupName='" + getAttributeValueGroupName() + "'" +
             "}";

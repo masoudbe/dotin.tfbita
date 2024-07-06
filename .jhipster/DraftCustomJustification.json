@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082859"
+    "changelogDate": "20240706105928"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -9,18 +9,18 @@
   "relationships": [
     {
       "otherEntityName": "draftReceipt",
-      "otherEntityRelationshipName": "draftCustomJustification",
       "relationshipName": "draftReceipts",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "draft",
-      "relationshipName": "draftJustifications",
+      "otherEntityRelationshipName": "draftJustifications",
+      "relationshipName": "draft",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

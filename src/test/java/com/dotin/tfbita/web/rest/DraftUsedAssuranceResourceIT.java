@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,8 @@ class DraftUsedAssuranceResourceIT {
 
     private DraftUsedAssurance draftUsedAssurance;
 
+    private DraftUsedAssurance insertedDraftUsedAssurance;
+
     /**
      * Create an entity for this test.
      *
@@ -110,6 +113,14 @@ class DraftUsedAssuranceResourceIT {
         draftUsedAssurance = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftUsedAssurance != null) {
+            draftUsedAssuranceRepository.delete(insertedDraftUsedAssurance);
+            insertedDraftUsedAssurance = null;
+        }
+    }
+
     @Test
     @Transactional
     void createDraftUsedAssurance() throws Exception {
@@ -133,6 +144,8 @@ class DraftUsedAssuranceResourceIT {
             returnedDraftUsedAssurance,
             getPersistedDraftUsedAssurance(returnedDraftUsedAssurance)
         );
+
+        insertedDraftUsedAssurance = returnedDraftUsedAssurance;
     }
 
     @Test
@@ -157,7 +170,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void getAllDraftUsedAssurances() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         // Get all the draftUsedAssuranceList
         restDraftUsedAssuranceMockMvc
@@ -176,7 +189,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void getDraftUsedAssurance() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         // Get the draftUsedAssurance
         restDraftUsedAssuranceMockMvc
@@ -202,7 +215,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void putExistingDraftUsedAssurance() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -297,7 +310,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void partialUpdateDraftUsedAssuranceWithPatch() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -308,8 +321,8 @@ class DraftUsedAssuranceResourceIT {
         partialUpdatedDraftUsedAssurance
             .assuranceRateId(UPDATED_ASSURANCE_RATE_ID)
             .assuranceSerial(UPDATED_ASSURANCE_SERIAL)
-            .defaultCurrencyUsedCost(UPDATED_DEFAULT_CURRENCY_USED_COST)
-            .usedCost(UPDATED_USED_COST);
+            .exchangeRate(UPDATED_EXCHANGE_RATE)
+            .defaultCurrencyUsedCost(UPDATED_DEFAULT_CURRENCY_USED_COST);
 
         restDraftUsedAssuranceMockMvc
             .perform(
@@ -332,7 +345,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void fullUpdateDraftUsedAssuranceWithPatch() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -430,7 +443,7 @@ class DraftUsedAssuranceResourceIT {
     @Transactional
     void deleteDraftUsedAssurance() throws Exception {
         // Initialize the database
-        draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
+        insertedDraftUsedAssurance = draftUsedAssuranceRepository.saveAndFlush(draftUsedAssurance);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

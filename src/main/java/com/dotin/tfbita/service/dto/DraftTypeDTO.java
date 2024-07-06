@@ -1,7 +1,9 @@
 package com.dotin.tfbita.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.dotin.tfbita.domain.DraftType} entity.
@@ -31,13 +33,27 @@ public class DraftTypeDTO implements Serializable {
 
     private Boolean usable;
 
+    private String currenciesCodes;
+
     private String defaultCurrencyCode;
 
-    private String accountInfoCode;
+    private CategoryElementDTO type;
 
-    private String topicInfoCode;
+    private CategoryElementDTO secondaryType;
 
-    private DraftDTO draftType;
+    private CategoryElementDTO division;
+
+    private DraftTypeTopicInfoDTO topicInfo;
+
+    private CreditTypeConditionInfoDTO conditionInfo;
+
+    private DraftTypeAccountInfoDTO accountInfo;
+
+    private DraftRequestTypeDTO requestType;
+
+    private ObjectiveCategoryElementDTO acceptableProductTypes;
+
+    private Set<StringValueDTO> userGroups = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -127,6 +143,14 @@ public class DraftTypeDTO implements Serializable {
         this.usable = usable;
     }
 
+    public String getCurrenciesCodes() {
+        return currenciesCodes;
+    }
+
+    public void setCurrenciesCodes(String currenciesCodes) {
+        this.currenciesCodes = currenciesCodes;
+    }
+
     public String getDefaultCurrencyCode() {
         return defaultCurrencyCode;
     }
@@ -135,28 +159,76 @@ public class DraftTypeDTO implements Serializable {
         this.defaultCurrencyCode = defaultCurrencyCode;
     }
 
-    public String getAccountInfoCode() {
-        return accountInfoCode;
+    public CategoryElementDTO getType() {
+        return type;
     }
 
-    public void setAccountInfoCode(String accountInfoCode) {
-        this.accountInfoCode = accountInfoCode;
+    public void setType(CategoryElementDTO type) {
+        this.type = type;
     }
 
-    public String getTopicInfoCode() {
-        return topicInfoCode;
+    public CategoryElementDTO getSecondaryType() {
+        return secondaryType;
     }
 
-    public void setTopicInfoCode(String topicInfoCode) {
-        this.topicInfoCode = topicInfoCode;
+    public void setSecondaryType(CategoryElementDTO secondaryType) {
+        this.secondaryType = secondaryType;
     }
 
-    public DraftDTO getDraftType() {
-        return draftType;
+    public CategoryElementDTO getDivision() {
+        return division;
     }
 
-    public void setDraftType(DraftDTO draftType) {
-        this.draftType = draftType;
+    public void setDivision(CategoryElementDTO division) {
+        this.division = division;
+    }
+
+    public DraftTypeTopicInfoDTO getTopicInfo() {
+        return topicInfo;
+    }
+
+    public void setTopicInfo(DraftTypeTopicInfoDTO topicInfo) {
+        this.topicInfo = topicInfo;
+    }
+
+    public CreditTypeConditionInfoDTO getConditionInfo() {
+        return conditionInfo;
+    }
+
+    public void setConditionInfo(CreditTypeConditionInfoDTO conditionInfo) {
+        this.conditionInfo = conditionInfo;
+    }
+
+    public DraftTypeAccountInfoDTO getAccountInfo() {
+        return accountInfo;
+    }
+
+    public void setAccountInfo(DraftTypeAccountInfoDTO accountInfo) {
+        this.accountInfo = accountInfo;
+    }
+
+    public DraftRequestTypeDTO getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(DraftRequestTypeDTO requestType) {
+        this.requestType = requestType;
+    }
+
+    public ObjectiveCategoryElementDTO getAcceptableProductTypes() {
+        return acceptableProductTypes;
+    }
+
+    public void setAcceptableProductTypes(ObjectiveCategoryElementDTO acceptableProductTypes) {
+        this.acceptableProductTypes = acceptableProductTypes;
+    }
+
+    public Set<StringValueDTO> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(Set<StringValueDTO> userGroups) {
+        this.userGroups = userGroups;
     }
 
     @Override
@@ -195,10 +267,17 @@ public class DraftTypeDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", portal='" + getPortal() + "'" +
             ", usable='" + getUsable() + "'" +
+            ", currenciesCodes='" + getCurrenciesCodes() + "'" +
             ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
-            ", accountInfoCode='" + getAccountInfoCode() + "'" +
-            ", topicInfoCode='" + getTopicInfoCode() + "'" +
-            ", draftType=" + getDraftType() +
+            ", type=" + getType() +
+            ", secondaryType=" + getSecondaryType() +
+            ", division=" + getDivision() +
+            ", topicInfo=" + getTopicInfo() +
+            ", conditionInfo=" + getConditionInfo() +
+            ", accountInfo=" + getAccountInfo() +
+            ", requestType=" + getRequestType() +
+            ", acceptableProductTypes=" + getAcceptableProductTypes() +
+            ", userGroups=" + getUserGroups() +
             "}";
     }
 }

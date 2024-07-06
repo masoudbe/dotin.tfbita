@@ -125,7 +125,7 @@ export const DraftStatusInfo = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('stampCostPaid')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftStatusInfo.statusInfo">Status Info</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftStatusInfo.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -148,8 +148,8 @@ export const DraftStatusInfo = () => {
                   <td>{draftStatusInfo.remainAmount}</td>
                   <td>{draftStatusInfo.stampCostPaid ? 'true' : 'false'}</td>
                   <td>
-                    {draftStatusInfo.statusInfo ? (
-                      <Link to={`/draft/${draftStatusInfo.statusInfo.id}`}>{draftStatusInfo.statusInfo.id}</Link>
+                    {draftStatusInfo.status ? (
+                      <Link to={`/category-element/${draftStatusInfo.status.id}`}>{draftStatusInfo.status.id}</Link>
                     ) : (
                       ''
                     )}

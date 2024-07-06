@@ -62,9 +62,9 @@ export const DraftUsedAssuranceDetail = () => {
           </dt>
           <dd>{draftUsedAssuranceEntity.usedCost}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftUsedAssurance.usedAssurances">Used Assurances</Translate>
+            <Translate contentKey="tfbitaApp.draftUsedAssurance.draft">Draft</Translate>
           </dt>
-          <dd>{draftUsedAssuranceEntity.usedAssurances ? draftUsedAssuranceEntity.usedAssurances.id : ''}</dd>
+          <dd>{draftUsedAssuranceEntity.draft ? draftUsedAssuranceEntity.draft.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-used-assurance" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

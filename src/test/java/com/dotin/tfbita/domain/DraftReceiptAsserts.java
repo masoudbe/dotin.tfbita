@@ -97,15 +97,6 @@ public class DraftReceiptAsserts {
             .satisfies(e -> assertThat(e.getUsable()).as("check usable").isEqualTo(actual.getUsable()))
             .satisfies(
                 e ->
-                    assertThat(e.getPaymentCurrencyRateTypeDesc())
-                        .as("check paymentCurrencyRateTypeDesc")
-                        .isEqualTo(actual.getPaymentCurrencyRateTypeDesc())
-            )
-            .satisfies(
-                e -> assertThat(e.getPaymentItemTypeDesc()).as("check paymentItemTypeDesc").isEqualTo(actual.getPaymentItemTypeDesc())
-            )
-            .satisfies(
-                e ->
                     assertThat(e.getNetWeight()).as("check netWeight").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getNetWeight())
             )
             .satisfies(
@@ -185,7 +176,28 @@ public class DraftReceiptAsserts {
     public static void assertDraftReceiptUpdatableRelationshipsEquals(DraftReceipt expected, DraftReceipt actual) {
         assertThat(expected)
             .as("Verify DraftReceipt relationships")
-            .satisfies(e -> assertThat(e.getReceipts()).as("check receipts").isEqualTo(actual.getReceipts()))
+            .satisfies(e -> assertThat(e.getProductDimension()).as("check productDimension").isEqualTo(actual.getProductDimension()))
+            .satisfies(e -> assertThat(e.getStateOfDocuments()).as("check stateOfDocuments").isEqualTo(actual.getStateOfDocuments()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCurrencyProvisionFileType())
+                        .as("check currencyProvisionFileType")
+                        .isEqualTo(actual.getCurrencyProvisionFileType())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getPaymentCurrencyRateType())
+                        .as("check paymentCurrencyRateType")
+                        .isEqualTo(actual.getPaymentCurrencyRateType())
+            )
+            .satisfies(e -> assertThat(e.getPaymentItem()).as("check paymentItem").isEqualTo(actual.getPaymentItem()))
+            .satisfies(
+                e ->
+                    assertThat(e.getDocumentTransactionContainer())
+                        .as("check documentTransactionContainer")
+                        .isEqualTo(actual.getDocumentTransactionContainer())
+            )
+            .satisfies(e -> assertThat(e.getDraft()).as("check draft").isEqualTo(actual.getDraft()))
             .satisfies(
                 e ->
                     assertThat(e.getDraftCustomJustifications())

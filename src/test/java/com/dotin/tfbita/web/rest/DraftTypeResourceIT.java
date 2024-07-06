@@ -4,22 +4,31 @@ import static com.dotin.tfbita.domain.DraftTypeAsserts.*;
 import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.DraftType;
 import com.dotin.tfbita.repository.DraftTypeRepository;
+import com.dotin.tfbita.service.DraftTypeService;
 import com.dotin.tfbita.service.dto.DraftTypeDTO;
 import com.dotin.tfbita.service.mapper.DraftTypeMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link DraftTypeResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class DraftTypeResourceIT {
@@ -63,14 +73,11 @@ class DraftTypeResourceIT {
     private static final Boolean DEFAULT_USABLE = false;
     private static final Boolean UPDATED_USABLE = true;
 
+    private static final String DEFAULT_CURRENCIES_CODES = "AAAAAAAAAA";
+    private static final String UPDATED_CURRENCIES_CODES = "BBBBBBBBBB";
+
     private static final String DEFAULT_DEFAULT_CURRENCY_CODE = "AAAAAAAAAA";
     private static final String UPDATED_DEFAULT_CURRENCY_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ACCOUNT_INFO_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_ACCOUNT_INFO_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TOPIC_INFO_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_TOPIC_INFO_CODE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/draft-types";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -84,8 +91,14 @@ class DraftTypeResourceIT {
     @Autowired
     private DraftTypeRepository draftTypeRepository;
 
+    @Mock
+    private DraftTypeRepository draftTypeRepositoryMock;
+
     @Autowired
     private DraftTypeMapper draftTypeMapper;
+
+    @Mock
+    private DraftTypeService draftTypeServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -94,6 +107,8 @@ class DraftTypeResourceIT {
     private MockMvc restDraftTypeMockMvc;
 
     private DraftType draftType;
+
+    private DraftType insertedDraftType;
 
     /**
      * Create an entity for this test.
@@ -113,9 +128,8 @@ class DraftTypeResourceIT {
             .name(DEFAULT_NAME)
             .portal(DEFAULT_PORTAL)
             .usable(DEFAULT_USABLE)
-            .defaultCurrencyCode(DEFAULT_DEFAULT_CURRENCY_CODE)
-            .accountInfoCode(DEFAULT_ACCOUNT_INFO_CODE)
-            .topicInfoCode(DEFAULT_TOPIC_INFO_CODE);
+            .currenciesCodes(DEFAULT_CURRENCIES_CODES)
+            .defaultCurrencyCode(DEFAULT_DEFAULT_CURRENCY_CODE);
         return draftType;
     }
 
@@ -137,15 +151,22 @@ class DraftTypeResourceIT {
             .name(UPDATED_NAME)
             .portal(UPDATED_PORTAL)
             .usable(UPDATED_USABLE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .topicInfoCode(UPDATED_TOPIC_INFO_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
         return draftType;
     }
 
     @BeforeEach
     public void initTest() {
         draftType = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftType != null) {
+            draftTypeRepository.delete(insertedDraftType);
+            insertedDraftType = null;
+        }
     }
 
     @Test
@@ -168,6 +189,8 @@ class DraftTypeResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftType = draftTypeMapper.toEntity(returnedDraftTypeDTO);
         assertDraftTypeUpdatableFieldsEquals(returnedDraftType, getPersistedDraftType(returnedDraftType));
+
+        insertedDraftType = returnedDraftType;
     }
 
     @Test
@@ -192,7 +215,7 @@ class DraftTypeResourceIT {
     @Transactional
     void getAllDraftTypes() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         // Get all the draftTypeList
         restDraftTypeMockMvc
@@ -210,16 +233,32 @@ class DraftTypeResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].portal").value(hasItem(DEFAULT_PORTAL.booleanValue())))
             .andExpect(jsonPath("$.[*].usable").value(hasItem(DEFAULT_USABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].defaultCurrencyCode").value(hasItem(DEFAULT_DEFAULT_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].accountInfoCode").value(hasItem(DEFAULT_ACCOUNT_INFO_CODE)))
-            .andExpect(jsonPath("$.[*].topicInfoCode").value(hasItem(DEFAULT_TOPIC_INFO_CODE)));
+            .andExpect(jsonPath("$.[*].currenciesCodes").value(hasItem(DEFAULT_CURRENCIES_CODES)))
+            .andExpect(jsonPath("$.[*].defaultCurrencyCode").value(hasItem(DEFAULT_DEFAULT_CURRENCY_CODE)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDraftTypesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(draftTypeServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDraftTypeMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(draftTypeServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDraftTypesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(draftTypeServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDraftTypeMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(draftTypeRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
     @Transactional
     void getDraftType() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         // Get the draftType
         restDraftTypeMockMvc
@@ -237,9 +276,8 @@ class DraftTypeResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.portal").value(DEFAULT_PORTAL.booleanValue()))
             .andExpect(jsonPath("$.usable").value(DEFAULT_USABLE.booleanValue()))
-            .andExpect(jsonPath("$.defaultCurrencyCode").value(DEFAULT_DEFAULT_CURRENCY_CODE))
-            .andExpect(jsonPath("$.accountInfoCode").value(DEFAULT_ACCOUNT_INFO_CODE))
-            .andExpect(jsonPath("$.topicInfoCode").value(DEFAULT_TOPIC_INFO_CODE));
+            .andExpect(jsonPath("$.currenciesCodes").value(DEFAULT_CURRENCIES_CODES))
+            .andExpect(jsonPath("$.defaultCurrencyCode").value(DEFAULT_DEFAULT_CURRENCY_CODE));
     }
 
     @Test
@@ -253,7 +291,7 @@ class DraftTypeResourceIT {
     @Transactional
     void putExistingDraftType() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -272,9 +310,8 @@ class DraftTypeResourceIT {
             .name(UPDATED_NAME)
             .portal(UPDATED_PORTAL)
             .usable(UPDATED_USABLE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .topicInfoCode(UPDATED_TOPIC_INFO_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
         DraftTypeDTO draftTypeDTO = draftTypeMapper.toDto(updatedDraftType);
 
         restDraftTypeMockMvc
@@ -356,7 +393,7 @@ class DraftTypeResourceIT {
     @Transactional
     void partialUpdateDraftTypeWithPatch() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -364,14 +401,7 @@ class DraftTypeResourceIT {
         DraftType partialUpdatedDraftType = new DraftType();
         partialUpdatedDraftType.setId(draftType.getId());
 
-        partialUpdatedDraftType
-            .alarmTime(UPDATED_ALARM_TIME)
-            .duration(UPDATED_DURATION)
-            .hasAssurance(UPDATED_HAS_ASSURANCE)
-            .hasSanction(UPDATED_HAS_SANCTION)
-            .portal(UPDATED_PORTAL)
-            .usable(UPDATED_USABLE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
+        partialUpdatedDraftType.code(UPDATED_CODE).duration(UPDATED_DURATION).hasSanction(UPDATED_HAS_SANCTION).name(UPDATED_NAME);
 
         restDraftTypeMockMvc
             .perform(
@@ -394,7 +424,7 @@ class DraftTypeResourceIT {
     @Transactional
     void fullUpdateDraftTypeWithPatch() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -413,9 +443,8 @@ class DraftTypeResourceIT {
             .name(UPDATED_NAME)
             .portal(UPDATED_PORTAL)
             .usable(UPDATED_USABLE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .topicInfoCode(UPDATED_TOPIC_INFO_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE);
 
         restDraftTypeMockMvc
             .perform(
@@ -497,7 +526,7 @@ class DraftTypeResourceIT {
     @Transactional
     void deleteDraftType() throws Exception {
         // Initialize the database
-        draftTypeRepository.saveAndFlush(draftType);
+        insertedDraftType = draftTypeRepository.saveAndFlush(draftType);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

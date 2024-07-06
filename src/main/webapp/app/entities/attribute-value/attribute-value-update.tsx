@@ -112,10 +112,10 @@ export const AttributeValueUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tfbitaApp.attributeValue.value')}
-                id="attribute-value-value"
-                name="value"
-                data-cy="value"
+                label={translate('tfbitaApp.attributeValue.val')}
+                id="attribute-value-val"
+                name="val"
+                data-cy="val"
                 type="text"
               />
               <ValidatedField

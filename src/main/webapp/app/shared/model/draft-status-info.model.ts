@@ -1,4 +1,4 @@
-import { IDraft } from 'app/shared/model/draft.model';
+import { ICategoryElement } from 'app/shared/model/category-element.model';
 
 export interface IDraftStatusInfo {
   id?: number;
@@ -11,7 +11,7 @@ export interface IDraftStatusInfo {
   rejectDescription?: string | null;
   remainAmount?: number | null;
   stampCostPaid?: boolean | null;
-  statusInfo?: IDraft | null;
+  status?: ICategoryElement | null;
 }
 
 export const defaultValue: Readonly<IDraftStatusInfo> = {

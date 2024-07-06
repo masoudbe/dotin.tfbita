@@ -24,14 +24,14 @@ class DraftExtendTest {
     }
 
     @Test
-    void extensionsTest() throws Exception {
+    void draftFieldTest() {
         DraftExtend draftExtend = getDraftExtendRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftExtend.setExtensions(draftBack);
-        assertThat(draftExtend.getExtensions()).isEqualTo(draftBack);
+        draftExtend.setDraftField(draftBack);
+        assertThat(draftExtend.getDraftField()).isEqualTo(draftBack);
 
-        draftExtend.extensions(null);
-        assertThat(draftExtend.getExtensions()).isNull();
+        draftExtend.draftField(null);
+        assertThat(draftExtend.getDraftField()).isNull();
     }
 }

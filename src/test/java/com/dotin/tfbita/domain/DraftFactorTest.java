@@ -24,14 +24,14 @@ class DraftFactorTest {
     }
 
     @Test
-    void draftFactorsTest() throws Exception {
+    void draftTest() {
         DraftFactor draftFactor = getDraftFactorRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftFactor.setDraftFactors(draftBack);
-        assertThat(draftFactor.getDraftFactors()).isEqualTo(draftBack);
+        draftFactor.setDraft(draftBack);
+        assertThat(draftFactor.getDraft()).isEqualTo(draftBack);
 
-        draftFactor.draftFactors(null);
-        assertThat(draftFactor.getDraftFactors()).isNull();
+        draftFactor.draft(null);
+        assertThat(draftFactor.getDraft()).isNull();
     }
 }

@@ -65,7 +65,7 @@ export const DraftUsedAssuranceUpdate = () => {
     const entity = {
       ...draftUsedAssuranceEntity,
       ...values,
-      usedAssurances: drafts.find(it => it.id.toString() === values.usedAssurances?.toString()),
+      draft: drafts.find(it => it.id.toString() === values.draft?.toString()),
     };
 
     if (isNew) {
@@ -80,7 +80,7 @@ export const DraftUsedAssuranceUpdate = () => {
       ? {}
       : {
           ...draftUsedAssuranceEntity,
-          usedAssurances: draftUsedAssuranceEntity?.usedAssurances?.id,
+          draft: draftUsedAssuranceEntity?.draft?.id,
         };
 
   return (
@@ -144,10 +144,10 @@ export const DraftUsedAssuranceUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="draft-used-assurance-usedAssurances"
-                name="usedAssurances"
-                data-cy="usedAssurances"
-                label={translate('tfbitaApp.draftUsedAssurance.usedAssurances')}
+                id="draft-used-assurance-draft"
+                name="draft"
+                data-cy="draft"
+                label={translate('tfbitaApp.draftUsedAssurance.draft')}
                 type="select"
               >
                 <option value="" key="0" />

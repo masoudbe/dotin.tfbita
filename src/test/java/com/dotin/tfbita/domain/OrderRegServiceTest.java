@@ -25,7 +25,7 @@ class OrderRegServiceTest {
     }
 
     @Test
-    void serviceTariffTest() throws Exception {
+    void serviceTariffTest() {
         OrderRegService orderRegService = getOrderRegServiceRandomSampleGenerator();
         ServiceTariff serviceTariffBack = getServiceTariffRandomSampleGenerator();
 
@@ -37,7 +37,7 @@ class OrderRegServiceTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void orderRegistrationInfoTest() {
         OrderRegService orderRegService = getOrderRegServiceRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 

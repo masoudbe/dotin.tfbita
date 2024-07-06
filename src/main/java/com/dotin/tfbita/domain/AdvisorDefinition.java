@@ -3,6 +3,8 @@ package com.dotin.tfbita.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A AdvisorDefinition.
@@ -35,8 +37,14 @@ public class AdvisorDefinition implements Serializable {
     @Column(name = "swift_code")
     private String swiftCode;
 
-    @Column(name = "credit_date")
-    private String creditDate;
+    @Column(name = "default_currency_code")
+    private String defaultCurrencyCode;
+
+    @Column(name = "currencies_codes")
+    private String currenciesCodes;
+
+    @Column(name = "country_code")
+    private String countryCode;
 
     @Column(name = "bank_code")
     private String bankCode;
@@ -44,65 +52,33 @@ public class AdvisorDefinition implements Serializable {
     @Column(name = "branch_code")
     private String branchCode;
 
-    @Column(name = "default_currency_code")
-    private String defaultCurrencyCode;
+    @JsonIgnoreProperties(value = { "advisorDefinition" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private AdditionalBrokerInformation additionalBrokerInformation;
 
-    @Column(name = "country_code")
-    private String countryCode;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft advisingBank;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "advisorDefinition")
+    @JsonIgnoreProperties(value = { "depositType", "advisorDefinition" }, allowSetters = true)
+    private Set<AdvisorDefinitionDeposit> advisorDeposits = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft interfaceAdvisingBank;
+    @JsonIgnoreProperties(value = { "depositType", "advisorDefinition" }, allowSetters = true)
+    private AdvisorDefinitionDeposit defaultVostroDeposit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft coveringBank;
+    @JsonIgnoreProperties(value = { "depositType", "advisorDefinition" }, allowSetters = true)
+    private AdvisorDefinitionDeposit defaultNostroDeposit;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "type" }, allowSetters = true)
+    private TransferMethodManagement receiveMethod;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "type" }, allowSetters = true)
+    private TransferMethodManagement payMethod;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SwiftBic swiftBic;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -184,17 +160,43 @@ public class AdvisorDefinition implements Serializable {
         this.swiftCode = swiftCode;
     }
 
-    public String getCreditDate() {
-        return this.creditDate;
+    public String getDefaultCurrencyCode() {
+        return this.defaultCurrencyCode;
     }
 
-    public AdvisorDefinition creditDate(String creditDate) {
-        this.setCreditDate(creditDate);
+    public AdvisorDefinition defaultCurrencyCode(String defaultCurrencyCode) {
+        this.setDefaultCurrencyCode(defaultCurrencyCode);
         return this;
     }
 
-    public void setCreditDate(String creditDate) {
-        this.creditDate = creditDate;
+    public void setDefaultCurrencyCode(String defaultCurrencyCode) {
+        this.defaultCurrencyCode = defaultCurrencyCode;
+    }
+
+    public String getCurrenciesCodes() {
+        return this.currenciesCodes;
+    }
+
+    public AdvisorDefinition currenciesCodes(String currenciesCodes) {
+        this.setCurrenciesCodes(currenciesCodes);
+        return this;
+    }
+
+    public void setCurrenciesCodes(String currenciesCodes) {
+        this.currenciesCodes = currenciesCodes;
+    }
+
+    public String getCountryCode() {
+        return this.countryCode;
+    }
+
+    public AdvisorDefinition countryCode(String countryCode) {
+        this.setCountryCode(countryCode);
+        return this;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getBankCode() {
@@ -223,68 +225,112 @@ public class AdvisorDefinition implements Serializable {
         this.branchCode = branchCode;
     }
 
-    public String getDefaultCurrencyCode() {
-        return this.defaultCurrencyCode;
+    public AdditionalBrokerInformation getAdditionalBrokerInformation() {
+        return this.additionalBrokerInformation;
     }
 
-    public AdvisorDefinition defaultCurrencyCode(String defaultCurrencyCode) {
-        this.setDefaultCurrencyCode(defaultCurrencyCode);
+    public void setAdditionalBrokerInformation(AdditionalBrokerInformation additionalBrokerInformation) {
+        this.additionalBrokerInformation = additionalBrokerInformation;
+    }
+
+    public AdvisorDefinition additionalBrokerInformation(AdditionalBrokerInformation additionalBrokerInformation) {
+        this.setAdditionalBrokerInformation(additionalBrokerInformation);
         return this;
     }
 
-    public void setDefaultCurrencyCode(String defaultCurrencyCode) {
-        this.defaultCurrencyCode = defaultCurrencyCode;
+    public Set<AdvisorDefinitionDeposit> getAdvisorDeposits() {
+        return this.advisorDeposits;
     }
 
-    public String getCountryCode() {
-        return this.countryCode;
+    public void setAdvisorDeposits(Set<AdvisorDefinitionDeposit> advisorDefinitionDeposits) {
+        if (this.advisorDeposits != null) {
+            this.advisorDeposits.forEach(i -> i.setAdvisorDefinition(null));
+        }
+        if (advisorDefinitionDeposits != null) {
+            advisorDefinitionDeposits.forEach(i -> i.setAdvisorDefinition(this));
+        }
+        this.advisorDeposits = advisorDefinitionDeposits;
     }
 
-    public AdvisorDefinition countryCode(String countryCode) {
-        this.setCountryCode(countryCode);
+    public AdvisorDefinition advisorDeposits(Set<AdvisorDefinitionDeposit> advisorDefinitionDeposits) {
+        this.setAdvisorDeposits(advisorDefinitionDeposits);
         return this;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public Draft getAdvisingBank() {
-        return this.advisingBank;
-    }
-
-    public void setAdvisingBank(Draft draft) {
-        this.advisingBank = draft;
-    }
-
-    public AdvisorDefinition advisingBank(Draft draft) {
-        this.setAdvisingBank(draft);
+    public AdvisorDefinition addAdvisorDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.advisorDeposits.add(advisorDefinitionDeposit);
+        advisorDefinitionDeposit.setAdvisorDefinition(this);
         return this;
     }
 
-    public Draft getInterfaceAdvisingBank() {
-        return this.interfaceAdvisingBank;
-    }
-
-    public void setInterfaceAdvisingBank(Draft draft) {
-        this.interfaceAdvisingBank = draft;
-    }
-
-    public AdvisorDefinition interfaceAdvisingBank(Draft draft) {
-        this.setInterfaceAdvisingBank(draft);
+    public AdvisorDefinition removeAdvisorDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.advisorDeposits.remove(advisorDefinitionDeposit);
+        advisorDefinitionDeposit.setAdvisorDefinition(null);
         return this;
     }
 
-    public Draft getCoveringBank() {
-        return this.coveringBank;
+    public AdvisorDefinitionDeposit getDefaultVostroDeposit() {
+        return this.defaultVostroDeposit;
     }
 
-    public void setCoveringBank(Draft draft) {
-        this.coveringBank = draft;
+    public void setDefaultVostroDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.defaultVostroDeposit = advisorDefinitionDeposit;
     }
 
-    public AdvisorDefinition coveringBank(Draft draft) {
-        this.setCoveringBank(draft);
+    public AdvisorDefinition defaultVostroDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.setDefaultVostroDeposit(advisorDefinitionDeposit);
+        return this;
+    }
+
+    public AdvisorDefinitionDeposit getDefaultNostroDeposit() {
+        return this.defaultNostroDeposit;
+    }
+
+    public void setDefaultNostroDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.defaultNostroDeposit = advisorDefinitionDeposit;
+    }
+
+    public AdvisorDefinition defaultNostroDeposit(AdvisorDefinitionDeposit advisorDefinitionDeposit) {
+        this.setDefaultNostroDeposit(advisorDefinitionDeposit);
+        return this;
+    }
+
+    public TransferMethodManagement getReceiveMethod() {
+        return this.receiveMethod;
+    }
+
+    public void setReceiveMethod(TransferMethodManagement transferMethodManagement) {
+        this.receiveMethod = transferMethodManagement;
+    }
+
+    public AdvisorDefinition receiveMethod(TransferMethodManagement transferMethodManagement) {
+        this.setReceiveMethod(transferMethodManagement);
+        return this;
+    }
+
+    public TransferMethodManagement getPayMethod() {
+        return this.payMethod;
+    }
+
+    public void setPayMethod(TransferMethodManagement transferMethodManagement) {
+        this.payMethod = transferMethodManagement;
+    }
+
+    public AdvisorDefinition payMethod(TransferMethodManagement transferMethodManagement) {
+        this.setPayMethod(transferMethodManagement);
+        return this;
+    }
+
+    public SwiftBic getSwiftBic() {
+        return this.swiftBic;
+    }
+
+    public void setSwiftBic(SwiftBic swiftBic) {
+        this.swiftBic = swiftBic;
+    }
+
+    public AdvisorDefinition swiftBic(SwiftBic swiftBic) {
+        this.setSwiftBic(swiftBic);
         return this;
     }
 
@@ -317,11 +363,11 @@ public class AdvisorDefinition implements Serializable {
             ", countryIsoCode='" + getCountryIsoCode() + "'" +
             ", depositNum='" + getDepositNum() + "'" +
             ", swiftCode='" + getSwiftCode() + "'" +
-            ", creditDate='" + getCreditDate() + "'" +
+            ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
+            ", currenciesCodes='" + getCurrenciesCodes() + "'" +
+            ", countryCode='" + getCountryCode() + "'" +
             ", bankCode='" + getBankCode() + "'" +
             ", branchCode='" + getBranchCode() + "'" +
-            ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
-            ", countryCode='" + getCountryCode() + "'" +
             "}";
     }
 }

@@ -8,6 +8,14 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
+import { IPaymentCurrencyRateType } from 'app/shared/model/payment-currency-rate-type.model';
+import { getEntities as getPaymentCurrencyRateTypes } from 'app/entities/payment-currency-rate-type/payment-currency-rate-type.reducer';
+import { IPaymentItemType } from 'app/shared/model/payment-item-type.model';
+import { getEntities as getPaymentItemTypes } from 'app/entities/payment-item-type/payment-item-type.reducer';
+import { IDraftReceiptDocumentTransactionContainer } from 'app/shared/model/draft-receipt-document-transaction-container.model';
+import { getEntities as getDraftReceiptDocumentTransactionContainers } from 'app/entities/draft-receipt-document-transaction-container/draft-receipt-document-transaction-container.reducer';
 import { IDraft } from 'app/shared/model/draft.model';
 import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IDraftCustomJustification } from 'app/shared/model/draft-custom-justification.model';
@@ -23,6 +31,10 @@ export const DraftReceiptUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
+  const paymentCurrencyRateTypes = useAppSelector(state => state.paymentCurrencyRateType.entities);
+  const paymentItemTypes = useAppSelector(state => state.paymentItemType.entities);
+  const draftReceiptDocumentTransactionContainers = useAppSelector(state => state.draftReceiptDocumentTransactionContainer.entities);
   const drafts = useAppSelector(state => state.draft.entities);
   const draftCustomJustifications = useAppSelector(state => state.draftCustomJustification.entities);
   const draftReceiptEntity = useAppSelector(state => state.draftReceipt.entity);
@@ -41,6 +53,10 @@ export const DraftReceiptUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getCategoryElements({}));
+    dispatch(getPaymentCurrencyRateTypes({}));
+    dispatch(getPaymentItemTypes({}));
+    dispatch(getDraftReceiptDocumentTransactionContainers({}));
     dispatch(getDrafts({}));
     dispatch(getDraftCustomJustifications({}));
   }, []);
@@ -102,7 +118,15 @@ export const DraftReceiptUpdate = () => {
     const entity = {
       ...draftReceiptEntity,
       ...values,
-      receipts: drafts.find(it => it.id.toString() === values.receipts?.toString()),
+      productDimension: categoryElements.find(it => it.id.toString() === values.productDimension?.toString()),
+      stateOfDocuments: categoryElements.find(it => it.id.toString() === values.stateOfDocuments?.toString()),
+      currencyProvisionFileType: categoryElements.find(it => it.id.toString() === values.currencyProvisionFileType?.toString()),
+      paymentCurrencyRateType: paymentCurrencyRateTypes.find(it => it.id.toString() === values.paymentCurrencyRateType?.toString()),
+      paymentItem: paymentItemTypes.find(it => it.id.toString() === values.paymentItem?.toString()),
+      documentTransactionContainer: draftReceiptDocumentTransactionContainers.find(
+        it => it.id.toString() === values.documentTransactionContainer?.toString(),
+      ),
+      draft: drafts.find(it => it.id.toString() === values.draft?.toString()),
       draftCustomJustifications: mapIdList(values.draftCustomJustifications),
     };
 
@@ -118,7 +142,13 @@ export const DraftReceiptUpdate = () => {
       ? {}
       : {
           ...draftReceiptEntity,
-          receipts: draftReceiptEntity?.receipts?.id,
+          productDimension: draftReceiptEntity?.productDimension?.id,
+          stateOfDocuments: draftReceiptEntity?.stateOfDocuments?.id,
+          currencyProvisionFileType: draftReceiptEntity?.currencyProvisionFileType?.id,
+          paymentCurrencyRateType: draftReceiptEntity?.paymentCurrencyRateType?.id,
+          paymentItem: draftReceiptEntity?.paymentItem?.id,
+          documentTransactionContainer: draftReceiptEntity?.documentTransactionContainer?.id,
+          draft: draftReceiptEntity?.draft?.id,
           draftCustomJustifications: draftReceiptEntity?.draftCustomJustifications?.map(e => e.id.toString()),
         };
 
@@ -285,20 +315,6 @@ export const DraftReceiptUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
-                label={translate('tfbitaApp.draftReceipt.paymentCurrencyRateTypeDesc')}
-                id="draft-receipt-paymentCurrencyRateTypeDesc"
-                name="paymentCurrencyRateTypeDesc"
-                data-cy="paymentCurrencyRateTypeDesc"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draftReceipt.paymentItemTypeDesc')}
-                id="draft-receipt-paymentItemTypeDesc"
-                name="paymentItemTypeDesc"
-                data-cy="paymentItemTypeDesc"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('tfbitaApp.draftReceipt.netWeight')}
                 id="draft-receipt-netWeight"
                 name="netWeight"
@@ -398,10 +414,106 @@ export const DraftReceiptUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="draft-receipt-receipts"
-                name="receipts"
-                data-cy="receipts"
-                label={translate('tfbitaApp.draftReceipt.receipts')}
+                id="draft-receipt-productDimension"
+                name="productDimension"
+                data-cy="productDimension"
+                label={translate('tfbitaApp.draftReceipt.productDimension')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-stateOfDocuments"
+                name="stateOfDocuments"
+                data-cy="stateOfDocuments"
+                label={translate('tfbitaApp.draftReceipt.stateOfDocuments')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-currencyProvisionFileType"
+                name="currencyProvisionFileType"
+                data-cy="currencyProvisionFileType"
+                label={translate('tfbitaApp.draftReceipt.currencyProvisionFileType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-paymentCurrencyRateType"
+                name="paymentCurrencyRateType"
+                data-cy="paymentCurrencyRateType"
+                label={translate('tfbitaApp.draftReceipt.paymentCurrencyRateType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {paymentCurrencyRateTypes
+                  ? paymentCurrencyRateTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-paymentItem"
+                name="paymentItem"
+                data-cy="paymentItem"
+                label={translate('tfbitaApp.draftReceipt.paymentItem')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {paymentItemTypes
+                  ? paymentItemTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-documentTransactionContainer"
+                name="documentTransactionContainer"
+                data-cy="documentTransactionContainer"
+                label={translate('tfbitaApp.draftReceipt.documentTransactionContainer')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftReceiptDocumentTransactionContainers
+                  ? draftReceiptDocumentTransactionContainers.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-receipt-draft"
+                name="draft"
+                data-cy="draft"
+                label={translate('tfbitaApp.draftReceipt.draft')}
                 type="select"
               >
                 <option value="" key="0" />

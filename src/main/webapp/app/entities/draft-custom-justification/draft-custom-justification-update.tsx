@@ -61,7 +61,7 @@ export const DraftCustomJustificationUpdate = () => {
       ...draftCustomJustificationEntity,
       ...values,
       draftReceipts: mapIdList(values.draftReceipts),
-      draftJustifications: drafts.find(it => it.id.toString() === values.draftJustifications?.toString()),
+      draft: drafts.find(it => it.id.toString() === values.draft?.toString()),
     };
 
     if (isNew) {
@@ -77,7 +77,7 @@ export const DraftCustomJustificationUpdate = () => {
       : {
           ...draftCustomJustificationEntity,
           draftReceipts: draftCustomJustificationEntity?.draftReceipts?.map(e => e.id.toString()),
-          draftJustifications: draftCustomJustificationEntity?.draftJustifications?.id,
+          draft: draftCustomJustificationEntity?.draft?.id,
         };
 
   return (
@@ -125,10 +125,10 @@ export const DraftCustomJustificationUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="draft-custom-justification-draftJustifications"
-                name="draftJustifications"
-                data-cy="draftJustifications"
-                label={translate('tfbitaApp.draftCustomJustification.draftJustifications')}
+                id="draft-custom-justification-draft"
+                name="draft"
+                data-cy="draft"
+                label={translate('tfbitaApp.draftCustomJustification.draft')}
                 type="select"
               >
                 <option value="" key="0" />

@@ -327,6 +327,20 @@ export const Draft = () => {
                   <Translate contentKey="tfbitaApp.draft.isWithoutPayment">Is Without Payment</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('isWithoutPayment')} />
                 </th>
+                <th className="hand" onClick={sort('mainAccountCurrencyCode')}>
+                  <Translate contentKey="tfbitaApp.draft.mainAccountCurrencyCode">Main Account Currency Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('mainAccountCurrencyCode')} />
+                </th>
+                <th className="hand" onClick={sort('orderRegCurrencyCode')}>
+                  <Translate contentKey="tfbitaApp.draft.orderRegCurrencyCode">Order Reg Currency Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('orderRegCurrencyCode')} />
+                </th>
+                <th className="hand" onClick={sort('chargedExchangeBrokerCurrencyCode')}>
+                  <Translate contentKey="tfbitaApp.draft.chargedExchangeBrokerCurrencyCode">
+                    Charged Exchange Broker Currency Code
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('chargedExchangeBrokerCurrencyCode')} />
+                </th>
                 <th className="hand" onClick={sort('destinationCountryCode')}>
                   <Translate contentKey="tfbitaApp.draft.destinationCountryCode">Destination Country Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('destinationCountryCode')} />
@@ -338,6 +352,12 @@ export const Draft = () => {
                 <th className="hand" onClick={sort('producerCountryCode')}>
                   <Translate contentKey="tfbitaApp.draft.producerCountryCode">Producer Country Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('producerCountryCode')} />
+                </th>
+                <th className="hand" onClick={sort('registerationJustificationCurrencyCode')}>
+                  <Translate contentKey="tfbitaApp.draft.registerationJustificationCurrencyCode">
+                    Registeration Justification Currency Code
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('registerationJustificationCurrencyCode')} />
                 </th>
                 <th className="hand" onClick={sort('branchCode')}>
                   <Translate contentKey="tfbitaApp.draft.branchCode">Branch Code</Translate>{' '}
@@ -351,52 +371,117 @@ export const Draft = () => {
                   <Translate contentKey="tfbitaApp.draft.certificateSenderBranchCode">Certificate Sender Branch Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('certificateSenderBranchCode')} />
                 </th>
-                <th className="hand" onClick={sort('mainAccountCurrencyCode')}>
-                  <Translate contentKey="tfbitaApp.draft.mainAccountCurrencyCode">Main Account Currency Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('mainAccountCurrencyCode')} />
-                </th>
-                <th className="hand" onClick={sort('orderRegCurrencyCode')}>
-                  <Translate contentKey="tfbitaApp.draft.orderRegCurrencyCode">Order Reg Currency Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('orderRegCurrencyCode')} />
-                </th>
-                <th className="hand" onClick={sort('chargedExchangeBrokerCurrency')}>
-                  <Translate contentKey="tfbitaApp.draft.chargedExchangeBrokerCurrency">Charged Exchange Broker Currency</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('chargedExchangeBrokerCurrency')} />
-                </th>
-                <th className="hand" onClick={sort('registerationJustificationCurrencyCode')}>
-                  <Translate contentKey="tfbitaApp.draft.registerationJustificationCurrencyCode">
-                    Registeration Justification Currency Code
-                  </Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('registerationJustificationCurrencyCode')} />
-                </th>
-                <th className="hand" onClick={sort('currencyExchangeInfoTitle')}>
-                  <Translate contentKey="tfbitaApp.draft.currencyExchangeInfoTitle">Currency Exchange Info Title</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('currencyExchangeInfoTitle')} />
-                </th>
-                <th className="hand" onClick={sort('transportationTypeName')}>
-                  <Translate contentKey="tfbitaApp.draft.transportationTypeName">Transportation Type Name</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('transportationTypeName')} />
-                </th>
-                <th className="hand" onClick={sort('accountInfoCode')}>
-                  <Translate contentKey="tfbitaApp.draft.accountInfoCode">Account Info Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('accountInfoCode')} />
-                </th>
-                <th className="hand" onClick={sort('customerNumbers')}>
-                  <Translate contentKey="tfbitaApp.draft.customerNumbers">Customer Numbers</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('customerNumbers')} />
-                </th>
-                <th className="hand" onClick={sort('sanctionSerials')}>
-                  <Translate contentKey="tfbitaApp.draft.sanctionSerials">Sanction Serials</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('sanctionSerials')} />
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.chargedExchangeBroker">Charged Exchange Broker</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draft.custom">Custom</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draft.insuranceLetterType">Insurance Letter Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.advisorDepositType">Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.interfaceAdvisorDepositType">Interface Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.coveringAdvisorDepositType">Covering Advisor Deposit Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.impartType">Impart Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.dealType">Deal Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.transportVehicleType">Transport Vehicle Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.freightLetterType">Freight Letter Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.actionCode">Action Code</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.ownershipCode">Ownership Code</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.currencyContainerPlace">Currency Container Place</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.paymentType">Payment Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.draftSource">Draft Source</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.loadSwitchPlace">Load Switch Place</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.draftType">Draft Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.statusInfo">Status Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.insuranceCompanyInfo">Insurance Company Info</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.advisingBank">Advising Bank</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.interfaceAdvisingBank">Interface Advising Bank</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.coveringBank">Covering Bank</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.auditCompanyInfo">Audit Company Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.transportType">Transport Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.currencyExchangeInfo">Currency Exchange Info</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.accountInfo">Account Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.destinationCustomCompanies">Destination Custom Companies</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.sourceCustomCompanies">Source Custom Companies</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.services">Services</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.draft.products">Products</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draft.services">Services</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draft.sanctionSerials">Sanction Serials</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.customerNumbers">Customer Numbers</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.suggestedSanctions">Suggested Sanctions</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draft.documentTransactionContainer">Document Transaction Container</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -469,27 +554,141 @@ export const Draft = () => {
                   <td>{draft.isMigrational ? 'true' : 'false'}</td>
                   <td>{draft.isNewCertificate ? 'true' : 'false'}</td>
                   <td>{draft.isWithoutPayment ? 'true' : 'false'}</td>
+                  <td>{draft.mainAccountCurrencyCode}</td>
+                  <td>{draft.orderRegCurrencyCode}</td>
+                  <td>{draft.chargedExchangeBrokerCurrencyCode}</td>
                   <td>{draft.destinationCountryCode}</td>
                   <td>{draft.beneficiaryCountryCode}</td>
                   <td>{draft.producerCountryCode}</td>
+                  <td>{draft.registerationJustificationCurrencyCode}</td>
                   <td>{draft.branchCode}</td>
                   <td>{draft.operationalBranchCode}</td>
                   <td>{draft.certificateSenderBranchCode}</td>
-                  <td>{draft.mainAccountCurrencyCode}</td>
-                  <td>{draft.orderRegCurrencyCode}</td>
-                  <td>{draft.chargedExchangeBrokerCurrency}</td>
-                  <td>{draft.registerationJustificationCurrencyCode}</td>
-                  <td>{draft.currencyExchangeInfoTitle}</td>
-                  <td>{draft.transportationTypeName}</td>
-                  <td>{draft.accountInfoCode}</td>
-                  <td>{draft.customerNumbers}</td>
-                  <td>{draft.sanctionSerials}</td>
                   <td>
-                    {draft.customs
-                      ? draft.customs.map((val, j) => (
+                    {draft.chargedExchangeBroker ? (
+                      <Link to={`/category-element/${draft.chargedExchangeBroker.id}`}>{draft.chargedExchangeBroker.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.insuranceLetterType ? (
+                      <Link to={`/category-element/${draft.insuranceLetterType.id}`}>{draft.insuranceLetterType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.advisorDepositType ? (
+                      <Link to={`/category-element/${draft.advisorDepositType.id}`}>{draft.advisorDepositType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.interfaceAdvisorDepositType ? (
+                      <Link to={`/category-element/${draft.interfaceAdvisorDepositType.id}`}>{draft.interfaceAdvisorDepositType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.coveringAdvisorDepositType ? (
+                      <Link to={`/category-element/${draft.coveringAdvisorDepositType.id}`}>{draft.coveringAdvisorDepositType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draft.impartType ? <Link to={`/category-element/${draft.impartType.id}`}>{draft.impartType.id}</Link> : ''}</td>
+                  <td>{draft.dealType ? <Link to={`/category-element/${draft.dealType.id}`}>{draft.dealType.id}</Link> : ''}</td>
+                  <td>
+                    {draft.transportVehicleType ? (
+                      <Link to={`/category-element/${draft.transportVehicleType.id}`}>{draft.transportVehicleType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.freightLetterType ? (
+                      <Link to={`/category-element/${draft.freightLetterType.id}`}>{draft.freightLetterType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draft.actionCode ? <Link to={`/category-element/${draft.actionCode.id}`}>{draft.actionCode.id}</Link> : ''}</td>
+                  <td>
+                    {draft.ownershipCode ? <Link to={`/category-element/${draft.ownershipCode.id}`}>{draft.ownershipCode.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {draft.currencyContainerPlace ? (
+                      <Link to={`/category-element/${draft.currencyContainerPlace.id}`}>{draft.currencyContainerPlace.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draft.paymentType ? <Link to={`/category-element/${draft.paymentType.id}`}>{draft.paymentType.id}</Link> : ''}</td>
+                  <td>{draft.draftSource ? <Link to={`/category-element/${draft.draftSource.id}`}>{draft.draftSource.id}</Link> : ''}</td>
+                  <td>{draft.loadSwitchPlace ? <Link to={`/custom/${draft.loadSwitchPlace.id}`}>{draft.loadSwitchPlace.id}</Link> : ''}</td>
+                  <td>{draft.draftType ? <Link to={`/draft-type/${draft.draftType.id}`}>{draft.draftType.id}</Link> : ''}</td>
+                  <td>{draft.statusInfo ? <Link to={`/draft-status-info/${draft.statusInfo.id}`}>{draft.statusInfo.id}</Link> : ''}</td>
+                  <td>
+                    {draft.insuranceCompanyInfo ? (
+                      <Link to={`/insurance-company-info/${draft.insuranceCompanyInfo.id}`}>{draft.insuranceCompanyInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.advisingBank ? <Link to={`/advisor-definition/${draft.advisingBank.id}`}>{draft.advisingBank.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {draft.interfaceAdvisingBank ? (
+                      <Link to={`/advisor-definition/${draft.interfaceAdvisingBank.id}`}>{draft.interfaceAdvisingBank.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.coveringBank ? <Link to={`/advisor-definition/${draft.coveringBank.id}`}>{draft.coveringBank.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {draft.auditCompanyInfo ? (
+                      <Link to={`/audit-company-info/${draft.auditCompanyInfo.id}`}>{draft.auditCompanyInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.transportType ? <Link to={`/transportation-type/${draft.transportType.id}`}>{draft.transportType.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {draft.currencyExchangeInfo ? (
+                      <Link to={`/currency-exchange-info/${draft.currencyExchangeInfo.id}`}>{draft.currencyExchangeInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draft.accountInfo ? <Link to={`/draft-account-info/${draft.accountInfo.id}`}>{draft.accountInfo.id}</Link> : ''}</td>
+                  <td>
+                    {draft.destinationCustomCompanies ? (
+                      <Link to={`/custom/${draft.destinationCustomCompanies.id}`}>{draft.destinationCustomCompanies.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.sourceCustomCompanies ? (
+                      <Link to={`/custom/${draft.sourceCustomCompanies.id}`}>{draft.sourceCustomCompanies.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draft.services
+                      ? draft.services.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/custom/${val.id}`}>{val.id}</Link>
-                            {j === draft.customs.length - 1 ? '' : ', '}
+                            <Link to={`/service-tariff/${val.id}`}>{val.id}</Link>
+                            {j === draft.services.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}
@@ -505,11 +704,41 @@ export const Draft = () => {
                       : null}
                   </td>
                   <td>
-                    {draft.services
-                      ? draft.services.map((val, j) => (
+                    {draft.sanctionSerials
+                      ? draft.sanctionSerials.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/service-tariff/${val.id}`}>{val.id}</Link>
-                            {j === draft.services.length - 1 ? '' : ', '}
+                            <Link to={`/string-value/${val.id}`}>{val.id}</Link>
+                            {j === draft.sanctionSerials.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {draft.customerNumbers
+                      ? draft.customerNumbers.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/long-value/${val.id}`}>{val.id}</Link>
+                            {j === draft.customerNumbers.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {draft.suggestedSanctions
+                      ? draft.suggestedSanctions.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/suggested-sanction-info/${val.id}`}>{val.id}</Link>
+                            {j === draft.suggestedSanctions.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
+                  <td>
+                    {draft.documentTransactionContainers
+                      ? draft.documentTransactionContainers.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/draft-document-transaction-container/${val.id}`}>{val.id}</Link>
+                            {j === draft.documentTransactionContainers.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

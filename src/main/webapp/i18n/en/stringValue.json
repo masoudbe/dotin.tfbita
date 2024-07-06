@@ -18,8 +18,10 @@
         "title": "String Value"
       },
       "id": "ID",
-      "value": "Value",
-      "orderRegistrationInfo": "Order Registration Info"
+      "val": "Val",
+      "orderRegistrationInfo": "Order Registration Info",
+      "draft": "Draft",
+      "draftType": "Draft Type"
     }
   }
 }

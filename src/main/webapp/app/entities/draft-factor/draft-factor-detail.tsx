@@ -68,15 +68,15 @@ export const DraftFactorDetail = () => {
           </dt>
           <dd>{draftFactorEntity.serial}</dd>
           <dt>
-            <span id="currencyName">
-              <Translate contentKey="tfbitaApp.draftFactor.currencyName">Currency Name</Translate>
+            <span id="currencyCode">
+              <Translate contentKey="tfbitaApp.draftFactor.currencyCode">Currency Code</Translate>
             </span>
           </dt>
-          <dd>{draftFactorEntity.currencyName}</dd>
+          <dd>{draftFactorEntity.currencyCode}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftFactor.draftFactors">Draft Factors</Translate>
+            <Translate contentKey="tfbitaApp.draftFactor.draft">Draft</Translate>
           </dt>
-          <dd>{draftFactorEntity.draftFactors ? draftFactorEntity.draftFactors.id : ''}</dd>
+          <dd>{draftFactorEntity.draft ? draftFactorEntity.draft.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-factor" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

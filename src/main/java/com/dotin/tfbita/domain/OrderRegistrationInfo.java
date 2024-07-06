@@ -174,68 +174,60 @@ public class OrderRegistrationInfo implements Serializable {
     private Set<PurchaseFromOtherResources> purchaseFromOtherResourcesLists = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement orderRegType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement requestType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement importType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement operationType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement currencyProvisionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement paymentTool;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement activityType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement ownerType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement externalCustomerType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement transportVehicleType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TransportationType transportType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
     private Custom destCoustomers;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
     private Custom cargoPlaceCustoms;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
     private Custom entranceBorders;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_order_registration_info__transport_vehicle_type",
-        joinColumns = @JoinColumn(name = "order_registration_info_id"),
-        inverseJoinColumns = @JoinColumn(name = "transport_vehicle_type_id")
-    )
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
-    private Set<CategoryElement> transportVehicleTypes = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -244,7 +236,7 @@ public class OrderRegistrationInfo implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "product_info_id")
     )
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "draftProductInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Set<Product> productInfos = new HashSet<>();
@@ -255,11 +247,11 @@ public class OrderRegistrationInfo implements Serializable {
         joinColumns = @JoinColumn(name = "order_registration_info_id"),
         inverseJoinColumns = @JoinColumn(name = "commission_transaction_number_id")
     )
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
     private Set<StringValue> commissionTransactionNumbers = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")
-    @JsonIgnoreProperties(value = { "product", "service", "orderRegistrationInfo", "orderRegServ" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "product", "service", "orderRegistrationInfo" }, allowSetters = true)
     private Set<LicenceInfo> licenceInfos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -1080,6 +1072,19 @@ public class OrderRegistrationInfo implements Serializable {
         return this;
     }
 
+    public CategoryElement getTransportVehicleType() {
+        return this.transportVehicleType;
+    }
+
+    public void setTransportVehicleType(CategoryElement categoryElement) {
+        this.transportVehicleType = categoryElement;
+    }
+
+    public OrderRegistrationInfo transportVehicleType(CategoryElement categoryElement) {
+        this.setTransportVehicleType(categoryElement);
+        return this;
+    }
+
     public TransportationType getTransportType() {
         return this.transportType;
     }
@@ -1129,29 +1134,6 @@ public class OrderRegistrationInfo implements Serializable {
 
     public OrderRegistrationInfo entranceBorders(Custom custom) {
         this.setEntranceBorders(custom);
-        return this;
-    }
-
-    public Set<CategoryElement> getTransportVehicleTypes() {
-        return this.transportVehicleTypes;
-    }
-
-    public void setTransportVehicleTypes(Set<CategoryElement> categoryElements) {
-        this.transportVehicleTypes = categoryElements;
-    }
-
-    public OrderRegistrationInfo transportVehicleTypes(Set<CategoryElement> categoryElements) {
-        this.setTransportVehicleTypes(categoryElements);
-        return this;
-    }
-
-    public OrderRegistrationInfo addTransportVehicleType(CategoryElement categoryElement) {
-        this.transportVehicleTypes.add(categoryElement);
-        return this;
-    }
-
-    public OrderRegistrationInfo removeTransportVehicleType(CategoryElement categoryElement) {
-        this.transportVehicleTypes.remove(categoryElement);
         return this;
     }
 

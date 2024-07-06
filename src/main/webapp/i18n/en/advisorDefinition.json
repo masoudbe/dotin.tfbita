@@ -23,14 +23,18 @@
       "countryIsoCode": "Country Iso Code",
       "depositNum": "Deposit Num",
       "swiftCode": "Swift Code",
-      "creditDate": "Credit Date",
+      "defaultCurrencyCode": "Default Currency Code",
+      "currenciesCodes": "Currencies Codes",
+      "countryCode": "Country Code",
       "bankCode": "Bank Code",
       "branchCode": "Branch Code",
-      "defaultCurrencyCode": "Default Currency Code",
-      "countryCode": "Country Code",
-      "advisingBank": "Advising Bank",
-      "interfaceAdvisingBank": "Interface Advising Bank",
-      "coveringBank": "Covering Bank"
+      "additionalBrokerInformation": "Additional Broker Information",
+      "advisorDeposit": "Advisor Deposit",
+      "defaultVostroDeposit": "Default Vostro Deposit",
+      "defaultNostroDeposit": "Default Nostro Deposit",
+      "receiveMethod": "Receive Method",
+      "payMethod": "Pay Method",
+      "swiftBic": "Swift Bic"
     }
   }
 }

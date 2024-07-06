@@ -1,3 +1,7 @@
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { IPaymentCurrencyRateType } from 'app/shared/model/payment-currency-rate-type.model';
+import { IPaymentItemType } from 'app/shared/model/payment-item-type.model';
+import { IDraftReceiptDocumentTransactionContainer } from 'app/shared/model/draft-receipt-document-transaction-container.model';
 import { IDraft } from 'app/shared/model/draft.model';
 import { IDraftCustomJustification } from 'app/shared/model/draft-custom-justification.model';
 
@@ -23,8 +27,6 @@ export interface IDraftReceipt {
   serial?: string | null;
   transportRow?: string | null;
   usable?: boolean | null;
-  paymentCurrencyRateTypeDesc?: string | null;
-  paymentItemTypeDesc?: string | null;
   netWeight?: number | null;
   grossWeight?: number | null;
   totalNetWeight?: number | null;
@@ -40,7 +42,13 @@ export interface IDraftReceipt {
   currencyProvisionFile?: string | null;
   isMigrational?: boolean | null;
   otherCost?: number | null;
-  receipts?: IDraft | null;
+  productDimension?: ICategoryElement | null;
+  stateOfDocuments?: ICategoryElement | null;
+  currencyProvisionFileType?: ICategoryElement | null;
+  paymentCurrencyRateType?: IPaymentCurrencyRateType | null;
+  paymentItem?: IPaymentItemType | null;
+  documentTransactionContainer?: IDraftReceiptDocumentTransactionContainer | null;
+  draft?: IDraft | null;
   draftCustomJustifications?: IDraftCustomJustification[] | null;
 }
 

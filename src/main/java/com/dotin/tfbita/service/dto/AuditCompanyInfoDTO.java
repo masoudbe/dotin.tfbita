@@ -43,9 +43,7 @@ public class AuditCompanyInfoDTO implements Serializable {
 
     private String unit;
 
-    private String city;
-
-    private DraftDTO auditCompanyInfo;
+    private String cityCode;
 
     public Long getId() {
         return id;
@@ -183,20 +181,12 @@ public class AuditCompanyInfoDTO implements Serializable {
         this.unit = unit;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityCode() {
+        return cityCode;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public DraftDTO getAuditCompanyInfo() {
-        return auditCompanyInfo;
-    }
-
-    public void setAuditCompanyInfo(DraftDTO auditCompanyInfo) {
-        this.auditCompanyInfo = auditCompanyInfo;
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
     }
 
     @Override
@@ -241,8 +231,7 @@ public class AuditCompanyInfoDTO implements Serializable {
             ", theSideStreet='" + getTheSideStreet() + "'" +
             ", title='" + getTitle() + "'" +
             ", unit='" + getUnit() + "'" +
-            ", city='" + getCity() + "'" +
-            ", auditCompanyInfo=" + getAuditCompanyInfo() +
+            ", cityCode='" + getCityCode() + "'" +
             "}";
     }
 }

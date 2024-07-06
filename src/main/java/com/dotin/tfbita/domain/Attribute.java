@@ -27,11 +27,11 @@ public class Attribute implements Serializable {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement format;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "category", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
     private CategoryElement type;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

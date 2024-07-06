@@ -19,7 +19,7 @@
       },
       "id": "ID",
       "draftReceipts": "Draft Receipts",
-      "draftJustifications": "Draft Justifications"
+      "draft": "Draft"
     }
   }
 }

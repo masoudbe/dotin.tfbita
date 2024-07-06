@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +82,8 @@ class AuditCompanyInfoResourceIT {
     private static final String DEFAULT_UNIT = "AAAAAAAAAA";
     private static final String UPDATED_UNIT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CITY = "AAAAAAAAAA";
-    private static final String UPDATED_CITY = "BBBBBBBBBB";
+    private static final String DEFAULT_CITY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CITY_CODE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/audit-company-infos";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -106,6 +107,8 @@ class AuditCompanyInfoResourceIT {
     private MockMvc restAuditCompanyInfoMockMvc;
 
     private AuditCompanyInfo auditCompanyInfo;
+
+    private AuditCompanyInfo insertedAuditCompanyInfo;
 
     /**
      * Create an entity for this test.
@@ -131,7 +134,7 @@ class AuditCompanyInfoResourceIT {
             .theSideStreet(DEFAULT_THE_SIDE_STREET)
             .title(DEFAULT_TITLE)
             .unit(DEFAULT_UNIT)
-            .city(DEFAULT_CITY);
+            .cityCode(DEFAULT_CITY_CODE);
         return auditCompanyInfo;
     }
 
@@ -159,13 +162,21 @@ class AuditCompanyInfoResourceIT {
             .theSideStreet(UPDATED_THE_SIDE_STREET)
             .title(UPDATED_TITLE)
             .unit(UPDATED_UNIT)
-            .city(UPDATED_CITY);
+            .cityCode(UPDATED_CITY_CODE);
         return auditCompanyInfo;
     }
 
     @BeforeEach
     public void initTest() {
         auditCompanyInfo = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedAuditCompanyInfo != null) {
+            auditCompanyInfoRepository.delete(insertedAuditCompanyInfo);
+            insertedAuditCompanyInfo = null;
+        }
     }
 
     @Test
@@ -188,6 +199,8 @@ class AuditCompanyInfoResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedAuditCompanyInfo = auditCompanyInfoMapper.toEntity(returnedAuditCompanyInfoDTO);
         assertAuditCompanyInfoUpdatableFieldsEquals(returnedAuditCompanyInfo, getPersistedAuditCompanyInfo(returnedAuditCompanyInfo));
+
+        insertedAuditCompanyInfo = returnedAuditCompanyInfo;
     }
 
     @Test
@@ -212,7 +225,7 @@ class AuditCompanyInfoResourceIT {
     @Transactional
     void getAllAuditCompanyInfos() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         // Get all the auditCompanyInfoList
         restAuditCompanyInfoMockMvc
@@ -236,14 +249,14 @@ class AuditCompanyInfoResourceIT {
             .andExpect(jsonPath("$.[*].theSideStreet").value(hasItem(DEFAULT_THE_SIDE_STREET)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].unit").value(hasItem(DEFAULT_UNIT)))
-            .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)));
+            .andExpect(jsonPath("$.[*].cityCode").value(hasItem(DEFAULT_CITY_CODE)));
     }
 
     @Test
     @Transactional
     void getAuditCompanyInfo() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         // Get the auditCompanyInfo
         restAuditCompanyInfoMockMvc
@@ -267,7 +280,7 @@ class AuditCompanyInfoResourceIT {
             .andExpect(jsonPath("$.theSideStreet").value(DEFAULT_THE_SIDE_STREET))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.unit").value(DEFAULT_UNIT))
-            .andExpect(jsonPath("$.city").value(DEFAULT_CITY));
+            .andExpect(jsonPath("$.cityCode").value(DEFAULT_CITY_CODE));
     }
 
     @Test
@@ -281,7 +294,7 @@ class AuditCompanyInfoResourceIT {
     @Transactional
     void putExistingAuditCompanyInfo() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -306,7 +319,7 @@ class AuditCompanyInfoResourceIT {
             .theSideStreet(UPDATED_THE_SIDE_STREET)
             .title(UPDATED_TITLE)
             .unit(UPDATED_UNIT)
-            .city(UPDATED_CITY);
+            .cityCode(UPDATED_CITY_CODE);
         AuditCompanyInfoDTO auditCompanyInfoDTO = auditCompanyInfoMapper.toDto(updatedAuditCompanyInfo);
 
         restAuditCompanyInfoMockMvc
@@ -388,7 +401,7 @@ class AuditCompanyInfoResourceIT {
     @Transactional
     void partialUpdateAuditCompanyInfoWithPatch() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -400,11 +413,14 @@ class AuditCompanyInfoResourceIT {
             .address(UPDATED_ADDRESS)
             .fax(UPDATED_FAX)
             .floor(UPDATED_FLOOR)
+            .inernationalobserviation(UPDATED_INERNATIONALOBSERVIATION)
+            .mainStreet(UPDATED_MAIN_STREET)
             .mobile(UPDATED_MOBILE)
-            .registrationNumber(UPDATED_REGISTRATION_NUMBER)
-            .telephone(UPDATED_TELEPHONE)
+            .tempId(UPDATED_TEMP_ID)
+            .theSideStreet(UPDATED_THE_SIDE_STREET)
             .title(UPDATED_TITLE)
-            .unit(UPDATED_UNIT);
+            .unit(UPDATED_UNIT)
+            .cityCode(UPDATED_CITY_CODE);
 
         restAuditCompanyInfoMockMvc
             .perform(
@@ -427,7 +443,7 @@ class AuditCompanyInfoResourceIT {
     @Transactional
     void fullUpdateAuditCompanyInfoWithPatch() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -452,7 +468,7 @@ class AuditCompanyInfoResourceIT {
             .theSideStreet(UPDATED_THE_SIDE_STREET)
             .title(UPDATED_TITLE)
             .unit(UPDATED_UNIT)
-            .city(UPDATED_CITY);
+            .cityCode(UPDATED_CITY_CODE);
 
         restAuditCompanyInfoMockMvc
             .perform(
@@ -537,7 +553,7 @@ class AuditCompanyInfoResourceIT {
     @Transactional
     void deleteAuditCompanyInfo() throws Exception {
         // Initialize the database
-        auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
+        insertedAuditCompanyInfo = auditCompanyInfoRepository.saveAndFlush(auditCompanyInfo);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

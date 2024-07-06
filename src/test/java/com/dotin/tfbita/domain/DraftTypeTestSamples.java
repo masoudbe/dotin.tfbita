@@ -20,9 +20,8 @@ public class DraftTypeTestSamples {
             .duration(1)
             .latestCreditSerial(1L)
             .name("name1")
-            .defaultCurrencyCode("defaultCurrencyCode1")
-            .accountInfoCode("accountInfoCode1")
-            .topicInfoCode("topicInfoCode1");
+            .currenciesCodes("currenciesCodes1")
+            .defaultCurrencyCode("defaultCurrencyCode1");
     }
 
     public static DraftType getDraftTypeSample2() {
@@ -34,9 +33,8 @@ public class DraftTypeTestSamples {
             .duration(2)
             .latestCreditSerial(2L)
             .name("name2")
-            .defaultCurrencyCode("defaultCurrencyCode2")
-            .accountInfoCode("accountInfoCode2")
-            .topicInfoCode("topicInfoCode2");
+            .currenciesCodes("currenciesCodes2")
+            .defaultCurrencyCode("defaultCurrencyCode2");
     }
 
     public static DraftType getDraftTypeRandomSampleGenerator() {
@@ -48,8 +46,7 @@ public class DraftTypeTestSamples {
             .duration(intCount.incrementAndGet())
             .latestCreditSerial(longCount.incrementAndGet())
             .name(UUID.randomUUID().toString())
-            .defaultCurrencyCode(UUID.randomUUID().toString())
-            .accountInfoCode(UUID.randomUUID().toString())
-            .topicInfoCode(UUID.randomUUID().toString());
+            .currenciesCodes(UUID.randomUUID().toString())
+            .defaultCurrencyCode(UUID.randomUUID().toString());
     }
 }

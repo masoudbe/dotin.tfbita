@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "basicInfo": {
+      "home": {
+        "title": "Basic Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Basic Info",
+        "createOrEditLabel": "Create or edit a Basic Info",
+        "notFound": "No Basic Infos found"
+      },
+      "created": "A new Basic Info is created with identifier {{ param }}",
+      "updated": "A Basic Info is updated with identifier {{ param }}",
+      "deleted": "A Basic Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Basic Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Basic Info"
+      },
+      "id": "ID",
+      "applyDate": "Apply Date",
+      "code": "Code",
+      "disabled": "Disabled"
+    }
+  }
+}

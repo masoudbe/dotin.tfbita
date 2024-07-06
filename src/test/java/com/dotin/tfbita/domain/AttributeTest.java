@@ -24,7 +24,7 @@ class AttributeTest {
     }
 
     @Test
-    void formatTest() throws Exception {
+    void formatTest() {
         Attribute attribute = getAttributeRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -36,7 +36,7 @@ class AttributeTest {
     }
 
     @Test
-    void typeTest() throws Exception {
+    void typeTest() {
         Attribute attribute = getAttributeRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 

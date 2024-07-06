@@ -28,10 +28,17 @@
       "name": "Name",
       "portal": "Portal",
       "usable": "Usable",
+      "currenciesCodes": "Currencies Codes",
       "defaultCurrencyCode": "Default Currency Code",
-      "accountInfoCode": "Account Info Code",
-      "topicInfoCode": "Topic Info Code",
-      "draftType": "Draft Type"
+      "type": "Type",
+      "secondaryType": "Secondary Type",
+      "division": "Division",
+      "topicInfo": "Topic Info",
+      "conditionInfo": "Condition Info",
+      "accountInfo": "Account Info",
+      "requestType": "Request Type",
+      "acceptableProductTypes": "Acceptable Product Types",
+      "userGroups": "User Groups"
     }
   }
 }

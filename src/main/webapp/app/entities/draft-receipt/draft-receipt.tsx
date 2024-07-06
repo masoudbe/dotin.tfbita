@@ -169,14 +169,6 @@ export const DraftReceipt = () => {
                   <Translate contentKey="tfbitaApp.draftReceipt.usable">Usable</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('usable')} />
                 </th>
-                <th className="hand" onClick={sort('paymentCurrencyRateTypeDesc')}>
-                  <Translate contentKey="tfbitaApp.draftReceipt.paymentCurrencyRateTypeDesc">Payment Currency Rate Type Desc</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('paymentCurrencyRateTypeDesc')} />
-                </th>
-                <th className="hand" onClick={sort('paymentItemTypeDesc')}>
-                  <Translate contentKey="tfbitaApp.draftReceipt.paymentItemTypeDesc">Payment Item Type Desc</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('paymentItemTypeDesc')} />
-                </th>
                 <th className="hand" onClick={sort('netWeight')}>
                   <Translate contentKey="tfbitaApp.draftReceipt.netWeight">Net Weight</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('netWeight')} />
@@ -234,7 +226,30 @@ export const DraftReceipt = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('otherCost')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftReceipt.receipts">Receipts</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftReceipt.productDimension">Product Dimension</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.stateOfDocuments">State Of Documents</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.currencyProvisionFileType">Currency Provision File Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.paymentCurrencyRateType">Payment Currency Rate Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.paymentItem">Payment Item</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.documentTransactionContainer">Document Transaction Container</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftReceipt.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.draftReceipt.draftCustomJustification">Draft Custom Justification</Translate>{' '}
@@ -271,8 +286,6 @@ export const DraftReceipt = () => {
                   <td>{draftReceipt.serial}</td>
                   <td>{draftReceipt.transportRow}</td>
                   <td>{draftReceipt.usable ? 'true' : 'false'}</td>
-                  <td>{draftReceipt.paymentCurrencyRateTypeDesc}</td>
-                  <td>{draftReceipt.paymentItemTypeDesc}</td>
                   <td>{draftReceipt.netWeight}</td>
                   <td>{draftReceipt.grossWeight}</td>
                   <td>{draftReceipt.totalNetWeight}</td>
@@ -301,7 +314,55 @@ export const DraftReceipt = () => {
                   </td>
                   <td>{draftReceipt.isMigrational ? 'true' : 'false'}</td>
                   <td>{draftReceipt.otherCost}</td>
-                  <td>{draftReceipt.receipts ? <Link to={`/draft/${draftReceipt.receipts.id}`}>{draftReceipt.receipts.id}</Link> : ''}</td>
+                  <td>
+                    {draftReceipt.productDimension ? (
+                      <Link to={`/category-element/${draftReceipt.productDimension.id}`}>{draftReceipt.productDimension.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftReceipt.stateOfDocuments ? (
+                      <Link to={`/category-element/${draftReceipt.stateOfDocuments.id}`}>{draftReceipt.stateOfDocuments.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftReceipt.currencyProvisionFileType ? (
+                      <Link to={`/category-element/${draftReceipt.currencyProvisionFileType.id}`}>
+                        {draftReceipt.currencyProvisionFileType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftReceipt.paymentCurrencyRateType ? (
+                      <Link to={`/payment-currency-rate-type/${draftReceipt.paymentCurrencyRateType.id}`}>
+                        {draftReceipt.paymentCurrencyRateType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftReceipt.paymentItem ? (
+                      <Link to={`/payment-item-type/${draftReceipt.paymentItem.id}`}>{draftReceipt.paymentItem.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftReceipt.documentTransactionContainer ? (
+                      <Link to={`/draft-receipt-document-transaction-container/${draftReceipt.documentTransactionContainer.id}`}>
+                        {draftReceipt.documentTransactionContainer.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draftReceipt.draft ? <Link to={`/draft/${draftReceipt.draft.id}`}>{draftReceipt.draft.id}</Link> : ''}</td>
                   <td>
                     {draftReceipt.draftCustomJustifications
                       ? draftReceipt.draftCustomJustifications.map((val, j) => (

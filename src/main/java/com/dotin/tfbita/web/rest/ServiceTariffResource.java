@@ -131,13 +131,10 @@ public class ServiceTariffResource {
     /**
      * {@code GET  /service-tariffs} : get all the serviceTariffs.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of serviceTariffs in body.
      */
     @GetMapping("")
-    public List<ServiceTariffDTO> getAllServiceTariffs(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<ServiceTariffDTO> getAllServiceTariffs() {
         log.debug("REST request to get all ServiceTariffs");
         return serviceTariffService.findAll();
     }

@@ -392,6 +392,24 @@ export const DraftDetail = () => {
           </dt>
           <dd>{draftEntity.isWithoutPayment ? 'true' : 'false'}</dd>
           <dt>
+            <span id="mainAccountCurrencyCode">
+              <Translate contentKey="tfbitaApp.draft.mainAccountCurrencyCode">Main Account Currency Code</Translate>
+            </span>
+          </dt>
+          <dd>{draftEntity.mainAccountCurrencyCode}</dd>
+          <dt>
+            <span id="orderRegCurrencyCode">
+              <Translate contentKey="tfbitaApp.draft.orderRegCurrencyCode">Order Reg Currency Code</Translate>
+            </span>
+          </dt>
+          <dd>{draftEntity.orderRegCurrencyCode}</dd>
+          <dt>
+            <span id="chargedExchangeBrokerCurrencyCode">
+              <Translate contentKey="tfbitaApp.draft.chargedExchangeBrokerCurrencyCode">Charged Exchange Broker Currency Code</Translate>
+            </span>
+          </dt>
+          <dd>{draftEntity.chargedExchangeBrokerCurrencyCode}</dd>
+          <dt>
             <span id="destinationCountryCode">
               <Translate contentKey="tfbitaApp.draft.destinationCountryCode">Destination Country Code</Translate>
             </span>
@@ -409,6 +427,14 @@ export const DraftDetail = () => {
             </span>
           </dt>
           <dd>{draftEntity.producerCountryCode}</dd>
+          <dt>
+            <span id="registerationJustificationCurrencyCode">
+              <Translate contentKey="tfbitaApp.draft.registerationJustificationCurrencyCode">
+                Registeration Justification Currency Code
+              </Translate>
+            </span>
+          </dt>
+          <dd>{draftEntity.registerationJustificationCurrencyCode}</dd>
           <dt>
             <span id="branchCode">
               <Translate contentKey="tfbitaApp.draft.branchCode">Branch Code</Translate>
@@ -428,70 +454,122 @@ export const DraftDetail = () => {
           </dt>
           <dd>{draftEntity.certificateSenderBranchCode}</dd>
           <dt>
-            <span id="mainAccountCurrencyCode">
-              <Translate contentKey="tfbitaApp.draft.mainAccountCurrencyCode">Main Account Currency Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.chargedExchangeBroker">Charged Exchange Broker</Translate>
           </dt>
-          <dd>{draftEntity.mainAccountCurrencyCode}</dd>
+          <dd>{draftEntity.chargedExchangeBroker ? draftEntity.chargedExchangeBroker.id : ''}</dd>
           <dt>
-            <span id="orderRegCurrencyCode">
-              <Translate contentKey="tfbitaApp.draft.orderRegCurrencyCode">Order Reg Currency Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.insuranceLetterType">Insurance Letter Type</Translate>
           </dt>
-          <dd>{draftEntity.orderRegCurrencyCode}</dd>
+          <dd>{draftEntity.insuranceLetterType ? draftEntity.insuranceLetterType.id : ''}</dd>
           <dt>
-            <span id="chargedExchangeBrokerCurrency">
-              <Translate contentKey="tfbitaApp.draft.chargedExchangeBrokerCurrency">Charged Exchange Broker Currency</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.advisorDepositType">Advisor Deposit Type</Translate>
           </dt>
-          <dd>{draftEntity.chargedExchangeBrokerCurrency}</dd>
+          <dd>{draftEntity.advisorDepositType ? draftEntity.advisorDepositType.id : ''}</dd>
           <dt>
-            <span id="registerationJustificationCurrencyCode">
-              <Translate contentKey="tfbitaApp.draft.registerationJustificationCurrencyCode">
-                Registeration Justification Currency Code
-              </Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.interfaceAdvisorDepositType">Interface Advisor Deposit Type</Translate>
           </dt>
-          <dd>{draftEntity.registerationJustificationCurrencyCode}</dd>
+          <dd>{draftEntity.interfaceAdvisorDepositType ? draftEntity.interfaceAdvisorDepositType.id : ''}</dd>
           <dt>
-            <span id="currencyExchangeInfoTitle">
-              <Translate contentKey="tfbitaApp.draft.currencyExchangeInfoTitle">Currency Exchange Info Title</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.coveringAdvisorDepositType">Covering Advisor Deposit Type</Translate>
           </dt>
-          <dd>{draftEntity.currencyExchangeInfoTitle}</dd>
+          <dd>{draftEntity.coveringAdvisorDepositType ? draftEntity.coveringAdvisorDepositType.id : ''}</dd>
           <dt>
-            <span id="transportationTypeName">
-              <Translate contentKey="tfbitaApp.draft.transportationTypeName">Transportation Type Name</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.impartType">Impart Type</Translate>
           </dt>
-          <dd>{draftEntity.transportationTypeName}</dd>
+          <dd>{draftEntity.impartType ? draftEntity.impartType.id : ''}</dd>
           <dt>
-            <span id="accountInfoCode">
-              <Translate contentKey="tfbitaApp.draft.accountInfoCode">Account Info Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.dealType">Deal Type</Translate>
           </dt>
-          <dd>{draftEntity.accountInfoCode}</dd>
+          <dd>{draftEntity.dealType ? draftEntity.dealType.id : ''}</dd>
           <dt>
-            <span id="customerNumbers">
-              <Translate contentKey="tfbitaApp.draft.customerNumbers">Customer Numbers</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.transportVehicleType">Transport Vehicle Type</Translate>
           </dt>
-          <dd>{draftEntity.customerNumbers}</dd>
+          <dd>{draftEntity.transportVehicleType ? draftEntity.transportVehicleType.id : ''}</dd>
           <dt>
-            <span id="sanctionSerials">
-              <Translate contentKey="tfbitaApp.draft.sanctionSerials">Sanction Serials</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draft.freightLetterType">Freight Letter Type</Translate>
           </dt>
-          <dd>{draftEntity.sanctionSerials}</dd>
+          <dd>{draftEntity.freightLetterType ? draftEntity.freightLetterType.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draft.custom">Custom</Translate>
+            <Translate contentKey="tfbitaApp.draft.actionCode">Action Code</Translate>
+          </dt>
+          <dd>{draftEntity.actionCode ? draftEntity.actionCode.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.ownershipCode">Ownership Code</Translate>
+          </dt>
+          <dd>{draftEntity.ownershipCode ? draftEntity.ownershipCode.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.currencyContainerPlace">Currency Container Place</Translate>
+          </dt>
+          <dd>{draftEntity.currencyContainerPlace ? draftEntity.currencyContainerPlace.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.paymentType">Payment Type</Translate>
+          </dt>
+          <dd>{draftEntity.paymentType ? draftEntity.paymentType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.draftSource">Draft Source</Translate>
+          </dt>
+          <dd>{draftEntity.draftSource ? draftEntity.draftSource.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.loadSwitchPlace">Load Switch Place</Translate>
+          </dt>
+          <dd>{draftEntity.loadSwitchPlace ? draftEntity.loadSwitchPlace.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.draftType">Draft Type</Translate>
+          </dt>
+          <dd>{draftEntity.draftType ? draftEntity.draftType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.statusInfo">Status Info</Translate>
+          </dt>
+          <dd>{draftEntity.statusInfo ? draftEntity.statusInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.insuranceCompanyInfo">Insurance Company Info</Translate>
+          </dt>
+          <dd>{draftEntity.insuranceCompanyInfo ? draftEntity.insuranceCompanyInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.advisingBank">Advising Bank</Translate>
+          </dt>
+          <dd>{draftEntity.advisingBank ? draftEntity.advisingBank.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.interfaceAdvisingBank">Interface Advising Bank</Translate>
+          </dt>
+          <dd>{draftEntity.interfaceAdvisingBank ? draftEntity.interfaceAdvisingBank.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.coveringBank">Covering Bank</Translate>
+          </dt>
+          <dd>{draftEntity.coveringBank ? draftEntity.coveringBank.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.auditCompanyInfo">Audit Company Info</Translate>
+          </dt>
+          <dd>{draftEntity.auditCompanyInfo ? draftEntity.auditCompanyInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.transportType">Transport Type</Translate>
+          </dt>
+          <dd>{draftEntity.transportType ? draftEntity.transportType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.currencyExchangeInfo">Currency Exchange Info</Translate>
+          </dt>
+          <dd>{draftEntity.currencyExchangeInfo ? draftEntity.currencyExchangeInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.accountInfo">Account Info</Translate>
+          </dt>
+          <dd>{draftEntity.accountInfo ? draftEntity.accountInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.destinationCustomCompanies">Destination Custom Companies</Translate>
+          </dt>
+          <dd>{draftEntity.destinationCustomCompanies ? draftEntity.destinationCustomCompanies.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.sourceCustomCompanies">Source Custom Companies</Translate>
+          </dt>
+          <dd>{draftEntity.sourceCustomCompanies ? draftEntity.sourceCustomCompanies.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.services">Services</Translate>
           </dt>
           <dd>
-            {draftEntity.customs
-              ? draftEntity.customs.map((val, i) => (
+            {draftEntity.services
+              ? draftEntity.services.map((val, i) => (
                   <span key={val.id}>
                     <a>{val.id}</a>
-                    {draftEntity.customs && i === draftEntity.customs.length - 1 ? '' : ', '}
+                    {draftEntity.services && i === draftEntity.services.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}
@@ -510,14 +588,53 @@ export const DraftDetail = () => {
               : null}
           </dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draft.services">Services</Translate>
+            <Translate contentKey="tfbitaApp.draft.sanctionSerials">Sanction Serials</Translate>
           </dt>
           <dd>
-            {draftEntity.services
-              ? draftEntity.services.map((val, i) => (
+            {draftEntity.sanctionSerials
+              ? draftEntity.sanctionSerials.map((val, i) => (
                   <span key={val.id}>
                     <a>{val.id}</a>
-                    {draftEntity.services && i === draftEntity.services.length - 1 ? '' : ', '}
+                    {draftEntity.sanctionSerials && i === draftEntity.sanctionSerials.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.customerNumbers">Customer Numbers</Translate>
+          </dt>
+          <dd>
+            {draftEntity.customerNumbers
+              ? draftEntity.customerNumbers.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {draftEntity.customerNumbers && i === draftEntity.customerNumbers.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.suggestedSanctions">Suggested Sanctions</Translate>
+          </dt>
+          <dd>
+            {draftEntity.suggestedSanctions
+              ? draftEntity.suggestedSanctions.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {draftEntity.suggestedSanctions && i === draftEntity.suggestedSanctions.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draft.documentTransactionContainer">Document Transaction Container</Translate>
+          </dt>
+          <dd>
+            {draftEntity.documentTransactionContainers
+              ? draftEntity.documentTransactionContainers.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {draftEntity.documentTransactionContainers && i === draftEntity.documentTransactionContainers.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}

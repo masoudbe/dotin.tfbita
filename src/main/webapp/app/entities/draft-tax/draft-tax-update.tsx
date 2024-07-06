@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IDocumentTransaction } from 'app/shared/model/document-transaction.model';
+import { getEntities as getDocumentTransactions } from 'app/entities/document-transaction/document-transaction.reducer';
 import { IDraft } from 'app/shared/model/draft.model';
 import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IDraftTax } from 'app/shared/model/draft-tax.model';
@@ -21,6 +23,7 @@ export const DraftTaxUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const documentTransactions = useAppSelector(state => state.documentTransaction.entities);
   const drafts = useAppSelector(state => state.draft.entities);
   const draftTaxEntity = useAppSelector(state => state.draftTax.entity);
   const loading = useAppSelector(state => state.draftTax.loading);
@@ -38,6 +41,7 @@ export const DraftTaxUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getDocumentTransactions({}));
     dispatch(getDrafts({}));
   }, []);
 
@@ -68,7 +72,9 @@ export const DraftTaxUpdate = () => {
     const entity = {
       ...draftTaxEntity,
       ...values,
-      taxes: drafts.find(it => it.id.toString() === values.taxes?.toString()),
+      documentTransaction: documentTransactions.find(it => it.id.toString() === values.documentTransaction?.toString()),
+      returnDocumentTransaction: documentTransactions.find(it => it.id.toString() === values.returnDocumentTransaction?.toString()),
+      draft: drafts.find(it => it.id.toString() === values.draft?.toString()),
     };
 
     if (isNew) {
@@ -83,7 +89,9 @@ export const DraftTaxUpdate = () => {
       ? {}
       : {
           ...draftTaxEntity,
-          taxes: draftTaxEntity?.taxes?.id,
+          documentTransaction: draftTaxEntity?.documentTransaction?.id,
+          returnDocumentTransaction: draftTaxEntity?.returnDocumentTransaction?.id,
+          draft: draftTaxEntity?.draft?.id,
         };
 
   return (
@@ -176,20 +184,38 @@ export const DraftTaxUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.draftTax.documentTransactionNumber')}
-                id="draft-tax-documentTransactionNumber"
-                name="documentTransactionNumber"
-                data-cy="documentTransactionNumber"
-                type="text"
-              />
+                id="draft-tax-documentTransaction"
+                name="documentTransaction"
+                data-cy="documentTransaction"
+                label={translate('tfbitaApp.draftTax.documentTransaction')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {documentTransactions
+                  ? documentTransactions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
-                label={translate('tfbitaApp.draftTax.returnDocumentTransactionNumber')}
-                id="draft-tax-returnDocumentTransactionNumber"
-                name="returnDocumentTransactionNumber"
-                data-cy="returnDocumentTransactionNumber"
-                type="text"
-              />
-              <ValidatedField id="draft-tax-taxes" name="taxes" data-cy="taxes" label={translate('tfbitaApp.draftTax.taxes')} type="select">
+                id="draft-tax-returnDocumentTransaction"
+                name="returnDocumentTransaction"
+                data-cy="returnDocumentTransaction"
+                label={translate('tfbitaApp.draftTax.returnDocumentTransaction')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {documentTransactions
+                  ? documentTransactions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="draft-tax-draft" name="draft" data-cy="draft" label={translate('tfbitaApp.draftTax.draft')} type="select">
                 <option value="" key="0" />
                 {drafts
                   ? drafts.map(otherEntity => (

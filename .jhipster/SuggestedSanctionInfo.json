@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105857"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sanctionSerial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "personnelCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "SuggestedSanctionInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

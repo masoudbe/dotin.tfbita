@@ -1,7 +1,7 @@
 import { IProductType } from 'app/shared/model/product-type.model';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { IDraft } from 'app/shared/model/draft.model';
-import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
+import { ICustomJustification } from 'app/shared/model/custom-justification.model';
 
 export interface IProduct {
   id?: number;
@@ -11,7 +11,7 @@ export interface IProduct {
   productType?: IProductType | null;
   orderRegistrationInfos?: IOrderRegistrationInfo[] | null;
   drafts?: IDraft[] | null;
-  draftProductInfos?: IDraftReceipt | null;
+  customJustifications?: ICustomJustification[] | null;
 }
 
 export const defaultValue: Readonly<IProduct> = {};

@@ -31,16 +31,15 @@ public interface OrderRegistrationInfoMapper extends EntityMapper<OrderRegistrat
     @Mapping(target = "ownerType", source = "ownerType", qualifiedByName = "categoryElementId")
     @Mapping(target = "status", source = "status", qualifiedByName = "categoryElementId")
     @Mapping(target = "externalCustomerType", source = "externalCustomerType", qualifiedByName = "categoryElementId")
+    @Mapping(target = "transportVehicleType", source = "transportVehicleType", qualifiedByName = "categoryElementId")
     @Mapping(target = "transportType", source = "transportType", qualifiedByName = "transportationTypeId")
     @Mapping(target = "destCoustomers", source = "destCoustomers", qualifiedByName = "customId")
     @Mapping(target = "cargoPlaceCustoms", source = "cargoPlaceCustoms", qualifiedByName = "customId")
     @Mapping(target = "entranceBorders", source = "entranceBorders", qualifiedByName = "customId")
-    @Mapping(target = "transportVehicleTypes", source = "transportVehicleTypes", qualifiedByName = "categoryElementIdSet")
     @Mapping(target = "productInfos", source = "productInfos", qualifiedByName = "productIdSet")
     @Mapping(target = "commissionTransactionNumbers", source = "commissionTransactionNumbers", qualifiedByName = "stringValueIdSet")
     OrderRegistrationInfoDTO toDto(OrderRegistrationInfo s);
 
-    @Mapping(target = "removeTransportVehicleType", ignore = true)
     @Mapping(target = "removeProductInfo", ignore = true)
     @Mapping(target = "removeCommissionTransactionNumber", ignore = true)
     OrderRegistrationInfo toEntity(OrderRegistrationInfoDTO orderRegistrationInfoDTO);
@@ -49,11 +48,6 @@ public interface OrderRegistrationInfoMapper extends EntityMapper<OrderRegistrat
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     CategoryElementDTO toDtoCategoryElementId(CategoryElement categoryElement);
-
-    @Named("categoryElementIdSet")
-    default Set<CategoryElementDTO> toDtoCategoryElementIdSet(Set<CategoryElement> categoryElement) {
-        return categoryElement.stream().map(this::toDtoCategoryElementId).collect(Collectors.toSet());
-    }
 
     @Named("transportationTypeId")
     @BeanMapping(ignoreByDefault = true)

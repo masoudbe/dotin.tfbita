@@ -32,11 +32,11 @@ export const AttributeValueDetail = () => {
           </dt>
           <dd>{attributeValueEntity.id}</dd>
           <dt>
-            <span id="value">
-              <Translate contentKey="tfbitaApp.attributeValue.value">Value</Translate>
+            <span id="val">
+              <Translate contentKey="tfbitaApp.attributeValue.val">Val</Translate>
             </span>
           </dt>
-          <dd>{attributeValueEntity.value}</dd>
+          <dd>{attributeValueEntity.val}</dd>
           <dt>
             <span id="customValue">
               <Translate contentKey="tfbitaApp.attributeValue.customValue">Custom Value</Translate>

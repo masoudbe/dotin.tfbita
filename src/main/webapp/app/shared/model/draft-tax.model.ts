@@ -1,3 +1,4 @@
+import { IDocumentTransaction } from 'app/shared/model/document-transaction.model';
 import { IDraft } from 'app/shared/model/draft.model';
 
 export interface IDraftTax {
@@ -12,9 +13,9 @@ export interface IDraftTax {
   returnTaxesAmount?: boolean | null;
   orderRegRate?: number | null;
   mainAccountRate?: number | null;
-  documentTransactionNumber?: string | null;
-  returnDocumentTransactionNumber?: string | null;
-  taxes?: IDraft | null;
+  documentTransaction?: IDocumentTransaction | null;
+  returnDocumentTransaction?: IDocumentTransaction | null;
+  draft?: IDraft | null;
 }
 
 export const defaultValue: Readonly<IDraftTax> = {

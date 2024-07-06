@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082857"
+    "changelogDate": "20240706105851"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -45,12 +45,12 @@
   "name": "DraftStatusInfo",
   "relationships": [
     {
-      "otherEntityName": "draft",
-      "relationshipName": "statusInfo",
-      "relationshipSide": "right",
+      "otherEntityName": "categoryElement",
+      "relationshipName": "status",
+      "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

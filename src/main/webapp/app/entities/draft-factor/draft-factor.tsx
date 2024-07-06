@@ -111,12 +111,12 @@ export const DraftFactor = () => {
                   <Translate contentKey="tfbitaApp.draftFactor.serial">Serial</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('serial')} />
                 </th>
-                <th className="hand" onClick={sort('currencyName')}>
-                  <Translate contentKey="tfbitaApp.draftFactor.currencyName">Currency Name</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('currencyName')} />
+                <th className="hand" onClick={sort('currencyCode')}>
+                  <Translate contentKey="tfbitaApp.draftFactor.currencyCode">Currency Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('currencyCode')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftFactor.draftFactors">Draft Factors</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftFactor.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -135,14 +135,8 @@ export const DraftFactor = () => {
                   <td>{draftFactor.factorDate}</td>
                   <td>{draftFactor.issueDate}</td>
                   <td>{draftFactor.serial}</td>
-                  <td>{draftFactor.currencyName}</td>
-                  <td>
-                    {draftFactor.draftFactors ? (
-                      <Link to={`/draft/${draftFactor.draftFactors.id}`}>{draftFactor.draftFactors.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+                  <td>{draftFactor.currencyCode}</td>
+                  <td>{draftFactor.draft ? <Link to={`/draft/${draftFactor.draft.id}`}>{draftFactor.draft.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/draft-factor/${draftFactor.id}`} color="info" size="sm" data-cy="entityDetailsButton">

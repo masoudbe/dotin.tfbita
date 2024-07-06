@@ -18,10 +18,14 @@ const apiUrl = 'api/categories';
 
 // Actions
 
-export const getEntities = createAsyncThunk('category/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ICategory[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'category/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<ICategory[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'category/fetch_entity',

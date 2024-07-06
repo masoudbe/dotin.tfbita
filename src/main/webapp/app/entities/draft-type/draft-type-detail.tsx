@@ -92,27 +92,62 @@ export const DraftTypeDetail = () => {
           </dt>
           <dd>{draftTypeEntity.usable ? 'true' : 'false'}</dd>
           <dt>
+            <span id="currenciesCodes">
+              <Translate contentKey="tfbitaApp.draftType.currenciesCodes">Currencies Codes</Translate>
+            </span>
+          </dt>
+          <dd>{draftTypeEntity.currenciesCodes}</dd>
+          <dt>
             <span id="defaultCurrencyCode">
               <Translate contentKey="tfbitaApp.draftType.defaultCurrencyCode">Default Currency Code</Translate>
             </span>
           </dt>
           <dd>{draftTypeEntity.defaultCurrencyCode}</dd>
           <dt>
-            <span id="accountInfoCode">
-              <Translate contentKey="tfbitaApp.draftType.accountInfoCode">Account Info Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draftType.type">Type</Translate>
           </dt>
-          <dd>{draftTypeEntity.accountInfoCode}</dd>
+          <dd>{draftTypeEntity.type ? draftTypeEntity.type.id : ''}</dd>
           <dt>
-            <span id="topicInfoCode">
-              <Translate contentKey="tfbitaApp.draftType.topicInfoCode">Topic Info Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draftType.secondaryType">Secondary Type</Translate>
           </dt>
-          <dd>{draftTypeEntity.topicInfoCode}</dd>
+          <dd>{draftTypeEntity.secondaryType ? draftTypeEntity.secondaryType.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftType.draftType">Draft Type</Translate>
+            <Translate contentKey="tfbitaApp.draftType.division">Division</Translate>
           </dt>
-          <dd>{draftTypeEntity.draftType ? draftTypeEntity.draftType.id : ''}</dd>
+          <dd>{draftTypeEntity.division ? draftTypeEntity.division.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.topicInfo">Topic Info</Translate>
+          </dt>
+          <dd>{draftTypeEntity.topicInfo ? draftTypeEntity.topicInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.conditionInfo">Condition Info</Translate>
+          </dt>
+          <dd>{draftTypeEntity.conditionInfo ? draftTypeEntity.conditionInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.accountInfo">Account Info</Translate>
+          </dt>
+          <dd>{draftTypeEntity.accountInfo ? draftTypeEntity.accountInfo.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.requestType">Request Type</Translate>
+          </dt>
+          <dd>{draftTypeEntity.requestType ? draftTypeEntity.requestType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.acceptableProductTypes">Acceptable Product Types</Translate>
+          </dt>
+          <dd>{draftTypeEntity.acceptableProductTypes ? draftTypeEntity.acceptableProductTypes.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftType.userGroups">User Groups</Translate>
+          </dt>
+          <dd>
+            {draftTypeEntity.userGroups
+              ? draftTypeEntity.userGroups.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {draftTypeEntity.userGroups && i === draftTypeEntity.userGroups.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/draft-type" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

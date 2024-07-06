@@ -61,6 +61,6 @@ public class DraftExtendAsserts {
     public static void assertDraftExtendUpdatableRelationshipsEquals(DraftExtend expected, DraftExtend actual) {
         assertThat(expected)
             .as("Verify DraftExtend relationships")
-            .satisfies(e -> assertThat(e.getExtensions()).as("check extensions").isEqualTo(actual.getExtensions()));
+            .satisfies(e -> assertThat(e.getDraftField()).as("check draftField").isEqualTo(actual.getDraftField()));
     }
 }

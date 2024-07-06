@@ -1,0 +1,24 @@
+{
+  "tfbitaApp": {
+    "paymentCurrencyRateType": {
+      "home": {
+        "title": "Payment Currency Rate Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Payment Currency Rate Type",
+        "createOrEditLabel": "Create or edit a Payment Currency Rate Type",
+        "notFound": "No Payment Currency Rate Types found"
+      },
+      "created": "A new Payment Currency Rate Type is created with identifier {{ param }}",
+      "updated": "A Payment Currency Rate Type is updated with identifier {{ param }}",
+      "deleted": "A Payment Currency Rate Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Payment Currency Rate Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment Currency Rate Type"
+      },
+      "id": "ID",
+      "description": "Description"
+    }
+  }
+}

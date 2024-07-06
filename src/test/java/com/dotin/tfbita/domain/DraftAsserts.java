@@ -259,6 +259,21 @@ public class DraftAsserts {
             .satisfies(e -> assertThat(e.getIsWithoutPayment()).as("check isWithoutPayment").isEqualTo(actual.getIsWithoutPayment()))
             .satisfies(
                 e ->
+                    assertThat(e.getMainAccountCurrencyCode())
+                        .as("check mainAccountCurrencyCode")
+                        .isEqualTo(actual.getMainAccountCurrencyCode())
+            )
+            .satisfies(
+                e -> assertThat(e.getOrderRegCurrencyCode()).as("check orderRegCurrencyCode").isEqualTo(actual.getOrderRegCurrencyCode())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getChargedExchangeBrokerCurrencyCode())
+                        .as("check chargedExchangeBrokerCurrencyCode")
+                        .isEqualTo(actual.getChargedExchangeBrokerCurrencyCode())
+            )
+            .satisfies(
+                e ->
                     assertThat(e.getDestinationCountryCode())
                         .as("check destinationCountryCode")
                         .isEqualTo(actual.getDestinationCountryCode())
@@ -272,6 +287,12 @@ public class DraftAsserts {
             .satisfies(
                 e -> assertThat(e.getProducerCountryCode()).as("check producerCountryCode").isEqualTo(actual.getProducerCountryCode())
             )
+            .satisfies(
+                e ->
+                    assertThat(e.getRegisterationJustificationCurrencyCode())
+                        .as("check registerationJustificationCurrencyCode")
+                        .isEqualTo(actual.getRegisterationJustificationCurrencyCode())
+            )
             .satisfies(e -> assertThat(e.getBranchCode()).as("check branchCode").isEqualTo(actual.getBranchCode()))
             .satisfies(
                 e -> assertThat(e.getOperationalBranchCode()).as("check operationalBranchCode").isEqualTo(actual.getOperationalBranchCode())
@@ -281,43 +302,7 @@ public class DraftAsserts {
                     assertThat(e.getCertificateSenderBranchCode())
                         .as("check certificateSenderBranchCode")
                         .isEqualTo(actual.getCertificateSenderBranchCode())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getMainAccountCurrencyCode())
-                        .as("check mainAccountCurrencyCode")
-                        .isEqualTo(actual.getMainAccountCurrencyCode())
-            )
-            .satisfies(
-                e -> assertThat(e.getOrderRegCurrencyCode()).as("check orderRegCurrencyCode").isEqualTo(actual.getOrderRegCurrencyCode())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getChargedExchangeBrokerCurrency())
-                        .as("check chargedExchangeBrokerCurrency")
-                        .isEqualTo(actual.getChargedExchangeBrokerCurrency())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getRegisterationJustificationCurrencyCode())
-                        .as("check registerationJustificationCurrencyCode")
-                        .isEqualTo(actual.getRegisterationJustificationCurrencyCode())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getCurrencyExchangeInfoTitle())
-                        .as("check currencyExchangeInfoTitle")
-                        .isEqualTo(actual.getCurrencyExchangeInfoTitle())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getTransportationTypeName())
-                        .as("check transportationTypeName")
-                        .isEqualTo(actual.getTransportationTypeName())
-            )
-            .satisfies(e -> assertThat(e.getAccountInfoCode()).as("check accountInfoCode").isEqualTo(actual.getAccountInfoCode()))
-            .satisfies(e -> assertThat(e.getCustomerNumbers()).as("check customerNumbers").isEqualTo(actual.getCustomerNumbers()))
-            .satisfies(e -> assertThat(e.getSanctionSerials()).as("check sanctionSerials").isEqualTo(actual.getSanctionSerials()));
+            );
     }
 
     /**
@@ -329,8 +314,77 @@ public class DraftAsserts {
     public static void assertDraftUpdatableRelationshipsEquals(Draft expected, Draft actual) {
         assertThat(expected)
             .as("Verify Draft relationships")
-            .satisfies(e -> assertThat(e.getCustoms()).as("check customs").isEqualTo(actual.getCustoms()))
+            .satisfies(
+                e -> assertThat(e.getChargedExchangeBroker()).as("check chargedExchangeBroker").isEqualTo(actual.getChargedExchangeBroker())
+            )
+            .satisfies(
+                e -> assertThat(e.getInsuranceLetterType()).as("check insuranceLetterType").isEqualTo(actual.getInsuranceLetterType())
+            )
+            .satisfies(e -> assertThat(e.getAdvisorDepositType()).as("check advisorDepositType").isEqualTo(actual.getAdvisorDepositType()))
+            .satisfies(
+                e ->
+                    assertThat(e.getInterfaceAdvisorDepositType())
+                        .as("check interfaceAdvisorDepositType")
+                        .isEqualTo(actual.getInterfaceAdvisorDepositType())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getCoveringAdvisorDepositType())
+                        .as("check coveringAdvisorDepositType")
+                        .isEqualTo(actual.getCoveringAdvisorDepositType())
+            )
+            .satisfies(e -> assertThat(e.getImpartType()).as("check impartType").isEqualTo(actual.getImpartType()))
+            .satisfies(e -> assertThat(e.getDealType()).as("check dealType").isEqualTo(actual.getDealType()))
+            .satisfies(
+                e -> assertThat(e.getTransportVehicleType()).as("check transportVehicleType").isEqualTo(actual.getTransportVehicleType())
+            )
+            .satisfies(e -> assertThat(e.getFreightLetterType()).as("check freightLetterType").isEqualTo(actual.getFreightLetterType()))
+            .satisfies(e -> assertThat(e.getActionCode()).as("check actionCode").isEqualTo(actual.getActionCode()))
+            .satisfies(e -> assertThat(e.getOwnershipCode()).as("check ownershipCode").isEqualTo(actual.getOwnershipCode()))
+            .satisfies(
+                e ->
+                    assertThat(e.getCurrencyContainerPlace())
+                        .as("check currencyContainerPlace")
+                        .isEqualTo(actual.getCurrencyContainerPlace())
+            )
+            .satisfies(e -> assertThat(e.getPaymentType()).as("check paymentType").isEqualTo(actual.getPaymentType()))
+            .satisfies(e -> assertThat(e.getDraftSource()).as("check draftSource").isEqualTo(actual.getDraftSource()))
+            .satisfies(e -> assertThat(e.getLoadSwitchPlace()).as("check loadSwitchPlace").isEqualTo(actual.getLoadSwitchPlace()))
+            .satisfies(e -> assertThat(e.getDraftType()).as("check draftType").isEqualTo(actual.getDraftType()))
+            .satisfies(e -> assertThat(e.getStatusInfo()).as("check statusInfo").isEqualTo(actual.getStatusInfo()))
+            .satisfies(
+                e -> assertThat(e.getInsuranceCompanyInfo()).as("check insuranceCompanyInfo").isEqualTo(actual.getInsuranceCompanyInfo())
+            )
+            .satisfies(e -> assertThat(e.getAdvisingBank()).as("check advisingBank").isEqualTo(actual.getAdvisingBank()))
+            .satisfies(
+                e -> assertThat(e.getInterfaceAdvisingBank()).as("check interfaceAdvisingBank").isEqualTo(actual.getInterfaceAdvisingBank())
+            )
+            .satisfies(e -> assertThat(e.getCoveringBank()).as("check coveringBank").isEqualTo(actual.getCoveringBank()))
+            .satisfies(e -> assertThat(e.getAuditCompanyInfo()).as("check auditCompanyInfo").isEqualTo(actual.getAuditCompanyInfo()))
+            .satisfies(e -> assertThat(e.getTransportType()).as("check transportType").isEqualTo(actual.getTransportType()))
+            .satisfies(
+                e -> assertThat(e.getCurrencyExchangeInfo()).as("check currencyExchangeInfo").isEqualTo(actual.getCurrencyExchangeInfo())
+            )
+            .satisfies(e -> assertThat(e.getAccountInfo()).as("check accountInfo").isEqualTo(actual.getAccountInfo()))
+            .satisfies(
+                e ->
+                    assertThat(e.getDestinationCustomCompanies())
+                        .as("check destinationCustomCompanies")
+                        .isEqualTo(actual.getDestinationCustomCompanies())
+            )
+            .satisfies(
+                e -> assertThat(e.getSourceCustomCompanies()).as("check sourceCustomCompanies").isEqualTo(actual.getSourceCustomCompanies())
+            )
+            .satisfies(e -> assertThat(e.getServices()).as("check services").isEqualTo(actual.getServices()))
             .satisfies(e -> assertThat(e.getProducts()).as("check products").isEqualTo(actual.getProducts()))
-            .satisfies(e -> assertThat(e.getServices()).as("check services").isEqualTo(actual.getServices()));
+            .satisfies(e -> assertThat(e.getSanctionSerials()).as("check sanctionSerials").isEqualTo(actual.getSanctionSerials()))
+            .satisfies(e -> assertThat(e.getCustomerNumbers()).as("check customerNumbers").isEqualTo(actual.getCustomerNumbers()))
+            .satisfies(e -> assertThat(e.getSuggestedSanctions()).as("check suggestedSanctions").isEqualTo(actual.getSuggestedSanctions()))
+            .satisfies(
+                e ->
+                    assertThat(e.getDocumentTransactionContainers())
+                        .as("check documentTransactionContainers")
+                        .isEqualTo(actual.getDocumentTransactionContainers())
+            );
     }
 }

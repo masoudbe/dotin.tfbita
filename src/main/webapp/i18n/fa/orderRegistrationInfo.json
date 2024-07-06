@@ -76,11 +76,11 @@
       "ownerType": "Owner Type",
       "status": "Status",
       "externalCustomerType": "External Customer Type",
+      "transportVehicleType": "Transport Vehicle Type",
       "transportType": "Transport Type",
       "destCoustomers": "Dest Coustomers",
       "cargoPlaceCustoms": "Cargo Place Customs",
       "entranceBorders": "Entrance Borders",
-      "transportVehicleType": "Transport Vehicle Type",
       "productInfo": "Product Info",
       "commissionTransactionNumber": "Commission Transaction Number",
       "licenceInfo": "Licence Info"

@@ -8,8 +8,6 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IInsuranceCompanyInfo } from 'app/shared/model/insurance-company-info.model';
 import { getEntity, updateEntity, createEntity, reset } from './insurance-company-info.reducer';
 
@@ -21,7 +19,6 @@ export const InsuranceCompanyInfoUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
   const insuranceCompanyInfoEntity = useAppSelector(state => state.insuranceCompanyInfo.entity);
   const loading = useAppSelector(state => state.insuranceCompanyInfo.loading);
   const updating = useAppSelector(state => state.insuranceCompanyInfo.updating);
@@ -37,8 +34,6 @@ export const InsuranceCompanyInfoUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getDrafts({}));
   }, []);
 
   useEffect(() => {
@@ -56,7 +51,6 @@ export const InsuranceCompanyInfoUpdate = () => {
     const entity = {
       ...insuranceCompanyInfoEntity,
       ...values,
-      insuranceCompanyInfo: drafts.find(it => it.id.toString() === values.insuranceCompanyInfo?.toString()),
     };
 
     if (isNew) {
@@ -71,7 +65,6 @@ export const InsuranceCompanyInfoUpdate = () => {
       ? {}
       : {
           ...insuranceCompanyInfoEntity,
-          insuranceCompanyInfo: insuranceCompanyInfoEntity?.insuranceCompanyInfo?.id,
         };
 
   return (
@@ -113,22 +106,6 @@ export const InsuranceCompanyInfoUpdate = () => {
                 data-cy="name"
                 type="text"
               />
-              <ValidatedField
-                id="insurance-company-info-insuranceCompanyInfo"
-                name="insuranceCompanyInfo"
-                data-cy="insuranceCompanyInfo"
-                label={translate('tfbitaApp.insuranceCompanyInfo.insuranceCompanyInfo')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/insurance-company-info" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

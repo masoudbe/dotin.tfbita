@@ -8,8 +8,20 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
+import { IDraftTypeTopicInfo } from 'app/shared/model/draft-type-topic-info.model';
+import { getEntities as getDraftTypeTopicInfos } from 'app/entities/draft-type-topic-info/draft-type-topic-info.reducer';
+import { ICreditTypeConditionInfo } from 'app/shared/model/credit-type-condition-info.model';
+import { getEntities as getCreditTypeConditionInfos } from 'app/entities/credit-type-condition-info/credit-type-condition-info.reducer';
+import { IDraftTypeAccountInfo } from 'app/shared/model/draft-type-account-info.model';
+import { getEntities as getDraftTypeAccountInfos } from 'app/entities/draft-type-account-info/draft-type-account-info.reducer';
+import { IDraftRequestType } from 'app/shared/model/draft-request-type.model';
+import { getEntities as getDraftRequestTypes } from 'app/entities/draft-request-type/draft-request-type.reducer';
+import { IObjectiveCategoryElement } from 'app/shared/model/objective-category-element.model';
+import { getEntities as getObjectiveCategoryElements } from 'app/entities/objective-category-element/objective-category-element.reducer';
+import { IStringValue } from 'app/shared/model/string-value.model';
+import { getEntities as getStringValues } from 'app/entities/string-value/string-value.reducer';
 import { IDraftType } from 'app/shared/model/draft-type.model';
 import { getEntity, updateEntity, createEntity, reset } from './draft-type.reducer';
 
@@ -21,7 +33,13 @@ export const DraftTypeUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
+  const draftTypeTopicInfos = useAppSelector(state => state.draftTypeTopicInfo.entities);
+  const creditTypeConditionInfos = useAppSelector(state => state.creditTypeConditionInfo.entities);
+  const draftTypeAccountInfos = useAppSelector(state => state.draftTypeAccountInfo.entities);
+  const draftRequestTypes = useAppSelector(state => state.draftRequestType.entities);
+  const objectiveCategoryElements = useAppSelector(state => state.objectiveCategoryElement.entities);
+  const stringValues = useAppSelector(state => state.stringValue.entities);
   const draftTypeEntity = useAppSelector(state => state.draftType.entity);
   const loading = useAppSelector(state => state.draftType.loading);
   const updating = useAppSelector(state => state.draftType.updating);
@@ -38,7 +56,13 @@ export const DraftTypeUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getDrafts({}));
+    dispatch(getCategoryElements({}));
+    dispatch(getDraftTypeTopicInfos({}));
+    dispatch(getCreditTypeConditionInfos({}));
+    dispatch(getDraftTypeAccountInfos({}));
+    dispatch(getDraftRequestTypes({}));
+    dispatch(getObjectiveCategoryElements({}));
+    dispatch(getStringValues({}));
   }, []);
 
   useEffect(() => {
@@ -65,7 +89,15 @@ export const DraftTypeUpdate = () => {
     const entity = {
       ...draftTypeEntity,
       ...values,
-      draftType: drafts.find(it => it.id.toString() === values.draftType?.toString()),
+      type: categoryElements.find(it => it.id.toString() === values.type?.toString()),
+      secondaryType: categoryElements.find(it => it.id.toString() === values.secondaryType?.toString()),
+      division: categoryElements.find(it => it.id.toString() === values.division?.toString()),
+      topicInfo: draftTypeTopicInfos.find(it => it.id.toString() === values.topicInfo?.toString()),
+      conditionInfo: creditTypeConditionInfos.find(it => it.id.toString() === values.conditionInfo?.toString()),
+      accountInfo: draftTypeAccountInfos.find(it => it.id.toString() === values.accountInfo?.toString()),
+      requestType: draftRequestTypes.find(it => it.id.toString() === values.requestType?.toString()),
+      acceptableProductTypes: objectiveCategoryElements.find(it => it.id.toString() === values.acceptableProductTypes?.toString()),
+      userGroups: mapIdList(values.userGroups),
     };
 
     if (isNew) {
@@ -80,7 +112,15 @@ export const DraftTypeUpdate = () => {
       ? {}
       : {
           ...draftTypeEntity,
-          draftType: draftTypeEntity?.draftType?.id,
+          type: draftTypeEntity?.type?.id,
+          secondaryType: draftTypeEntity?.secondaryType?.id,
+          division: draftTypeEntity?.division?.id,
+          topicInfo: draftTypeEntity?.topicInfo?.id,
+          conditionInfo: draftTypeEntity?.conditionInfo?.id,
+          accountInfo: draftTypeEntity?.accountInfo?.id,
+          requestType: draftTypeEntity?.requestType?.id,
+          acceptableProductTypes: draftTypeEntity?.acceptableProductTypes?.id,
+          userGroups: draftTypeEntity?.userGroups?.map(e => e.id.toString()),
         };
 
   return (
@@ -171,36 +211,152 @@ export const DraftTypeUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
+                label={translate('tfbitaApp.draftType.currenciesCodes')}
+                id="draft-type-currenciesCodes"
+                name="currenciesCodes"
+                data-cy="currenciesCodes"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('tfbitaApp.draftType.defaultCurrencyCode')}
                 id="draft-type-defaultCurrencyCode"
                 name="defaultCurrencyCode"
                 data-cy="defaultCurrencyCode"
                 type="text"
               />
+              <ValidatedField id="draft-type-type" name="type" data-cy="type" label={translate('tfbitaApp.draftType.type')} type="select">
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
-                label={translate('tfbitaApp.draftType.accountInfoCode')}
-                id="draft-type-accountInfoCode"
-                name="accountInfoCode"
-                data-cy="accountInfoCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draftType.topicInfoCode')}
-                id="draft-type-topicInfoCode"
-                name="topicInfoCode"
-                data-cy="topicInfoCode"
-                type="text"
-              />
-              <ValidatedField
-                id="draft-type-draftType"
-                name="draftType"
-                data-cy="draftType"
-                label={translate('tfbitaApp.draftType.draftType')}
+                id="draft-type-secondaryType"
+                name="secondaryType"
+                data-cy="secondaryType"
+                label={translate('tfbitaApp.draftType.secondaryType')}
                 type="select"
               >
                 <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-division"
+                name="division"
+                data-cy="division"
+                label={translate('tfbitaApp.draftType.division')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-topicInfo"
+                name="topicInfo"
+                data-cy="topicInfo"
+                label={translate('tfbitaApp.draftType.topicInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftTypeTopicInfos
+                  ? draftTypeTopicInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-conditionInfo"
+                name="conditionInfo"
+                data-cy="conditionInfo"
+                label={translate('tfbitaApp.draftType.conditionInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {creditTypeConditionInfos
+                  ? creditTypeConditionInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-accountInfo"
+                name="accountInfo"
+                data-cy="accountInfo"
+                label={translate('tfbitaApp.draftType.accountInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftTypeAccountInfos
+                  ? draftTypeAccountInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-requestType"
+                name="requestType"
+                data-cy="requestType"
+                label={translate('tfbitaApp.draftType.requestType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftRequestTypes
+                  ? draftRequestTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-type-acceptableProductTypes"
+                name="acceptableProductTypes"
+                data-cy="acceptableProductTypes"
+                label={translate('tfbitaApp.draftType.acceptableProductTypes')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {objectiveCategoryElements
+                  ? objectiveCategoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.draftType.userGroups')}
+                id="draft-type-userGroups"
+                data-cy="userGroups"
+                type="select"
+                multiple
+                name="userGroups"
+              >
+                <option value="" key="0" />
+                {stringValues
+                  ? stringValues.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

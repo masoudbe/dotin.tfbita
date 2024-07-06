@@ -102,9 +102,6 @@ export const Custom = () => {
                   <Translate contentKey="tfbitaApp.custom.tempId">Temp Id</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('tempId')} />
                 </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.custom.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -120,16 +117,6 @@ export const Custom = () => {
                   <td>{custom.latinName}</td>
                   <td>{custom.name}</td>
                   <td>{custom.tempId}</td>
-                  <td>
-                    {custom.drafts
-                      ? custom.drafts.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/draft/${val.id}`}>{val.id}</Link>
-                            {j === custom.drafts.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/custom/${custom.id}`} color="info" size="sm" data-cy="entityDetailsButton">

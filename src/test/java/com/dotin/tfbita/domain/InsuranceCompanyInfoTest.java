@@ -1,6 +1,5 @@
 package com.dotin.tfbita.domain;
 
-import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static com.dotin.tfbita.domain.InsuranceCompanyInfoTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,17 +20,5 @@ class InsuranceCompanyInfoTest {
 
         insuranceCompanyInfo2 = getInsuranceCompanyInfoSample2();
         assertThat(insuranceCompanyInfo1).isNotEqualTo(insuranceCompanyInfo2);
-    }
-
-    @Test
-    void insuranceCompanyInfoTest() throws Exception {
-        InsuranceCompanyInfo insuranceCompanyInfo = getInsuranceCompanyInfoRandomSampleGenerator();
-        Draft draftBack = getDraftRandomSampleGenerator();
-
-        insuranceCompanyInfo.setInsuranceCompanyInfo(draftBack);
-        assertThat(insuranceCompanyInfo.getInsuranceCompanyInfo()).isEqualTo(draftBack);
-
-        insuranceCompanyInfo.insuranceCompanyInfo(null);
-        assertThat(insuranceCompanyInfo.getInsuranceCompanyInfo()).isNull();
     }
 }

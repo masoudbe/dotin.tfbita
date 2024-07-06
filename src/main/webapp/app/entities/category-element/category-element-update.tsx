@@ -10,8 +10,6 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
-import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
-import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
 import { ICategoryElement } from 'app/shared/model/category-element.model';
 import { getEntity, updateEntity, createEntity, reset } from './category-element.reducer';
 
@@ -24,7 +22,6 @@ export const CategoryElementUpdate = () => {
   const isNew = id === undefined;
 
   const categories = useAppSelector(state => state.category.entities);
-  const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
   const categoryElementEntity = useAppSelector(state => state.categoryElement.entity);
   const loading = useAppSelector(state => state.categoryElement.loading);
   const updating = useAppSelector(state => state.categoryElement.updating);
@@ -42,7 +39,6 @@ export const CategoryElementUpdate = () => {
     }
 
     dispatch(getCategories({}));
-    dispatch(getOrderRegistrationInfos({}));
   }, []);
 
   useEffect(() => {
@@ -61,7 +57,6 @@ export const CategoryElementUpdate = () => {
       ...categoryElementEntity,
       ...values,
       category: categories.find(it => it.id.toString() === values.category?.toString()),
-      orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
     };
 
     if (isNew) {
@@ -77,7 +72,6 @@ export const CategoryElementUpdate = () => {
       : {
           ...categoryElementEntity,
           category: categoryElementEntity?.category?.id,
-          orderRegistrationInfos: categoryElementEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
         };
 
   return (
@@ -106,10 +100,10 @@ export const CategoryElementUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tfbitaApp.categoryElement.value')}
-                id="category-element-value"
-                name="value"
-                data-cy="value"
+                label={translate('tfbitaApp.categoryElement.val')}
+                id="category-element-val"
+                name="val"
+                data-cy="val"
                 type="text"
               />
               <ValidatedField
@@ -136,23 +130,6 @@ export const CategoryElementUpdate = () => {
                 <option value="" key="0" />
                 {categories
                   ? categories.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                label={translate('tfbitaApp.categoryElement.orderRegistrationInfo')}
-                id="category-element-orderRegistrationInfo"
-                data-cy="orderRegistrationInfo"
-                type="select"
-                multiple
-                name="orderRegistrationInfos"
-              >
-                <option value="" key="0" />
-                {orderRegistrationInfos
-                  ? orderRegistrationInfos.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

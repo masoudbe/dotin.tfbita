@@ -28,24 +28,48 @@ public class ServiceTariff implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_service_tariff__draft",
-        joinColumns = @JoinColumn(name = "service_tariff_id"),
-        inverseJoinColumns = @JoinColumn(name = "draft_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "services")
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
@@ -97,6 +121,12 @@ public class ServiceTariff implements Serializable {
     }
 
     public void setDrafts(Set<Draft> drafts) {
+        if (this.drafts != null) {
+            this.drafts.forEach(i -> i.removeServices(this));
+        }
+        if (drafts != null) {
+            drafts.forEach(i -> i.addServices(this));
+        }
         this.drafts = drafts;
     }
 
@@ -107,11 +137,13 @@ public class ServiceTariff implements Serializable {
 
     public ServiceTariff addDraft(Draft draft) {
         this.drafts.add(draft);
+        draft.getServices().add(this);
         return this;
     }
 
     public ServiceTariff removeDraft(Draft draft) {
         this.drafts.remove(draft);
+        draft.getServices().remove(this);
         return this;
     }
 

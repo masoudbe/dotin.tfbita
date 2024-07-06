@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082900"
+    "changelogDate": "20240706105853"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -30,7 +30,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "currencyName",
+      "fieldName": "currencyCode",
       "fieldType": "String"
     }
   ],
@@ -38,7 +38,8 @@
   "relationships": [
     {
       "otherEntityName": "draft",
-      "relationshipName": "draftFactors",
+      "otherEntityRelationshipName": "draftFactors",
+      "relationshipName": "draft",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -214,6 +215,8 @@ class OrderRegistrationInfoResourceIT {
 
     private OrderRegistrationInfo orderRegistrationInfo;
 
+    private OrderRegistrationInfo insertedOrderRegistrationInfo;
+
     /**
      * Create an entity for this test.
      *
@@ -335,6 +338,14 @@ class OrderRegistrationInfoResourceIT {
         orderRegistrationInfo = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedOrderRegistrationInfo != null) {
+            orderRegistrationInfoRepository.delete(insertedOrderRegistrationInfo);
+            insertedOrderRegistrationInfo = null;
+        }
+    }
+
     @Test
     @Transactional
     void createOrderRegistrationInfo() throws Exception {
@@ -360,6 +371,8 @@ class OrderRegistrationInfoResourceIT {
             returnedOrderRegistrationInfo,
             getPersistedOrderRegistrationInfo(returnedOrderRegistrationInfo)
         );
+
+        insertedOrderRegistrationInfo = returnedOrderRegistrationInfo;
     }
 
     @Test
@@ -384,7 +397,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void getAllOrderRegistrationInfos() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         // Get all the orderRegistrationInfoList
         restOrderRegistrationInfoMockMvc
@@ -464,7 +477,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void getOrderRegistrationInfo() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         // Get the orderRegistrationInfo
         restOrderRegistrationInfoMockMvc
@@ -532,7 +545,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void putExistingOrderRegistrationInfo() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -671,7 +684,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void partialUpdateOrderRegistrationInfoWithPatch() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -681,27 +694,29 @@ class OrderRegistrationInfoResourceIT {
 
         partialUpdatedOrderRegistrationInfo
             .startOrderRegDate(UPDATED_START_ORDER_REG_DATE)
-            .requestNumber(UPDATED_REQUEST_NUMBER)
             .bankCode(UPDATED_BANK_CODE)
             .branchCode(UPDATED_BRANCH_CODE)
             .customerNumber(UPDATED_CUSTOMER_NUMBER)
             .applicantNationalcode(UPDATED_APPLICANT_NATIONALCODE)
             .performaNumber(UPDATED_PERFORMA_NUMBER)
-            .performaDate(UPDATED_PERFORMA_DATE)
-            .performaExpiryDate(UPDATED_PERFORMA_EXPIRY_DATE)
             .performaDatePersian(UPDATED_PERFORMA_DATE_PERSIAN)
             .performaExpiryDatePersian(UPDATED_PERFORMA_EXPIRY_DATE_PERSIAN)
-            .infoSubmissionDate(UPDATED_INFO_SUBMISSION_DATE)
             .sourceCountry(UPDATED_SOURCE_COUNTRY)
+            .deliveryTimeOfGoods(UPDATED_DELIVERY_TIME_OF_GOODS)
+            .possibilityClearance(UPDATED_POSSIBILITY_CLEARANCE)
+            .ableAddServiceInProductOrder(UPDATED_ABLE_ADD_SERVICE_IN_PRODUCT_ORDER)
             .currencyCode(UPDATED_CURRENCY_CODE)
+            .fobAmount(UPDATED_FOB_AMOUNT)
             .shipmentCost(UPDATED_SHIPMENT_COST)
-            .isFile(UPDATED_IS_FILE)
-            .extended(UPDATED_EXTENDED)
+            .totalAmount(UPDATED_TOTAL_AMOUNT)
+            .fileNumber(UPDATED_FILE_NUMBER)
             .updated(UPDATED_UPDATED)
             .generateFromService(UPDATED_GENERATE_FROM_SERVICE)
-            .certificateNumber(UPDATED_CERTIFICATE_NUMBER)
-            .extendedDayNumber(UPDATED_EXTENDED_DAY_NUMBER)
-            .producerCountries(UPDATED_PRODUCER_COUNTRIES);
+            .centralBankCode(UPDATED_CENTRAL_BANK_CODE)
+            .sumRedemptionDuration(UPDATED_SUM_REDEMPTION_DURATION)
+            .excelFile(UPDATED_EXCEL_FILE)
+            .excelFileContentType(UPDATED_EXCEL_FILE_CONTENT_TYPE)
+            .commissionTransactionNumber(UPDATED_COMMISSION_TRANSACTION_NUMBER);
 
         restOrderRegistrationInfoMockMvc
             .perform(
@@ -724,7 +739,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void fullUpdateOrderRegistrationInfoWithPatch() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -866,7 +881,7 @@ class OrderRegistrationInfoResourceIT {
     @Transactional
     void deleteOrderRegistrationInfo() throws Exception {
         // Initialize the database
-        orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
+        insertedOrderRegistrationInfo = orderRegistrationInfoRepository.saveAndFlush(orderRegistrationInfo);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

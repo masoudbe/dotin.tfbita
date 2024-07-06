@@ -28,7 +28,7 @@ public class AuditCompanyInfoTestSamples {
             .theSideStreet("theSideStreet1")
             .title("title1")
             .unit("unit1")
-            .city("city1");
+            .cityCode("cityCode1");
     }
 
     public static AuditCompanyInfo getAuditCompanyInfoSample2() {
@@ -50,7 +50,7 @@ public class AuditCompanyInfoTestSamples {
             .theSideStreet("theSideStreet2")
             .title("title2")
             .unit("unit2")
-            .city("city2");
+            .cityCode("cityCode2");
     }
 
     public static AuditCompanyInfo getAuditCompanyInfoRandomSampleGenerator() {
@@ -72,6 +72,6 @@ public class AuditCompanyInfoTestSamples {
             .theSideStreet(UUID.randomUUID().toString())
             .title(UUID.randomUUID().toString())
             .unit(UUID.randomUUID().toString())
-            .city(UUID.randomUUID().toString());
+            .cityCode(UUID.randomUUID().toString());
     }
 }

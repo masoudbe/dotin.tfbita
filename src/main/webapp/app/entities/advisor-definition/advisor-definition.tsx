@@ -113,9 +113,17 @@ export const AdvisorDefinition = () => {
                   <Translate contentKey="tfbitaApp.advisorDefinition.swiftCode">Swift Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('swiftCode')} />
                 </th>
-                <th className="hand" onClick={sort('creditDate')}>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.creditDate">Credit Date</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('creditDate')} />
+                <th className="hand" onClick={sort('defaultCurrencyCode')}>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.defaultCurrencyCode">Default Currency Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('defaultCurrencyCode')} />
+                </th>
+                <th className="hand" onClick={sort('currenciesCodes')}>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.currenciesCodes">Currencies Codes</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('currenciesCodes')} />
+                </th>
+                <th className="hand" onClick={sort('countryCode')}>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.countryCode">Country Code</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('countryCode')} />
                 </th>
                 <th className="hand" onClick={sort('bankCode')}>
                   <Translate contentKey="tfbitaApp.advisorDefinition.bankCode">Bank Code</Translate>{' '}
@@ -125,23 +133,27 @@ export const AdvisorDefinition = () => {
                   <Translate contentKey="tfbitaApp.advisorDefinition.branchCode">Branch Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('branchCode')} />
                 </th>
-                <th className="hand" onClick={sort('defaultCurrencyCode')}>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.defaultCurrencyCode">Default Currency Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('defaultCurrencyCode')} />
-                </th>
-                <th className="hand" onClick={sort('countryCode')}>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.countryCode">Country Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('countryCode')} />
-                </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.advisingBank">Advising Bank</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.interfaceAdvisingBank">Interface Advising Bank</Translate>{' '}
+                  <Translate contentKey="tfbitaApp.advisorDefinition.additionalBrokerInformation">Additional Broker Information</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.advisorDefinition.coveringBank">Covering Bank</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.advisorDefinition.defaultVostroDeposit">Default Vostro Deposit</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.defaultNostroDeposit">Default Nostro Deposit</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.receiveMethod">Receive Method</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.payMethod">Pay Method</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.advisorDefinition.swiftBic">Swift Bic</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -159,28 +171,57 @@ export const AdvisorDefinition = () => {
                   <td>{advisorDefinition.countryIsoCode}</td>
                   <td>{advisorDefinition.depositNum}</td>
                   <td>{advisorDefinition.swiftCode}</td>
-                  <td>{advisorDefinition.creditDate}</td>
+                  <td>{advisorDefinition.defaultCurrencyCode}</td>
+                  <td>{advisorDefinition.currenciesCodes}</td>
+                  <td>{advisorDefinition.countryCode}</td>
                   <td>{advisorDefinition.bankCode}</td>
                   <td>{advisorDefinition.branchCode}</td>
-                  <td>{advisorDefinition.defaultCurrencyCode}</td>
-                  <td>{advisorDefinition.countryCode}</td>
                   <td>
-                    {advisorDefinition.advisingBank ? (
-                      <Link to={`/draft/${advisorDefinition.advisingBank.id}`}>{advisorDefinition.advisingBank.id}</Link>
+                    {advisorDefinition.additionalBrokerInformation ? (
+                      <Link to={`/additional-broker-information/${advisorDefinition.additionalBrokerInformation.id}`}>
+                        {advisorDefinition.additionalBrokerInformation.id}
+                      </Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {advisorDefinition.interfaceAdvisingBank ? (
-                      <Link to={`/draft/${advisorDefinition.interfaceAdvisingBank.id}`}>{advisorDefinition.interfaceAdvisingBank.id}</Link>
+                    {advisorDefinition.defaultVostroDeposit ? (
+                      <Link to={`/advisor-definition-deposit/${advisorDefinition.defaultVostroDeposit.id}`}>
+                        {advisorDefinition.defaultVostroDeposit.id}
+                      </Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {advisorDefinition.coveringBank ? (
-                      <Link to={`/draft/${advisorDefinition.coveringBank.id}`}>{advisorDefinition.coveringBank.id}</Link>
+                    {advisorDefinition.defaultNostroDeposit ? (
+                      <Link to={`/advisor-definition-deposit/${advisorDefinition.defaultNostroDeposit.id}`}>
+                        {advisorDefinition.defaultNostroDeposit.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {advisorDefinition.receiveMethod ? (
+                      <Link to={`/transfer-method-management/${advisorDefinition.receiveMethod.id}`}>
+                        {advisorDefinition.receiveMethod.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {advisorDefinition.payMethod ? (
+                      <Link to={`/transfer-method-management/${advisorDefinition.payMethod.id}`}>{advisorDefinition.payMethod.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {advisorDefinition.swiftBic ? (
+                      <Link to={`/swift-bic/${advisorDefinition.swiftBic.id}`}>{advisorDefinition.swiftBic.id}</Link>
                     ) : (
                       ''
                     )}

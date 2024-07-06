@@ -18,10 +18,14 @@ const apiUrl = 'api/product-types';
 
 // Actions
 
-export const getEntities = createAsyncThunk('productType/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IProductType[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'productType/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IProductType[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'productType/fetch_entity',

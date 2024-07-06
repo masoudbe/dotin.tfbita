@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class AttributeValueResourceIT {
 
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VAL = "AAAAAAAAAA";
+    private static final String UPDATED_VAL = "BBBBBBBBBB";
 
     private static final String DEFAULT_CUSTOM_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_CUSTOM_VALUE = "BBBBBBBBBB";
@@ -65,6 +66,8 @@ class AttributeValueResourceIT {
 
     private AttributeValue attributeValue;
 
+    private AttributeValue insertedAttributeValue;
+
     /**
      * Create an entity for this test.
      *
@@ -73,7 +76,7 @@ class AttributeValueResourceIT {
      */
     public static AttributeValue createEntity(EntityManager em) {
         AttributeValue attributeValue = new AttributeValue()
-            .value(DEFAULT_VALUE)
+            .val(DEFAULT_VAL)
             .customValue(DEFAULT_CUSTOM_VALUE)
             .attributeValueGroupName(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME);
         return attributeValue;
@@ -87,7 +90,7 @@ class AttributeValueResourceIT {
      */
     public static AttributeValue createUpdatedEntity(EntityManager em) {
         AttributeValue attributeValue = new AttributeValue()
-            .value(UPDATED_VALUE)
+            .val(UPDATED_VAL)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
         return attributeValue;
@@ -96,6 +99,14 @@ class AttributeValueResourceIT {
     @BeforeEach
     public void initTest() {
         attributeValue = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedAttributeValue != null) {
+            attributeValueRepository.delete(insertedAttributeValue);
+            insertedAttributeValue = null;
+        }
     }
 
     @Test
@@ -118,6 +129,8 @@ class AttributeValueResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedAttributeValue = attributeValueMapper.toEntity(returnedAttributeValueDTO);
         assertAttributeValueUpdatableFieldsEquals(returnedAttributeValue, getPersistedAttributeValue(returnedAttributeValue));
+
+        insertedAttributeValue = returnedAttributeValue;
     }
 
     @Test
@@ -142,7 +155,7 @@ class AttributeValueResourceIT {
     @Transactional
     void getAllAttributeValues() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         // Get all the attributeValueList
         restAttributeValueMockMvc
@@ -150,7 +163,7 @@ class AttributeValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(attributeValue.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
+            .andExpect(jsonPath("$.[*].val").value(hasItem(DEFAULT_VAL)))
             .andExpect(jsonPath("$.[*].customValue").value(hasItem(DEFAULT_CUSTOM_VALUE)))
             .andExpect(jsonPath("$.[*].attributeValueGroupName").value(hasItem(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME)));
     }
@@ -159,7 +172,7 @@ class AttributeValueResourceIT {
     @Transactional
     void getAttributeValue() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         // Get the attributeValue
         restAttributeValueMockMvc
@@ -167,7 +180,7 @@ class AttributeValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(attributeValue.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
+            .andExpect(jsonPath("$.val").value(DEFAULT_VAL))
             .andExpect(jsonPath("$.customValue").value(DEFAULT_CUSTOM_VALUE))
             .andExpect(jsonPath("$.attributeValueGroupName").value(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME));
     }
@@ -183,7 +196,7 @@ class AttributeValueResourceIT {
     @Transactional
     void putExistingAttributeValue() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -192,7 +205,7 @@ class AttributeValueResourceIT {
         // Disconnect from session so that the updates on updatedAttributeValue are not directly saved in db
         em.detach(updatedAttributeValue);
         updatedAttributeValue
-            .value(UPDATED_VALUE)
+            .val(UPDATED_VAL)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
         AttributeValueDTO attributeValueDTO = attributeValueMapper.toDto(updatedAttributeValue);
@@ -276,7 +289,7 @@ class AttributeValueResourceIT {
     @Transactional
     void partialUpdateAttributeValueWithPatch() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -284,10 +297,7 @@ class AttributeValueResourceIT {
         AttributeValue partialUpdatedAttributeValue = new AttributeValue();
         partialUpdatedAttributeValue.setId(attributeValue.getId());
 
-        partialUpdatedAttributeValue
-            .value(UPDATED_VALUE)
-            .customValue(UPDATED_CUSTOM_VALUE)
-            .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
+        partialUpdatedAttributeValue.val(UPDATED_VAL);
 
         restAttributeValueMockMvc
             .perform(
@@ -310,7 +320,7 @@ class AttributeValueResourceIT {
     @Transactional
     void fullUpdateAttributeValueWithPatch() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -319,7 +329,7 @@ class AttributeValueResourceIT {
         partialUpdatedAttributeValue.setId(attributeValue.getId());
 
         partialUpdatedAttributeValue
-            .value(UPDATED_VALUE)
+            .val(UPDATED_VAL)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
 
@@ -403,7 +413,7 @@ class AttributeValueResourceIT {
     @Transactional
     void deleteAttributeValue() throws Exception {
         // Initialize the database
-        attributeValueRepository.saveAndFlush(attributeValue);
+        insertedAttributeValue = attributeValueRepository.saveAndFlush(attributeValue);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

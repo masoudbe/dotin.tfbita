@@ -21,21 +21,27 @@ public class AdvisorDefinitionDTO implements Serializable {
 
     private String swiftCode;
 
-    private String creditDate;
+    private String defaultCurrencyCode;
+
+    private String currenciesCodes;
+
+    private String countryCode;
 
     private String bankCode;
 
     private String branchCode;
 
-    private String defaultCurrencyCode;
+    private AdditionalBrokerInformationDTO additionalBrokerInformation;
 
-    private String countryCode;
+    private AdvisorDefinitionDepositDTO defaultVostroDeposit;
 
-    private DraftDTO advisingBank;
+    private AdvisorDefinitionDepositDTO defaultNostroDeposit;
 
-    private DraftDTO interfaceAdvisingBank;
+    private TransferMethodManagementDTO receiveMethod;
 
-    private DraftDTO coveringBank;
+    private TransferMethodManagementDTO payMethod;
+
+    private SwiftBicDTO swiftBic;
 
     public Long getId() {
         return id;
@@ -85,12 +91,28 @@ public class AdvisorDefinitionDTO implements Serializable {
         this.swiftCode = swiftCode;
     }
 
-    public String getCreditDate() {
-        return creditDate;
+    public String getDefaultCurrencyCode() {
+        return defaultCurrencyCode;
     }
 
-    public void setCreditDate(String creditDate) {
-        this.creditDate = creditDate;
+    public void setDefaultCurrencyCode(String defaultCurrencyCode) {
+        this.defaultCurrencyCode = defaultCurrencyCode;
+    }
+
+    public String getCurrenciesCodes() {
+        return currenciesCodes;
+    }
+
+    public void setCurrenciesCodes(String currenciesCodes) {
+        this.currenciesCodes = currenciesCodes;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getBankCode() {
@@ -109,44 +131,52 @@ public class AdvisorDefinitionDTO implements Serializable {
         this.branchCode = branchCode;
     }
 
-    public String getDefaultCurrencyCode() {
-        return defaultCurrencyCode;
+    public AdditionalBrokerInformationDTO getAdditionalBrokerInformation() {
+        return additionalBrokerInformation;
     }
 
-    public void setDefaultCurrencyCode(String defaultCurrencyCode) {
-        this.defaultCurrencyCode = defaultCurrencyCode;
+    public void setAdditionalBrokerInformation(AdditionalBrokerInformationDTO additionalBrokerInformation) {
+        this.additionalBrokerInformation = additionalBrokerInformation;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public AdvisorDefinitionDepositDTO getDefaultVostroDeposit() {
+        return defaultVostroDeposit;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setDefaultVostroDeposit(AdvisorDefinitionDepositDTO defaultVostroDeposit) {
+        this.defaultVostroDeposit = defaultVostroDeposit;
     }
 
-    public DraftDTO getAdvisingBank() {
-        return advisingBank;
+    public AdvisorDefinitionDepositDTO getDefaultNostroDeposit() {
+        return defaultNostroDeposit;
     }
 
-    public void setAdvisingBank(DraftDTO advisingBank) {
-        this.advisingBank = advisingBank;
+    public void setDefaultNostroDeposit(AdvisorDefinitionDepositDTO defaultNostroDeposit) {
+        this.defaultNostroDeposit = defaultNostroDeposit;
     }
 
-    public DraftDTO getInterfaceAdvisingBank() {
-        return interfaceAdvisingBank;
+    public TransferMethodManagementDTO getReceiveMethod() {
+        return receiveMethod;
     }
 
-    public void setInterfaceAdvisingBank(DraftDTO interfaceAdvisingBank) {
-        this.interfaceAdvisingBank = interfaceAdvisingBank;
+    public void setReceiveMethod(TransferMethodManagementDTO receiveMethod) {
+        this.receiveMethod = receiveMethod;
     }
 
-    public DraftDTO getCoveringBank() {
-        return coveringBank;
+    public TransferMethodManagementDTO getPayMethod() {
+        return payMethod;
     }
 
-    public void setCoveringBank(DraftDTO coveringBank) {
-        this.coveringBank = coveringBank;
+    public void setPayMethod(TransferMethodManagementDTO payMethod) {
+        this.payMethod = payMethod;
+    }
+
+    public SwiftBicDTO getSwiftBic() {
+        return swiftBic;
+    }
+
+    public void setSwiftBic(SwiftBicDTO swiftBic) {
+        this.swiftBic = swiftBic;
     }
 
     @Override
@@ -180,14 +210,17 @@ public class AdvisorDefinitionDTO implements Serializable {
             ", countryIsoCode='" + getCountryIsoCode() + "'" +
             ", depositNum='" + getDepositNum() + "'" +
             ", swiftCode='" + getSwiftCode() + "'" +
-            ", creditDate='" + getCreditDate() + "'" +
+            ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
+            ", currenciesCodes='" + getCurrenciesCodes() + "'" +
+            ", countryCode='" + getCountryCode() + "'" +
             ", bankCode='" + getBankCode() + "'" +
             ", branchCode='" + getBranchCode() + "'" +
-            ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
-            ", countryCode='" + getCountryCode() + "'" +
-            ", advisingBank=" + getAdvisingBank() +
-            ", interfaceAdvisingBank=" + getInterfaceAdvisingBank() +
-            ", coveringBank=" + getCoveringBank() +
+            ", additionalBrokerInformation=" + getAdditionalBrokerInformation() +
+            ", defaultVostroDeposit=" + getDefaultVostroDeposit() +
+            ", defaultNostroDeposit=" + getDefaultNostroDeposit() +
+            ", receiveMethod=" + getReceiveMethod() +
+            ", payMethod=" + getPayMethod() +
+            ", swiftBic=" + getSwiftBic() +
             "}";
     }
 }

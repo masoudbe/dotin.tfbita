@@ -26,7 +26,7 @@ class ProductTypeTest {
     }
 
     @Test
-    void productTypeAttributesTest() throws Exception {
+    void productTypeAttributesTest() {
         ProductType productType = getProductTypeRandomSampleGenerator();
         TypeAttribute typeAttributeBack = getTypeAttributeRandomSampleGenerator();
 

@@ -4,7 +4,7 @@ import { IProduct } from 'app/shared/model/product.model';
 
 export interface IAttributeValue {
   id?: number;
-  value?: string | null;
+  val?: string | null;
   customValue?: string | null;
   attributeValueGroupName?: string | null;
   typeAttribute?: ITypeAttribute | null;

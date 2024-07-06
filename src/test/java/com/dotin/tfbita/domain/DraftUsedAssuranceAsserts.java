@@ -78,6 +78,6 @@ public class DraftUsedAssuranceAsserts {
     public static void assertDraftUsedAssuranceUpdatableRelationshipsEquals(DraftUsedAssurance expected, DraftUsedAssurance actual) {
         assertThat(expected)
             .as("Verify DraftUsedAssurance relationships")
-            .satisfies(e -> assertThat(e.getUsedAssurances()).as("check usedAssurances").isEqualTo(actual.getUsedAssurances()));
+            .satisfies(e -> assertThat(e.getDraft()).as("check draft").isEqualTo(actual.getDraft()));
     }
 }

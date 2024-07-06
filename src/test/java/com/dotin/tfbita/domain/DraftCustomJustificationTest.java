@@ -27,7 +27,7 @@ class DraftCustomJustificationTest {
     }
 
     @Test
-    void draftReceiptsTest() throws Exception {
+    void draftReceiptsTest() {
         DraftCustomJustification draftCustomJustification = getDraftCustomJustificationRandomSampleGenerator();
         DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
 
@@ -45,14 +45,14 @@ class DraftCustomJustificationTest {
     }
 
     @Test
-    void draftJustificationsTest() throws Exception {
+    void draftTest() {
         DraftCustomJustification draftCustomJustification = getDraftCustomJustificationRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftCustomJustification.setDraftJustifications(draftBack);
-        assertThat(draftCustomJustification.getDraftJustifications()).isEqualTo(draftBack);
+        draftCustomJustification.setDraft(draftBack);
+        assertThat(draftCustomJustification.getDraft()).isEqualTo(draftBack);
 
-        draftCustomJustification.draftJustifications(null);
-        assertThat(draftCustomJustification.getDraftJustifications()).isNull();
+        draftCustomJustification.draft(null);
+        assertThat(draftCustomJustification.getDraft()).isNull();
     }
 }

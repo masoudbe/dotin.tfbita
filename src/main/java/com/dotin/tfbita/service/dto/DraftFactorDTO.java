@@ -24,9 +24,9 @@ public class DraftFactorDTO implements Serializable {
 
     private String serial;
 
-    private String currencyName;
+    private String currencyCode;
 
-    private DraftDTO draftFactors;
+    private DraftDTO draft;
 
     public Long getId() {
         return id;
@@ -84,20 +84,20 @@ public class DraftFactorDTO implements Serializable {
         this.serial = serial;
     }
 
-    public String getCurrencyName() {
-        return currencyName;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
-    public DraftDTO getDraftFactors() {
-        return draftFactors;
+    public DraftDTO getDraft() {
+        return draft;
     }
 
-    public void setDraftFactors(DraftDTO draftFactors) {
-        this.draftFactors = draftFactors;
+    public void setDraft(DraftDTO draft) {
+        this.draft = draft;
     }
 
     @Override
@@ -132,8 +132,8 @@ public class DraftFactorDTO implements Serializable {
             ", factorDate='" + getFactorDate() + "'" +
             ", issueDate='" + getIssueDate() + "'" +
             ", serial='" + getSerial() + "'" +
-            ", currencyName='" + getCurrencyName() + "'" +
-            ", draftFactors=" + getDraftFactors() +
+            ", currencyCode='" + getCurrencyCode() + "'" +
+            ", draft=" + getDraft() +
             "}";
     }
 }

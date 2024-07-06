@@ -2,12 +2,9 @@ package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
 import static com.dotin.tfbita.domain.CategoryTestSamples.*;
-import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class CategoryElementTest {
@@ -27,7 +24,7 @@ class CategoryElementTest {
     }
 
     @Test
-    void categoryTest() throws Exception {
+    void categoryTest() {
         CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
         Category categoryBack = getCategoryRandomSampleGenerator();
 
@@ -36,27 +33,5 @@ class CategoryElementTest {
 
         categoryElement.category(null);
         assertThat(categoryElement.getCategory()).isNull();
-    }
-
-    @Test
-    void orderRegistrationInfoTest() throws Exception {
-        CategoryElement categoryElement = getCategoryElementRandomSampleGenerator();
-        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
-
-        categoryElement.addOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(categoryElement.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getTransportVehicleTypes()).containsOnly(categoryElement);
-
-        categoryElement.removeOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(categoryElement.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getTransportVehicleTypes()).doesNotContain(categoryElement);
-
-        categoryElement.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
-        assertThat(categoryElement.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getTransportVehicleTypes()).containsOnly(categoryElement);
-
-        categoryElement.setOrderRegistrationInfos(new HashSet<>());
-        assertThat(categoryElement.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getTransportVehicleTypes()).doesNotContain(categoryElement);
     }
 }

@@ -131,10 +131,13 @@ public class DraftTypeResource {
     /**
      * {@code GET  /draft-types} : get all the draftTypes.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of draftTypes in body.
      */
     @GetMapping("")
-    public List<DraftTypeDTO> getAllDraftTypes() {
+    public List<DraftTypeDTO> getAllDraftTypes(
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         log.debug("REST request to get all DraftTypes");
         return draftTypeService.findAll();
     }

@@ -130,6 +130,8 @@ public class OrderRegistrationInfoDTO implements Serializable {
 
     private CategoryElementDTO externalCustomerType;
 
+    private CategoryElementDTO transportVehicleType;
+
     private TransportationTypeDTO transportType;
 
     private CustomDTO destCoustomers;
@@ -137,8 +139,6 @@ public class OrderRegistrationInfoDTO implements Serializable {
     private CustomDTO cargoPlaceCustoms;
 
     private CustomDTO entranceBorders;
-
-    private Set<CategoryElementDTO> transportVehicleTypes = new HashSet<>();
 
     private Set<ProductDTO> productInfos = new HashSet<>();
 
@@ -608,6 +608,14 @@ public class OrderRegistrationInfoDTO implements Serializable {
         this.externalCustomerType = externalCustomerType;
     }
 
+    public CategoryElementDTO getTransportVehicleType() {
+        return transportVehicleType;
+    }
+
+    public void setTransportVehicleType(CategoryElementDTO transportVehicleType) {
+        this.transportVehicleType = transportVehicleType;
+    }
+
     public TransportationTypeDTO getTransportType() {
         return transportType;
     }
@@ -638,14 +646,6 @@ public class OrderRegistrationInfoDTO implements Serializable {
 
     public void setEntranceBorders(CustomDTO entranceBorders) {
         this.entranceBorders = entranceBorders;
-    }
-
-    public Set<CategoryElementDTO> getTransportVehicleTypes() {
-        return transportVehicleTypes;
-    }
-
-    public void setTransportVehicleTypes(Set<CategoryElementDTO> transportVehicleTypes) {
-        this.transportVehicleTypes = transportVehicleTypes;
     }
 
     public Set<ProductDTO> getProductInfos() {
@@ -746,11 +746,11 @@ public class OrderRegistrationInfoDTO implements Serializable {
             ", ownerType=" + getOwnerType() +
             ", status=" + getStatus() +
             ", externalCustomerType=" + getExternalCustomerType() +
+            ", transportVehicleType=" + getTransportVehicleType() +
             ", transportType=" + getTransportType() +
             ", destCoustomers=" + getDestCoustomers() +
             ", cargoPlaceCustoms=" + getCargoPlaceCustoms() +
             ", entranceBorders=" + getEntranceBorders() +
-            ", transportVehicleTypes=" + getTransportVehicleTypes() +
             ", productInfos=" + getProductInfos() +
             ", commissionTransactionNumbers=" + getCommissionTransactionNumbers() +
             "}";

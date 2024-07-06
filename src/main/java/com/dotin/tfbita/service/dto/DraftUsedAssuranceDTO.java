@@ -22,7 +22,7 @@ public class DraftUsedAssuranceDTO implements Serializable {
 
     private BigDecimal usedCost;
 
-    private DraftDTO usedAssurances;
+    private DraftDTO draft;
 
     public Long getId() {
         return id;
@@ -72,12 +72,12 @@ public class DraftUsedAssuranceDTO implements Serializable {
         this.usedCost = usedCost;
     }
 
-    public DraftDTO getUsedAssurances() {
-        return usedAssurances;
+    public DraftDTO getDraft() {
+        return draft;
     }
 
-    public void setUsedAssurances(DraftDTO usedAssurances) {
-        this.usedAssurances = usedAssurances;
+    public void setDraft(DraftDTO draft) {
+        this.draft = draft;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class DraftUsedAssuranceDTO implements Serializable {
             ", exchangeRate=" + getExchangeRate() +
             ", defaultCurrencyUsedCost=" + getDefaultCurrencyUsedCost() +
             ", usedCost=" + getUsedCost() +
-            ", usedAssurances=" + getUsedAssurances() +
+            ", draft=" + getDraft() +
             "}";
     }
 }

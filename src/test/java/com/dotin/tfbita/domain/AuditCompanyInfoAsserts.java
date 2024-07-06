@@ -68,7 +68,7 @@ public class AuditCompanyInfoAsserts {
             .satisfies(e -> assertThat(e.getTheSideStreet()).as("check theSideStreet").isEqualTo(actual.getTheSideStreet()))
             .satisfies(e -> assertThat(e.getTitle()).as("check title").isEqualTo(actual.getTitle()))
             .satisfies(e -> assertThat(e.getUnit()).as("check unit").isEqualTo(actual.getUnit()))
-            .satisfies(e -> assertThat(e.getCity()).as("check city").isEqualTo(actual.getCity()));
+            .satisfies(e -> assertThat(e.getCityCode()).as("check cityCode").isEqualTo(actual.getCityCode()));
     }
 
     /**
@@ -77,9 +77,5 @@ public class AuditCompanyInfoAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertAuditCompanyInfoUpdatableRelationshipsEquals(AuditCompanyInfo expected, AuditCompanyInfo actual) {
-        assertThat(expected)
-            .as("Verify AuditCompanyInfo relationships")
-            .satisfies(e -> assertThat(e.getAuditCompanyInfo()).as("check auditCompanyInfo").isEqualTo(actual.getAuditCompanyInfo()));
-    }
+    public static void assertAuditCompanyInfoUpdatableRelationshipsEquals(AuditCompanyInfo expected, AuditCompanyInfo actual) {}
 }

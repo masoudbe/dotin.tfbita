@@ -10,14 +10,14 @@ public class StringValueTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static StringValue getStringValueSample1() {
-        return new StringValue().id(1L).value("value1");
+        return new StringValue().id(1L).val("val1");
     }
 
     public static StringValue getStringValueSample2() {
-        return new StringValue().id(2L).value("value2");
+        return new StringValue().id(2L).val("val2");
     }
 
     public static StringValue getStringValueRandomSampleGenerator() {
-        return new StringValue().id(longCount.incrementAndGet()).value(UUID.randomUUID().toString());
+        return new StringValue().id(longCount.incrementAndGet()).val(UUID.randomUUID().toString());
     }
 }

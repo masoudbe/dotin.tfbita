@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082904"
+    "changelogDate": "20240706105903"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -46,27 +46,71 @@
       "fieldType": "Boolean"
     },
     {
+      "fieldName": "currenciesCodes",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "defaultCurrencyCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "accountInfoCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "topicInfoCode",
       "fieldType": "String"
     }
   ],
   "name": "DraftType",
   "relationships": [
     {
-      "otherEntityName": "draft",
-      "relationshipName": "draftType",
+      "otherEntityName": "categoryElement",
+      "relationshipName": "type",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "secondaryType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "division",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftTypeTopicInfo",
+      "relationshipName": "topicInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "creditTypeConditionInfo",
+      "relationshipName": "conditionInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftTypeAccountInfo",
+      "relationshipName": "accountInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftRequestType",
+      "relationshipName": "requestType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "objectiveCategoryElement",
+      "relationshipName": "acceptableProductTypes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "stringValue",
+      "relationshipName": "userGroups",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

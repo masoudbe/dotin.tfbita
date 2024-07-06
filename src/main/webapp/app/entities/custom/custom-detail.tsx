@@ -55,19 +55,6 @@ export const CustomDetail = () => {
             </span>
           </dt>
           <dd>{customEntity.tempId}</dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.custom.draft">Draft</Translate>
-          </dt>
-          <dd>
-            {customEntity.drafts
-              ? customEntity.drafts.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {customEntity.drafts && i === customEntity.drafts.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/custom" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

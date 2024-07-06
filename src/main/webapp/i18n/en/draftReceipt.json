@@ -38,8 +38,6 @@
       "serial": "Serial",
       "transportRow": "Transport Row",
       "usable": "Usable",
-      "paymentCurrencyRateTypeDesc": "Payment Currency Rate Type Desc",
-      "paymentItemTypeDesc": "Payment Item Type Desc",
       "netWeight": "Net Weight",
       "grossWeight": "Gross Weight",
       "totalNetWeight": "Total Net Weight",
@@ -54,8 +52,14 @@
       "currencyProvisionFile": "Currency Provision File",
       "isMigrational": "Is Migrational",
       "otherCost": "Other Cost",
-      "product": "Product",
-      "receipts": "Receipts",
+      "draftProductInfos": "Draft Product Infos",
+      "productDimension": "Product Dimension",
+      "stateOfDocuments": "State Of Documents",
+      "currencyProvisionFileType": "Currency Provision File Type",
+      "paymentCurrencyRateType": "Payment Currency Rate Type",
+      "paymentItem": "Payment Item",
+      "documentTransactionContainer": "Document Transaction Container",
+      "draft": "Draft",
       "draftCustomJustification": "Draft Custom Justification"
     }
   }

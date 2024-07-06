@@ -59,9 +59,5 @@ public class CustomAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertCustomUpdatableRelationshipsEquals(Custom expected, Custom actual) {
-        assertThat(expected)
-            .as("Verify Custom relationships")
-            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()));
-    }
+    public static void assertCustomUpdatableRelationshipsEquals(Custom expected, Custom actual) {}
 }

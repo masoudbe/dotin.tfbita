@@ -25,7 +25,7 @@ class PurchaseFromOtherResourcesTest {
     }
 
     @Test
-    void currencySupplierTest() throws Exception {
+    void currencySupplierTest() {
         PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -37,7 +37,7 @@ class PurchaseFromOtherResourcesTest {
     }
 
     @Test
-    void statusTest() throws Exception {
+    void statusTest() {
         PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
@@ -49,7 +49,7 @@ class PurchaseFromOtherResourcesTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void orderRegistrationInfoTest() {
         PurchaseFromOtherResources purchaseFromOtherResources = getPurchaseFromOtherResourcesRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 

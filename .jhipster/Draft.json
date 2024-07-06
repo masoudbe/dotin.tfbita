@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082855"
+    "changelogDate": "20240706105852"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -246,6 +246,18 @@
       "fieldType": "Boolean"
     },
     {
+      "fieldName": "mainAccountCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderRegCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chargedExchangeBrokerCurrencyCode",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "destinationCountryCode",
       "fieldType": "String"
     },
@@ -255,6 +267,10 @@
     },
     {
       "fieldName": "producerCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registerationJustificationCurrencyCode",
       "fieldType": "String"
     },
     {
@@ -268,117 +284,250 @@
     {
       "fieldName": "certificateSenderBranchCode",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "mainAccountCurrencyCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "orderRegCurrencyCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "chargedExchangeBrokerCurrency",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "registerationJustificationCurrencyCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "currencyExchangeInfoTitle",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "transportationTypeName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "accountInfoCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "customerNumbers",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "sanctionSerials",
-      "fieldType": "String"
     }
   ],
   "name": "Draft",
   "relationships": [
     {
       "otherEntityName": "draftReceipt",
-      "otherEntityRelationshipName": "receipts",
-      "relationshipName": "draftReceipt",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "draftUsedAssurance",
-      "otherEntityRelationshipName": "usedAssurances",
-      "relationshipName": "draftUsedAssurance",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "draftFactor",
-      "otherEntityRelationshipName": "draftFactors",
-      "relationshipName": "draftFactor",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "draftCustomJustification",
-      "otherEntityRelationshipName": "draftJustifications",
-      "relationshipName": "draftCustomJustification",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "draftExtend",
-      "otherEntityRelationshipName": "extensions",
-      "relationshipName": "draftExtend",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "receipts",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "draftTax",
-      "otherEntityRelationshipName": "taxes",
-      "relationshipName": "draftTax",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "taxes",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "draftStatusInfo",
-      "otherEntityRelationshipName": "statusInfo",
-      "relationshipName": "draftStatusInfo",
+      "otherEntityName": "draftExtend",
+      "otherEntityRelationshipName": "draftField",
+      "relationshipName": "extensions",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftFactor",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "draftFactors",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftUsedAssurance",
+      "relationshipName": "usedAssurances",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftCustomJustification",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "draftJustifications",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "chargedExchangeBroker",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "insuranceLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "advisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "interfaceAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "coveringAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "impartType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "dealType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "transportVehicleType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "freightLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "actionCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "ownershipCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencyContainerPlace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "paymentType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "draftSource",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "custom",
-      "otherEntityRelationshipName": "draft",
-      "relationshipName": "custom",
-      "relationshipSide": "right",
+      "relationshipName": "loadSwitchPlace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftType",
+      "relationshipName": "draftType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftStatusInfo",
+      "relationshipName": "statusInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "insuranceCompanyInfo",
+      "relationshipName": "insuranceCompanyInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "advisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "interfaceAdvisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "coveringBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "auditCompanyInfo",
+      "relationshipName": "auditCompanyInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transportationType",
+      "relationshipName": "transportType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "currencyExchangeInfo",
+      "relationshipName": "currencyExchangeInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftAccountInfo",
+      "relationshipName": "accountInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "destinationCustomCompanies",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "sourceCustomCompanies",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "serviceTariff",
+      "relationshipName": "services",
+      "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "product",
-      "otherEntityRelationshipName": "draft",
       "relationshipName": "products",
-      "relationshipSide": "right",
+      "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
-      "otherEntityName": "serviceTariff",
-      "otherEntityRelationshipName": "draft",
-      "relationshipName": "services",
-      "relationshipSide": "right",
+      "otherEntityName": "stringValue",
+      "relationshipName": "sanctionSerials",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "longValue",
+      "relationshipName": "customerNumbers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "suggestedSanctionInfo",
+      "relationshipName": "suggestedSanctions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "relationshipName": "documentTransactionContainer",
+      "relationshipSide": "left",
       "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

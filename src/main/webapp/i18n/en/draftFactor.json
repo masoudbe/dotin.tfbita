@@ -24,8 +24,8 @@
       "factorDate": "Factor Date",
       "issueDate": "Issue Date",
       "serial": "Serial",
-      "currencyName": "Currency Name",
-      "draftFactors": "Draft Factors"
+      "currencyCode": "Currency Code",
+      "draft": "Draft"
     }
   }
 }

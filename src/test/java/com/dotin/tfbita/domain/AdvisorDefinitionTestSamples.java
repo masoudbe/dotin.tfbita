@@ -17,11 +17,11 @@ public class AdvisorDefinitionTestSamples {
             .countryIsoCode("countryIsoCode1")
             .depositNum("depositNum1")
             .swiftCode("swiftCode1")
-            .creditDate("creditDate1")
-            .bankCode("bankCode1")
-            .branchCode("branchCode1")
             .defaultCurrencyCode("defaultCurrencyCode1")
-            .countryCode("countryCode1");
+            .currenciesCodes("currenciesCodes1")
+            .countryCode("countryCode1")
+            .bankCode("bankCode1")
+            .branchCode("branchCode1");
     }
 
     public static AdvisorDefinition getAdvisorDefinitionSample2() {
@@ -32,11 +32,11 @@ public class AdvisorDefinitionTestSamples {
             .countryIsoCode("countryIsoCode2")
             .depositNum("depositNum2")
             .swiftCode("swiftCode2")
-            .creditDate("creditDate2")
-            .bankCode("bankCode2")
-            .branchCode("branchCode2")
             .defaultCurrencyCode("defaultCurrencyCode2")
-            .countryCode("countryCode2");
+            .currenciesCodes("currenciesCodes2")
+            .countryCode("countryCode2")
+            .bankCode("bankCode2")
+            .branchCode("branchCode2");
     }
 
     public static AdvisorDefinition getAdvisorDefinitionRandomSampleGenerator() {
@@ -47,10 +47,10 @@ public class AdvisorDefinitionTestSamples {
             .countryIsoCode(UUID.randomUUID().toString())
             .depositNum(UUID.randomUUID().toString())
             .swiftCode(UUID.randomUUID().toString())
-            .creditDate(UUID.randomUUID().toString())
-            .bankCode(UUID.randomUUID().toString())
-            .branchCode(UUID.randomUUID().toString())
             .defaultCurrencyCode(UUID.randomUUID().toString())
-            .countryCode(UUID.randomUUID().toString());
+            .currenciesCodes(UUID.randomUUID().toString())
+            .countryCode(UUID.randomUUID().toString())
+            .bankCode(UUID.randomUUID().toString())
+            .branchCode(UUID.randomUUID().toString());
     }
 }

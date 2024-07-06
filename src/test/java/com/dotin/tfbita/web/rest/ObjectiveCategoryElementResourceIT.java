@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ class ObjectiveCategoryElementResourceIT {
 
     private ObjectiveCategoryElement objectiveCategoryElement;
 
+    private ObjectiveCategoryElement insertedObjectiveCategoryElement;
+
     /**
      * Create an entity for this test.
      *
@@ -93,6 +96,14 @@ class ObjectiveCategoryElementResourceIT {
         objectiveCategoryElement = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedObjectiveCategoryElement != null) {
+            objectiveCategoryElementRepository.delete(insertedObjectiveCategoryElement);
+            insertedObjectiveCategoryElement = null;
+        }
+    }
+
     @Test
     @Transactional
     void createObjectiveCategoryElement() throws Exception {
@@ -118,6 +129,8 @@ class ObjectiveCategoryElementResourceIT {
             returnedObjectiveCategoryElement,
             getPersistedObjectiveCategoryElement(returnedObjectiveCategoryElement)
         );
+
+        insertedObjectiveCategoryElement = returnedObjectiveCategoryElement;
     }
 
     @Test
@@ -144,7 +157,7 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void getAllObjectiveCategoryElements() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         // Get all the objectiveCategoryElementList
         restObjectiveCategoryElementMockMvc
@@ -160,7 +173,7 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void getObjectiveCategoryElement() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         // Get the objectiveCategoryElement
         restObjectiveCategoryElementMockMvc
@@ -183,7 +196,7 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void putExistingObjectiveCategoryElement() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -275,15 +288,13 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void partialUpdateObjectiveCategoryElementWithPatch() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the objectiveCategoryElement using partial update
         ObjectiveCategoryElement partialUpdatedObjectiveCategoryElement = new ObjectiveCategoryElement();
         partialUpdatedObjectiveCategoryElement.setId(objectiveCategoryElement.getId());
-
-        partialUpdatedObjectiveCategoryElement.entityId(UPDATED_ENTITY_ID);
 
         restObjectiveCategoryElementMockMvc
             .perform(
@@ -306,7 +317,7 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void fullUpdateObjectiveCategoryElementWithPatch() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -401,7 +412,7 @@ class ObjectiveCategoryElementResourceIT {
     @Transactional
     void deleteObjectiveCategoryElement() throws Exception {
         // Initialize the database
-        objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
+        insertedObjectiveCategoryElement = objectiveCategoryElementRepository.saveAndFlush(objectiveCategoryElement);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

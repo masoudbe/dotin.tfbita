@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105924"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "item",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tariffCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productName",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "productId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "boxCount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "boxType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pureWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "impureWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "amountCurrency",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "CustomJustificationChild",
+  "relationships": [
+    {
+      "otherEntityName": "customJustification",
+      "otherEntityRelationshipName": "customJustificationChildList",
+      "relationshipName": "customJustification",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,44 @@
+{
+  "tfbitaApp": {
+    "creditTypeCondition": {
+      "home": {
+        "title": "Credit Type Conditions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Credit Type Condition",
+        "createOrEditLabel": "Create or edit a Credit Type Condition",
+        "notFound": "No Credit Type Conditions found"
+      },
+      "created": "A new Credit Type Condition is created with identifier {{ param }}",
+      "updated": "A Credit Type Condition is updated with identifier {{ param }}",
+      "deleted": "A Credit Type Condition is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Credit Type Condition {{ id }}?"
+      },
+      "detail": {
+        "title": "Credit Type Condition"
+      },
+      "id": "ID",
+      "assurancePercentage": "Assurance Percentage",
+      "commissionRate": "Commission Rate",
+      "customerPrepaymentRateFrom": "Customer Prepayment Rate From",
+      "customerPrepaymentRateTo": "Customer Prepayment Rate To",
+      "durationFrom": "Duration From",
+      "durationTo": "Duration To",
+      "orderRegistrationRightFrom": "Order Registration Right From",
+      "orderRegistrationRightTo": "Order Registration Right To",
+      "postSuspensionPeriodPenaltyRate": "Post Suspension Period Penalty Rate",
+      "priceFrom": "Price From",
+      "priceTo": "Price To",
+      "suspensionDurationFrom": "Suspension Duration From",
+      "suspensionDurationTo": "Suspension Duration To",
+      "suspensionPeriodInterestRate": "Suspension Period Interest Rate",
+      "updateCommissionRate": "Update Commission Rate",
+      "currencyCode": "Currency Code",
+      "serviceOrProduct": "Service Or Product",
+      "neededIdentificationDocTypes": "Needed Identification Doc Types",
+      "productTypes": "Product Types",
+      "assuranceTypes": "Assurance Types",
+      "creditTypeConditionInfo": "Credit Type Condition Info"
+    }
+  }
+}

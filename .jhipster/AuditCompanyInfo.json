@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082905"
+    "changelogDate": "20240706105859"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -70,19 +70,12 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "city",
+      "fieldName": "cityCode",
       "fieldType": "String"
     }
   ],
   "name": "AuditCompanyInfo",
-  "relationships": [
-    {
-      "otherEntityName": "draft",
-      "relationshipName": "auditCompanyInfo",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"
 }

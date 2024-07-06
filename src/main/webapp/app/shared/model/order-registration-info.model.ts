@@ -63,11 +63,11 @@ export interface IOrderRegistrationInfo {
   ownerType?: ICategoryElement | null;
   status?: ICategoryElement | null;
   externalCustomerType?: ICategoryElement | null;
+  transportVehicleType?: ICategoryElement | null;
   transportType?: ITransportationType | null;
   destCoustomers?: ICustom | null;
   cargoPlaceCustoms?: ICustom | null;
   entranceBorders?: ICustom | null;
-  transportVehicleTypes?: ICategoryElement[] | null;
   productInfos?: IProduct[] | null;
   commissionTransactionNumbers?: IStringValue[] | null;
 }

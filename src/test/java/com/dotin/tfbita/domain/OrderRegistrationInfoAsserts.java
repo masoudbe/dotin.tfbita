@@ -190,13 +190,13 @@ public class OrderRegistrationInfoAsserts {
             .satisfies(
                 e -> assertThat(e.getExternalCustomerType()).as("check externalCustomerType").isEqualTo(actual.getExternalCustomerType())
             )
+            .satisfies(
+                e -> assertThat(e.getTransportVehicleType()).as("check transportVehicleType").isEqualTo(actual.getTransportVehicleType())
+            )
             .satisfies(e -> assertThat(e.getTransportType()).as("check transportType").isEqualTo(actual.getTransportType()))
             .satisfies(e -> assertThat(e.getDestCoustomers()).as("check destCoustomers").isEqualTo(actual.getDestCoustomers()))
             .satisfies(e -> assertThat(e.getCargoPlaceCustoms()).as("check cargoPlaceCustoms").isEqualTo(actual.getCargoPlaceCustoms()))
             .satisfies(e -> assertThat(e.getEntranceBorders()).as("check entranceBorders").isEqualTo(actual.getEntranceBorders()))
-            .satisfies(
-                e -> assertThat(e.getTransportVehicleTypes()).as("check transportVehicleTypes").isEqualTo(actual.getTransportVehicleTypes())
-            )
             .satisfies(e -> assertThat(e.getProductInfos()).as("check productInfos").isEqualTo(actual.getProductInfos()))
             .satisfies(
                 e ->

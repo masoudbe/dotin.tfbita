@@ -1,7 +1,6 @@
 package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.LicenceInfoTestSamples.*;
-import static com.dotin.tfbita.domain.OrderRegServTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.ProductTestSamples.*;
 import static com.dotin.tfbita.domain.ServiceTariffTestSamples.*;
@@ -27,7 +26,7 @@ class LicenceInfoTest {
     }
 
     @Test
-    void productTest() throws Exception {
+    void productTest() {
         LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
         Product productBack = getProductRandomSampleGenerator();
 
@@ -39,7 +38,7 @@ class LicenceInfoTest {
     }
 
     @Test
-    void serviceTest() throws Exception {
+    void serviceTest() {
         LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
         ServiceTariff serviceTariffBack = getServiceTariffRandomSampleGenerator();
 
@@ -51,7 +50,7 @@ class LicenceInfoTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void orderRegistrationInfoTest() {
         LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
@@ -60,17 +59,5 @@ class LicenceInfoTest {
 
         licenceInfo.orderRegistrationInfo(null);
         assertThat(licenceInfo.getOrderRegistrationInfo()).isNull();
-    }
-
-    @Test
-    void orderRegServTest() throws Exception {
-        LicenceInfo licenceInfo = getLicenceInfoRandomSampleGenerator();
-        OrderRegServ orderRegServBack = getOrderRegServRandomSampleGenerator();
-
-        licenceInfo.setOrderRegServ(orderRegServBack);
-        assertThat(licenceInfo.getOrderRegServ()).isEqualTo(orderRegServBack);
-
-        licenceInfo.orderRegServ(null);
-        assertThat(licenceInfo.getOrderRegServ()).isNull();
     }
 }

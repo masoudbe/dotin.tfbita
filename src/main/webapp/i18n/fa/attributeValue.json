@@ -18,7 +18,7 @@
         "title": "Attribute Value"
       },
       "id": "ID",
-      "value": "Value",
+      "val": "Val",
       "customValue": "Custom Value",
       "attributeValueGroupName": "Attribute Value Group Name",
       "typeAttribute": "Type Attribute",

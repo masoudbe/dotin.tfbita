@@ -4,30 +4,23 @@ import static com.dotin.tfbita.domain.ServiceTariffAsserts.*;
 import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.ServiceTariff;
 import com.dotin.tfbita.repository.ServiceTariffRepository;
-import com.dotin.tfbita.service.ServiceTariffService;
 import com.dotin.tfbita.service.dto.ServiceTariffDTO;
 import com.dotin.tfbita.service.mapper.ServiceTariffMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ServiceTariffResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ServiceTariffResourceIT {
@@ -60,14 +52,8 @@ class ServiceTariffResourceIT {
     @Autowired
     private ServiceTariffRepository serviceTariffRepository;
 
-    @Mock
-    private ServiceTariffRepository serviceTariffRepositoryMock;
-
     @Autowired
     private ServiceTariffMapper serviceTariffMapper;
-
-    @Mock
-    private ServiceTariffService serviceTariffServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -76,6 +62,8 @@ class ServiceTariffResourceIT {
     private MockMvc restServiceTariffMockMvc;
 
     private ServiceTariff serviceTariff;
+
+    private ServiceTariff insertedServiceTariff;
 
     /**
      * Create an entity for this test.
@@ -104,6 +92,14 @@ class ServiceTariffResourceIT {
         serviceTariff = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedServiceTariff != null) {
+            serviceTariffRepository.delete(insertedServiceTariff);
+            insertedServiceTariff = null;
+        }
+    }
+
     @Test
     @Transactional
     void createServiceTariff() throws Exception {
@@ -124,6 +120,8 @@ class ServiceTariffResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedServiceTariff = serviceTariffMapper.toEntity(returnedServiceTariffDTO);
         assertServiceTariffUpdatableFieldsEquals(returnedServiceTariff, getPersistedServiceTariff(returnedServiceTariff));
+
+        insertedServiceTariff = returnedServiceTariff;
     }
 
     @Test
@@ -148,7 +146,7 @@ class ServiceTariffResourceIT {
     @Transactional
     void getAllServiceTariffs() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         // Get all the serviceTariffList
         restServiceTariffMockMvc
@@ -160,28 +158,11 @@ class ServiceTariffResourceIT {
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)));
     }
 
-    @SuppressWarnings({ "unchecked" })
-    void getAllServiceTariffsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(serviceTariffServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restServiceTariffMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(serviceTariffServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllServiceTariffsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(serviceTariffServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restServiceTariffMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(serviceTariffRepositoryMock, times(1)).findAll(any(Pageable.class));
-    }
-
     @Test
     @Transactional
     void getServiceTariff() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         // Get the serviceTariff
         restServiceTariffMockMvc
@@ -204,7 +185,7 @@ class ServiceTariffResourceIT {
     @Transactional
     void putExistingServiceTariff() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -294,7 +275,7 @@ class ServiceTariffResourceIT {
     @Transactional
     void partialUpdateServiceTariffWithPatch() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -302,7 +283,7 @@ class ServiceTariffResourceIT {
         ServiceTariff partialUpdatedServiceTariff = new ServiceTariff();
         partialUpdatedServiceTariff.setId(serviceTariff.getId());
 
-        partialUpdatedServiceTariff.code(UPDATED_CODE);
+        partialUpdatedServiceTariff.code(UPDATED_CODE).title(UPDATED_TITLE);
 
         restServiceTariffMockMvc
             .perform(
@@ -325,7 +306,7 @@ class ServiceTariffResourceIT {
     @Transactional
     void fullUpdateServiceTariffWithPatch() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -415,7 +396,7 @@ class ServiceTariffResourceIT {
     @Transactional
     void deleteServiceTariff() throws Exception {
         // Initialize the database
-        serviceTariffRepository.saveAndFlush(serviceTariff);
+        insertedServiceTariff = serviceTariffRepository.saveAndFlush(serviceTariff);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

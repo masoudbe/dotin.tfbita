@@ -18,10 +18,14 @@ const apiUrl = 'api/string-values';
 
 // Actions
 
-export const getEntities = createAsyncThunk('stringValue/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IStringValue[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'stringValue/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IStringValue[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'stringValue/fetch_entity',

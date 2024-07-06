@@ -28,8 +28,6 @@ public class DraftReceiptTestSamples {
             .row(1)
             .serial("serial1")
             .transportRow("transportRow1")
-            .paymentCurrencyRateTypeDesc("paymentCurrencyRateTypeDesc1")
-            .paymentItemTypeDesc("paymentItemTypeDesc1")
             .letterNumberTazirat("letterNumberTazirat1")
             .letterDateTazirat("letterDateTazirat1")
             .deadlineSubmitDocumentDate("deadlineSubmitDocumentDate1");
@@ -52,8 +50,6 @@ public class DraftReceiptTestSamples {
             .row(2)
             .serial("serial2")
             .transportRow("transportRow2")
-            .paymentCurrencyRateTypeDesc("paymentCurrencyRateTypeDesc2")
-            .paymentItemTypeDesc("paymentItemTypeDesc2")
             .letterNumberTazirat("letterNumberTazirat2")
             .letterDateTazirat("letterDateTazirat2")
             .deadlineSubmitDocumentDate("deadlineSubmitDocumentDate2");
@@ -76,8 +72,6 @@ public class DraftReceiptTestSamples {
             .row(intCount.incrementAndGet())
             .serial(UUID.randomUUID().toString())
             .transportRow(UUID.randomUUID().toString())
-            .paymentCurrencyRateTypeDesc(UUID.randomUUID().toString())
-            .paymentItemTypeDesc(UUID.randomUUID().toString())
             .letterNumberTazirat(UUID.randomUUID().toString())
             .letterDateTazirat(UUID.randomUUID().toString())
             .deadlineSubmitDocumentDate(UUID.randomUUID().toString());

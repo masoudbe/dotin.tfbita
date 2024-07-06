@@ -86,9 +86,9 @@ export const DraftStatusInfoDetail = () => {
           </dt>
           <dd>{draftStatusInfoEntity.stampCostPaid ? 'true' : 'false'}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftStatusInfo.statusInfo">Status Info</Translate>
+            <Translate contentKey="tfbitaApp.draftStatusInfo.status">Status</Translate>
           </dt>
-          <dd>{draftStatusInfoEntity.statusInfo ? draftStatusInfoEntity.statusInfo.id : ''}</dd>
+          <dd>{draftStatusInfoEntity.status ? draftStatusInfoEntity.status.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-status-info" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

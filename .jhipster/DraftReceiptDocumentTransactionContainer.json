@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105919"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "receiveReceiptCommission",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "DraftReceiptDocumentTransactionContainer",
+  "relationships": [
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "receiptIssueDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "freightLetterStampCostDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "deliverDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "documentTransactionCanceledDeliver",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "documentTransactionCanceledReceiptIssue",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "receiptCommissionDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

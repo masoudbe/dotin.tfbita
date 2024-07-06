@@ -203,6 +203,15 @@ public class Draft implements Serializable {
     @Column(name = "is_without_payment")
     private Boolean isWithoutPayment;
 
+    @Column(name = "main_account_currency_code")
+    private String mainAccountCurrencyCode;
+
+    @Column(name = "order_reg_currency_code")
+    private String orderRegCurrencyCode;
+
+    @Column(name = "charged_exchange_broker_currency_code")
+    private String chargedExchangeBrokerCurrencyCode;
+
     @Column(name = "destination_country_code")
     private String destinationCountryCode;
 
@@ -211,6 +220,9 @@ public class Draft implements Serializable {
 
     @Column(name = "producer_country_code")
     private String producerCountryCode;
+
+    @Column(name = "registeration_justification_currency_code")
+    private String registerationJustificationCurrencyCode;
 
     @Column(name = "branch_code")
     private String branchCode;
@@ -221,72 +233,264 @@ public class Draft implements Serializable {
     @Column(name = "certificate_sender_branch_code")
     private String certificateSenderBranchCode;
 
-    @Column(name = "main_account_currency_code")
-    private String mainAccountCurrencyCode;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draft")
+    @JsonIgnoreProperties(
+        value = {
+            "draftProductInfos",
+            "productDimension",
+            "stateOfDocuments",
+            "currencyProvisionFileType",
+            "paymentCurrencyRateType",
+            "paymentItem",
+            "documentTransactionContainer",
+            "draft",
+            "draftCustomJustifications",
+        },
+        allowSetters = true
+    )
+    private Set<DraftReceipt> receipts = new HashSet<>();
 
-    @Column(name = "order_reg_currency_code")
-    private String orderRegCurrencyCode;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draft")
+    @JsonIgnoreProperties(value = { "documentTransaction", "returnDocumentTransaction", "draft" }, allowSetters = true)
+    private Set<DraftTax> taxes = new HashSet<>();
 
-    @Column(name = "charged_exchange_broker_currency")
-    private String chargedExchangeBrokerCurrency;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draftField")
+    @JsonIgnoreProperties(value = { "draftField" }, allowSetters = true)
+    private Set<DraftExtend> extensions = new HashSet<>();
 
-    @Column(name = "registeration_justification_currency_code")
-    private String registerationJustificationCurrencyCode;
-
-    @Column(name = "currency_exchange_info_title")
-    private String currencyExchangeInfoTitle;
-
-    @Column(name = "transportation_type_name")
-    private String transportationTypeName;
-
-    @Column(name = "account_info_code")
-    private String accountInfoCode;
-
-    @Column(name = "customer_numbers")
-    private Long customerNumbers;
-
-    @Column(name = "sanction_serials")
-    private String sanctionSerials;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipts")
-    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
-    private Set<DraftReceipt> draftReceipts = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usedAssurances")
-    @JsonIgnoreProperties(value = { "usedAssurances" }, allowSetters = true)
-    private Set<DraftUsedAssurance> draftUsedAssurances = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draftFactors")
-    @JsonIgnoreProperties(value = { "draftFactors" }, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draft")
+    @JsonIgnoreProperties(value = { "draft" }, allowSetters = true)
     private Set<DraftFactor> draftFactors = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draftJustifications")
-    @JsonIgnoreProperties(value = { "draftReceipts", "draftJustifications" }, allowSetters = true)
-    private Set<DraftCustomJustification> draftCustomJustifications = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draft")
+    @JsonIgnoreProperties(value = { "draft" }, allowSetters = true)
+    private Set<DraftUsedAssurance> usedAssurances = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "extensions")
-    @JsonIgnoreProperties(value = { "extensions" }, allowSetters = true)
-    private Set<DraftExtend> draftExtends = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draft")
+    @JsonIgnoreProperties(value = { "draftReceipts", "draft" }, allowSetters = true)
+    private Set<DraftCustomJustification> draftJustifications = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "taxes")
-    @JsonIgnoreProperties(value = { "taxes" }, allowSetters = true)
-    private Set<DraftTax> draftTaxes = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement chargedExchangeBroker;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "statusInfo")
-    @JsonIgnoreProperties(value = { "statusInfo" }, allowSetters = true)
-    private Set<DraftStatusInfo> draftStatusInfos = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement insuranceLetterType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drafts")
-    @JsonIgnoreProperties(value = { "loadSwitchPlace", "orderRegistrationInfos", "drafts" }, allowSetters = true)
-    private Set<Custom> customs = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement advisorDepositType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drafts")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
-    private Set<Product> products = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement interfaceAdvisorDepositType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drafts")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement coveringAdvisorDepositType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement impartType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement dealType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement transportVehicleType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement freightLetterType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement actionCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement ownershipCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement currencyContainerPlace;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement paymentType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement draftSource;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Custom loadSwitchPlace;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "type",
+            "secondaryType",
+            "division",
+            "topicInfo",
+            "conditionInfo",
+            "accountInfo",
+            "requestType",
+            "acceptableProductTypes",
+            "userGroups",
+        },
+        allowSetters = true
+    )
+    private DraftType draftType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "status" }, allowSetters = true)
+    private DraftStatusInfo statusInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private InsuranceCompanyInfo insuranceCompanyInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "additionalBrokerInformation",
+            "advisorDeposits",
+            "defaultVostroDeposit",
+            "defaultNostroDeposit",
+            "receiveMethod",
+            "payMethod",
+            "swiftBic",
+        },
+        allowSetters = true
+    )
+    private AdvisorDefinition advisingBank;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "additionalBrokerInformation",
+            "advisorDeposits",
+            "defaultVostroDeposit",
+            "defaultNostroDeposit",
+            "receiveMethod",
+            "payMethod",
+            "swiftBic",
+        },
+        allowSetters = true
+    )
+    private AdvisorDefinition interfaceAdvisingBank;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "additionalBrokerInformation",
+            "advisorDeposits",
+            "defaultVostroDeposit",
+            "defaultNostroDeposit",
+            "receiveMethod",
+            "payMethod",
+            "swiftBic",
+        },
+        allowSetters = true
+    )
+    private AdvisorDefinition coveringBank;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AuditCompanyInfo auditCompanyInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private TransportationType transportType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CurrencyExchangeInfo currencyExchangeInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DraftAccountInfo accountInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Custom destinationCustomCompanies;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Custom sourceCustomCompanies;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__services",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "services_id")
+    )
     @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
     private Set<ServiceTariff> services = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__products",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "products_id")
+    )
+    @JsonIgnoreProperties(
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
+        allowSetters = true
+    )
+    private Set<Product> products = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__sanction_serials",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "sanction_serials_id")
+    )
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
+    private Set<StringValue> sanctionSerials = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__customer_numbers",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "customer_numbers_id")
+    )
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private Set<LongValue> customerNumbers = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__suggested_sanctions",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "suggested_sanctions_id")
+    )
+    @JsonIgnoreProperties(value = { "drafts" }, allowSetters = true)
+    private Set<SuggestedSanctionInfo> suggestedSanctions = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft__document_transaction_container",
+        joinColumns = @JoinColumn(name = "draft_id"),
+        inverseJoinColumns = @JoinColumn(name = "document_transaction_container_id")
+    )
+    @JsonIgnoreProperties(
+        value = {
+            "receipts",
+            "otherDocumentTransactions",
+            "canceledJustificationDocumentTransactions",
+            "justificationDocumentTransactions",
+            "receivedCommisions",
+            "canceledDocumentTransactions",
+            "returnedDefaultCurrencyCostsDocumentTransactions",
+            "defaultCurrencyCostsDocumentTransactions",
+            "issueCommissionDocumentTransaction",
+            "paymentDocumentTransaction",
+            "settleDocumentTransaction",
+            "settleExcessDocumentTransaction",
+            "commissionDeleteDraftDocumentTransaction",
+            "commissionDraftExtendDocumentTransaction",
+            "drafts",
+        },
+        allowSetters = true
+    )
+    private Set<DraftDocumentTransactionContainer> documentTransactionContainers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -1083,6 +1287,45 @@ public class Draft implements Serializable {
         this.isWithoutPayment = isWithoutPayment;
     }
 
+    public String getMainAccountCurrencyCode() {
+        return this.mainAccountCurrencyCode;
+    }
+
+    public Draft mainAccountCurrencyCode(String mainAccountCurrencyCode) {
+        this.setMainAccountCurrencyCode(mainAccountCurrencyCode);
+        return this;
+    }
+
+    public void setMainAccountCurrencyCode(String mainAccountCurrencyCode) {
+        this.mainAccountCurrencyCode = mainAccountCurrencyCode;
+    }
+
+    public String getOrderRegCurrencyCode() {
+        return this.orderRegCurrencyCode;
+    }
+
+    public Draft orderRegCurrencyCode(String orderRegCurrencyCode) {
+        this.setOrderRegCurrencyCode(orderRegCurrencyCode);
+        return this;
+    }
+
+    public void setOrderRegCurrencyCode(String orderRegCurrencyCode) {
+        this.orderRegCurrencyCode = orderRegCurrencyCode;
+    }
+
+    public String getChargedExchangeBrokerCurrencyCode() {
+        return this.chargedExchangeBrokerCurrencyCode;
+    }
+
+    public Draft chargedExchangeBrokerCurrencyCode(String chargedExchangeBrokerCurrencyCode) {
+        this.setChargedExchangeBrokerCurrencyCode(chargedExchangeBrokerCurrencyCode);
+        return this;
+    }
+
+    public void setChargedExchangeBrokerCurrencyCode(String chargedExchangeBrokerCurrencyCode) {
+        this.chargedExchangeBrokerCurrencyCode = chargedExchangeBrokerCurrencyCode;
+    }
+
     public String getDestinationCountryCode() {
         return this.destinationCountryCode;
     }
@@ -1120,6 +1363,19 @@ public class Draft implements Serializable {
 
     public void setProducerCountryCode(String producerCountryCode) {
         this.producerCountryCode = producerCountryCode;
+    }
+
+    public String getRegisterationJustificationCurrencyCode() {
+        return this.registerationJustificationCurrencyCode;
+    }
+
+    public Draft registerationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
+        this.setRegisterationJustificationCurrencyCode(registerationJustificationCurrencyCode);
+        return this;
+    }
+
+    public void setRegisterationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
+        this.registerationJustificationCurrencyCode = registerationJustificationCurrencyCode;
     }
 
     public String getBranchCode() {
@@ -1161,182 +1417,96 @@ public class Draft implements Serializable {
         this.certificateSenderBranchCode = certificateSenderBranchCode;
     }
 
-    public String getMainAccountCurrencyCode() {
-        return this.mainAccountCurrencyCode;
+    public Set<DraftReceipt> getReceipts() {
+        return this.receipts;
     }
 
-    public Draft mainAccountCurrencyCode(String mainAccountCurrencyCode) {
-        this.setMainAccountCurrencyCode(mainAccountCurrencyCode);
-        return this;
-    }
-
-    public void setMainAccountCurrencyCode(String mainAccountCurrencyCode) {
-        this.mainAccountCurrencyCode = mainAccountCurrencyCode;
-    }
-
-    public String getOrderRegCurrencyCode() {
-        return this.orderRegCurrencyCode;
-    }
-
-    public Draft orderRegCurrencyCode(String orderRegCurrencyCode) {
-        this.setOrderRegCurrencyCode(orderRegCurrencyCode);
-        return this;
-    }
-
-    public void setOrderRegCurrencyCode(String orderRegCurrencyCode) {
-        this.orderRegCurrencyCode = orderRegCurrencyCode;
-    }
-
-    public String getChargedExchangeBrokerCurrency() {
-        return this.chargedExchangeBrokerCurrency;
-    }
-
-    public Draft chargedExchangeBrokerCurrency(String chargedExchangeBrokerCurrency) {
-        this.setChargedExchangeBrokerCurrency(chargedExchangeBrokerCurrency);
-        return this;
-    }
-
-    public void setChargedExchangeBrokerCurrency(String chargedExchangeBrokerCurrency) {
-        this.chargedExchangeBrokerCurrency = chargedExchangeBrokerCurrency;
-    }
-
-    public String getRegisterationJustificationCurrencyCode() {
-        return this.registerationJustificationCurrencyCode;
-    }
-
-    public Draft registerationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
-        this.setRegisterationJustificationCurrencyCode(registerationJustificationCurrencyCode);
-        return this;
-    }
-
-    public void setRegisterationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
-        this.registerationJustificationCurrencyCode = registerationJustificationCurrencyCode;
-    }
-
-    public String getCurrencyExchangeInfoTitle() {
-        return this.currencyExchangeInfoTitle;
-    }
-
-    public Draft currencyExchangeInfoTitle(String currencyExchangeInfoTitle) {
-        this.setCurrencyExchangeInfoTitle(currencyExchangeInfoTitle);
-        return this;
-    }
-
-    public void setCurrencyExchangeInfoTitle(String currencyExchangeInfoTitle) {
-        this.currencyExchangeInfoTitle = currencyExchangeInfoTitle;
-    }
-
-    public String getTransportationTypeName() {
-        return this.transportationTypeName;
-    }
-
-    public Draft transportationTypeName(String transportationTypeName) {
-        this.setTransportationTypeName(transportationTypeName);
-        return this;
-    }
-
-    public void setTransportationTypeName(String transportationTypeName) {
-        this.transportationTypeName = transportationTypeName;
-    }
-
-    public String getAccountInfoCode() {
-        return this.accountInfoCode;
-    }
-
-    public Draft accountInfoCode(String accountInfoCode) {
-        this.setAccountInfoCode(accountInfoCode);
-        return this;
-    }
-
-    public void setAccountInfoCode(String accountInfoCode) {
-        this.accountInfoCode = accountInfoCode;
-    }
-
-    public Long getCustomerNumbers() {
-        return this.customerNumbers;
-    }
-
-    public Draft customerNumbers(Long customerNumbers) {
-        this.setCustomerNumbers(customerNumbers);
-        return this;
-    }
-
-    public void setCustomerNumbers(Long customerNumbers) {
-        this.customerNumbers = customerNumbers;
-    }
-
-    public String getSanctionSerials() {
-        return this.sanctionSerials;
-    }
-
-    public Draft sanctionSerials(String sanctionSerials) {
-        this.setSanctionSerials(sanctionSerials);
-        return this;
-    }
-
-    public void setSanctionSerials(String sanctionSerials) {
-        this.sanctionSerials = sanctionSerials;
-    }
-
-    public Set<DraftReceipt> getDraftReceipts() {
-        return this.draftReceipts;
-    }
-
-    public void setDraftReceipts(Set<DraftReceipt> draftReceipts) {
-        if (this.draftReceipts != null) {
-            this.draftReceipts.forEach(i -> i.setReceipts(null));
+    public void setReceipts(Set<DraftReceipt> draftReceipts) {
+        if (this.receipts != null) {
+            this.receipts.forEach(i -> i.setDraft(null));
         }
         if (draftReceipts != null) {
-            draftReceipts.forEach(i -> i.setReceipts(this));
+            draftReceipts.forEach(i -> i.setDraft(this));
         }
-        this.draftReceipts = draftReceipts;
+        this.receipts = draftReceipts;
     }
 
-    public Draft draftReceipts(Set<DraftReceipt> draftReceipts) {
-        this.setDraftReceipts(draftReceipts);
+    public Draft receipts(Set<DraftReceipt> draftReceipts) {
+        this.setReceipts(draftReceipts);
         return this;
     }
 
-    public Draft addDraftReceipt(DraftReceipt draftReceipt) {
-        this.draftReceipts.add(draftReceipt);
-        draftReceipt.setReceipts(this);
+    public Draft addReceipts(DraftReceipt draftReceipt) {
+        this.receipts.add(draftReceipt);
+        draftReceipt.setDraft(this);
         return this;
     }
 
-    public Draft removeDraftReceipt(DraftReceipt draftReceipt) {
-        this.draftReceipts.remove(draftReceipt);
-        draftReceipt.setReceipts(null);
+    public Draft removeReceipts(DraftReceipt draftReceipt) {
+        this.receipts.remove(draftReceipt);
+        draftReceipt.setDraft(null);
         return this;
     }
 
-    public Set<DraftUsedAssurance> getDraftUsedAssurances() {
-        return this.draftUsedAssurances;
+    public Set<DraftTax> getTaxes() {
+        return this.taxes;
     }
 
-    public void setDraftUsedAssurances(Set<DraftUsedAssurance> draftUsedAssurances) {
-        if (this.draftUsedAssurances != null) {
-            this.draftUsedAssurances.forEach(i -> i.setUsedAssurances(null));
+    public void setTaxes(Set<DraftTax> draftTaxes) {
+        if (this.taxes != null) {
+            this.taxes.forEach(i -> i.setDraft(null));
         }
-        if (draftUsedAssurances != null) {
-            draftUsedAssurances.forEach(i -> i.setUsedAssurances(this));
+        if (draftTaxes != null) {
+            draftTaxes.forEach(i -> i.setDraft(this));
         }
-        this.draftUsedAssurances = draftUsedAssurances;
+        this.taxes = draftTaxes;
     }
 
-    public Draft draftUsedAssurances(Set<DraftUsedAssurance> draftUsedAssurances) {
-        this.setDraftUsedAssurances(draftUsedAssurances);
+    public Draft taxes(Set<DraftTax> draftTaxes) {
+        this.setTaxes(draftTaxes);
         return this;
     }
 
-    public Draft addDraftUsedAssurance(DraftUsedAssurance draftUsedAssurance) {
-        this.draftUsedAssurances.add(draftUsedAssurance);
-        draftUsedAssurance.setUsedAssurances(this);
+    public Draft addTaxes(DraftTax draftTax) {
+        this.taxes.add(draftTax);
+        draftTax.setDraft(this);
         return this;
     }
 
-    public Draft removeDraftUsedAssurance(DraftUsedAssurance draftUsedAssurance) {
-        this.draftUsedAssurances.remove(draftUsedAssurance);
-        draftUsedAssurance.setUsedAssurances(null);
+    public Draft removeTaxes(DraftTax draftTax) {
+        this.taxes.remove(draftTax);
+        draftTax.setDraft(null);
+        return this;
+    }
+
+    public Set<DraftExtend> getExtensions() {
+        return this.extensions;
+    }
+
+    public void setExtensions(Set<DraftExtend> draftExtends) {
+        if (this.extensions != null) {
+            this.extensions.forEach(i -> i.setDraftField(null));
+        }
+        if (draftExtends != null) {
+            draftExtends.forEach(i -> i.setDraftField(this));
+        }
+        this.extensions = draftExtends;
+    }
+
+    public Draft extensions(Set<DraftExtend> draftExtends) {
+        this.setExtensions(draftExtends);
+        return this;
+    }
+
+    public Draft addExtensions(DraftExtend draftExtend) {
+        this.extensions.add(draftExtend);
+        draftExtend.setDraftField(this);
+        return this;
+    }
+
+    public Draft removeExtensions(DraftExtend draftExtend) {
+        this.extensions.remove(draftExtend);
+        draftExtend.setDraftField(null);
         return this;
     }
 
@@ -1346,10 +1516,10 @@ public class Draft implements Serializable {
 
     public void setDraftFactors(Set<DraftFactor> draftFactors) {
         if (this.draftFactors != null) {
-            this.draftFactors.forEach(i -> i.setDraftFactors(null));
+            this.draftFactors.forEach(i -> i.setDraft(null));
         }
         if (draftFactors != null) {
-            draftFactors.forEach(i -> i.setDraftFactors(this));
+            draftFactors.forEach(i -> i.setDraft(this));
         }
         this.draftFactors = draftFactors;
     }
@@ -1359,201 +1529,428 @@ public class Draft implements Serializable {
         return this;
     }
 
-    public Draft addDraftFactor(DraftFactor draftFactor) {
+    public Draft addDraftFactors(DraftFactor draftFactor) {
         this.draftFactors.add(draftFactor);
-        draftFactor.setDraftFactors(this);
+        draftFactor.setDraft(this);
         return this;
     }
 
-    public Draft removeDraftFactor(DraftFactor draftFactor) {
+    public Draft removeDraftFactors(DraftFactor draftFactor) {
         this.draftFactors.remove(draftFactor);
-        draftFactor.setDraftFactors(null);
+        draftFactor.setDraft(null);
         return this;
     }
 
-    public Set<DraftCustomJustification> getDraftCustomJustifications() {
-        return this.draftCustomJustifications;
+    public Set<DraftUsedAssurance> getUsedAssurances() {
+        return this.usedAssurances;
     }
 
-    public void setDraftCustomJustifications(Set<DraftCustomJustification> draftCustomJustifications) {
-        if (this.draftCustomJustifications != null) {
-            this.draftCustomJustifications.forEach(i -> i.setDraftJustifications(null));
+    public void setUsedAssurances(Set<DraftUsedAssurance> draftUsedAssurances) {
+        if (this.usedAssurances != null) {
+            this.usedAssurances.forEach(i -> i.setDraft(null));
+        }
+        if (draftUsedAssurances != null) {
+            draftUsedAssurances.forEach(i -> i.setDraft(this));
+        }
+        this.usedAssurances = draftUsedAssurances;
+    }
+
+    public Draft usedAssurances(Set<DraftUsedAssurance> draftUsedAssurances) {
+        this.setUsedAssurances(draftUsedAssurances);
+        return this;
+    }
+
+    public Draft addUsedAssurances(DraftUsedAssurance draftUsedAssurance) {
+        this.usedAssurances.add(draftUsedAssurance);
+        draftUsedAssurance.setDraft(this);
+        return this;
+    }
+
+    public Draft removeUsedAssurances(DraftUsedAssurance draftUsedAssurance) {
+        this.usedAssurances.remove(draftUsedAssurance);
+        draftUsedAssurance.setDraft(null);
+        return this;
+    }
+
+    public Set<DraftCustomJustification> getDraftJustifications() {
+        return this.draftJustifications;
+    }
+
+    public void setDraftJustifications(Set<DraftCustomJustification> draftCustomJustifications) {
+        if (this.draftJustifications != null) {
+            this.draftJustifications.forEach(i -> i.setDraft(null));
         }
         if (draftCustomJustifications != null) {
-            draftCustomJustifications.forEach(i -> i.setDraftJustifications(this));
+            draftCustomJustifications.forEach(i -> i.setDraft(this));
         }
-        this.draftCustomJustifications = draftCustomJustifications;
+        this.draftJustifications = draftCustomJustifications;
     }
 
-    public Draft draftCustomJustifications(Set<DraftCustomJustification> draftCustomJustifications) {
-        this.setDraftCustomJustifications(draftCustomJustifications);
+    public Draft draftJustifications(Set<DraftCustomJustification> draftCustomJustifications) {
+        this.setDraftJustifications(draftCustomJustifications);
         return this;
     }
 
-    public Draft addDraftCustomJustification(DraftCustomJustification draftCustomJustification) {
-        this.draftCustomJustifications.add(draftCustomJustification);
-        draftCustomJustification.setDraftJustifications(this);
+    public Draft addDraftJustifications(DraftCustomJustification draftCustomJustification) {
+        this.draftJustifications.add(draftCustomJustification);
+        draftCustomJustification.setDraft(this);
         return this;
     }
 
-    public Draft removeDraftCustomJustification(DraftCustomJustification draftCustomJustification) {
-        this.draftCustomJustifications.remove(draftCustomJustification);
-        draftCustomJustification.setDraftJustifications(null);
+    public Draft removeDraftJustifications(DraftCustomJustification draftCustomJustification) {
+        this.draftJustifications.remove(draftCustomJustification);
+        draftCustomJustification.setDraft(null);
         return this;
     }
 
-    public Set<DraftExtend> getDraftExtends() {
-        return this.draftExtends;
+    public CategoryElement getChargedExchangeBroker() {
+        return this.chargedExchangeBroker;
     }
 
-    public void setDraftExtends(Set<DraftExtend> draftExtends) {
-        if (this.draftExtends != null) {
-            this.draftExtends.forEach(i -> i.setExtensions(null));
-        }
-        if (draftExtends != null) {
-            draftExtends.forEach(i -> i.setExtensions(this));
-        }
-        this.draftExtends = draftExtends;
+    public void setChargedExchangeBroker(CategoryElement categoryElement) {
+        this.chargedExchangeBroker = categoryElement;
     }
 
-    public Draft draftExtends(Set<DraftExtend> draftExtends) {
-        this.setDraftExtends(draftExtends);
+    public Draft chargedExchangeBroker(CategoryElement categoryElement) {
+        this.setChargedExchangeBroker(categoryElement);
         return this;
     }
 
-    public Draft addDraftExtend(DraftExtend draftExtend) {
-        this.draftExtends.add(draftExtend);
-        draftExtend.setExtensions(this);
+    public CategoryElement getInsuranceLetterType() {
+        return this.insuranceLetterType;
+    }
+
+    public void setInsuranceLetterType(CategoryElement categoryElement) {
+        this.insuranceLetterType = categoryElement;
+    }
+
+    public Draft insuranceLetterType(CategoryElement categoryElement) {
+        this.setInsuranceLetterType(categoryElement);
         return this;
     }
 
-    public Draft removeDraftExtend(DraftExtend draftExtend) {
-        this.draftExtends.remove(draftExtend);
-        draftExtend.setExtensions(null);
+    public CategoryElement getAdvisorDepositType() {
+        return this.advisorDepositType;
+    }
+
+    public void setAdvisorDepositType(CategoryElement categoryElement) {
+        this.advisorDepositType = categoryElement;
+    }
+
+    public Draft advisorDepositType(CategoryElement categoryElement) {
+        this.setAdvisorDepositType(categoryElement);
         return this;
     }
 
-    public Set<DraftTax> getDraftTaxes() {
-        return this.draftTaxes;
+    public CategoryElement getInterfaceAdvisorDepositType() {
+        return this.interfaceAdvisorDepositType;
     }
 
-    public void setDraftTaxes(Set<DraftTax> draftTaxes) {
-        if (this.draftTaxes != null) {
-            this.draftTaxes.forEach(i -> i.setTaxes(null));
-        }
-        if (draftTaxes != null) {
-            draftTaxes.forEach(i -> i.setTaxes(this));
-        }
-        this.draftTaxes = draftTaxes;
+    public void setInterfaceAdvisorDepositType(CategoryElement categoryElement) {
+        this.interfaceAdvisorDepositType = categoryElement;
     }
 
-    public Draft draftTaxes(Set<DraftTax> draftTaxes) {
-        this.setDraftTaxes(draftTaxes);
+    public Draft interfaceAdvisorDepositType(CategoryElement categoryElement) {
+        this.setInterfaceAdvisorDepositType(categoryElement);
         return this;
     }
 
-    public Draft addDraftTax(DraftTax draftTax) {
-        this.draftTaxes.add(draftTax);
-        draftTax.setTaxes(this);
+    public CategoryElement getCoveringAdvisorDepositType() {
+        return this.coveringAdvisorDepositType;
+    }
+
+    public void setCoveringAdvisorDepositType(CategoryElement categoryElement) {
+        this.coveringAdvisorDepositType = categoryElement;
+    }
+
+    public Draft coveringAdvisorDepositType(CategoryElement categoryElement) {
+        this.setCoveringAdvisorDepositType(categoryElement);
         return this;
     }
 
-    public Draft removeDraftTax(DraftTax draftTax) {
-        this.draftTaxes.remove(draftTax);
-        draftTax.setTaxes(null);
+    public CategoryElement getImpartType() {
+        return this.impartType;
+    }
+
+    public void setImpartType(CategoryElement categoryElement) {
+        this.impartType = categoryElement;
+    }
+
+    public Draft impartType(CategoryElement categoryElement) {
+        this.setImpartType(categoryElement);
         return this;
     }
 
-    public Set<DraftStatusInfo> getDraftStatusInfos() {
-        return this.draftStatusInfos;
+    public CategoryElement getDealType() {
+        return this.dealType;
     }
 
-    public void setDraftStatusInfos(Set<DraftStatusInfo> draftStatusInfos) {
-        if (this.draftStatusInfos != null) {
-            this.draftStatusInfos.forEach(i -> i.setStatusInfo(null));
-        }
-        if (draftStatusInfos != null) {
-            draftStatusInfos.forEach(i -> i.setStatusInfo(this));
-        }
-        this.draftStatusInfos = draftStatusInfos;
+    public void setDealType(CategoryElement categoryElement) {
+        this.dealType = categoryElement;
     }
 
-    public Draft draftStatusInfos(Set<DraftStatusInfo> draftStatusInfos) {
-        this.setDraftStatusInfos(draftStatusInfos);
+    public Draft dealType(CategoryElement categoryElement) {
+        this.setDealType(categoryElement);
         return this;
     }
 
-    public Draft addDraftStatusInfo(DraftStatusInfo draftStatusInfo) {
-        this.draftStatusInfos.add(draftStatusInfo);
-        draftStatusInfo.setStatusInfo(this);
+    public CategoryElement getTransportVehicleType() {
+        return this.transportVehicleType;
+    }
+
+    public void setTransportVehicleType(CategoryElement categoryElement) {
+        this.transportVehicleType = categoryElement;
+    }
+
+    public Draft transportVehicleType(CategoryElement categoryElement) {
+        this.setTransportVehicleType(categoryElement);
         return this;
     }
 
-    public Draft removeDraftStatusInfo(DraftStatusInfo draftStatusInfo) {
-        this.draftStatusInfos.remove(draftStatusInfo);
-        draftStatusInfo.setStatusInfo(null);
+    public CategoryElement getFreightLetterType() {
+        return this.freightLetterType;
+    }
+
+    public void setFreightLetterType(CategoryElement categoryElement) {
+        this.freightLetterType = categoryElement;
+    }
+
+    public Draft freightLetterType(CategoryElement categoryElement) {
+        this.setFreightLetterType(categoryElement);
         return this;
     }
 
-    public Set<Custom> getCustoms() {
-        return this.customs;
+    public CategoryElement getActionCode() {
+        return this.actionCode;
     }
 
-    public void setCustoms(Set<Custom> customs) {
-        if (this.customs != null) {
-            this.customs.forEach(i -> i.removeDraft(this));
-        }
-        if (customs != null) {
-            customs.forEach(i -> i.addDraft(this));
-        }
-        this.customs = customs;
+    public void setActionCode(CategoryElement categoryElement) {
+        this.actionCode = categoryElement;
     }
 
-    public Draft customs(Set<Custom> customs) {
-        this.setCustoms(customs);
+    public Draft actionCode(CategoryElement categoryElement) {
+        this.setActionCode(categoryElement);
         return this;
     }
 
-    public Draft addCustom(Custom custom) {
-        this.customs.add(custom);
-        custom.getDrafts().add(this);
+    public CategoryElement getOwnershipCode() {
+        return this.ownershipCode;
+    }
+
+    public void setOwnershipCode(CategoryElement categoryElement) {
+        this.ownershipCode = categoryElement;
+    }
+
+    public Draft ownershipCode(CategoryElement categoryElement) {
+        this.setOwnershipCode(categoryElement);
         return this;
     }
 
-    public Draft removeCustom(Custom custom) {
-        this.customs.remove(custom);
-        custom.getDrafts().remove(this);
+    public CategoryElement getCurrencyContainerPlace() {
+        return this.currencyContainerPlace;
+    }
+
+    public void setCurrencyContainerPlace(CategoryElement categoryElement) {
+        this.currencyContainerPlace = categoryElement;
+    }
+
+    public Draft currencyContainerPlace(CategoryElement categoryElement) {
+        this.setCurrencyContainerPlace(categoryElement);
         return this;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
+    public CategoryElement getPaymentType() {
+        return this.paymentType;
     }
 
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.removeDraft(this));
-        }
-        if (products != null) {
-            products.forEach(i -> i.addDraft(this));
-        }
-        this.products = products;
+    public void setPaymentType(CategoryElement categoryElement) {
+        this.paymentType = categoryElement;
     }
 
-    public Draft products(Set<Product> products) {
-        this.setProducts(products);
+    public Draft paymentType(CategoryElement categoryElement) {
+        this.setPaymentType(categoryElement);
         return this;
     }
 
-    public Draft addProducts(Product product) {
-        this.products.add(product);
-        product.getDrafts().add(this);
+    public CategoryElement getDraftSource() {
+        return this.draftSource;
+    }
+
+    public void setDraftSource(CategoryElement categoryElement) {
+        this.draftSource = categoryElement;
+    }
+
+    public Draft draftSource(CategoryElement categoryElement) {
+        this.setDraftSource(categoryElement);
         return this;
     }
 
-    public Draft removeProducts(Product product) {
-        this.products.remove(product);
-        product.getDrafts().remove(this);
+    public Custom getLoadSwitchPlace() {
+        return this.loadSwitchPlace;
+    }
+
+    public void setLoadSwitchPlace(Custom custom) {
+        this.loadSwitchPlace = custom;
+    }
+
+    public Draft loadSwitchPlace(Custom custom) {
+        this.setLoadSwitchPlace(custom);
+        return this;
+    }
+
+    public DraftType getDraftType() {
+        return this.draftType;
+    }
+
+    public void setDraftType(DraftType draftType) {
+        this.draftType = draftType;
+    }
+
+    public Draft draftType(DraftType draftType) {
+        this.setDraftType(draftType);
+        return this;
+    }
+
+    public DraftStatusInfo getStatusInfo() {
+        return this.statusInfo;
+    }
+
+    public void setStatusInfo(DraftStatusInfo draftStatusInfo) {
+        this.statusInfo = draftStatusInfo;
+    }
+
+    public Draft statusInfo(DraftStatusInfo draftStatusInfo) {
+        this.setStatusInfo(draftStatusInfo);
+        return this;
+    }
+
+    public InsuranceCompanyInfo getInsuranceCompanyInfo() {
+        return this.insuranceCompanyInfo;
+    }
+
+    public void setInsuranceCompanyInfo(InsuranceCompanyInfo insuranceCompanyInfo) {
+        this.insuranceCompanyInfo = insuranceCompanyInfo;
+    }
+
+    public Draft insuranceCompanyInfo(InsuranceCompanyInfo insuranceCompanyInfo) {
+        this.setInsuranceCompanyInfo(insuranceCompanyInfo);
+        return this;
+    }
+
+    public AdvisorDefinition getAdvisingBank() {
+        return this.advisingBank;
+    }
+
+    public void setAdvisingBank(AdvisorDefinition advisorDefinition) {
+        this.advisingBank = advisorDefinition;
+    }
+
+    public Draft advisingBank(AdvisorDefinition advisorDefinition) {
+        this.setAdvisingBank(advisorDefinition);
+        return this;
+    }
+
+    public AdvisorDefinition getInterfaceAdvisingBank() {
+        return this.interfaceAdvisingBank;
+    }
+
+    public void setInterfaceAdvisingBank(AdvisorDefinition advisorDefinition) {
+        this.interfaceAdvisingBank = advisorDefinition;
+    }
+
+    public Draft interfaceAdvisingBank(AdvisorDefinition advisorDefinition) {
+        this.setInterfaceAdvisingBank(advisorDefinition);
+        return this;
+    }
+
+    public AdvisorDefinition getCoveringBank() {
+        return this.coveringBank;
+    }
+
+    public void setCoveringBank(AdvisorDefinition advisorDefinition) {
+        this.coveringBank = advisorDefinition;
+    }
+
+    public Draft coveringBank(AdvisorDefinition advisorDefinition) {
+        this.setCoveringBank(advisorDefinition);
+        return this;
+    }
+
+    public AuditCompanyInfo getAuditCompanyInfo() {
+        return this.auditCompanyInfo;
+    }
+
+    public void setAuditCompanyInfo(AuditCompanyInfo auditCompanyInfo) {
+        this.auditCompanyInfo = auditCompanyInfo;
+    }
+
+    public Draft auditCompanyInfo(AuditCompanyInfo auditCompanyInfo) {
+        this.setAuditCompanyInfo(auditCompanyInfo);
+        return this;
+    }
+
+    public TransportationType getTransportType() {
+        return this.transportType;
+    }
+
+    public void setTransportType(TransportationType transportationType) {
+        this.transportType = transportationType;
+    }
+
+    public Draft transportType(TransportationType transportationType) {
+        this.setTransportType(transportationType);
+        return this;
+    }
+
+    public CurrencyExchangeInfo getCurrencyExchangeInfo() {
+        return this.currencyExchangeInfo;
+    }
+
+    public void setCurrencyExchangeInfo(CurrencyExchangeInfo currencyExchangeInfo) {
+        this.currencyExchangeInfo = currencyExchangeInfo;
+    }
+
+    public Draft currencyExchangeInfo(CurrencyExchangeInfo currencyExchangeInfo) {
+        this.setCurrencyExchangeInfo(currencyExchangeInfo);
+        return this;
+    }
+
+    public DraftAccountInfo getAccountInfo() {
+        return this.accountInfo;
+    }
+
+    public void setAccountInfo(DraftAccountInfo draftAccountInfo) {
+        this.accountInfo = draftAccountInfo;
+    }
+
+    public Draft accountInfo(DraftAccountInfo draftAccountInfo) {
+        this.setAccountInfo(draftAccountInfo);
+        return this;
+    }
+
+    public Custom getDestinationCustomCompanies() {
+        return this.destinationCustomCompanies;
+    }
+
+    public void setDestinationCustomCompanies(Custom custom) {
+        this.destinationCustomCompanies = custom;
+    }
+
+    public Draft destinationCustomCompanies(Custom custom) {
+        this.setDestinationCustomCompanies(custom);
+        return this;
+    }
+
+    public Custom getSourceCustomCompanies() {
+        return this.sourceCustomCompanies;
+    }
+
+    public void setSourceCustomCompanies(Custom custom) {
+        this.sourceCustomCompanies = custom;
+    }
+
+    public Draft sourceCustomCompanies(Custom custom) {
+        this.setSourceCustomCompanies(custom);
         return this;
     }
 
@@ -1562,12 +1959,6 @@ public class Draft implements Serializable {
     }
 
     public void setServices(Set<ServiceTariff> serviceTariffs) {
-        if (this.services != null) {
-            this.services.forEach(i -> i.removeDraft(this));
-        }
-        if (serviceTariffs != null) {
-            serviceTariffs.forEach(i -> i.addDraft(this));
-        }
         this.services = serviceTariffs;
     }
 
@@ -1578,13 +1969,126 @@ public class Draft implements Serializable {
 
     public Draft addServices(ServiceTariff serviceTariff) {
         this.services.add(serviceTariff);
-        serviceTariff.getDrafts().add(this);
         return this;
     }
 
     public Draft removeServices(ServiceTariff serviceTariff) {
         this.services.remove(serviceTariff);
-        serviceTariff.getDrafts().remove(this);
+        return this;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public Draft products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public Draft addProducts(Product product) {
+        this.products.add(product);
+        return this;
+    }
+
+    public Draft removeProducts(Product product) {
+        this.products.remove(product);
+        return this;
+    }
+
+    public Set<StringValue> getSanctionSerials() {
+        return this.sanctionSerials;
+    }
+
+    public void setSanctionSerials(Set<StringValue> stringValues) {
+        this.sanctionSerials = stringValues;
+    }
+
+    public Draft sanctionSerials(Set<StringValue> stringValues) {
+        this.setSanctionSerials(stringValues);
+        return this;
+    }
+
+    public Draft addSanctionSerials(StringValue stringValue) {
+        this.sanctionSerials.add(stringValue);
+        return this;
+    }
+
+    public Draft removeSanctionSerials(StringValue stringValue) {
+        this.sanctionSerials.remove(stringValue);
+        return this;
+    }
+
+    public Set<LongValue> getCustomerNumbers() {
+        return this.customerNumbers;
+    }
+
+    public void setCustomerNumbers(Set<LongValue> longValues) {
+        this.customerNumbers = longValues;
+    }
+
+    public Draft customerNumbers(Set<LongValue> longValues) {
+        this.setCustomerNumbers(longValues);
+        return this;
+    }
+
+    public Draft addCustomerNumbers(LongValue longValue) {
+        this.customerNumbers.add(longValue);
+        return this;
+    }
+
+    public Draft removeCustomerNumbers(LongValue longValue) {
+        this.customerNumbers.remove(longValue);
+        return this;
+    }
+
+    public Set<SuggestedSanctionInfo> getSuggestedSanctions() {
+        return this.suggestedSanctions;
+    }
+
+    public void setSuggestedSanctions(Set<SuggestedSanctionInfo> suggestedSanctionInfos) {
+        this.suggestedSanctions = suggestedSanctionInfos;
+    }
+
+    public Draft suggestedSanctions(Set<SuggestedSanctionInfo> suggestedSanctionInfos) {
+        this.setSuggestedSanctions(suggestedSanctionInfos);
+        return this;
+    }
+
+    public Draft addSuggestedSanctions(SuggestedSanctionInfo suggestedSanctionInfo) {
+        this.suggestedSanctions.add(suggestedSanctionInfo);
+        return this;
+    }
+
+    public Draft removeSuggestedSanctions(SuggestedSanctionInfo suggestedSanctionInfo) {
+        this.suggestedSanctions.remove(suggestedSanctionInfo);
+        return this;
+    }
+
+    public Set<DraftDocumentTransactionContainer> getDocumentTransactionContainers() {
+        return this.documentTransactionContainers;
+    }
+
+    public void setDocumentTransactionContainers(Set<DraftDocumentTransactionContainer> draftDocumentTransactionContainers) {
+        this.documentTransactionContainers = draftDocumentTransactionContainers;
+    }
+
+    public Draft documentTransactionContainers(Set<DraftDocumentTransactionContainer> draftDocumentTransactionContainers) {
+        this.setDocumentTransactionContainers(draftDocumentTransactionContainers);
+        return this;
+    }
+
+    public Draft addDocumentTransactionContainer(DraftDocumentTransactionContainer draftDocumentTransactionContainer) {
+        this.documentTransactionContainers.add(draftDocumentTransactionContainer);
+        return this;
+    }
+
+    public Draft removeDocumentTransactionContainer(DraftDocumentTransactionContainer draftDocumentTransactionContainer) {
+        this.documentTransactionContainers.remove(draftDocumentTransactionContainer);
         return this;
     }
 
@@ -1672,21 +2176,16 @@ public class Draft implements Serializable {
             ", isMigrational='" + getIsMigrational() + "'" +
             ", isNewCertificate='" + getIsNewCertificate() + "'" +
             ", isWithoutPayment='" + getIsWithoutPayment() + "'" +
+            ", mainAccountCurrencyCode='" + getMainAccountCurrencyCode() + "'" +
+            ", orderRegCurrencyCode='" + getOrderRegCurrencyCode() + "'" +
+            ", chargedExchangeBrokerCurrencyCode='" + getChargedExchangeBrokerCurrencyCode() + "'" +
             ", destinationCountryCode='" + getDestinationCountryCode() + "'" +
             ", beneficiaryCountryCode='" + getBeneficiaryCountryCode() + "'" +
             ", producerCountryCode='" + getProducerCountryCode() + "'" +
+            ", registerationJustificationCurrencyCode='" + getRegisterationJustificationCurrencyCode() + "'" +
             ", branchCode='" + getBranchCode() + "'" +
             ", operationalBranchCode='" + getOperationalBranchCode() + "'" +
             ", certificateSenderBranchCode='" + getCertificateSenderBranchCode() + "'" +
-            ", mainAccountCurrencyCode='" + getMainAccountCurrencyCode() + "'" +
-            ", orderRegCurrencyCode='" + getOrderRegCurrencyCode() + "'" +
-            ", chargedExchangeBrokerCurrency='" + getChargedExchangeBrokerCurrency() + "'" +
-            ", registerationJustificationCurrencyCode='" + getRegisterationJustificationCurrencyCode() + "'" +
-            ", currencyExchangeInfoTitle='" + getCurrencyExchangeInfoTitle() + "'" +
-            ", transportationTypeName='" + getTransportationTypeName() + "'" +
-            ", accountInfoCode='" + getAccountInfoCode() + "'" +
-            ", customerNumbers=" + getCustomerNumbers() +
-            ", sanctionSerials='" + getSanctionSerials() + "'" +
             "}";
     }
 }

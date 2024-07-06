@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105925"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "deductionAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "remainingDeductionAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receivedDeductionAmount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "JustificationDeductionAmount",
+  "relationships": [
+    {
+      "otherEntityName": "justificationDeductionAmountPart",
+      "relationshipName": "justificationDeductionAmountParts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "justificationDeductionDetail",
+      "relationshipName": "justificationDeductionDetails",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

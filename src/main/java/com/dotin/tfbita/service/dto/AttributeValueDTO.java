@@ -11,7 +11,7 @@ public class AttributeValueDTO implements Serializable {
 
     private Long id;
 
-    private String value;
+    private String val;
 
     private String customValue;
 
@@ -31,12 +31,12 @@ public class AttributeValueDTO implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getVal() {
+        return val;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public String getCustomValue() {
@@ -105,7 +105,7 @@ public class AttributeValueDTO implements Serializable {
     public String toString() {
         return "AttributeValueDTO{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", val='" + getVal() + "'" +
             ", customValue='" + getCustomValue() + "'" +
             ", attributeValueGroupName='" + getAttributeValueGroupName() + "'" +
             ", typeAttribute=" + getTypeAttribute() +

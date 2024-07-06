@@ -56,7 +56,7 @@ public class DraftFactorAsserts {
             .satisfies(e -> assertThat(e.getFactorDate()).as("check factorDate").isEqualTo(actual.getFactorDate()))
             .satisfies(e -> assertThat(e.getIssueDate()).as("check issueDate").isEqualTo(actual.getIssueDate()))
             .satisfies(e -> assertThat(e.getSerial()).as("check serial").isEqualTo(actual.getSerial()))
-            .satisfies(e -> assertThat(e.getCurrencyName()).as("check currencyName").isEqualTo(actual.getCurrencyName()));
+            .satisfies(e -> assertThat(e.getCurrencyCode()).as("check currencyCode").isEqualTo(actual.getCurrencyCode()));
     }
 
     /**
@@ -68,6 +68,6 @@ public class DraftFactorAsserts {
     public static void assertDraftFactorUpdatableRelationshipsEquals(DraftFactor expected, DraftFactor actual) {
         assertThat(expected)
             .as("Verify DraftFactor relationships")
-            .satisfies(e -> assertThat(e.getDraftFactors()).as("check draftFactors").isEqualTo(actual.getDraftFactors()));
+            .satisfies(e -> assertThat(e.getDraft()).as("check draft").isEqualTo(actual.getDraft()));
     }
 }

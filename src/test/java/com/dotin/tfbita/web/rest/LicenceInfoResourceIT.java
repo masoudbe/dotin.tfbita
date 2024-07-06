@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,8 @@ class LicenceInfoResourceIT {
 
     private LicenceInfo licenceInfo;
 
+    private LicenceInfo insertedLicenceInfo;
+
     /**
      * Create an entity for this test.
      *
@@ -113,6 +116,14 @@ class LicenceInfoResourceIT {
         licenceInfo = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedLicenceInfo != null) {
+            licenceInfoRepository.delete(insertedLicenceInfo);
+            insertedLicenceInfo = null;
+        }
+    }
+
     @Test
     @Transactional
     void createLicenceInfo() throws Exception {
@@ -133,6 +144,8 @@ class LicenceInfoResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedLicenceInfo = licenceInfoMapper.toEntity(returnedLicenceInfoDTO);
         assertLicenceInfoUpdatableFieldsEquals(returnedLicenceInfo, getPersistedLicenceInfo(returnedLicenceInfo));
+
+        insertedLicenceInfo = returnedLicenceInfo;
     }
 
     @Test
@@ -157,7 +170,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void getAllLicenceInfos() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         // Get all the licenceInfoList
         restLicenceInfoMockMvc
@@ -177,7 +190,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void getLicenceInfo() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         // Get the licenceInfo
         restLicenceInfoMockMvc
@@ -204,7 +217,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void putExistingLicenceInfo() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -300,7 +313,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void partialUpdateLicenceInfoWithPatch() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -336,7 +349,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void fullUpdateLicenceInfoWithPatch() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -432,7 +445,7 @@ class LicenceInfoResourceIT {
     @Transactional
     void deleteLicenceInfo() throws Exception {
         // Initialize the database
-        licenceInfoRepository.saveAndFlush(licenceInfo);
+        insertedLicenceInfo = licenceInfoRepository.saveAndFlush(licenceInfo);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

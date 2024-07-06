@@ -1,12 +1,104 @@
+entity Category {
+    name String
+    code String
+}
+
+entity CategoryElement {
+    val String
+    categoryName String
+    code String
+}
+
+entity Custom {
+    modificationDate String
+    latinName String
+    name String
+    tempId Long
+}
+
+entity LicenceInfo {
+    organizationLicence String
+    licenceNumber String
+    licenceDate String
+    havingProduct Boolean
+    havingService Boolean
+    creditDate String
+}
+
+entity ServiceTariff {
+    code String
+    title String
+}
+
+entity OrderRegService {
+    amount BigDecimal
+    currencyAmount BigDecimal
+    unit String
+}
+
+entity ObjectiveCategory {
+    name String
+}
+
+entity ObjectiveCategoryElement {
+    entityClass String
+    entityId Long
+}
+
+entity Product {
+    code String
+    modificationDate String
+    name String
+}
+
+entity ProductType {
+    description String
+    modificationDate String
+    topicCode String
+}
+
+entity AttributeValue {
+    val String
+    customValue String
+    attributeValueGroupName String
+}
+
+entity TypeAttribute {
+    necessary Boolean
+    isUnique Boolean
+}
+
+entity AttributeValueGroup {
+    mandatory Boolean
+    name String
+}
+
+entity Attribute {
+    modificationDate String
+    name String
+}
+
+entity PurchaseFromOtherResources {
+    evidenceCode String
+    currencySupplierDescription String
+    amount BigDecimal
+    purchaseRate BigDecimal
+    orderRegistrationAmount BigDecimal
+    requestDate String
+    confirmationDate String
+    description String
+    purchaseNumber String
+    purchaseCurrencyName String
+}
 
 entity OrderRegistrationInfo {
-    orderRegNum  String
+    orderRegNum String
     startOrderRegDate String
     endOrderRegDate String
     requestNumber String
-	 bankCode  String
-     branchCode  String
-    customerNumber  String
+    bankCode String
+    branchCode String
+    customerNumber String
     applicantNationalcode String
     performaNumber String
     performaDate String
@@ -15,7 +107,8 @@ entity OrderRegistrationInfo {
     performaExpiryDatePersian String
     infoSubmissionDate String
     sellerName String
-    beneficiaryCountry String
+    beneficiaryCountryCode String
+    producerCountriesCode String
     sourceCountry String
     multipleTransportable Boolean
     deliveryTimeOfGoods String
@@ -47,102 +140,35 @@ entity OrderRegistrationInfo {
     commissionTransactionNumber String
 }
 
-entity Category {
-    name String
-    code String
-}
-
-entity CategoryElement{
-	value String
-    categoryName String
-    code String
-}
-
-entity Custom {
-	modificationDate String
+entity TransportationType {
     latinName String
-    name String
-    tempId Long
-}
-
-entity OrderRegServ {
-	amount BigDecimal
-    currencyAmount BigDecimal
-    unit String
-    title String
-    code String
-}
-
-entity Product {
-	code String
     modificationDate String
     name String
-    description String
-    topicCode String
-    attributeValueGroupName String
 }
 
-entity LicenceInfo {
-	organizationLicence String
-    licenceNumber String
-    licenceDate String
-    havingProduct Boolean
-    havingService Boolean
-    creditDate String
+entity StringValue {
+    val String
 }
 
-entity PurchaseFromOtherResources {
-	evidenceCode String
-    currencySupplierDescription String
-    amount BigDecimal
-	purchaseRate BigDecimal
-    orderRegistrationAmount BigDecimal
-    requestDate String
-    confirmationDate String
-	description String
-	purchaseNumber String
-	purchaseCurrencyName String
+entity LongValue {
+    val Long
 }
 
-
-relationship OneToMany {
-	        OrderRegistrationInfo to LicenceInfo{licenceInfo}
-         	OrderRegistrationInfo to OrderRegServ{orderRegService}
-        	OrderRegistrationInfo to PurchaseFromOtherResources{purchaseFromOtherResources}
-            Category to CategoryElement{categoryElement}
+entity DraftStatusInfo {
+    approved Boolean
+    draftRequestAccepted Boolean
+    insuranceCostPaid Boolean
+    issued Boolean
+    otherCostsPaid Boolean
+    postSwiftCostPaied Boolean
+    rejectDescription String
+    remainAmount BigDecimal
+    stampCostPaid Boolean
 }
-
-relationship ManyToOne {
-          CategoryElement{orderRegType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{requestType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{importType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{operationTyp} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{currencyProvisionType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{paymentTool} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{activityType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{ownerType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{status} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{externalCustomerType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          CategoryElement{transportType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-          LicenceInfo{product} to Product
-          LicenceInfo to OrderRegServ
-          CategoryElement{currencySupplier} to @OnDelete("SET NULL") @OnUpdate("CASCADE") PurchaseFromOtherResources
-          CategoryElement{statusPurchase} to @OnDelete("SET NULL") @OnUpdate("CASCADE") PurchaseFromOtherResources
-          CategoryElement{transportVehicleType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") OrderRegistrationInfo
-}
-
-relationship ManyToMany {
-	Custom{orderRegistrationInfo} to OrderRegistrationInfo{custom}
-    Product{orderRegistrationInfo} to OrderRegistrationInfo{productInfo}
-}
-
-use mapstruct for OrderRegistrationInfo,PurchaseFromOtherResources,LicenceInfo,Product,OrderRegServ,Custom
-use paginate,serviceImpl for OrderRegistrationInfo
-
 
 
 entity Draft {
-	advisorDepositNumber String
+    advisorDepositNumber String
     advisorRequestDeleted Boolean
     auditCost BigDecimal
     beneficiaryInfo String
@@ -195,48 +221,241 @@ entity Draft {
     swiftComment String
     transferAmount BigDecimal
     transportVehicleChangeable Boolean
-	paymentTool String
+    paymentTool String
     letterNumberTazirat String
     letterDateTazirat String
     loanNumber String
     isMigrational Boolean
     isNewCertificate Boolean
     isWithoutPayment Boolean
-	destinationCountryCode String
-	beneficiaryCountryCode String
-	producerCountryCode String
-	branchCode String
+    mainAccountCurrencyCode String
+    orderRegCurrencyCode String
+    chargedExchangeBrokerCurrencyCode String
+    destinationCountryCode String
+    beneficiaryCountryCode String
+    producerCountryCode String
+    registerationJustificationCurrencyCode String
+    branchCode String
     operationalBranchCode String
     certificateSenderBranchCode String
-	mainAccountCurrencyCode String
-    orderRegCurrencyCode String
-	chargedExchangeBrokerCurrency String
-	registerationJustificationCurrencyCode String
-	currencyExchangeInfoTitle String
-    transportationTypeName String
-	accountInfoCode String
-    customerNumbers Long
-	sanctionSerials String
-  }
+}
 
-entity ServiceTariff {
-    code String
+entity DraftFactor {
+    amount BigDecimal
+    description String
+    eqAmount BigDecimal
+    factorDate String
+    issueDate String
+    serial String
+    currencyCode String
+}
+
+entity DraftUsedAssurance {
+    assuranceRateId String
+    assuranceSerial String
+    exchangeRate BigDecimal
+    defaultCurrencyUsedCost BigDecimal
+    usedCost BigDecimal
+}
+
+
+entity InsuranceCompanyInfo {
+    modificationDate String
+    name String
+}
+
+entity CurrencyExchangeInfo {
     title String
 }
 
- entity DraftStatusInfo {
-    approved Boolean
-    draftRequestAccepted Boolean
-    insuranceCostPaid Boolean
-    issued Boolean
-    otherCostsPaid Boolean
-    postSwiftCostPaied Boolean
-    rejectDescription String
-    remainAmount BigDecimal
-    stampCostPaid Boolean
+entity SuggestedSanctionInfo {
+    sanctionSerial String
+    personnelCode String
 }
 
- entity DraftReceipt  {
+entity DraftAccountInfo {
+    documentReceiptDisciplinaryAccountId Long
+    draftMainAccountId Long
+    insuranceCostAccountId Long
+    justificationDisciplinaryAccountId Long
+    openDraftDisciplinaryAccountId Long
+    otherCostsAccountId Long
+    postSwiftCostsAccountId Long
+    amountDeductionAccountId Long
+}
+
+
+entity AuditCompanyInfo {
+    address String
+    barCodes String
+    dateOfRegistration String
+    fax String
+    floor String
+    inernationalobserviation String
+    mainStreet String
+    mobile String
+    plaque String
+    postalCode String
+    registrationNumber String
+    telephone String
+    tempId Long
+    theSideStreet String
+    title String
+    unit String
+    cityCode String
+}
+
+entity DraftExtend {
+    date String
+    duration Integer
+    time String
+}
+
+entity DraftTax {
+    orderRegCurrencyAmount BigDecimal
+    mainAccountCurrencyAmount BigDecimal
+    letterNumber String
+    letterImage AnyBlob
+    description String
+    registrationDate String
+    returnTaxesAmount Boolean
+    orderRegRate BigDecimal
+    mainAccountRate BigDecimal
+}
+entity DocumentTransaction {
+    currencyExchangeCode String
+    transactionCode String
+}
+
+entity DraftType {
+    alarmTime Integer
+    code String
+    disableDate String
+    duration Integer
+    hasAssurance Boolean
+    hasSanction Boolean
+    latestCreditSerial Long
+    name String
+    portal Boolean
+    usable Boolean
+    currenciesCodes String
+    defaultCurrencyCode String
+}
+
+entity DraftTypeTopicInfo {
+    currencySellCommissionTopic Long
+    documentReceiptDisciplinaryTopic Long
+    draftMainTopic Long
+    insuranceCostTopic Long
+    justificationDisciplinaryTopic Long
+    openDraftDisciplinaryTopic Long
+    otherCostsTopic Long
+    postTelegraphSwiftCostsTopic Long
+}
+entity CreditTypeConditionInfo {
+    durationFrom Integer
+    durationTo Integer
+    priceFrom BigDecimal
+    priceTo BigDecimal
+    justificationDisciplinaryTopic Long
+    openDraftDisciplinaryTopic Long
+    otherCostsTopic Long
+    postTelegraphSwiftCostsTopic Long
+}
+entity CreditTypeCondition {
+    assurancePercentage BigDecimal
+    commissionRate BigDecimal
+    customerPrepaymentRateFrom BigDecimal
+    customerPrepaymentRateTo BigDecimal
+    durationFrom Integer
+    durationTo Integer
+    orderRegistrationRightFrom BigDecimal
+    orderRegistrationRightTo BigDecimal
+    postSuspensionPeriodPenaltyRate BigDecimal
+    priceFrom BigDecimal
+    priceTo BigDecimal
+    suspensionDurationFrom Integer
+    suspensionDurationTo Integer
+    suspensionPeriodInterestRate BigDecimal
+    updateCommissionRate BigDecimal
+    currencyCode String
+}
+
+entity DraftTypeAccountInfo {
+    sellCurrencyCommissionAccount String
+    incomeAccountNumber String
+}
+entity DraftCertificateType {
+    mandatory Boolean
+}
+
+entity DraftRequestType {
+}
+
+
+entity AdvisorDefinition {
+    caption String
+    code String
+    countryIsoCode String
+    depositNum String
+    swiftCode String
+    defaultCurrencyCode String
+    currenciesCodes String
+    countryCode String
+    bankCode String
+    branchCode String
+}
+
+
+entity AdvisorDefinitionDeposit {
+    advisorDepositNumber String
+    defaultAdvisorDeposit Boolean
+    depositNum String
+    swiftCode String
+    currencyCode String
+}
+
+entity TransferMethodManagement {
+    code String
+    desc String
+}
+
+entity SwiftBic {
+    address String
+    address2 String
+    address3 String
+    address4 String
+    bank String
+    bankName String
+    bankName2 String
+    bankName3 String
+    branch String
+    branchName String
+    branchName2 String
+    city String
+    country String
+    location String
+    subTypeIndicator String
+    zip String
+}
+
+entity AdditionalBrokerInformation {
+    dateOfStartRelation String
+    creditLimit String
+    revokedDate String
+    revokedNote String
+    confidential String
+    otherBrokerServices String
+    sanctionedStatus String
+    considerations String
+    description String
+    waysOfCommunication String
+    servicesAvailable String
+    customerAcceptancePolicy String
+}
+
+
+entity DraftReceipt {
     comment String
     customerDeliverDate String
     date String
@@ -257,8 +476,6 @@ entity ServiceTariff {
     serial String
     transportRow String
     usable Boolean
-    paymentCurrencyRateTypeDesc String
-	paymentItemTypeDesc String
     netWeight BigDecimal
     grossWeight BigDecimal
     totalNetWeight BigDecimal
@@ -272,155 +489,350 @@ entity ServiceTariff {
     deadlineSubmitDocumentDate String
     currencyProvisionFile AnyBlob
     isMigrational Boolean
-	otherCost BigDecimal
+    otherCost BigDecimal
+}
+
+entity PaymentCurrencyRateType {
+    description String
+}
+
+entity PaymentItemType {
+    description String
+}
+
+entity DraftProductInfo {
+    productAmount String
+    productDimension String
+}
+
+entity DraftReceiptDocumentTransactionContainer {
+    receiveReceiptCommission Boolean
+}
+
+entity DraftDocumentTransactionContainer {
+}
+
+
+entity CustomJustification {
+    agentId Long
+    agriculturalPublicPolicies String
+    assessmentPlace String
+    attachedDocuments String
+    balanceRate BigDecimal
+    bankCode String
+    borderTransportType String
+    boxCountType String
+    boxMarks String
+    cargoIndexNumber String
+    centralBankCreditCode String
+    comments String
+    constructorCountryCode String
+    costDetails String
+    cottageNumber BigDecimal
+    creditEquivalentAmount BigDecimal
+    currency String
+    currencyAmount BigDecimal
+    currencyRate BigDecimal
+    currencySwiftCode String
+    customCompanyCode String
+    customerId Long
+    date String
+    destCountryCode String
+    destCustom String
+    destCustomCode String
+    disciplinaryDocumentsIssued Boolean
+    discountPercent BigDecimal
+    eightDigitOrderCode String
+    entranceCustomCompany Long
+    entranceCustomCompanyId Long
+    evacuationPlace String
+    evaluationMethodCode String
+    exportDate String
+    exporter String
+    exporterCountryCode String
+    extensionDate String
+    factorTotalAmount String
+    freightIndexNumber String
+    frightLetter String
+    importLicence String
+    importLicense String
+    impureWeight BigDecimal
+    indices String
+    internalTransportType String
+    issuanceDate String
+    itemNumber String
+    items Integer
+    justificationAgent String
+    justificationCurrencyRate BigDecimal
+    licenceNumber String
+    makeCertificateNumber String
+    newBorderTransportType Long
+    newEvacuationPlace Long
+    newInternalTransportType Long
+    newProductItemCustomValue BigDecimal
+    orderRegistrationDate String
+    orderRegistrationNumber String
+    papers Integer
+    paymentConditions String
+    preferences String
+    procedure String
+    productBoxCount Integer
+    productCode String
+    productItemCost BigDecimal
+    productItemCount String
+    productItemCustomValue String
+    productItemValue String
+    productMeasure String
+    productOwner String
+    productReleaseDate String
+    productType String
+    productWorth BigDecimal
+    profitRate BigDecimal
+    pureWeight BigDecimal
+    quota String
+    receiver String
+    referenceNumber Integer
+    registrationNumber String
+    reverseOfJustificationDisciplinaryDocumentNumber String
+    reverseOfJustificationDocumentsIssued Boolean
+    rightsRate BigDecimal
+    tradingCountryCode String
+    transactionTypeCode String
+    warehouseFactorNumber String
+    constructorCountryName String
+    lastCountryName String
+    bankCode String
+    branchCode String
+    justificationCurrencyCode String
+    creditCurrencyCode String
+    isMigrational Boolean
+    originalLetterImage Blob
+    letterImage Blob
+    sourceCountryCode String
+    destCountryCode String
+    exporterCountryCode String
+}
+
+entity TradeTypeCode {
+    latinName String
+    name String
+}
+
+entity PaymentCondition {
+    latinName String
+    name String
+}
+
+entity CustomJustificationChild {
+    item String
+    tariffCode String
+    productName BigDecimal
+    productId Long
+    boxCount BigDecimal
+    boxType String
+    pureWeight BigDecimal
+    impureWeight BigDecimal
+    amountCurrency BigDecimal
+}
+entity JustificationDeductionAmount {
+    deductionAmount BigDecimal
+    remainingDeductionAmount BigDecimal
+    receivedDeductionAmount BigDecimal
+}
+
+entity JustificationDeductionAmountPart {
+    receiveTransactionCode String
+    returnTransactionCode String
+    date String
+    amount BigDecimal
+    amountBasedOnRial BigDecimal
+    depositNumber String
+    receiveCurrencyCode String
+    currencyRateDate String
+    sellRate BigDecimal
+    buyRate BigDecimal
+    comment String
+}
+
+entity JustificationDeductionDetail {
+    deductionAmount BigDecimal
+    equivalentDeductionAmount BigDecimal
+    receiveCurrencyCode String
+    comment String
 }
 
 entity DraftCustomJustification {
 }
 
-entity  DraftFactor {
-    amount BigDecimal
-    description String
-    eqAmount BigDecimal
-    factorDate String
-    issueDate String
-    serial String
-    currencyName String
-}
-entity DraftUsedAssurance {
-    assuranceRateId String
-    assuranceSerial String
-    exchangeRate BigDecimal
-    defaultCurrencyUsedCost BigDecimal
-    usedCost BigDecimal
-}
-
-entity InsuranceCompanyInfo {
-    modificationDate String
-    name String
-}
-
-
-entity AdvisorDefinition {
-	caption String
+entity BasicInfo {
+    applyDate String
     code String
-    countryIsoCode String
-    depositNum String
-    swiftCode String
-    creditDate String
-	bankCode String
-	branchCode String
-	defaultCurrencyCode String
-	countryCode String
+    disabled Boolean
 }
-
-entity DraftType {
-    alarmTime Integer
-    code String
-    disableDate String
-    duration Integer
-    hasAssurance Boolean
-    hasSanction Boolean
-    latestCreditSerial Long
-    name String
-    portal Boolean
-    usable Boolean
-	defaultCurrencyCode String
-	accountInfoCode String
-	topicInfoCode String
-}
-
- entity AuditCompanyInfo  {
-    address String
-    barCodes String
-    dateOfRegistration String
-    fax String
-    floor String
-    inernationalobserviation String
-    mainStreet String
-    mobile String
-    plaque String
-    postalCode String
-    registrationNumber String
-    telephone String
-    tempId Long
-    theSideStreet String
-    title String
-    unit String
-    city String
-	}
-
-entity DraftExtend  {
-    date String
-    duration Integer
-    time String
-	}
-
-entity DraftTax	{
-	orderRegCurrencyAmount BigDecimal
-    mainAccountCurrencyAmount BigDecimal
-    letterNumber String
-    letterImage AnyBlob
-    description String
-    registrationDate String
-    returnTaxesAmount Boolean
-    orderRegRate BigDecimal
-    mainAccountRate BigDecimal
-    documentTransactionNumber String
-    returnDocumentTransactionNumber String
-	}
 
 relationship OneToMany {
-	             Draft to DraftReceipt{receipts}
-				 Draft to DraftUsedAssurance{usedAssurances}
-	             Draft to DraftFactor{draftFactors}
-                 Draft to DraftCustomJustification{draftJustifications}
-                 Draft to DraftExtend{extensions}
-				 Draft to DraftTax{taxes}
-                 DraftReceipt to Product{draftProductInfos}
-                 Draft to DraftStatusInfo{statusInfo}
+    Category{possibleValues} to CategoryElement{category}
+    ObjectiveCategory{possibleValues} to ObjectiveCategoryElement{objectiveCategory}
+    Product{attributeValues} to AttributeValue
+    AttributeValueGroup{values} to AttributeValue{attributeValueGroup}
+    OrderRegistrationInfo{serviceInfo} to OrderRegService
+    OrderRegistrationInfo{purchaseFromOtherResourcesList} to PurchaseFromOtherResources
+    Draft{receipts} to DraftReceipt{draft}
+    Draft{taxes} to DraftTax{draft}
+    Draft{extensions} to DraftExtend{draftField}
+    Draft{draftFactors} to DraftFactor{draft}
+    Draft{usedAssurances} to DraftUsedAssurance
+    Draft{draftJustifications} to DraftCustomJustification{draft}
+    CreditTypeConditionInfo{conditions} to CreditTypeCondition
+    DraftRequestType{certificateTypeList} to DraftCertificateType
+    AdvisorDefinition{advisorDeposit} to AdvisorDefinitionDeposit{advisorDefinition}
+    DraftReceipt{draftProductInfos} to DraftProductInfo
+    DraftDocumentTransactionContainer{receipts} to DraftReceiptDocumentTransactionContainer
+    DraftDocumentTransactionContainer{otherDocumentTransactions} to DocumentTransaction{otherDocumentTransactionsContainer}
+    DraftDocumentTransactionContainer{canceledJustificationDocumentTransactions} to DocumentTransaction{canceledJustificationDocumentContainer}
+    DraftDocumentTransactionContainer{justificationDocumentTransactions} to DocumentTransaction{justificationDocumentTransactionsContainer}
+    DraftDocumentTransactionContainer{receivedCommisions} to DocumentTransaction{receivedCommisionsContainer}
+    DraftDocumentTransactionContainer{canceledDocumentTransactions} to DocumentTransaction{canceledDocumentTransactionsContainer}
+    DraftDocumentTransactionContainer{returnedDefaultCurrencyCostsDocumentTransactions} to DocumentTransaction{returnedDefaultCurrencyCostsContainer}
+    DraftDocumentTransactionContainer{defaultCurrencyCostsDocumentTransactions} to DocumentTransaction{defaultCurrencyCostsDocumentContainer}
+    CustomJustification{customJustificationChildList} to CustomJustificationChild{customJustification}
+    JustificationDeductionAmount{justificationDeductionAmountParts} to JustificationDeductionAmountPart
+    JustificationDeductionAmount{justificationDeductionDetails} to JustificationDeductionDetail
 }
 
 relationship ManyToOne {
-     CategoryElement{freightLetterType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-	 CategoryElement{actionCode} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{ownershipCode} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{currencyContainerPlace} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{draftSource} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{chargedExchangeBroker} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{impartType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{insuranceLetterType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{advisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{interfaceAdvisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-	 CategoryElement{paymentType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{dealType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{coveringAdvisorDepositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     Custom{loadSwitchPlace} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Draft
-     CategoryElement{depositType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") AdvisorDefinition
-     AdvisorDefinition{advisingBank} to Draft
-     AdvisorDefinition{interfaceAdvisingBank} to Draft
-     AdvisorDefinition{coveringBank} to  Draft
-	 CategoryElement{type} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType
-     CategoryElement{secondaryType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType
-     CategoryElement{division} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftType
-	 DraftType{draftType} to Draft
-     InsuranceCompanyInfo{insuranceCompanyInfo} to Draft
-	 AuditCompanyInfo{auditCompanyInfo} to Draft
-     CategoryElement{productDimension} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt
-     CategoryElement{stateOfDocuments} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt
-     CategoryElement{currencyProvisionFileType} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftReceipt
-     CategoryElement{statusDraft} to @OnDelete("SET NULL") @OnUpdate("CASCADE") DraftStatusInfo
-
+    LicenceInfo{product} to Product
+    LicenceInfo{service} to ServiceTariff
+    LicenceInfo{orderRegistrationInfo} to OrderRegistrationInfo{licenceInfo}
+    OrderRegService{serviceTariff} to ServiceTariff
+    Product{productType} to ProductType
+    AttributeValue{typeAttribute} to TypeAttribute
+    TypeAttribute{attribute} to Attribute
+    AttributeValueGroup{attribute} to Attribute
+    Attribute{format} to CategoryElement
+    Attribute{type} to CategoryElement
+    PurchaseFromOtherResources{currencySupplier} to CategoryElement
+    PurchaseFromOtherResources{status} to CategoryElement
+    OrderRegistrationInfo{orderRegType} to CategoryElement
+    OrderRegistrationInfo{requestType} to CategoryElement
+    OrderRegistrationInfo{importType} to CategoryElement
+    OrderRegistrationInfo{operationType} to CategoryElement
+    OrderRegistrationInfo{currencyProvisionType} to CategoryElement
+    OrderRegistrationInfo{paymentTool} to CategoryElement
+    OrderRegistrationInfo{activityType} to CategoryElement
+    OrderRegistrationInfo{ownerType} to CategoryElement
+    OrderRegistrationInfo{status} to CategoryElement
+    OrderRegistrationInfo{externalCustomerType} to CategoryElement
+    OrderRegistrationInfo{transportVehicleType} to CategoryElement
+    OrderRegistrationInfo{transportType} to TransportationType
+    OrderRegistrationInfo{destCoustomers} to Custom
+    OrderRegistrationInfo{cargoPlaceCustoms} to Custom
+    OrderRegistrationInfo{entranceBorders} to Custom
+    Draft{chargedExchangeBroker} to CategoryElement
+    Draft{insuranceLetterType} to CategoryElement
+    Draft{advisorDepositType} to CategoryElement
+    Draft{interfaceAdvisorDepositType} to CategoryElement
+    Draft{coveringAdvisorDepositType} to CategoryElement
+    Draft{impartType} to CategoryElement
+    Draft{dealType} to CategoryElement
+    Draft{transportVehicleType} to CategoryElement
+    Draft{freightLetterType} to CategoryElement
+    Draft{actionCode} to CategoryElement
+    Draft{ownershipCode} to CategoryElement
+    Draft{currencyContainerPlace} to CategoryElement
+    Draft{paymentType} to CategoryElement
+    Draft{draftSource} to CategoryElement
+    Draft{loadSwitchPlace} to Custom
+    Draft{draftType} to DraftType
+    DraftStatusInfo{status} to CategoryElement
+    Draft{statusInfo} to DraftStatusInfo
+    Draft{insuranceCompanyInfo} to InsuranceCompanyInfo
+    Draft{advisingBank} to AdvisorDefinition
+    Draft{interfaceAdvisingBank} to AdvisorDefinition
+    Draft{coveringBank} to AdvisorDefinition
+    Draft{auditCompanyInfo} to AuditCompanyInfo
+    Draft{transportType} to TransportationType
+    Draft{currencyExchangeInfo} to CurrencyExchangeInfo
+    Draft{accountInfo} to DraftAccountInfo
+    Draft{destinationCustomCompanies} to Custom
+    Draft{sourceCustomCompanies} to Custom
+    DraftTax{documentTransaction} to DocumentTransaction
+    DraftTax{returnDocumentTransaction} to DocumentTransaction
+    DraftType{type} to CategoryElement
+    DraftType{secondaryType} to CategoryElement
+    DraftType{division} to CategoryElement
+    DraftType{topicInfo} to DraftTypeTopicInfo
+    CreditTypeCondition{serviceOrProduct} to CategoryElement
+    CreditTypeConditionInfo{defaultCondition} to CreditTypeCondition
+    DraftType{conditionInfo} to CreditTypeConditionInfo
+    DraftType{accountInfo} to DraftTypeAccountInfo
+    DraftType{requestType} to DraftRequestType
+    AdvisorDefinitionDeposit{depositType} to CategoryElement
+    AdvisorDefinition{defaultVostroDeposit} to AdvisorDefinitionDeposit
+    AdvisorDefinition{defaultNostroDeposit} to AdvisorDefinitionDeposit
+    TransferMethodManagement{type} to CategoryElement
+    AdvisorDefinition{receiveMethod} to TransferMethodManagement
+    AdvisorDefinition{payMethod} to TransferMethodManagement
+    AdvisorDefinition{swiftBic} to SwiftBic
+    DraftReceipt{productDimension} to CategoryElement
+    DraftReceipt{stateOfDocuments} to CategoryElement
+    DraftReceipt{currencyProvisionFileType} to CategoryElement
+    DraftReceipt{paymentCurrencyRateType} to PaymentCurrencyRateType
+    DraftReceipt{paymentItem} to PaymentItemType
+    DraftProductInfo{product} to Product
+    DraftReceiptDocumentTransactionContainer{receiptIssueDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{freightLetterStampCostDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{deliverDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledDeliver} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledReceiptIssue} to DocumentTransaction
+    DraftReceipt{documentTransactionContainer} to DraftReceiptDocumentTransactionContainer
+    DraftReceiptDocumentTransactionContainer{receiptIssueDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{freightLetterStampCostDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{deliverDocumentTransaction} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledDeliver} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{documentTransactionCanceledReceiptIssue} to DocumentTransaction
+    DraftReceiptDocumentTransactionContainer{receiptCommissionDocumentTransactions} to DocumentTransaction
+    DraftDocumentTransactionContainer{issueCommissionDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{paymentDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{settleDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{settleExcessDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{commissionDeleteDraftDocumentTransaction} to DocumentTransaction
+    DraftDocumentTransactionContainer{commissionDraftExtendDocumentTransaction} to DocumentTransaction
+    CustomJustification{vehicleEnterNationality} to CategoryElement
+    CustomJustification{container} to CategoryElement
+    CustomJustification{vehicleCrossNationality} to CategoryElement
+    CustomJustification{exportCustom} to Custom
+    CustomJustification{entranceCustom} to Custom
+    CustomJustification{transportConditions} to TransportationType
+    CustomJustification{tradeTypeCode} to TradeTypeCode
+    CustomJustification{newPaymentConditions} to PaymentCondition
+    JustificationDeductionDetail{deductionReason} to CategoryElement
+    CustomJustification{justificationDeductionAmount} to JustificationDeductionAmount
+    CreditTypeCondition{neededIdentificationDocTypes} to ObjectiveCategoryElement
+    CreditTypeCondition{productTypes} to ObjectiveCategoryElement
+    CreditTypeCondition{assuranceTypes} to ObjectiveCategoryElement
+    DraftType{acceptableProductTypes} to ObjectiveCategoryElement
 }
+
 
 relationship ManyToMany {
-	    Custom{draft} to Draft{custom}
-		Product{draft} to Draft{products}
-		ServiceTariff{draft} to Draft{services}
-        DraftCustomJustification{draftReceipts} to DraftReceipt{draftCustomJustification}
+    ProductType{productTypeAttributes} to TypeAttribute
+    OrderRegistrationInfo{productInfo} to Product
+    OrderRegistrationInfo{commissionTransactionNumber} to StringValue
+    Draft{services} to ServiceTariff
+    Draft{products} to Product
+    Draft{sanctionSerials} to StringValue
+    Draft{customerNumbers} to LongValue
+    Draft{suggestedSanctions} to SuggestedSanctionInfo
+    Draft{documentTransactionContainer} to DraftDocumentTransactionContainer
+    DraftType{userGroups} to StringValue
+    CustomJustification{products} to Product
+    CustomJustification{reverseOfJustificationDocumentTransactions} to DocumentTransaction
+    DraftCustomJustification{draftReceipts} to DraftReceipt
 }
 
-use mapstruct for *
-use paginate,serviceImpl for Draft,DraftReceipt,DraftType,DraftCustomJustification,DraftStatusInfo
+relationship OneToOne {
+    AdvisorDefinition{additionalBrokerInformation} to AdditionalBrokerInformation{advisorDefinition}
+}
 
-
+use paginate, serviceImpl, mapstruct, serviceClass  for *

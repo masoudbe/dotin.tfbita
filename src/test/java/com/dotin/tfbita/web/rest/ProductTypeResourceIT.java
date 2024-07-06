@@ -19,6 +19,7 @@ import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,6 +81,8 @@ class ProductTypeResourceIT {
 
     private ProductType productType;
 
+    private ProductType insertedProductType;
+
     /**
      * Create an entity for this test.
      *
@@ -113,6 +116,14 @@ class ProductTypeResourceIT {
         productType = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedProductType != null) {
+            productTypeRepository.delete(insertedProductType);
+            insertedProductType = null;
+        }
+    }
+
     @Test
     @Transactional
     void createProductType() throws Exception {
@@ -133,6 +144,8 @@ class ProductTypeResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedProductType = productTypeMapper.toEntity(returnedProductTypeDTO);
         assertProductTypeUpdatableFieldsEquals(returnedProductType, getPersistedProductType(returnedProductType));
+
+        insertedProductType = returnedProductType;
     }
 
     @Test
@@ -157,7 +170,7 @@ class ProductTypeResourceIT {
     @Transactional
     void getAllProductTypes() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         // Get all the productTypeList
         restProductTypeMockMvc
@@ -191,7 +204,7 @@ class ProductTypeResourceIT {
     @Transactional
     void getProductType() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         // Get the productType
         restProductTypeMockMvc
@@ -215,7 +228,7 @@ class ProductTypeResourceIT {
     @Transactional
     void putExistingProductType() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -305,13 +318,15 @@ class ProductTypeResourceIT {
     @Transactional
     void partialUpdateProductTypeWithPatch() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the productType using partial update
         ProductType partialUpdatedProductType = new ProductType();
         partialUpdatedProductType.setId(productType.getId());
+
+        partialUpdatedProductType.description(UPDATED_DESCRIPTION).modificationDate(UPDATED_MODIFICATION_DATE);
 
         restProductTypeMockMvc
             .perform(
@@ -334,7 +349,7 @@ class ProductTypeResourceIT {
     @Transactional
     void fullUpdateProductTypeWithPatch() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -427,7 +442,7 @@ class ProductTypeResourceIT {
     @Transactional
     void deleteProductType() throws Exception {
         // Initialize the database
-        productTypeRepository.saveAndFlush(productType);
+        insertedProductType = productTypeRepository.saveAndFlush(productType);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

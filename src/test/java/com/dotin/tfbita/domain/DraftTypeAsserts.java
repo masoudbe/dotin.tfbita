@@ -57,11 +57,10 @@ public class DraftTypeAsserts {
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
             .satisfies(e -> assertThat(e.getPortal()).as("check portal").isEqualTo(actual.getPortal()))
             .satisfies(e -> assertThat(e.getUsable()).as("check usable").isEqualTo(actual.getUsable()))
+            .satisfies(e -> assertThat(e.getCurrenciesCodes()).as("check currenciesCodes").isEqualTo(actual.getCurrenciesCodes()))
             .satisfies(
                 e -> assertThat(e.getDefaultCurrencyCode()).as("check defaultCurrencyCode").isEqualTo(actual.getDefaultCurrencyCode())
-            )
-            .satisfies(e -> assertThat(e.getAccountInfoCode()).as("check accountInfoCode").isEqualTo(actual.getAccountInfoCode()))
-            .satisfies(e -> assertThat(e.getTopicInfoCode()).as("check topicInfoCode").isEqualTo(actual.getTopicInfoCode()));
+            );
     }
 
     /**
@@ -73,6 +72,19 @@ public class DraftTypeAsserts {
     public static void assertDraftTypeUpdatableRelationshipsEquals(DraftType expected, DraftType actual) {
         assertThat(expected)
             .as("Verify DraftType relationships")
-            .satisfies(e -> assertThat(e.getDraftType()).as("check draftType").isEqualTo(actual.getDraftType()));
+            .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
+            .satisfies(e -> assertThat(e.getSecondaryType()).as("check secondaryType").isEqualTo(actual.getSecondaryType()))
+            .satisfies(e -> assertThat(e.getDivision()).as("check division").isEqualTo(actual.getDivision()))
+            .satisfies(e -> assertThat(e.getTopicInfo()).as("check topicInfo").isEqualTo(actual.getTopicInfo()))
+            .satisfies(e -> assertThat(e.getConditionInfo()).as("check conditionInfo").isEqualTo(actual.getConditionInfo()))
+            .satisfies(e -> assertThat(e.getAccountInfo()).as("check accountInfo").isEqualTo(actual.getAccountInfo()))
+            .satisfies(e -> assertThat(e.getRequestType()).as("check requestType").isEqualTo(actual.getRequestType()))
+            .satisfies(
+                e ->
+                    assertThat(e.getAcceptableProductTypes())
+                        .as("check acceptableProductTypes")
+                        .isEqualTo(actual.getAcceptableProductTypes())
+            )
+            .satisfies(e -> assertThat(e.getUserGroups()).as("check userGroups").isEqualTo(actual.getUserGroups()));
     }
 }

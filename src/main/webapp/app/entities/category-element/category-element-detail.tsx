@@ -32,11 +32,11 @@ export const CategoryElementDetail = () => {
           </dt>
           <dd>{categoryElementEntity.id}</dd>
           <dt>
-            <span id="value">
-              <Translate contentKey="tfbitaApp.categoryElement.value">Value</Translate>
+            <span id="val">
+              <Translate contentKey="tfbitaApp.categoryElement.val">Val</Translate>
             </span>
           </dt>
-          <dd>{categoryElementEntity.value}</dd>
+          <dd>{categoryElementEntity.val}</dd>
           <dt>
             <span id="categoryName">
               <Translate contentKey="tfbitaApp.categoryElement.categoryName">Category Name</Translate>
@@ -53,21 +53,6 @@ export const CategoryElementDetail = () => {
             <Translate contentKey="tfbitaApp.categoryElement.category">Category</Translate>
           </dt>
           <dd>{categoryElementEntity.category ? categoryElementEntity.category.id : ''}</dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.categoryElement.orderRegistrationInfo">Order Registration Info</Translate>
-          </dt>
-          <dd>
-            {categoryElementEntity.orderRegistrationInfos
-              ? categoryElementEntity.orderRegistrationInfos.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {categoryElementEntity.orderRegistrationInfos && i === categoryElementEntity.orderRegistrationInfos.length - 1
-                      ? ''
-                      : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/category-element" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -3,6 +3,8 @@ package com.dotin.tfbita.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A DraftType.
@@ -50,32 +52,50 @@ public class DraftType implements Serializable {
     @Column(name = "usable")
     private Boolean usable;
 
+    @Column(name = "currencies_codes")
+    private String currenciesCodes;
+
     @Column(name = "default_currency_code")
     private String defaultCurrencyCode;
 
-    @Column(name = "account_info_code")
-    private String accountInfoCode;
-
-    @Column(name = "topic_info_code")
-    private String topicInfoCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement secondaryType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement division;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DraftTypeTopicInfo topicInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "conditions", "defaultCondition" }, allowSetters = true)
+    private CreditTypeConditionInfo conditionInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DraftTypeAccountInfo accountInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "certificateTypeLists" }, allowSetters = true)
+    private DraftRequestType requestType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "objectiveCategory" }, allowSetters = true)
+    private ObjectiveCategoryElement acceptableProductTypes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_draft_type__user_groups",
+        joinColumns = @JoinColumn(name = "draft_type_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_groups_id")
     )
-    private Draft draftType;
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
+    private Set<StringValue> userGroups = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -222,6 +242,19 @@ public class DraftType implements Serializable {
         this.usable = usable;
     }
 
+    public String getCurrenciesCodes() {
+        return this.currenciesCodes;
+    }
+
+    public DraftType currenciesCodes(String currenciesCodes) {
+        this.setCurrenciesCodes(currenciesCodes);
+        return this;
+    }
+
+    public void setCurrenciesCodes(String currenciesCodes) {
+        this.currenciesCodes = currenciesCodes;
+    }
+
     public String getDefaultCurrencyCode() {
         return this.defaultCurrencyCode;
     }
@@ -235,42 +268,130 @@ public class DraftType implements Serializable {
         this.defaultCurrencyCode = defaultCurrencyCode;
     }
 
-    public String getAccountInfoCode() {
-        return this.accountInfoCode;
+    public CategoryElement getType() {
+        return this.type;
     }
 
-    public DraftType accountInfoCode(String accountInfoCode) {
-        this.setAccountInfoCode(accountInfoCode);
+    public void setType(CategoryElement categoryElement) {
+        this.type = categoryElement;
+    }
+
+    public DraftType type(CategoryElement categoryElement) {
+        this.setType(categoryElement);
         return this;
     }
 
-    public void setAccountInfoCode(String accountInfoCode) {
-        this.accountInfoCode = accountInfoCode;
+    public CategoryElement getSecondaryType() {
+        return this.secondaryType;
     }
 
-    public String getTopicInfoCode() {
-        return this.topicInfoCode;
+    public void setSecondaryType(CategoryElement categoryElement) {
+        this.secondaryType = categoryElement;
     }
 
-    public DraftType topicInfoCode(String topicInfoCode) {
-        this.setTopicInfoCode(topicInfoCode);
+    public DraftType secondaryType(CategoryElement categoryElement) {
+        this.setSecondaryType(categoryElement);
         return this;
     }
 
-    public void setTopicInfoCode(String topicInfoCode) {
-        this.topicInfoCode = topicInfoCode;
+    public CategoryElement getDivision() {
+        return this.division;
     }
 
-    public Draft getDraftType() {
-        return this.draftType;
+    public void setDivision(CategoryElement categoryElement) {
+        this.division = categoryElement;
     }
 
-    public void setDraftType(Draft draft) {
-        this.draftType = draft;
+    public DraftType division(CategoryElement categoryElement) {
+        this.setDivision(categoryElement);
+        return this;
     }
 
-    public DraftType draftType(Draft draft) {
-        this.setDraftType(draft);
+    public DraftTypeTopicInfo getTopicInfo() {
+        return this.topicInfo;
+    }
+
+    public void setTopicInfo(DraftTypeTopicInfo draftTypeTopicInfo) {
+        this.topicInfo = draftTypeTopicInfo;
+    }
+
+    public DraftType topicInfo(DraftTypeTopicInfo draftTypeTopicInfo) {
+        this.setTopicInfo(draftTypeTopicInfo);
+        return this;
+    }
+
+    public CreditTypeConditionInfo getConditionInfo() {
+        return this.conditionInfo;
+    }
+
+    public void setConditionInfo(CreditTypeConditionInfo creditTypeConditionInfo) {
+        this.conditionInfo = creditTypeConditionInfo;
+    }
+
+    public DraftType conditionInfo(CreditTypeConditionInfo creditTypeConditionInfo) {
+        this.setConditionInfo(creditTypeConditionInfo);
+        return this;
+    }
+
+    public DraftTypeAccountInfo getAccountInfo() {
+        return this.accountInfo;
+    }
+
+    public void setAccountInfo(DraftTypeAccountInfo draftTypeAccountInfo) {
+        this.accountInfo = draftTypeAccountInfo;
+    }
+
+    public DraftType accountInfo(DraftTypeAccountInfo draftTypeAccountInfo) {
+        this.setAccountInfo(draftTypeAccountInfo);
+        return this;
+    }
+
+    public DraftRequestType getRequestType() {
+        return this.requestType;
+    }
+
+    public void setRequestType(DraftRequestType draftRequestType) {
+        this.requestType = draftRequestType;
+    }
+
+    public DraftType requestType(DraftRequestType draftRequestType) {
+        this.setRequestType(draftRequestType);
+        return this;
+    }
+
+    public ObjectiveCategoryElement getAcceptableProductTypes() {
+        return this.acceptableProductTypes;
+    }
+
+    public void setAcceptableProductTypes(ObjectiveCategoryElement objectiveCategoryElement) {
+        this.acceptableProductTypes = objectiveCategoryElement;
+    }
+
+    public DraftType acceptableProductTypes(ObjectiveCategoryElement objectiveCategoryElement) {
+        this.setAcceptableProductTypes(objectiveCategoryElement);
+        return this;
+    }
+
+    public Set<StringValue> getUserGroups() {
+        return this.userGroups;
+    }
+
+    public void setUserGroups(Set<StringValue> stringValues) {
+        this.userGroups = stringValues;
+    }
+
+    public DraftType userGroups(Set<StringValue> stringValues) {
+        this.setUserGroups(stringValues);
+        return this;
+    }
+
+    public DraftType addUserGroups(StringValue stringValue) {
+        this.userGroups.add(stringValue);
+        return this;
+    }
+
+    public DraftType removeUserGroups(StringValue stringValue) {
+        this.userGroups.remove(stringValue);
         return this;
     }
 
@@ -308,9 +429,8 @@ public class DraftType implements Serializable {
             ", name='" + getName() + "'" +
             ", portal='" + getPortal() + "'" +
             ", usable='" + getUsable() + "'" +
+            ", currenciesCodes='" + getCurrenciesCodes() + "'" +
             ", defaultCurrencyCode='" + getDefaultCurrencyCode() + "'" +
-            ", accountInfoCode='" + getAccountInfoCode() + "'" +
-            ", topicInfoCode='" + getTopicInfoCode() + "'" +
             "}";
     }
 }

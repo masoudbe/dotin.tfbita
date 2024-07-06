@@ -76,6 +76,6 @@ public class DraftStatusInfoAsserts {
     public static void assertDraftStatusInfoUpdatableRelationshipsEquals(DraftStatusInfo expected, DraftStatusInfo actual) {
         assertThat(expected)
             .as("Verify DraftStatusInfo relationships")
-            .satisfies(e -> assertThat(e.getStatusInfo()).as("check statusInfo").isEqualTo(actual.getStatusInfo()));
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
     }
 }

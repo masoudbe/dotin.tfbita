@@ -131,11 +131,10 @@ public class CustomResource {
     /**
      * {@code GET  /customs} : get all the customs.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of customs in body.
      */
     @GetMapping("")
-    public List<CustomDTO> getAllCustoms(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
+    public List<CustomDTO> getAllCustoms() {
         log.debug("REST request to get all Customs");
         return customService.findAll();
     }

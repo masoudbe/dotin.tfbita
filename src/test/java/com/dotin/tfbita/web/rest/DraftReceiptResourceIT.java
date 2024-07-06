@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +97,6 @@ class DraftReceiptResourceIT {
     private static final Boolean DEFAULT_USABLE = false;
     private static final Boolean UPDATED_USABLE = true;
 
-    private static final String DEFAULT_PAYMENT_CURRENCY_RATE_TYPE_DESC = "AAAAAAAAAA";
-    private static final String UPDATED_PAYMENT_CURRENCY_RATE_TYPE_DESC = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PAYMENT_ITEM_TYPE_DESC = "AAAAAAAAAA";
-    private static final String UPDATED_PAYMENT_ITEM_TYPE_DESC = "BBBBBBBBBB";
-
     private static final BigDecimal DEFAULT_NET_WEIGHT = new BigDecimal(1);
     private static final BigDecimal UPDATED_NET_WEIGHT = new BigDecimal(2);
 
@@ -169,6 +164,8 @@ class DraftReceiptResourceIT {
 
     private DraftReceipt draftReceipt;
 
+    private DraftReceipt insertedDraftReceipt;
+
     /**
      * Create an entity for this test.
      *
@@ -197,8 +194,6 @@ class DraftReceiptResourceIT {
             .serial(DEFAULT_SERIAL)
             .transportRow(DEFAULT_TRANSPORT_ROW)
             .usable(DEFAULT_USABLE)
-            .paymentCurrencyRateTypeDesc(DEFAULT_PAYMENT_CURRENCY_RATE_TYPE_DESC)
-            .paymentItemTypeDesc(DEFAULT_PAYMENT_ITEM_TYPE_DESC)
             .netWeight(DEFAULT_NET_WEIGHT)
             .grossWeight(DEFAULT_GROSS_WEIGHT)
             .totalNetWeight(DEFAULT_TOTAL_NET_WEIGHT)
@@ -245,8 +240,6 @@ class DraftReceiptResourceIT {
             .serial(UPDATED_SERIAL)
             .transportRow(UPDATED_TRANSPORT_ROW)
             .usable(UPDATED_USABLE)
-            .paymentCurrencyRateTypeDesc(UPDATED_PAYMENT_CURRENCY_RATE_TYPE_DESC)
-            .paymentItemTypeDesc(UPDATED_PAYMENT_ITEM_TYPE_DESC)
             .netWeight(UPDATED_NET_WEIGHT)
             .grossWeight(UPDATED_GROSS_WEIGHT)
             .totalNetWeight(UPDATED_TOTAL_NET_WEIGHT)
@@ -270,6 +263,14 @@ class DraftReceiptResourceIT {
         draftReceipt = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftReceipt != null) {
+            draftReceiptRepository.delete(insertedDraftReceipt);
+            insertedDraftReceipt = null;
+        }
+    }
+
     @Test
     @Transactional
     void createDraftReceipt() throws Exception {
@@ -290,6 +291,8 @@ class DraftReceiptResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftReceipt = draftReceiptMapper.toEntity(returnedDraftReceiptDTO);
         assertDraftReceiptUpdatableFieldsEquals(returnedDraftReceipt, getPersistedDraftReceipt(returnedDraftReceipt));
+
+        insertedDraftReceipt = returnedDraftReceipt;
     }
 
     @Test
@@ -314,7 +317,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void getAllDraftReceipts() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         // Get all the draftReceiptList
         restDraftReceiptMockMvc
@@ -342,8 +345,6 @@ class DraftReceiptResourceIT {
             .andExpect(jsonPath("$.[*].serial").value(hasItem(DEFAULT_SERIAL)))
             .andExpect(jsonPath("$.[*].transportRow").value(hasItem(DEFAULT_TRANSPORT_ROW)))
             .andExpect(jsonPath("$.[*].usable").value(hasItem(DEFAULT_USABLE.booleanValue())))
-            .andExpect(jsonPath("$.[*].paymentCurrencyRateTypeDesc").value(hasItem(DEFAULT_PAYMENT_CURRENCY_RATE_TYPE_DESC)))
-            .andExpect(jsonPath("$.[*].paymentItemTypeDesc").value(hasItem(DEFAULT_PAYMENT_ITEM_TYPE_DESC)))
             .andExpect(jsonPath("$.[*].netWeight").value(hasItem(sameNumber(DEFAULT_NET_WEIGHT))))
             .andExpect(jsonPath("$.[*].grossWeight").value(hasItem(sameNumber(DEFAULT_GROSS_WEIGHT))))
             .andExpect(jsonPath("$.[*].totalNetWeight").value(hasItem(sameNumber(DEFAULT_TOTAL_NET_WEIGHT))))
@@ -367,7 +368,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void getDraftReceipt() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         // Get the draftReceipt
         restDraftReceiptMockMvc
@@ -395,8 +396,6 @@ class DraftReceiptResourceIT {
             .andExpect(jsonPath("$.serial").value(DEFAULT_SERIAL))
             .andExpect(jsonPath("$.transportRow").value(DEFAULT_TRANSPORT_ROW))
             .andExpect(jsonPath("$.usable").value(DEFAULT_USABLE.booleanValue()))
-            .andExpect(jsonPath("$.paymentCurrencyRateTypeDesc").value(DEFAULT_PAYMENT_CURRENCY_RATE_TYPE_DESC))
-            .andExpect(jsonPath("$.paymentItemTypeDesc").value(DEFAULT_PAYMENT_ITEM_TYPE_DESC))
             .andExpect(jsonPath("$.netWeight").value(sameNumber(DEFAULT_NET_WEIGHT)))
             .andExpect(jsonPath("$.grossWeight").value(sameNumber(DEFAULT_GROSS_WEIGHT)))
             .andExpect(jsonPath("$.totalNetWeight").value(sameNumber(DEFAULT_TOTAL_NET_WEIGHT)))
@@ -425,7 +424,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void putExistingDraftReceipt() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -454,8 +453,6 @@ class DraftReceiptResourceIT {
             .serial(UPDATED_SERIAL)
             .transportRow(UPDATED_TRANSPORT_ROW)
             .usable(UPDATED_USABLE)
-            .paymentCurrencyRateTypeDesc(UPDATED_PAYMENT_CURRENCY_RATE_TYPE_DESC)
-            .paymentItemTypeDesc(UPDATED_PAYMENT_ITEM_TYPE_DESC)
             .netWeight(UPDATED_NET_WEIGHT)
             .grossWeight(UPDATED_GROSS_WEIGHT)
             .totalNetWeight(UPDATED_TOTAL_NET_WEIGHT)
@@ -552,7 +549,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void partialUpdateDraftReceiptWithPatch() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -563,21 +560,26 @@ class DraftReceiptResourceIT {
         partialUpdatedDraftReceipt
             .comment(UPDATED_COMMENT)
             .date(UPDATED_DATE)
-            .deliverDate(UPDATED_DELIVER_DATE)
             .deliverDuration(UPDATED_DELIVER_DURATION)
             .delivered(UPDATED_DELIVERED)
+            .documentTransactionEffectiveDate(UPDATED_DOCUMENT_TRANSACTION_EFFECTIVE_DATE)
             .freightLetterDate(UPDATED_FREIGHT_LETTER_DATE)
+            .freightLetterNumber(UPDATED_FREIGHT_LETTER_NUMBER)
             .freightLetterStampCost(UPDATED_FREIGHT_LETTER_STAMP_COST)
             .issueDate(UPDATED_ISSUE_DATE)
-            .issueDocument(UPDATED_ISSUE_DOCUMENT)
-            .productAmount(UPDATED_PRODUCT_AMOUNT)
             .receiptDate(UPDATED_RECEIPT_DATE)
-            .paymentCurrencyRateTypeDesc(UPDATED_PAYMENT_CURRENCY_RATE_TYPE_DESC)
-            .paymentItemTypeDesc(UPDATED_PAYMENT_ITEM_TYPE_DESC)
+            .usable(UPDATED_USABLE)
+            .netWeight(UPDATED_NET_WEIGHT)
+            .grossWeight(UPDATED_GROSS_WEIGHT)
+            .totalNetWeight(UPDATED_TOTAL_NET_WEIGHT)
             .totalGrossWeight(UPDATED_TOTAL_GROSS_WEIGHT)
+            .letterNumberTazirat(UPDATED_LETTER_NUMBER_TAZIRAT)
             .fobAmount(UPDATED_FOB_AMOUNT)
             .shippingFare(UPDATED_SHIPPING_FARE)
-            .deadlineSubmitDocumentDate(UPDATED_DEADLINE_SUBMIT_DOCUMENT_DATE)
+            .inspectionCost(UPDATED_INSPECTION_COST)
+            .currencyProvisionFile(UPDATED_CURRENCY_PROVISION_FILE)
+            .currencyProvisionFileContentType(UPDATED_CURRENCY_PROVISION_FILE_CONTENT_TYPE)
+            .isMigrational(UPDATED_IS_MIGRATIONAL)
             .otherCost(UPDATED_OTHER_COST);
 
         restDraftReceiptMockMvc
@@ -601,7 +603,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void fullUpdateDraftReceiptWithPatch() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -630,8 +632,6 @@ class DraftReceiptResourceIT {
             .serial(UPDATED_SERIAL)
             .transportRow(UPDATED_TRANSPORT_ROW)
             .usable(UPDATED_USABLE)
-            .paymentCurrencyRateTypeDesc(UPDATED_PAYMENT_CURRENCY_RATE_TYPE_DESC)
-            .paymentItemTypeDesc(UPDATED_PAYMENT_ITEM_TYPE_DESC)
             .netWeight(UPDATED_NET_WEIGHT)
             .grossWeight(UPDATED_GROSS_WEIGHT)
             .totalNetWeight(UPDATED_TOTAL_NET_WEIGHT)
@@ -728,7 +728,7 @@ class DraftReceiptResourceIT {
     @Transactional
     void deleteDraftReceipt() throws Exception {
         // Initialize the database
-        draftReceiptRepository.saveAndFlush(draftReceipt);
+        insertedDraftReceipt = draftReceiptRepository.saveAndFlush(draftReceipt);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

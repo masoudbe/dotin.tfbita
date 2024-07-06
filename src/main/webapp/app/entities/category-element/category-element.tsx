@@ -88,9 +88,9 @@ export const CategoryElement = () => {
                   <Translate contentKey="tfbitaApp.categoryElement.id">ID</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('value')}>
-                  <Translate contentKey="tfbitaApp.categoryElement.value">Value</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('value')} />
+                <th className="hand" onClick={sort('val')}>
+                  <Translate contentKey="tfbitaApp.categoryElement.val">Val</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('val')} />
                 </th>
                 <th className="hand" onClick={sort('categoryName')}>
                   <Translate contentKey="tfbitaApp.categoryElement.categoryName">Category Name</Translate>{' '}
@@ -103,10 +103,6 @@ export const CategoryElement = () => {
                 <th>
                   <Translate contentKey="tfbitaApp.categoryElement.category">Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.categoryElement.orderRegistrationInfo">Order Registration Info</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -118,7 +114,7 @@ export const CategoryElement = () => {
                       {categoryElement.id}
                     </Button>
                   </td>
-                  <td>{categoryElement.value}</td>
+                  <td>{categoryElement.val}</td>
                   <td>{categoryElement.categoryName}</td>
                   <td>{categoryElement.code}</td>
                   <td>
@@ -127,16 +123,6 @@ export const CategoryElement = () => {
                     ) : (
                       ''
                     )}
-                  </td>
-                  <td>
-                    {categoryElement.orderRegistrationInfos
-                      ? categoryElement.orderRegistrationInfos.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
-                            {j === categoryElement.orderRegistrationInfos.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

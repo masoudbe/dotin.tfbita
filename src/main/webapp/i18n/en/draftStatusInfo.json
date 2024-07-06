@@ -27,7 +27,7 @@
       "rejectDescription": "Reject Description",
       "remainAmount": "Remain Amount",
       "stampCostPaid": "Stamp Cost Paid",
-      "statusInfo": "Status Info"
+      "status": "Status"
     }
   }
 }

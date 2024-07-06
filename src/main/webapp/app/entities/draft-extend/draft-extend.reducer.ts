@@ -18,10 +18,14 @@ const apiUrl = 'api/draft-extends';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draftExtend/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraftExtend[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draftExtend/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraftExtend[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draftExtend/fetch_entity',

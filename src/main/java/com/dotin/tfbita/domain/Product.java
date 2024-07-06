@@ -54,11 +54,11 @@ public class Product implements Serializable {
             "ownerType",
             "status",
             "externalCustomerType",
+            "transportVehicleType",
             "transportType",
             "destCoustomers",
             "cargoPlaceCustoms",
             "entranceBorders",
-            "transportVehicleTypes",
             "productInfos",
             "commissionTransactionNumbers",
             "licenceInfos",
@@ -67,32 +67,72 @@ public class Product implements Serializable {
     )
     private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_product__draft",
-        joinColumns = @JoinColumn(name = "product_id"),
-        inverseJoinColumns = @JoinColumn(name = "draft_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
     private Set<Draft> drafts = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
-    private DraftReceipt draftProductInfos;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
+    @JsonIgnoreProperties(
+        value = {
+            "customJustificationChildLists",
+            "vehicleEnterNationality",
+            "container",
+            "vehicleCrossNationality",
+            "exportCustom",
+            "entranceCustom",
+            "transportConditions",
+            "tradeTypeCode",
+            "newPaymentConditions",
+            "justificationDeductionAmount",
+            "products",
+            "reverseOfJustificationDocumentTransactions",
+        },
+        allowSetters = true
+    )
+    private Set<CustomJustification> customJustifications = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -228,6 +268,12 @@ public class Product implements Serializable {
     }
 
     public void setDrafts(Set<Draft> drafts) {
+        if (this.drafts != null) {
+            this.drafts.forEach(i -> i.removeProducts(this));
+        }
+        if (drafts != null) {
+            drafts.forEach(i -> i.addProducts(this));
+        }
         this.drafts = drafts;
     }
 
@@ -238,24 +284,44 @@ public class Product implements Serializable {
 
     public Product addDraft(Draft draft) {
         this.drafts.add(draft);
+        draft.getProducts().add(this);
         return this;
     }
 
     public Product removeDraft(Draft draft) {
         this.drafts.remove(draft);
+        draft.getProducts().remove(this);
         return this;
     }
 
-    public DraftReceipt getDraftProductInfos() {
-        return this.draftProductInfos;
+    public Set<CustomJustification> getCustomJustifications() {
+        return this.customJustifications;
     }
 
-    public void setDraftProductInfos(DraftReceipt draftReceipt) {
-        this.draftProductInfos = draftReceipt;
+    public void setCustomJustifications(Set<CustomJustification> customJustifications) {
+        if (this.customJustifications != null) {
+            this.customJustifications.forEach(i -> i.removeProducts(this));
+        }
+        if (customJustifications != null) {
+            customJustifications.forEach(i -> i.addProducts(this));
+        }
+        this.customJustifications = customJustifications;
     }
 
-    public Product draftProductInfos(DraftReceipt draftReceipt) {
-        this.setDraftProductInfos(draftReceipt);
+    public Product customJustifications(Set<CustomJustification> customJustifications) {
+        this.setCustomJustifications(customJustifications);
+        return this;
+    }
+
+    public Product addCustomJustification(CustomJustification customJustification) {
+        this.customJustifications.add(customJustification);
+        customJustification.getProducts().add(this);
+        return this;
+    }
+
+    public Product removeCustomJustification(CustomJustification customJustification) {
+        this.customJustifications.remove(customJustification);
+        customJustification.getProducts().remove(this);
         return this;
     }
 

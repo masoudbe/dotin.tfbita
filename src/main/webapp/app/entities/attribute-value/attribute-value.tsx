@@ -87,9 +87,9 @@ export const AttributeValue = () => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="tfbitaApp.attributeValue.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('value')}>
-                  <Translate contentKey="tfbitaApp.attributeValue.value">Value</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('value')} />
+                <th className="hand" onClick={sort('val')}>
+                  <Translate contentKey="tfbitaApp.attributeValue.val">Val</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('val')} />
                 </th>
                 <th className="hand" onClick={sort('customValue')}>
                   <Translate contentKey="tfbitaApp.attributeValue.customValue">Custom Value</Translate>{' '}
@@ -120,7 +120,7 @@ export const AttributeValue = () => {
                       {attributeValue.id}
                     </Button>
                   </td>
-                  <td>{attributeValue.value}</td>
+                  <td>{attributeValue.val}</td>
                   <td>{attributeValue.customValue}</td>
                   <td>{attributeValue.attributeValueGroupName}</td>
                   <td>

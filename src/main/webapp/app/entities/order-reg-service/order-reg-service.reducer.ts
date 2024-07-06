@@ -18,10 +18,14 @@ const apiUrl = 'api/order-reg-services';
 
 // Actions
 
-export const getEntities = createAsyncThunk('orderRegService/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IOrderRegService[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'orderRegService/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IOrderRegService[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'orderRegService/fetch_entity',

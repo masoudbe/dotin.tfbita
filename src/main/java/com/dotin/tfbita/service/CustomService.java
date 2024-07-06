@@ -10,8 +10,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,15 +89,6 @@ public class CustomService {
     }
 
     /**
-     * Get all the customs with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<CustomDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return customRepository.findAllWithEagerRelationships(pageable).map(customMapper::toDto);
-    }
-
-    /**
      * Get one custom by id.
      *
      * @param id the id of the entity.
@@ -108,7 +97,7 @@ public class CustomService {
     @Transactional(readOnly = true)
     public Optional<CustomDTO> findOne(Long id) {
         log.debug("Request to get Custom : {}", id);
-        return customRepository.findOneWithEagerRelationships(id).map(customMapper::toDto);
+        return customRepository.findById(id).map(customMapper::toDto);
     }
 
     /**

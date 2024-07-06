@@ -101,10 +101,6 @@ export const InsuranceCompanyInfo = () => {
                   <Translate contentKey="tfbitaApp.insuranceCompanyInfo.name">Name</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.insuranceCompanyInfo.insuranceCompanyInfo">Insurance Company Info</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -118,15 +114,6 @@ export const InsuranceCompanyInfo = () => {
                   </td>
                   <td>{insuranceCompanyInfo.modificationDate}</td>
                   <td>{insuranceCompanyInfo.name}</td>
-                  <td>
-                    {insuranceCompanyInfo.insuranceCompanyInfo ? (
-                      <Link to={`/draft/${insuranceCompanyInfo.insuranceCompanyInfo.id}`}>
-                        {insuranceCompanyInfo.insuranceCompanyInfo.id}
-                      </Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button

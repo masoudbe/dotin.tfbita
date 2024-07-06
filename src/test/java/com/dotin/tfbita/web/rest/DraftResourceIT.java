@@ -5,23 +5,32 @@ import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.dotin.tfbita.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.Draft;
 import com.dotin.tfbita.repository.DraftRepository;
+import com.dotin.tfbita.service.DraftService;
 import com.dotin.tfbita.service.dto.DraftDTO;
 import com.dotin.tfbita.service.mapper.DraftMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link DraftResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class DraftResourceIT {
@@ -215,6 +225,15 @@ class DraftResourceIT {
     private static final Boolean DEFAULT_IS_WITHOUT_PAYMENT = false;
     private static final Boolean UPDATED_IS_WITHOUT_PAYMENT = true;
 
+    private static final String DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_MAIN_ACCOUNT_CURRENCY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ORDER_REG_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_ORDER_REG_CURRENCY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_DESTINATION_COUNTRY_CODE = "AAAAAAAAAA";
     private static final String UPDATED_DESTINATION_COUNTRY_CODE = "BBBBBBBBBB";
 
@@ -224,6 +243,9 @@ class DraftResourceIT {
     private static final String DEFAULT_PRODUCER_COUNTRY_CODE = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCER_COUNTRY_CODE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_BRANCH_CODE = "AAAAAAAAAA";
     private static final String UPDATED_BRANCH_CODE = "BBBBBBBBBB";
 
@@ -232,33 +254,6 @@ class DraftResourceIT {
 
     private static final String DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CERTIFICATE_SENDER_BRANCH_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_MAIN_ACCOUNT_CURRENCY_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ORDER_REG_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_ORDER_REG_CURRENCY_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY = "AAAAAAAAAA";
-    private static final String UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY = "BBBBBBBBBB";
-
-    private static final String DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CURRENCY_EXCHANGE_INFO_TITLE = "AAAAAAAAAA";
-    private static final String UPDATED_CURRENCY_EXCHANGE_INFO_TITLE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TRANSPORTATION_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_TRANSPORTATION_TYPE_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ACCOUNT_INFO_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_ACCOUNT_INFO_CODE = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_CUSTOMER_NUMBERS = 1L;
-    private static final Long UPDATED_CUSTOMER_NUMBERS = 2L;
-
-    private static final String DEFAULT_SANCTION_SERIALS = "AAAAAAAAAA";
-    private static final String UPDATED_SANCTION_SERIALS = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/drafts";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -272,8 +267,14 @@ class DraftResourceIT {
     @Autowired
     private DraftRepository draftRepository;
 
+    @Mock
+    private DraftRepository draftRepositoryMock;
+
     @Autowired
     private DraftMapper draftMapper;
+
+    @Mock
+    private DraftService draftServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -282,6 +283,8 @@ class DraftResourceIT {
     private MockMvc restDraftMockMvc;
 
     private Draft draft;
+
+    private Draft insertedDraft;
 
     /**
      * Create an entity for this test.
@@ -351,21 +354,16 @@ class DraftResourceIT {
             .isMigrational(DEFAULT_IS_MIGRATIONAL)
             .isNewCertificate(DEFAULT_IS_NEW_CERTIFICATE)
             .isWithoutPayment(DEFAULT_IS_WITHOUT_PAYMENT)
+            .mainAccountCurrencyCode(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE)
+            .orderRegCurrencyCode(DEFAULT_ORDER_REG_CURRENCY_CODE)
+            .chargedExchangeBrokerCurrencyCode(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE)
             .destinationCountryCode(DEFAULT_DESTINATION_COUNTRY_CODE)
             .beneficiaryCountryCode(DEFAULT_BENEFICIARY_COUNTRY_CODE)
             .producerCountryCode(DEFAULT_PRODUCER_COUNTRY_CODE)
+            .registerationJustificationCurrencyCode(DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
             .branchCode(DEFAULT_BRANCH_CODE)
             .operationalBranchCode(DEFAULT_OPERATIONAL_BRANCH_CODE)
-            .certificateSenderBranchCode(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE)
-            .mainAccountCurrencyCode(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE)
-            .orderRegCurrencyCode(DEFAULT_ORDER_REG_CURRENCY_CODE)
-            .chargedExchangeBrokerCurrency(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY)
-            .registerationJustificationCurrencyCode(DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
-            .currencyExchangeInfoTitle(DEFAULT_CURRENCY_EXCHANGE_INFO_TITLE)
-            .transportationTypeName(DEFAULT_TRANSPORTATION_TYPE_NAME)
-            .accountInfoCode(DEFAULT_ACCOUNT_INFO_CODE)
-            .customerNumbers(DEFAULT_CUSTOMER_NUMBERS)
-            .sanctionSerials(DEFAULT_SANCTION_SERIALS);
+            .certificateSenderBranchCode(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE);
         return draft;
     }
 
@@ -437,27 +435,30 @@ class DraftResourceIT {
             .isMigrational(UPDATED_IS_MIGRATIONAL)
             .isNewCertificate(UPDATED_IS_NEW_CERTIFICATE)
             .isWithoutPayment(UPDATED_IS_WITHOUT_PAYMENT)
+            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
+            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
+            .chargedExchangeBrokerCurrencyCode(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE)
             .destinationCountryCode(UPDATED_DESTINATION_COUNTRY_CODE)
             .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
             .producerCountryCode(UPDATED_PRODUCER_COUNTRY_CODE)
+            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
             .branchCode(UPDATED_BRANCH_CODE)
             .operationalBranchCode(UPDATED_OPERATIONAL_BRANCH_CODE)
-            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE)
-            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
-            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
-            .chargedExchangeBrokerCurrency(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY)
-            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
-            .currencyExchangeInfoTitle(UPDATED_CURRENCY_EXCHANGE_INFO_TITLE)
-            .transportationTypeName(UPDATED_TRANSPORTATION_TYPE_NAME)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .customerNumbers(UPDATED_CUSTOMER_NUMBERS)
-            .sanctionSerials(UPDATED_SANCTION_SERIALS);
+            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE);
         return draft;
     }
 
     @BeforeEach
     public void initTest() {
         draft = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraft != null) {
+            draftRepository.delete(insertedDraft);
+            insertedDraft = null;
+        }
     }
 
     @Test
@@ -480,6 +481,8 @@ class DraftResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraft = draftMapper.toEntity(returnedDraftDTO);
         assertDraftUpdatableFieldsEquals(returnedDraft, getPersistedDraft(returnedDraft));
+
+        insertedDraft = returnedDraft;
     }
 
     @Test
@@ -504,7 +507,7 @@ class DraftResourceIT {
     @Transactional
     void getAllDrafts() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         // Get all the draftList
         restDraftMockMvc
@@ -574,30 +577,42 @@ class DraftResourceIT {
             .andExpect(jsonPath("$.[*].isMigrational").value(hasItem(DEFAULT_IS_MIGRATIONAL.booleanValue())))
             .andExpect(jsonPath("$.[*].isNewCertificate").value(hasItem(DEFAULT_IS_NEW_CERTIFICATE.booleanValue())))
             .andExpect(jsonPath("$.[*].isWithoutPayment").value(hasItem(DEFAULT_IS_WITHOUT_PAYMENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].mainAccountCurrencyCode").value(hasItem(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE)))
+            .andExpect(jsonPath("$.[*].orderRegCurrencyCode").value(hasItem(DEFAULT_ORDER_REG_CURRENCY_CODE)))
+            .andExpect(jsonPath("$.[*].chargedExchangeBrokerCurrencyCode").value(hasItem(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE)))
             .andExpect(jsonPath("$.[*].destinationCountryCode").value(hasItem(DEFAULT_DESTINATION_COUNTRY_CODE)))
             .andExpect(jsonPath("$.[*].beneficiaryCountryCode").value(hasItem(DEFAULT_BENEFICIARY_COUNTRY_CODE)))
             .andExpect(jsonPath("$.[*].producerCountryCode").value(hasItem(DEFAULT_PRODUCER_COUNTRY_CODE)))
-            .andExpect(jsonPath("$.[*].branchCode").value(hasItem(DEFAULT_BRANCH_CODE)))
-            .andExpect(jsonPath("$.[*].operationalBranchCode").value(hasItem(DEFAULT_OPERATIONAL_BRANCH_CODE)))
-            .andExpect(jsonPath("$.[*].certificateSenderBranchCode").value(hasItem(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE)))
-            .andExpect(jsonPath("$.[*].mainAccountCurrencyCode").value(hasItem(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].orderRegCurrencyCode").value(hasItem(DEFAULT_ORDER_REG_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].chargedExchangeBrokerCurrency").value(hasItem(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY)))
             .andExpect(
                 jsonPath("$.[*].registerationJustificationCurrencyCode").value(hasItem(DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE))
             )
-            .andExpect(jsonPath("$.[*].currencyExchangeInfoTitle").value(hasItem(DEFAULT_CURRENCY_EXCHANGE_INFO_TITLE)))
-            .andExpect(jsonPath("$.[*].transportationTypeName").value(hasItem(DEFAULT_TRANSPORTATION_TYPE_NAME)))
-            .andExpect(jsonPath("$.[*].accountInfoCode").value(hasItem(DEFAULT_ACCOUNT_INFO_CODE)))
-            .andExpect(jsonPath("$.[*].customerNumbers").value(hasItem(DEFAULT_CUSTOMER_NUMBERS.intValue())))
-            .andExpect(jsonPath("$.[*].sanctionSerials").value(hasItem(DEFAULT_SANCTION_SERIALS)));
+            .andExpect(jsonPath("$.[*].branchCode").value(hasItem(DEFAULT_BRANCH_CODE)))
+            .andExpect(jsonPath("$.[*].operationalBranchCode").value(hasItem(DEFAULT_OPERATIONAL_BRANCH_CODE)))
+            .andExpect(jsonPath("$.[*].certificateSenderBranchCode").value(hasItem(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDraftsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(draftServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDraftMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(draftServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDraftsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(draftServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDraftMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(draftRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
     @Transactional
     void getDraft() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         // Get the draft
         restDraftMockMvc
@@ -665,21 +680,16 @@ class DraftResourceIT {
             .andExpect(jsonPath("$.isMigrational").value(DEFAULT_IS_MIGRATIONAL.booleanValue()))
             .andExpect(jsonPath("$.isNewCertificate").value(DEFAULT_IS_NEW_CERTIFICATE.booleanValue()))
             .andExpect(jsonPath("$.isWithoutPayment").value(DEFAULT_IS_WITHOUT_PAYMENT.booleanValue()))
+            .andExpect(jsonPath("$.mainAccountCurrencyCode").value(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE))
+            .andExpect(jsonPath("$.orderRegCurrencyCode").value(DEFAULT_ORDER_REG_CURRENCY_CODE))
+            .andExpect(jsonPath("$.chargedExchangeBrokerCurrencyCode").value(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE))
             .andExpect(jsonPath("$.destinationCountryCode").value(DEFAULT_DESTINATION_COUNTRY_CODE))
             .andExpect(jsonPath("$.beneficiaryCountryCode").value(DEFAULT_BENEFICIARY_COUNTRY_CODE))
             .andExpect(jsonPath("$.producerCountryCode").value(DEFAULT_PRODUCER_COUNTRY_CODE))
+            .andExpect(jsonPath("$.registerationJustificationCurrencyCode").value(DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE))
             .andExpect(jsonPath("$.branchCode").value(DEFAULT_BRANCH_CODE))
             .andExpect(jsonPath("$.operationalBranchCode").value(DEFAULT_OPERATIONAL_BRANCH_CODE))
-            .andExpect(jsonPath("$.certificateSenderBranchCode").value(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE))
-            .andExpect(jsonPath("$.mainAccountCurrencyCode").value(DEFAULT_MAIN_ACCOUNT_CURRENCY_CODE))
-            .andExpect(jsonPath("$.orderRegCurrencyCode").value(DEFAULT_ORDER_REG_CURRENCY_CODE))
-            .andExpect(jsonPath("$.chargedExchangeBrokerCurrency").value(DEFAULT_CHARGED_EXCHANGE_BROKER_CURRENCY))
-            .andExpect(jsonPath("$.registerationJustificationCurrencyCode").value(DEFAULT_REGISTERATION_JUSTIFICATION_CURRENCY_CODE))
-            .andExpect(jsonPath("$.currencyExchangeInfoTitle").value(DEFAULT_CURRENCY_EXCHANGE_INFO_TITLE))
-            .andExpect(jsonPath("$.transportationTypeName").value(DEFAULT_TRANSPORTATION_TYPE_NAME))
-            .andExpect(jsonPath("$.accountInfoCode").value(DEFAULT_ACCOUNT_INFO_CODE))
-            .andExpect(jsonPath("$.customerNumbers").value(DEFAULT_CUSTOMER_NUMBERS.intValue()))
-            .andExpect(jsonPath("$.sanctionSerials").value(DEFAULT_SANCTION_SERIALS));
+            .andExpect(jsonPath("$.certificateSenderBranchCode").value(DEFAULT_CERTIFICATE_SENDER_BRANCH_CODE));
     }
 
     @Test
@@ -693,7 +703,7 @@ class DraftResourceIT {
     @Transactional
     void putExistingDraft() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -762,21 +772,16 @@ class DraftResourceIT {
             .isMigrational(UPDATED_IS_MIGRATIONAL)
             .isNewCertificate(UPDATED_IS_NEW_CERTIFICATE)
             .isWithoutPayment(UPDATED_IS_WITHOUT_PAYMENT)
+            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
+            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
+            .chargedExchangeBrokerCurrencyCode(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE)
             .destinationCountryCode(UPDATED_DESTINATION_COUNTRY_CODE)
             .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
             .producerCountryCode(UPDATED_PRODUCER_COUNTRY_CODE)
+            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
             .branchCode(UPDATED_BRANCH_CODE)
             .operationalBranchCode(UPDATED_OPERATIONAL_BRANCH_CODE)
-            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE)
-            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
-            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
-            .chargedExchangeBrokerCurrency(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY)
-            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
-            .currencyExchangeInfoTitle(UPDATED_CURRENCY_EXCHANGE_INFO_TITLE)
-            .transportationTypeName(UPDATED_TRANSPORTATION_TYPE_NAME)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .customerNumbers(UPDATED_CUSTOMER_NUMBERS)
-            .sanctionSerials(UPDATED_SANCTION_SERIALS);
+            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE);
         DraftDTO draftDTO = draftMapper.toDto(updatedDraft);
 
         restDraftMockMvc
@@ -854,7 +859,7 @@ class DraftResourceIT {
     @Transactional
     void partialUpdateDraftWithPatch() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -863,47 +868,41 @@ class DraftResourceIT {
         partialUpdatedDraft.setId(draft.getId());
 
         partialUpdatedDraft
-            .auditCost(UPDATED_AUDIT_COST)
+            .advisorRequestDeleted(UPDATED_ADVISOR_REQUEST_DELETED)
+            .beneficiaryInfo(UPDATED_BENEFICIARY_INFO)
+            .branchStampCost(UPDATED_BRANCH_STAMP_COST)
             .centralBankCodeReference(UPDATED_CENTRAL_BANK_CODE_REFERENCE)
-            .chargedExchangeBrokerAmount(UPDATED_CHARGED_EXCHANGE_BROKER_AMOUNT)
-            .comment(UPDATED_COMMENT)
-            .customerDepositNumber(UPDATED_CUSTOMER_DEPOSIT_NUMBER)
-            .deliverDuration(UPDATED_DELIVER_DURATION)
-            .discount(UPDATED_DISCOUNT)
-            .draftNumber(UPDATED_DRAFT_NUMBER)
-            .draftOrderRegServiceWorth(UPDATED_DRAFT_ORDER_REG_SERVICE_WORTH)
-            .draftOrderRegTotalWorth(UPDATED_DRAFT_ORDER_REG_TOTAL_WORTH)
-            .hasTransportJustification(UPDATED_HAS_TRANSPORT_JUSTIFICATION)
-            .insuranceCost(UPDATED_INSURANCE_COST)
-            .insuranceDate(UPDATED_INSURANCE_DATE)
-            .insuranceExpiryDate(UPDATED_INSURANCE_EXPIRY_DATE)
+            .charterAcceptable(UPDATED_CHARTER_ACCEPTABLE)
+            .completionDate(UPDATED_COMPLETION_DATE)
+            .coveringBankDepositNumber(UPDATED_COVERING_BANK_DEPOSIT_NUMBER)
+            .currencyExchangeDepositNumber(UPDATED_CURRENCY_EXCHANGE_DEPOSIT_NUMBER)
+            .draftOtherCost(UPDATED_DRAFT_OTHER_COST)
+            .insuranceNumber(UPDATED_INSURANCE_NUMBER)
             .interfaceAdvisorDepositNumber(UPDATED_INTERFACE_ADVISOR_DEPOSIT_NUMBER)
+            .issueDate(UPDATED_ISSUE_DATE)
+            .issueDraftCommission(UPDATED_ISSUE_DRAFT_COMMISSION)
             .lastShipmentDate(UPDATED_LAST_SHIPMENT_DATE)
             .makeCertification(UPDATED_MAKE_CERTIFICATION)
             .multipleTransportable(UPDATED_MULTIPLE_TRANSPORTABLE)
-            .orderRegistrationDate(UPDATED_ORDER_REGISTRATION_DATE)
+            .orderRegistrationExpiryDate(UPDATED_ORDER_REGISTRATION_EXPIRY_DATE)
             .orderRegistrationNumber(UPDATED_ORDER_REGISTRATION_NUMBER)
-            .otherCost(UPDATED_OTHER_COST)
+            .performaDate(UPDATED_PERFORMA_DATE)
             .performaExpiryDate(UPDATED_PERFORMA_EXPIRY_DATE)
-            .receiveAllCommission(UPDATED_RECEIVE_ALL_COMMISSION)
+            .performaNumber(UPDATED_PERFORMA_NUMBER)
             .requestDate(UPDATED_REQUEST_DATE)
-            .sanctionSerial(UPDATED_SANCTION_SERIAL)
-            .serial(UPDATED_SERIAL)
-            .shipmentCost(UPDATED_SHIPMENT_COST)
             .sourceTransportPlace(UPDATED_SOURCE_TRANSPORT_PLACE)
+            .swiftComment(UPDATED_SWIFT_COMMENT)
             .transferAmount(UPDATED_TRANSFER_AMOUNT)
-            .transportVehicleChangeable(UPDATED_TRANSPORT_VEHICLE_CHANGEABLE)
+            .paymentTool(UPDATED_PAYMENT_TOOL)
             .letterNumberTazirat(UPDATED_LETTER_NUMBER_TAZIRAT)
             .letterDateTazirat(UPDATED_LETTER_DATE_TAZIRAT)
+            .loanNumber(UPDATED_LOAN_NUMBER)
             .isNewCertificate(UPDATED_IS_NEW_CERTIFICATE)
             .destinationCountryCode(UPDATED_DESTINATION_COUNTRY_CODE)
             .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
-            .producerCountryCode(UPDATED_PRODUCER_COUNTRY_CODE)
-            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE)
-            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
-            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
             .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
-            .currencyExchangeInfoTitle(UPDATED_CURRENCY_EXCHANGE_INFO_TITLE);
+            .branchCode(UPDATED_BRANCH_CODE)
+            .operationalBranchCode(UPDATED_OPERATIONAL_BRANCH_CODE);
 
         restDraftMockMvc
             .perform(
@@ -923,7 +922,7 @@ class DraftResourceIT {
     @Transactional
     void fullUpdateDraftWithPatch() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -992,21 +991,16 @@ class DraftResourceIT {
             .isMigrational(UPDATED_IS_MIGRATIONAL)
             .isNewCertificate(UPDATED_IS_NEW_CERTIFICATE)
             .isWithoutPayment(UPDATED_IS_WITHOUT_PAYMENT)
+            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
+            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
+            .chargedExchangeBrokerCurrencyCode(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY_CODE)
             .destinationCountryCode(UPDATED_DESTINATION_COUNTRY_CODE)
             .beneficiaryCountryCode(UPDATED_BENEFICIARY_COUNTRY_CODE)
             .producerCountryCode(UPDATED_PRODUCER_COUNTRY_CODE)
+            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
             .branchCode(UPDATED_BRANCH_CODE)
             .operationalBranchCode(UPDATED_OPERATIONAL_BRANCH_CODE)
-            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE)
-            .mainAccountCurrencyCode(UPDATED_MAIN_ACCOUNT_CURRENCY_CODE)
-            .orderRegCurrencyCode(UPDATED_ORDER_REG_CURRENCY_CODE)
-            .chargedExchangeBrokerCurrency(UPDATED_CHARGED_EXCHANGE_BROKER_CURRENCY)
-            .registerationJustificationCurrencyCode(UPDATED_REGISTERATION_JUSTIFICATION_CURRENCY_CODE)
-            .currencyExchangeInfoTitle(UPDATED_CURRENCY_EXCHANGE_INFO_TITLE)
-            .transportationTypeName(UPDATED_TRANSPORTATION_TYPE_NAME)
-            .accountInfoCode(UPDATED_ACCOUNT_INFO_CODE)
-            .customerNumbers(UPDATED_CUSTOMER_NUMBERS)
-            .sanctionSerials(UPDATED_SANCTION_SERIALS);
+            .certificateSenderBranchCode(UPDATED_CERTIFICATE_SENDER_BRANCH_CODE);
 
         restDraftMockMvc
             .perform(
@@ -1088,7 +1082,7 @@ class DraftResourceIT {
     @Transactional
     void deleteDraft() throws Exception {
         // Initialize the database
-        draftRepository.saveAndFlush(draft);
+        insertedDraft = draftRepository.saveAndFlush(draft);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

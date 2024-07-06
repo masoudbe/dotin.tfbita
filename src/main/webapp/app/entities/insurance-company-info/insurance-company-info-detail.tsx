@@ -43,10 +43,6 @@ export const InsuranceCompanyInfoDetail = () => {
             </span>
           </dt>
           <dd>{insuranceCompanyInfoEntity.name}</dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.insuranceCompanyInfo.insuranceCompanyInfo">Insurance Company Info</Translate>
-          </dt>
-          <dd>{insuranceCompanyInfoEntity.insuranceCompanyInfo ? insuranceCompanyInfoEntity.insuranceCompanyInfo.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/insurance-company-info" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

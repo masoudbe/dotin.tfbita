@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +66,6 @@ class DraftTaxResourceIT {
     private static final BigDecimal DEFAULT_MAIN_ACCOUNT_RATE = new BigDecimal(1);
     private static final BigDecimal UPDATED_MAIN_ACCOUNT_RATE = new BigDecimal(2);
 
-    private static final String DEFAULT_DOCUMENT_TRANSACTION_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_DOCUMENT_TRANSACTION_NUMBER = "BBBBBBBBBB";
-
-    private static final String DEFAULT_RETURN_DOCUMENT_TRANSACTION_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_RETURN_DOCUMENT_TRANSACTION_NUMBER = "BBBBBBBBBB";
-
     private static final String ENTITY_API_URL = "/api/draft-taxes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -94,6 +89,8 @@ class DraftTaxResourceIT {
 
     private DraftTax draftTax;
 
+    private DraftTax insertedDraftTax;
+
     /**
      * Create an entity for this test.
      *
@@ -111,9 +108,7 @@ class DraftTaxResourceIT {
             .registrationDate(DEFAULT_REGISTRATION_DATE)
             .returnTaxesAmount(DEFAULT_RETURN_TAXES_AMOUNT)
             .orderRegRate(DEFAULT_ORDER_REG_RATE)
-            .mainAccountRate(DEFAULT_MAIN_ACCOUNT_RATE)
-            .documentTransactionNumber(DEFAULT_DOCUMENT_TRANSACTION_NUMBER)
-            .returnDocumentTransactionNumber(DEFAULT_RETURN_DOCUMENT_TRANSACTION_NUMBER);
+            .mainAccountRate(DEFAULT_MAIN_ACCOUNT_RATE);
         return draftTax;
     }
 
@@ -134,15 +129,21 @@ class DraftTaxResourceIT {
             .registrationDate(UPDATED_REGISTRATION_DATE)
             .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT)
             .orderRegRate(UPDATED_ORDER_REG_RATE)
-            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE)
-            .documentTransactionNumber(UPDATED_DOCUMENT_TRANSACTION_NUMBER)
-            .returnDocumentTransactionNumber(UPDATED_RETURN_DOCUMENT_TRANSACTION_NUMBER);
+            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
         return draftTax;
     }
 
     @BeforeEach
     public void initTest() {
         draftTax = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftTax != null) {
+            draftTaxRepository.delete(insertedDraftTax);
+            insertedDraftTax = null;
+        }
     }
 
     @Test
@@ -165,6 +166,8 @@ class DraftTaxResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftTax = draftTaxMapper.toEntity(returnedDraftTaxDTO);
         assertDraftTaxUpdatableFieldsEquals(returnedDraftTax, getPersistedDraftTax(returnedDraftTax));
+
+        insertedDraftTax = returnedDraftTax;
     }
 
     @Test
@@ -189,7 +192,7 @@ class DraftTaxResourceIT {
     @Transactional
     void getAllDraftTaxes() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         // Get all the draftTaxList
         restDraftTaxMockMvc
@@ -206,16 +209,14 @@ class DraftTaxResourceIT {
             .andExpect(jsonPath("$.[*].registrationDate").value(hasItem(DEFAULT_REGISTRATION_DATE)))
             .andExpect(jsonPath("$.[*].returnTaxesAmount").value(hasItem(DEFAULT_RETURN_TAXES_AMOUNT.booleanValue())))
             .andExpect(jsonPath("$.[*].orderRegRate").value(hasItem(sameNumber(DEFAULT_ORDER_REG_RATE))))
-            .andExpect(jsonPath("$.[*].mainAccountRate").value(hasItem(sameNumber(DEFAULT_MAIN_ACCOUNT_RATE))))
-            .andExpect(jsonPath("$.[*].documentTransactionNumber").value(hasItem(DEFAULT_DOCUMENT_TRANSACTION_NUMBER)))
-            .andExpect(jsonPath("$.[*].returnDocumentTransactionNumber").value(hasItem(DEFAULT_RETURN_DOCUMENT_TRANSACTION_NUMBER)));
+            .andExpect(jsonPath("$.[*].mainAccountRate").value(hasItem(sameNumber(DEFAULT_MAIN_ACCOUNT_RATE))));
     }
 
     @Test
     @Transactional
     void getDraftTax() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         // Get the draftTax
         restDraftTaxMockMvc
@@ -232,9 +233,7 @@ class DraftTaxResourceIT {
             .andExpect(jsonPath("$.registrationDate").value(DEFAULT_REGISTRATION_DATE))
             .andExpect(jsonPath("$.returnTaxesAmount").value(DEFAULT_RETURN_TAXES_AMOUNT.booleanValue()))
             .andExpect(jsonPath("$.orderRegRate").value(sameNumber(DEFAULT_ORDER_REG_RATE)))
-            .andExpect(jsonPath("$.mainAccountRate").value(sameNumber(DEFAULT_MAIN_ACCOUNT_RATE)))
-            .andExpect(jsonPath("$.documentTransactionNumber").value(DEFAULT_DOCUMENT_TRANSACTION_NUMBER))
-            .andExpect(jsonPath("$.returnDocumentTransactionNumber").value(DEFAULT_RETURN_DOCUMENT_TRANSACTION_NUMBER));
+            .andExpect(jsonPath("$.mainAccountRate").value(sameNumber(DEFAULT_MAIN_ACCOUNT_RATE)));
     }
 
     @Test
@@ -248,7 +247,7 @@ class DraftTaxResourceIT {
     @Transactional
     void putExistingDraftTax() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -266,9 +265,7 @@ class DraftTaxResourceIT {
             .registrationDate(UPDATED_REGISTRATION_DATE)
             .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT)
             .orderRegRate(UPDATED_ORDER_REG_RATE)
-            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE)
-            .documentTransactionNumber(UPDATED_DOCUMENT_TRANSACTION_NUMBER)
-            .returnDocumentTransactionNumber(UPDATED_RETURN_DOCUMENT_TRANSACTION_NUMBER);
+            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
         DraftTaxDTO draftTaxDTO = draftTaxMapper.toDto(updatedDraftTax);
 
         restDraftTaxMockMvc
@@ -350,7 +347,7 @@ class DraftTaxResourceIT {
     @Transactional
     void partialUpdateDraftTaxWithPatch() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -359,10 +356,10 @@ class DraftTaxResourceIT {
         partialUpdatedDraftTax.setId(draftTax.getId());
 
         partialUpdatedDraftTax
+            .letterImage(UPDATED_LETTER_IMAGE)
+            .letterImageContentType(UPDATED_LETTER_IMAGE_CONTENT_TYPE)
             .registrationDate(UPDATED_REGISTRATION_DATE)
-            .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT)
-            .orderRegRate(UPDATED_ORDER_REG_RATE)
-            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
+            .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT);
 
         restDraftTaxMockMvc
             .perform(
@@ -382,7 +379,7 @@ class DraftTaxResourceIT {
     @Transactional
     void fullUpdateDraftTaxWithPatch() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -400,9 +397,7 @@ class DraftTaxResourceIT {
             .registrationDate(UPDATED_REGISTRATION_DATE)
             .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT)
             .orderRegRate(UPDATED_ORDER_REG_RATE)
-            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE)
-            .documentTransactionNumber(UPDATED_DOCUMENT_TRANSACTION_NUMBER)
-            .returnDocumentTransactionNumber(UPDATED_RETURN_DOCUMENT_TRANSACTION_NUMBER);
+            .mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
 
         restDraftTaxMockMvc
             .perform(
@@ -484,7 +479,7 @@ class DraftTaxResourceIT {
     @Transactional
     void deleteDraftTax() throws Exception {
         // Initialize the database
-        draftTaxRepository.saveAndFlush(draftTax);
+        insertedDraftTax = draftTaxRepository.saveAndFlush(draftTax);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

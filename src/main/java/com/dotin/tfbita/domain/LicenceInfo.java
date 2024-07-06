@@ -40,7 +40,7 @@ public class LicenceInfo implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "draftProductInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Product product;
@@ -64,11 +64,11 @@ public class LicenceInfo implements Serializable {
             "ownerType",
             "status",
             "externalCustomerType",
+            "transportVehicleType",
             "transportType",
             "destCoustomers",
             "cargoPlaceCustoms",
             "entranceBorders",
-            "transportVehicleTypes",
             "productInfos",
             "commissionTransactionNumbers",
             "licenceInfos",
@@ -76,10 +76,6 @@ public class LicenceInfo implements Serializable {
         allowSetters = true
     )
     private OrderRegistrationInfo orderRegistrationInfo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "orderRegService", "licenceInfos" }, allowSetters = true)
-    private OrderRegServ orderRegServ;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -210,19 +206,6 @@ public class LicenceInfo implements Serializable {
 
     public LicenceInfo orderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
         this.setOrderRegistrationInfo(orderRegistrationInfo);
-        return this;
-    }
-
-    public OrderRegServ getOrderRegServ() {
-        return this.orderRegServ;
-    }
-
-    public void setOrderRegServ(OrderRegServ orderRegServ) {
-        this.orderRegServ = orderRegServ;
-    }
-
-    public LicenceInfo orderRegServ(OrderRegServ orderRegServ) {
-        this.setOrderRegServ(orderRegServ);
         return this;
     }
 

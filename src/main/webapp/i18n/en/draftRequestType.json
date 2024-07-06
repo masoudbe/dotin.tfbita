@@ -1,0 +1,24 @@
+{
+  "tfbitaApp": {
+    "draftRequestType": {
+      "home": {
+        "title": "Draft Request Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Request Type",
+        "createOrEditLabel": "Create or edit a Draft Request Type",
+        "notFound": "No Draft Request Types found"
+      },
+      "created": "A new Draft Request Type is created with identifier {{ param }}",
+      "updated": "A Draft Request Type is updated with identifier {{ param }}",
+      "deleted": "A Draft Request Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Request Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Request Type"
+      },
+      "id": "ID",
+      "certificateTypeList": "Certificate Type List"
+    }
+  }
+}

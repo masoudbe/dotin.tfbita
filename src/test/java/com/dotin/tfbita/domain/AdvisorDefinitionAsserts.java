@@ -52,13 +52,13 @@ public class AdvisorDefinitionAsserts {
             .satisfies(e -> assertThat(e.getCountryIsoCode()).as("check countryIsoCode").isEqualTo(actual.getCountryIsoCode()))
             .satisfies(e -> assertThat(e.getDepositNum()).as("check depositNum").isEqualTo(actual.getDepositNum()))
             .satisfies(e -> assertThat(e.getSwiftCode()).as("check swiftCode").isEqualTo(actual.getSwiftCode()))
-            .satisfies(e -> assertThat(e.getCreditDate()).as("check creditDate").isEqualTo(actual.getCreditDate()))
-            .satisfies(e -> assertThat(e.getBankCode()).as("check bankCode").isEqualTo(actual.getBankCode()))
-            .satisfies(e -> assertThat(e.getBranchCode()).as("check branchCode").isEqualTo(actual.getBranchCode()))
             .satisfies(
                 e -> assertThat(e.getDefaultCurrencyCode()).as("check defaultCurrencyCode").isEqualTo(actual.getDefaultCurrencyCode())
             )
-            .satisfies(e -> assertThat(e.getCountryCode()).as("check countryCode").isEqualTo(actual.getCountryCode()));
+            .satisfies(e -> assertThat(e.getCurrenciesCodes()).as("check currenciesCodes").isEqualTo(actual.getCurrenciesCodes()))
+            .satisfies(e -> assertThat(e.getCountryCode()).as("check countryCode").isEqualTo(actual.getCountryCode()))
+            .satisfies(e -> assertThat(e.getBankCode()).as("check bankCode").isEqualTo(actual.getBankCode()))
+            .satisfies(e -> assertThat(e.getBranchCode()).as("check branchCode").isEqualTo(actual.getBranchCode()));
     }
 
     /**
@@ -70,10 +70,20 @@ public class AdvisorDefinitionAsserts {
     public static void assertAdvisorDefinitionUpdatableRelationshipsEquals(AdvisorDefinition expected, AdvisorDefinition actual) {
         assertThat(expected)
             .as("Verify AdvisorDefinition relationships")
-            .satisfies(e -> assertThat(e.getAdvisingBank()).as("check advisingBank").isEqualTo(actual.getAdvisingBank()))
             .satisfies(
-                e -> assertThat(e.getInterfaceAdvisingBank()).as("check interfaceAdvisingBank").isEqualTo(actual.getInterfaceAdvisingBank())
+                e ->
+                    assertThat(e.getAdditionalBrokerInformation())
+                        .as("check additionalBrokerInformation")
+                        .isEqualTo(actual.getAdditionalBrokerInformation())
             )
-            .satisfies(e -> assertThat(e.getCoveringBank()).as("check coveringBank").isEqualTo(actual.getCoveringBank()));
+            .satisfies(
+                e -> assertThat(e.getDefaultVostroDeposit()).as("check defaultVostroDeposit").isEqualTo(actual.getDefaultVostroDeposit())
+            )
+            .satisfies(
+                e -> assertThat(e.getDefaultNostroDeposit()).as("check defaultNostroDeposit").isEqualTo(actual.getDefaultNostroDeposit())
+            )
+            .satisfies(e -> assertThat(e.getReceiveMethod()).as("check receiveMethod").isEqualTo(actual.getReceiveMethod()))
+            .satisfies(e -> assertThat(e.getPayMethod()).as("check payMethod").isEqualTo(actual.getPayMethod()))
+            .satisfies(e -> assertThat(e.getSwiftBic()).as("check swiftBic").isEqualTo(actual.getSwiftBic()));
     }
 }

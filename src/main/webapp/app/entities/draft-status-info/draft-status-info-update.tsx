@@ -8,8 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
 import { IDraftStatusInfo } from 'app/shared/model/draft-status-info.model';
 import { getEntity, updateEntity, createEntity, reset } from './draft-status-info.reducer';
 
@@ -21,7 +21,7 @@ export const DraftStatusInfoUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
   const draftStatusInfoEntity = useAppSelector(state => state.draftStatusInfo.entity);
   const loading = useAppSelector(state => state.draftStatusInfo.loading);
   const updating = useAppSelector(state => state.draftStatusInfo.updating);
@@ -38,7 +38,7 @@ export const DraftStatusInfoUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getDrafts({}));
+    dispatch(getCategoryElements({}));
   }, []);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const DraftStatusInfoUpdate = () => {
     const entity = {
       ...draftStatusInfoEntity,
       ...values,
-      statusInfo: drafts.find(it => it.id.toString() === values.statusInfo?.toString()),
+      status: categoryElements.find(it => it.id.toString() === values.status?.toString()),
     };
 
     if (isNew) {
@@ -74,7 +74,7 @@ export const DraftStatusInfoUpdate = () => {
       ? {}
       : {
           ...draftStatusInfoEntity,
-          statusInfo: draftStatusInfoEntity?.statusInfo?.id,
+          status: draftStatusInfoEntity?.status?.id,
         };
 
   return (
@@ -173,15 +173,15 @@ export const DraftStatusInfoUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
-                id="draft-status-info-statusInfo"
-                name="statusInfo"
-                data-cy="statusInfo"
-                label={translate('tfbitaApp.draftStatusInfo.statusInfo')}
+                id="draft-status-info-status"
+                name="status"
+                data-cy="status"
+                label={translate('tfbitaApp.draftStatusInfo.status')}
                 type="select"
               >
                 <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

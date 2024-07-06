@@ -319,6 +319,10 @@ export const OrderRegistrationInfo = () => {
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
+                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportType">Transport Type</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
@@ -332,10 +336,6 @@ export const OrderRegistrationInfo = () => {
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.orderRegistrationInfo.entranceBorders">Entrance Borders</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
@@ -496,6 +496,15 @@ export const OrderRegistrationInfo = () => {
                     )}
                   </td>
                   <td>
+                    {orderRegistrationInfo.transportVehicleType ? (
+                      <Link to={`/category-element/${orderRegistrationInfo.transportVehicleType.id}`}>
+                        {orderRegistrationInfo.transportVehicleType.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
                     {orderRegistrationInfo.transportType ? (
                       <Link to={`/transportation-type/${orderRegistrationInfo.transportType.id}`}>
                         {orderRegistrationInfo.transportType.id}
@@ -524,16 +533,6 @@ export const OrderRegistrationInfo = () => {
                     ) : (
                       ''
                     )}
-                  </td>
-                  <td>
-                    {orderRegistrationInfo.transportVehicleTypes
-                      ? orderRegistrationInfo.transportVehicleTypes.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/category-element/${val.id}`}>{val.id}</Link>
-                            {j === orderRegistrationInfo.transportVehicleTypes.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
                   </td>
                   <td>
                     {orderRegistrationInfo.productInfos

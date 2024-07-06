@@ -29,8 +29,6 @@ public class LicenceInfoDTO implements Serializable {
 
     private OrderRegistrationInfoDTO orderRegistrationInfo;
 
-    private OrderRegServDTO orderRegServ;
-
     public Long getId() {
         return id;
     }
@@ -111,14 +109,6 @@ public class LicenceInfoDTO implements Serializable {
         this.orderRegistrationInfo = orderRegistrationInfo;
     }
 
-    public OrderRegServDTO getOrderRegServ() {
-        return orderRegServ;
-    }
-
-    public void setOrderRegServ(OrderRegServDTO orderRegServ) {
-        this.orderRegServ = orderRegServ;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -154,7 +144,6 @@ public class LicenceInfoDTO implements Serializable {
             ", product=" + getProduct() +
             ", service=" + getService() +
             ", orderRegistrationInfo=" + getOrderRegistrationInfo() +
-            ", orderRegServ=" + getOrderRegServ() +
             "}";
     }
 }

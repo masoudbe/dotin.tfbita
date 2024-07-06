@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class StringValueResourceIT {
 
-    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VAL = "AAAAAAAAAA";
+    private static final String UPDATED_VAL = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/string-values";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -59,6 +60,8 @@ class StringValueResourceIT {
 
     private StringValue stringValue;
 
+    private StringValue insertedStringValue;
+
     /**
      * Create an entity for this test.
      *
@@ -66,7 +69,7 @@ class StringValueResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static StringValue createEntity(EntityManager em) {
-        StringValue stringValue = new StringValue().value(DEFAULT_VALUE);
+        StringValue stringValue = new StringValue().val(DEFAULT_VAL);
         return stringValue;
     }
 
@@ -77,13 +80,21 @@ class StringValueResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static StringValue createUpdatedEntity(EntityManager em) {
-        StringValue stringValue = new StringValue().value(UPDATED_VALUE);
+        StringValue stringValue = new StringValue().val(UPDATED_VAL);
         return stringValue;
     }
 
     @BeforeEach
     public void initTest() {
         stringValue = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedStringValue != null) {
+            stringValueRepository.delete(insertedStringValue);
+            insertedStringValue = null;
+        }
     }
 
     @Test
@@ -106,6 +117,8 @@ class StringValueResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedStringValue = stringValueMapper.toEntity(returnedStringValueDTO);
         assertStringValueUpdatableFieldsEquals(returnedStringValue, getPersistedStringValue(returnedStringValue));
+
+        insertedStringValue = returnedStringValue;
     }
 
     @Test
@@ -130,7 +143,7 @@ class StringValueResourceIT {
     @Transactional
     void getAllStringValues() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         // Get all the stringValueList
         restStringValueMockMvc
@@ -138,14 +151,14 @@ class StringValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stringValue.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.[*].val").value(hasItem(DEFAULT_VAL)));
     }
 
     @Test
     @Transactional
     void getStringValue() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         // Get the stringValue
         restStringValueMockMvc
@@ -153,7 +166,7 @@ class StringValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(stringValue.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
+            .andExpect(jsonPath("$.val").value(DEFAULT_VAL));
     }
 
     @Test
@@ -167,7 +180,7 @@ class StringValueResourceIT {
     @Transactional
     void putExistingStringValue() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -175,7 +188,7 @@ class StringValueResourceIT {
         StringValue updatedStringValue = stringValueRepository.findById(stringValue.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedStringValue are not directly saved in db
         em.detach(updatedStringValue);
-        updatedStringValue.value(UPDATED_VALUE);
+        updatedStringValue.val(UPDATED_VAL);
         StringValueDTO stringValueDTO = stringValueMapper.toDto(updatedStringValue);
 
         restStringValueMockMvc
@@ -257,7 +270,7 @@ class StringValueResourceIT {
     @Transactional
     void partialUpdateStringValueWithPatch() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -286,7 +299,7 @@ class StringValueResourceIT {
     @Transactional
     void fullUpdateStringValueWithPatch() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -294,7 +307,7 @@ class StringValueResourceIT {
         StringValue partialUpdatedStringValue = new StringValue();
         partialUpdatedStringValue.setId(stringValue.getId());
 
-        partialUpdatedStringValue.value(UPDATED_VALUE);
+        partialUpdatedStringValue.val(UPDATED_VAL);
 
         restStringValueMockMvc
             .perform(
@@ -376,7 +389,7 @@ class StringValueResourceIT {
     @Transactional
     void deleteStringValue() throws Exception {
         // Initialize the database
-        stringValueRepository.saveAndFlush(stringValue);
+        insertedStringValue = stringValueRepository.saveAndFlush(stringValue);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

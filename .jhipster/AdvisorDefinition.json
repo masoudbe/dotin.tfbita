@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082903"
+    "changelogDate": "20240706105910"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -26,7 +26,15 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "creditDate",
+      "fieldName": "defaultCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currenciesCodes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryCode",
       "fieldType": "String"
     },
     {
@@ -36,33 +44,51 @@
     {
       "fieldName": "branchCode",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "defaultCurrencyCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "countryCode",
-      "fieldType": "String"
     }
   ],
   "name": "AdvisorDefinition",
   "relationships": [
     {
-      "otherEntityName": "draft",
-      "relationshipName": "advisingBank",
+      "otherEntityName": "additionalBrokerInformation",
+      "otherEntityRelationshipName": "advisorDefinition",
+      "relationshipName": "additionalBrokerInformation",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinitionDeposit",
+      "otherEntityRelationshipName": "advisorDefinition",
+      "relationshipName": "advisorDeposit",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "advisorDefinitionDeposit",
+      "relationshipName": "defaultVostroDeposit",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "draft",
-      "relationshipName": "interfaceAdvisingBank",
+      "otherEntityName": "advisorDefinitionDeposit",
+      "relationshipName": "defaultNostroDeposit",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "draft",
-      "relationshipName": "coveringBank",
+      "otherEntityName": "transferMethodManagement",
+      "relationshipName": "receiveMethod",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transferMethodManagement",
+      "relationshipName": "payMethod",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "swiftBic",
+      "relationshipName": "swiftBic",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }

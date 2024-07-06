@@ -47,9 +47,9 @@ export const DraftCustomJustificationDetail = () => {
               : null}
           </dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftCustomJustification.draftJustifications">Draft Justifications</Translate>
+            <Translate contentKey="tfbitaApp.draftCustomJustification.draft">Draft</Translate>
           </dt>
-          <dd>{draftCustomJustificationEntity.draftJustifications ? draftCustomJustificationEntity.draftJustifications.id : ''}</dd>
+          <dd>{draftCustomJustificationEntity.draft ? draftCustomJustificationEntity.draft.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-custom-justification" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

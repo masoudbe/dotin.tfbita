@@ -98,8 +98,7 @@ export const DraftCustomJustification = () => {
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftCustomJustification.draftJustifications">Draft Justifications</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftCustomJustification.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -123,10 +122,8 @@ export const DraftCustomJustification = () => {
                       : null}
                   </td>
                   <td>
-                    {draftCustomJustification.draftJustifications ? (
-                      <Link to={`/draft/${draftCustomJustification.draftJustifications.id}`}>
-                        {draftCustomJustification.draftJustifications.id}
-                      </Link>
+                    {draftCustomJustification.draft ? (
+                      <Link to={`/draft/${draftCustomJustification.draft.id}`}>{draftCustomJustification.draft.id}</Link>
                     ) : (
                       ''
                     )}

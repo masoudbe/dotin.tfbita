@@ -18,10 +18,14 @@ const apiUrl = 'api/insurance-company-infos';
 
 // Actions
 
-export const getEntities = createAsyncThunk('insuranceCompanyInfo/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IInsuranceCompanyInfo[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'insuranceCompanyInfo/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IInsuranceCompanyInfo[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'insuranceCompanyInfo/fetch_entity',

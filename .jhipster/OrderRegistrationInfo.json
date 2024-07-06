@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240606191116"
+    "changelogDate": "20240706105847"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -266,6 +266,12 @@
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "transportVehicleType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityName": "transportationType",
       "relationshipName": "transportType",
       "relationshipSide": "left",
@@ -288,12 +294,6 @@
       "relationshipName": "entranceBorders",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "categoryElement",
-      "relationshipName": "transportVehicleType",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "product",

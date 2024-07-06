@@ -24,10 +24,7 @@ public class OrderRegistrationInfoRepositoryWithBagRelationshipsImpl implements 
 
     @Override
     public Optional<OrderRegistrationInfo> fetchBagRelationships(Optional<OrderRegistrationInfo> orderRegistrationInfo) {
-        return orderRegistrationInfo
-            .map(this::fetchTransportVehicleTypes)
-            .map(this::fetchProductInfos)
-            .map(this::fetchCommissionTransactionNumbers);
+        return orderRegistrationInfo.map(this::fetchProductInfos).map(this::fetchCommissionTransactionNumbers);
     }
 
     @Override
@@ -42,34 +39,9 @@ public class OrderRegistrationInfoRepositoryWithBagRelationshipsImpl implements 
     @Override
     public List<OrderRegistrationInfo> fetchBagRelationships(List<OrderRegistrationInfo> orderRegistrationInfos) {
         return Optional.of(orderRegistrationInfos)
-            .map(this::fetchTransportVehicleTypes)
             .map(this::fetchProductInfos)
             .map(this::fetchCommissionTransactionNumbers)
             .orElse(Collections.emptyList());
-    }
-
-    OrderRegistrationInfo fetchTransportVehicleTypes(OrderRegistrationInfo result) {
-        return entityManager
-            .createQuery(
-                "select orderRegistrationInfo from OrderRegistrationInfo orderRegistrationInfo left join fetch orderRegistrationInfo.transportVehicleTypes where orderRegistrationInfo.id = :id",
-                OrderRegistrationInfo.class
-            )
-            .setParameter(ID_PARAMETER, result.getId())
-            .getSingleResult();
-    }
-
-    List<OrderRegistrationInfo> fetchTransportVehicleTypes(List<OrderRegistrationInfo> orderRegistrationInfos) {
-        HashMap<Object, Integer> order = new HashMap<>();
-        IntStream.range(0, orderRegistrationInfos.size()).forEach(index -> order.put(orderRegistrationInfos.get(index).getId(), index));
-        List<OrderRegistrationInfo> result = entityManager
-            .createQuery(
-                "select orderRegistrationInfo from OrderRegistrationInfo orderRegistrationInfo left join fetch orderRegistrationInfo.transportVehicleTypes where orderRegistrationInfo in :orderRegistrationInfos",
-                OrderRegistrationInfo.class
-            )
-            .setParameter(ORDERREGISTRATIONINFOS_PARAMETER, orderRegistrationInfos)
-            .getResultList();
-        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
-        return result;
     }
 
     OrderRegistrationInfo fetchProductInfos(OrderRegistrationInfo result) {

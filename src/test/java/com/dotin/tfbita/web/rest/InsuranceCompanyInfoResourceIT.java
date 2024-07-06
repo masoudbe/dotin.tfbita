@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ class InsuranceCompanyInfoResourceIT {
 
     private InsuranceCompanyInfo insuranceCompanyInfo;
 
+    private InsuranceCompanyInfo insertedInsuranceCompanyInfo;
+
     /**
      * Create an entity for this test.
      *
@@ -93,6 +96,14 @@ class InsuranceCompanyInfoResourceIT {
         insuranceCompanyInfo = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedInsuranceCompanyInfo != null) {
+            insuranceCompanyInfoRepository.delete(insertedInsuranceCompanyInfo);
+            insertedInsuranceCompanyInfo = null;
+        }
+    }
+
     @Test
     @Transactional
     void createInsuranceCompanyInfo() throws Exception {
@@ -118,6 +129,8 @@ class InsuranceCompanyInfoResourceIT {
             returnedInsuranceCompanyInfo,
             getPersistedInsuranceCompanyInfo(returnedInsuranceCompanyInfo)
         );
+
+        insertedInsuranceCompanyInfo = returnedInsuranceCompanyInfo;
     }
 
     @Test
@@ -142,7 +155,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void getAllInsuranceCompanyInfos() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         // Get all the insuranceCompanyInfoList
         restInsuranceCompanyInfoMockMvc
@@ -158,7 +171,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void getInsuranceCompanyInfo() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         // Get the insuranceCompanyInfo
         restInsuranceCompanyInfoMockMvc
@@ -181,7 +194,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void putExistingInsuranceCompanyInfo() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -273,7 +286,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void partialUpdateInsuranceCompanyInfoWithPatch() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -281,7 +294,7 @@ class InsuranceCompanyInfoResourceIT {
         InsuranceCompanyInfo partialUpdatedInsuranceCompanyInfo = new InsuranceCompanyInfo();
         partialUpdatedInsuranceCompanyInfo.setId(insuranceCompanyInfo.getId());
 
-        partialUpdatedInsuranceCompanyInfo.modificationDate(UPDATED_MODIFICATION_DATE).name(UPDATED_NAME);
+        partialUpdatedInsuranceCompanyInfo.modificationDate(UPDATED_MODIFICATION_DATE);
 
         restInsuranceCompanyInfoMockMvc
             .perform(
@@ -304,7 +317,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void fullUpdateInsuranceCompanyInfoWithPatch() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -399,7 +412,7 @@ class InsuranceCompanyInfoResourceIT {
     @Transactional
     void deleteInsuranceCompanyInfo() throws Exception {
         // Initialize the database
-        insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
+        insertedInsuranceCompanyInfo = insuranceCompanyInfoRepository.saveAndFlush(insuranceCompanyInfo);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

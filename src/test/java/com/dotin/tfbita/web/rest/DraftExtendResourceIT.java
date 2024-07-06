@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,8 @@ class DraftExtendResourceIT {
 
     private DraftExtend draftExtend;
 
+    private DraftExtend insertedDraftExtend;
+
     /**
      * Create an entity for this test.
      *
@@ -92,6 +95,14 @@ class DraftExtendResourceIT {
         draftExtend = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftExtend != null) {
+            draftExtendRepository.delete(insertedDraftExtend);
+            insertedDraftExtend = null;
+        }
+    }
+
     @Test
     @Transactional
     void createDraftExtend() throws Exception {
@@ -112,6 +123,8 @@ class DraftExtendResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftExtend = draftExtendMapper.toEntity(returnedDraftExtendDTO);
         assertDraftExtendUpdatableFieldsEquals(returnedDraftExtend, getPersistedDraftExtend(returnedDraftExtend));
+
+        insertedDraftExtend = returnedDraftExtend;
     }
 
     @Test
@@ -136,7 +149,7 @@ class DraftExtendResourceIT {
     @Transactional
     void getAllDraftExtends() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         // Get all the draftExtendList
         restDraftExtendMockMvc
@@ -153,7 +166,7 @@ class DraftExtendResourceIT {
     @Transactional
     void getDraftExtend() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         // Get the draftExtend
         restDraftExtendMockMvc
@@ -177,7 +190,7 @@ class DraftExtendResourceIT {
     @Transactional
     void putExistingDraftExtend() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -267,13 +280,15 @@ class DraftExtendResourceIT {
     @Transactional
     void partialUpdateDraftExtendWithPatch() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the draftExtend using partial update
         DraftExtend partialUpdatedDraftExtend = new DraftExtend();
         partialUpdatedDraftExtend.setId(draftExtend.getId());
+
+        partialUpdatedDraftExtend.date(UPDATED_DATE);
 
         restDraftExtendMockMvc
             .perform(
@@ -296,7 +311,7 @@ class DraftExtendResourceIT {
     @Transactional
     void fullUpdateDraftExtendWithPatch() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -386,7 +401,7 @@ class DraftExtendResourceIT {
     @Transactional
     void deleteDraftExtend() throws Exception {
         // Initialize the database
-        draftExtendRepository.saveAndFlush(draftExtend);
+        insertedDraftExtend = draftExtendRepository.saveAndFlush(draftExtend);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

@@ -128,15 +128,11 @@ export const AuditCompanyInfoDetail = () => {
           </dt>
           <dd>{auditCompanyInfoEntity.unit}</dd>
           <dt>
-            <span id="city">
-              <Translate contentKey="tfbitaApp.auditCompanyInfo.city">City</Translate>
+            <span id="cityCode">
+              <Translate contentKey="tfbitaApp.auditCompanyInfo.cityCode">City Code</Translate>
             </span>
           </dt>
-          <dd>{auditCompanyInfoEntity.city}</dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.auditCompanyInfo.auditCompanyInfo">Audit Company Info</Translate>
-          </dt>
-          <dd>{auditCompanyInfoEntity.auditCompanyInfo ? auditCompanyInfoEntity.auditCompanyInfo.id : ''}</dd>
+          <dd>{auditCompanyInfoEntity.cityCode}</dd>
         </dl>
         <Button tag={Link} to="/audit-company-info" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

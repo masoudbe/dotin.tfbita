@@ -18,10 +18,14 @@ const apiUrl = 'api/draft-used-assurances';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draftUsedAssurance/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraftUsedAssurance[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draftUsedAssurance/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraftUsedAssurance[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draftUsedAssurance/fetch_entity',

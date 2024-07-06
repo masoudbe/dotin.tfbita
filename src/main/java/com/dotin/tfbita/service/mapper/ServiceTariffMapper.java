@@ -16,6 +16,7 @@ public interface ServiceTariffMapper extends EntityMapper<ServiceTariffDTO, Serv
     @Mapping(target = "drafts", source = "drafts", qualifiedByName = "draftIdSet")
     ServiceTariffDTO toDto(ServiceTariff s);
 
+    @Mapping(target = "drafts", ignore = true)
     @Mapping(target = "removeDraft", ignore = true)
     ServiceTariff toEntity(ServiceTariffDTO serviceTariffDTO);
 

@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105926"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "receiveTransactionCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returnTransactionCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "amountBasedOnRial",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "depositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "receiveCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyRateDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sellRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "buyRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "name": "JustificationDeductionAmountPart",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

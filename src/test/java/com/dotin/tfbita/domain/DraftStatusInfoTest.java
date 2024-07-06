@@ -1,7 +1,7 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
 import static com.dotin.tfbita.domain.DraftStatusInfoTestSamples.*;
-import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
@@ -24,14 +24,14 @@ class DraftStatusInfoTest {
     }
 
     @Test
-    void statusInfoTest() throws Exception {
+    void statusTest() {
         DraftStatusInfo draftStatusInfo = getDraftStatusInfoRandomSampleGenerator();
-        Draft draftBack = getDraftRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 
-        draftStatusInfo.setStatusInfo(draftBack);
-        assertThat(draftStatusInfo.getStatusInfo()).isEqualTo(draftBack);
+        draftStatusInfo.setStatus(categoryElementBack);
+        assertThat(draftStatusInfo.getStatus()).isEqualTo(categoryElementBack);
 
-        draftStatusInfo.statusInfo(null);
-        assertThat(draftStatusInfo.getStatusInfo()).isNull();
+        draftStatusInfo.status(null);
+        assertThat(draftStatusInfo.getStatus()).isNull();
     }
 }

@@ -1,0 +1,17 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105856"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CurrencyExchangeInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

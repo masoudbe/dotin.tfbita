@@ -1,0 +1,29 @@
+{
+  "tfbitaApp": {
+    "justificationDeductionDetail": {
+      "home": {
+        "title": "Justification Deduction Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Justification Deduction Detail",
+        "createOrEditLabel": "Create or edit a Justification Deduction Detail",
+        "notFound": "No Justification Deduction Details found"
+      },
+      "created": "A new Justification Deduction Detail is created with identifier {{ param }}",
+      "updated": "A Justification Deduction Detail is updated with identifier {{ param }}",
+      "deleted": "A Justification Deduction Detail is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Justification Deduction Detail {{ id }}?"
+      },
+      "detail": {
+        "title": "Justification Deduction Detail"
+      },
+      "id": "ID",
+      "deductionAmount": "Deduction Amount",
+      "equivalentDeductionAmount": "Equivalent Deduction Amount",
+      "receiveCurrencyCode": "Receive Currency Code",
+      "comment": "Comment",
+      "deductionReason": "Deduction Reason",
+      "justificationDeductionAmount": "Justification Deduction Amount"
+    }
+  }
+}

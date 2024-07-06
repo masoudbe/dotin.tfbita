@@ -19,6 +19,7 @@ import jakarta.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,6 +72,8 @@ class DraftCustomJustificationResourceIT {
 
     private DraftCustomJustification draftCustomJustification;
 
+    private DraftCustomJustification insertedDraftCustomJustification;
+
     /**
      * Create an entity for this test.
      *
@@ -98,6 +101,14 @@ class DraftCustomJustificationResourceIT {
         draftCustomJustification = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftCustomJustification != null) {
+            draftCustomJustificationRepository.delete(insertedDraftCustomJustification);
+            insertedDraftCustomJustification = null;
+        }
+    }
+
     @Test
     @Transactional
     void createDraftCustomJustification() throws Exception {
@@ -123,6 +134,8 @@ class DraftCustomJustificationResourceIT {
             returnedDraftCustomJustification,
             getPersistedDraftCustomJustification(returnedDraftCustomJustification)
         );
+
+        insertedDraftCustomJustification = returnedDraftCustomJustification;
     }
 
     @Test
@@ -149,7 +162,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void getAllDraftCustomJustifications() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         // Get all the draftCustomJustificationList
         restDraftCustomJustificationMockMvc
@@ -180,7 +193,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void getDraftCustomJustification() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         // Get the draftCustomJustification
         restDraftCustomJustificationMockMvc
@@ -201,7 +214,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void putExistingDraftCustomJustification() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -292,7 +305,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void partialUpdateDraftCustomJustificationWithPatch() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -321,7 +334,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void fullUpdateDraftCustomJustificationWithPatch() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -414,7 +427,7 @@ class DraftCustomJustificationResourceIT {
     @Transactional
     void deleteDraftCustomJustification() throws Exception {
         // Initialize the database
-        draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
+        insertedDraftCustomJustification = draftCustomJustificationRepository.saveAndFlush(draftCustomJustification);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

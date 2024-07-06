@@ -21,7 +21,7 @@
       "date": "Date",
       "duration": "Duration",
       "time": "Time",
-      "extensions": "Extensions"
+      "draftField": "Draft Field"
     }
   }
 }

@@ -18,10 +18,14 @@ const apiUrl = 'api/attribute-value-groups';
 
 // Actions
 
-export const getEntities = createAsyncThunk('attributeValueGroup/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IAttributeValueGroup[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'attributeValueGroup/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IAttributeValueGroup[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'attributeValueGroup/fetch_entity',

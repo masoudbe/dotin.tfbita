@@ -16,7 +16,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface DraftCustomJustificationMapper extends EntityMapper<DraftCustomJustificationDTO, DraftCustomJustification> {
     @Mapping(target = "draftReceipts", source = "draftReceipts", qualifiedByName = "draftReceiptIdSet")
-    @Mapping(target = "draftJustifications", source = "draftJustifications", qualifiedByName = "draftId")
+    @Mapping(target = "draft", source = "draft", qualifiedByName = "draftId")
     DraftCustomJustificationDTO toDto(DraftCustomJustification s);
 
     @Mapping(target = "removeDraftReceipts", ignore = true)

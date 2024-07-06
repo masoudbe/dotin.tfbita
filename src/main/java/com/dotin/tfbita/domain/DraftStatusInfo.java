@@ -49,22 +49,8 @@ public class DraftStatusInfo implements Serializable {
     private Boolean stampCostPaid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft statusInfo;
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement status;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -198,16 +184,16 @@ public class DraftStatusInfo implements Serializable {
         this.stampCostPaid = stampCostPaid;
     }
 
-    public Draft getStatusInfo() {
-        return this.statusInfo;
+    public CategoryElement getStatus() {
+        return this.status;
     }
 
-    public void setStatusInfo(Draft draft) {
-        this.statusInfo = draft;
+    public void setStatus(CategoryElement categoryElement) {
+        this.status = categoryElement;
     }
 
-    public DraftStatusInfo statusInfo(Draft draft) {
-        this.setStatusInfo(draft);
+    public DraftStatusInfo status(CategoryElement categoryElement) {
+        this.setStatus(categoryElement);
         return this;
     }
 

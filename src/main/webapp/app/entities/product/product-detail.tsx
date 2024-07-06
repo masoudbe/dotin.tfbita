@@ -80,9 +80,18 @@ export const ProductDetail = () => {
               : null}
           </dd>
           <dt>
-            <Translate contentKey="tfbitaApp.product.draftProductInfos">Draft Product Infos</Translate>
+            <Translate contentKey="tfbitaApp.product.customJustification">Custom Justification</Translate>
           </dt>
-          <dd>{productEntity.draftProductInfos ? productEntity.draftProductInfos.id : ''}</dd>
+          <dd>
+            {productEntity.customJustifications
+              ? productEntity.customJustifications.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {productEntity.customJustifications && i === productEntity.customJustifications.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
         </dl>
         <Button tag={Link} to="/product" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

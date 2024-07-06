@@ -8,8 +8,8 @@ export interface IDraftFactor {
   factorDate?: string | null;
   issueDate?: string | null;
   serial?: string | null;
-  currencyName?: string | null;
-  draftFactors?: IDraft | null;
+  currencyCode?: string | null;
+  draft?: IDraft | null;
 }
 
 export const defaultValue: Readonly<IDraftFactor> = {};

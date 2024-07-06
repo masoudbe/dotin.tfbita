@@ -34,8 +34,7 @@
       "theSideStreet": "The Side Street",
       "title": "Title",
       "unit": "Unit",
-      "city": "City",
-      "auditCompanyInfo": "Audit Company Info"
+      "cityCode": "City Code"
     }
   }
 }

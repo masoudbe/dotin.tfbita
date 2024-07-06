@@ -1,5 +1,3 @@
-import { IDraft } from 'app/shared/model/draft.model';
-
 export interface IAuditCompanyInfo {
   id?: number;
   address?: string | null;
@@ -18,8 +16,7 @@ export interface IAuditCompanyInfo {
   theSideStreet?: string | null;
   title?: string | null;
   unit?: string | null;
-  city?: string | null;
-  auditCompanyInfo?: IDraft | null;
+  cityCode?: string | null;
 }
 
 export const defaultValue: Readonly<IAuditCompanyInfo> = {};

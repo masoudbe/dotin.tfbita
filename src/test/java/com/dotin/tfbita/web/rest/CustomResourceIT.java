@@ -4,30 +4,23 @@ import static com.dotin.tfbita.domain.CustomAsserts.*;
 import static com.dotin.tfbita.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.dotin.tfbita.IntegrationTest;
 import com.dotin.tfbita.domain.Custom;
 import com.dotin.tfbita.repository.CustomRepository;
-import com.dotin.tfbita.service.CustomService;
 import com.dotin.tfbita.service.dto.CustomDTO;
 import com.dotin.tfbita.service.mapper.CustomMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link CustomResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class CustomResourceIT {
@@ -66,14 +58,8 @@ class CustomResourceIT {
     @Autowired
     private CustomRepository customRepository;
 
-    @Mock
-    private CustomRepository customRepositoryMock;
-
     @Autowired
     private CustomMapper customMapper;
-
-    @Mock
-    private CustomService customServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -82,6 +68,8 @@ class CustomResourceIT {
     private MockMvc restCustomMockMvc;
 
     private Custom custom;
+
+    private Custom insertedCustom;
 
     /**
      * Create an entity for this test.
@@ -118,6 +106,14 @@ class CustomResourceIT {
         custom = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedCustom != null) {
+            customRepository.delete(insertedCustom);
+            insertedCustom = null;
+        }
+    }
+
     @Test
     @Transactional
     void createCustom() throws Exception {
@@ -138,6 +134,8 @@ class CustomResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedCustom = customMapper.toEntity(returnedCustomDTO);
         assertCustomUpdatableFieldsEquals(returnedCustom, getPersistedCustom(returnedCustom));
+
+        insertedCustom = returnedCustom;
     }
 
     @Test
@@ -162,7 +160,7 @@ class CustomResourceIT {
     @Transactional
     void getAllCustoms() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         // Get all the customList
         restCustomMockMvc
@@ -176,28 +174,11 @@ class CustomResourceIT {
             .andExpect(jsonPath("$.[*].tempId").value(hasItem(DEFAULT_TEMP_ID.intValue())));
     }
 
-    @SuppressWarnings({ "unchecked" })
-    void getAllCustomsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(customServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restCustomMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(customServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllCustomsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(customServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restCustomMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(customRepositoryMock, times(1)).findAll(any(Pageable.class));
-    }
-
     @Test
     @Transactional
     void getCustom() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         // Get the custom
         restCustomMockMvc
@@ -222,7 +203,7 @@ class CustomResourceIT {
     @Transactional
     void putExistingCustom() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -308,15 +289,13 @@ class CustomResourceIT {
     @Transactional
     void partialUpdateCustomWithPatch() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the custom using partial update
         Custom partialUpdatedCustom = new Custom();
         partialUpdatedCustom.setId(custom.getId());
-
-        partialUpdatedCustom.name(UPDATED_NAME).tempId(UPDATED_TEMP_ID);
 
         restCustomMockMvc
             .perform(
@@ -336,7 +315,7 @@ class CustomResourceIT {
     @Transactional
     void fullUpdateCustomWithPatch() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -430,7 +409,7 @@ class CustomResourceIT {
     @Transactional
     void deleteCustom() throws Exception {
         // Initialize the database
-        customRepository.saveAndFlush(custom);
+        insertedCustom = customRepository.saveAndFlush(custom);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

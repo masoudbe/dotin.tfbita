@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ class AttributeValueGroupResourceIT {
 
     private AttributeValueGroup attributeValueGroup;
 
+    private AttributeValueGroup insertedAttributeValueGroup;
+
     /**
      * Create an entity for this test.
      *
@@ -89,6 +92,14 @@ class AttributeValueGroupResourceIT {
         attributeValueGroup = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedAttributeValueGroup != null) {
+            attributeValueGroupRepository.delete(insertedAttributeValueGroup);
+            insertedAttributeValueGroup = null;
+        }
+    }
+
     @Test
     @Transactional
     void createAttributeValueGroup() throws Exception {
@@ -112,6 +123,8 @@ class AttributeValueGroupResourceIT {
             returnedAttributeValueGroup,
             getPersistedAttributeValueGroup(returnedAttributeValueGroup)
         );
+
+        insertedAttributeValueGroup = returnedAttributeValueGroup;
     }
 
     @Test
@@ -136,7 +149,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void getAllAttributeValueGroups() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         // Get all the attributeValueGroupList
         restAttributeValueGroupMockMvc
@@ -152,7 +165,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void getAttributeValueGroup() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         // Get the attributeValueGroup
         restAttributeValueGroupMockMvc
@@ -175,7 +188,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void putExistingAttributeValueGroup() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -265,7 +278,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void partialUpdateAttributeValueGroupWithPatch() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -273,7 +286,7 @@ class AttributeValueGroupResourceIT {
         AttributeValueGroup partialUpdatedAttributeValueGroup = new AttributeValueGroup();
         partialUpdatedAttributeValueGroup.setId(attributeValueGroup.getId());
 
-        partialUpdatedAttributeValueGroup.mandatory(UPDATED_MANDATORY).name(UPDATED_NAME);
+        partialUpdatedAttributeValueGroup.name(UPDATED_NAME);
 
         restAttributeValueGroupMockMvc
             .perform(
@@ -296,7 +309,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void fullUpdateAttributeValueGroupWithPatch() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -391,7 +404,7 @@ class AttributeValueGroupResourceIT {
     @Transactional
     void deleteAttributeValueGroup() throws Exception {
         // Initialize the database
-        attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
+        insertedAttributeValueGroup = attributeValueGroupRepository.saveAndFlush(attributeValueGroup);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

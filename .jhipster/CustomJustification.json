@@ -1,0 +1,465 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105921"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "agentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "agriculturalPublicPolicies",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "assessmentPlace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attachedDocuments",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "balanceRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "bankCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "borderTransportType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "boxCountType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "boxMarks",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cargoIndexNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "centralBankCreditCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comments",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "constructorCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "costDetails",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cottageNumber",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "creditEquivalentAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currency",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currencyRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currencySwiftCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customCompanyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destCustom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destCustomCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disciplinaryDocumentsIssued",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "discountPercent",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "eightDigitOrderCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "entranceCustomCompany",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "entranceCustomCompanyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "evacuationPlace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "evaluationMethodCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exportDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exporter",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exporterCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extensionDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "factorTotalAmount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightIndexNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "frightLetter",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "importLicence",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "importLicense",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "impureWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "indices",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "internalTransportType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issuanceDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "itemNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "items",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "justificationAgent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "justificationCurrencyRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "licenceNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "makeCertificateNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "newBorderTransportType",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "newEvacuationPlace",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "newInternalTransportType",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "newProductItemCustomValue",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "orderRegistrationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderRegistrationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "papers",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "paymentConditions",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "preferences",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "procedure",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productBoxCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "productCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productItemCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "productItemCount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productItemCustomValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productItemValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productMeasure",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productOwner",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productReleaseDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productWorth",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "profitRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pureWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "quota",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "receiver",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "referenceNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reverseOfJustificationDisciplinaryDocumentNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reverseOfJustificationDocumentsIssued",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "rightsRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "tradingCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transactionTypeCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "warehouseFactorNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "constructorCountryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastCountryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "justificationCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isMigrational",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "originalLetterImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "letterImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "sourceCountryCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CustomJustification",
+  "relationships": [
+    {
+      "otherEntityName": "customJustificationChild",
+      "otherEntityRelationshipName": "customJustification",
+      "relationshipName": "customJustificationChildList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "vehicleEnterNationality",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "container",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "vehicleCrossNationality",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "exportCustom",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "entranceCustom",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transportationType",
+      "relationshipName": "transportConditions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "tradeTypeCode",
+      "relationshipName": "tradeTypeCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paymentCondition",
+      "relationshipName": "newPaymentConditions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "justificationDeductionAmount",
+      "relationshipName": "justificationDeductionAmount",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "product",
+      "relationshipName": "products",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "reverseOfJustificationDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

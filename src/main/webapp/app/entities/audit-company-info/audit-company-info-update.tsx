@@ -8,8 +8,6 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IAuditCompanyInfo } from 'app/shared/model/audit-company-info.model';
 import { getEntity, updateEntity, createEntity, reset } from './audit-company-info.reducer';
 
@@ -21,7 +19,6 @@ export const AuditCompanyInfoUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
   const auditCompanyInfoEntity = useAppSelector(state => state.auditCompanyInfo.entity);
   const loading = useAppSelector(state => state.auditCompanyInfo.loading);
   const updating = useAppSelector(state => state.auditCompanyInfo.updating);
@@ -37,8 +34,6 @@ export const AuditCompanyInfoUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getDrafts({}));
   }, []);
 
   useEffect(() => {
@@ -59,7 +54,6 @@ export const AuditCompanyInfoUpdate = () => {
     const entity = {
       ...auditCompanyInfoEntity,
       ...values,
-      auditCompanyInfo: drafts.find(it => it.id.toString() === values.auditCompanyInfo?.toString()),
     };
 
     if (isNew) {
@@ -74,7 +68,6 @@ export const AuditCompanyInfoUpdate = () => {
       ? {}
       : {
           ...auditCompanyInfoEntity,
-          auditCompanyInfo: auditCompanyInfoEntity?.auditCompanyInfo?.id,
         };
 
   return (
@@ -215,28 +208,12 @@ export const AuditCompanyInfoUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.auditCompanyInfo.city')}
-                id="audit-company-info-city"
-                name="city"
-                data-cy="city"
+                label={translate('tfbitaApp.auditCompanyInfo.cityCode')}
+                id="audit-company-info-cityCode"
+                name="cityCode"
+                data-cy="cityCode"
                 type="text"
               />
-              <ValidatedField
-                id="audit-company-info-auditCompanyInfo"
-                name="auditCompanyInfo"
-                data-cy="auditCompanyInfo"
-                label={translate('tfbitaApp.auditCompanyInfo.auditCompanyInfo')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/audit-company-info" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

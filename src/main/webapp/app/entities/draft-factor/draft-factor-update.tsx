@@ -62,7 +62,7 @@ export const DraftFactorUpdate = () => {
     const entity = {
       ...draftFactorEntity,
       ...values,
-      draftFactors: drafts.find(it => it.id.toString() === values.draftFactors?.toString()),
+      draft: drafts.find(it => it.id.toString() === values.draft?.toString()),
     };
 
     if (isNew) {
@@ -77,7 +77,7 @@ export const DraftFactorUpdate = () => {
       ? {}
       : {
           ...draftFactorEntity,
-          draftFactors: draftFactorEntity?.draftFactors?.id,
+          draft: draftFactorEntity?.draft?.id,
         };
 
   return (
@@ -148,17 +148,17 @@ export const DraftFactorUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.draftFactor.currencyName')}
-                id="draft-factor-currencyName"
-                name="currencyName"
-                data-cy="currencyName"
+                label={translate('tfbitaApp.draftFactor.currencyCode')}
+                id="draft-factor-currencyCode"
+                name="currencyCode"
+                data-cy="currencyCode"
                 type="text"
               />
               <ValidatedField
-                id="draft-factor-draftFactors"
-                name="draftFactors"
-                data-cy="draftFactors"
-                label={translate('tfbitaApp.draftFactor.draftFactors')}
+                id="draft-factor-draft"
+                name="draft"
+                data-cy="draft"
+                label={translate('tfbitaApp.draftFactor.draft')}
                 type="select"
               >
                 <option value="" key="0" />

@@ -18,10 +18,14 @@ const apiUrl = 'api/service-tariffs';
 
 // Actions
 
-export const getEntities = createAsyncThunk('serviceTariff/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IServiceTariff[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'serviceTariff/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IServiceTariff[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'serviceTariff/fetch_entity',

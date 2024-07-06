@@ -1,12 +1,10 @@
 package com.dotin.tfbita.service.mapper;
 
 import com.dotin.tfbita.domain.LicenceInfo;
-import com.dotin.tfbita.domain.OrderRegServ;
 import com.dotin.tfbita.domain.OrderRegistrationInfo;
 import com.dotin.tfbita.domain.Product;
 import com.dotin.tfbita.domain.ServiceTariff;
 import com.dotin.tfbita.service.dto.LicenceInfoDTO;
-import com.dotin.tfbita.service.dto.OrderRegServDTO;
 import com.dotin.tfbita.service.dto.OrderRegistrationInfoDTO;
 import com.dotin.tfbita.service.dto.ProductDTO;
 import com.dotin.tfbita.service.dto.ServiceTariffDTO;
@@ -20,7 +18,6 @@ public interface LicenceInfoMapper extends EntityMapper<LicenceInfoDTO, LicenceI
     @Mapping(target = "product", source = "product", qualifiedByName = "productId")
     @Mapping(target = "service", source = "service", qualifiedByName = "serviceTariffId")
     @Mapping(target = "orderRegistrationInfo", source = "orderRegistrationInfo", qualifiedByName = "orderRegistrationInfoId")
-    @Mapping(target = "orderRegServ", source = "orderRegServ", qualifiedByName = "orderRegServId")
     LicenceInfoDTO toDto(LicenceInfo s);
 
     @Named("productId")
@@ -37,9 +34,4 @@ public interface LicenceInfoMapper extends EntityMapper<LicenceInfoDTO, LicenceI
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     OrderRegistrationInfoDTO toDtoOrderRegistrationInfoId(OrderRegistrationInfo orderRegistrationInfo);
-
-    @Named("orderRegServId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    OrderRegServDTO toDtoOrderRegServId(OrderRegServ orderRegServ);
 }

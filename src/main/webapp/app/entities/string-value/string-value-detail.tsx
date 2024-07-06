@@ -32,11 +32,11 @@ export const StringValueDetail = () => {
           </dt>
           <dd>{stringValueEntity.id}</dd>
           <dt>
-            <span id="value">
-              <Translate contentKey="tfbitaApp.stringValue.value">Value</Translate>
+            <span id="val">
+              <Translate contentKey="tfbitaApp.stringValue.val">Val</Translate>
             </span>
           </dt>
-          <dd>{stringValueEntity.value}</dd>
+          <dd>{stringValueEntity.val}</dd>
           <dt>
             <Translate contentKey="tfbitaApp.stringValue.orderRegistrationInfo">Order Registration Info</Translate>
           </dt>
@@ -46,6 +46,32 @@ export const StringValueDetail = () => {
                   <span key={val.id}>
                     <a>{val.id}</a>
                     {stringValueEntity.orderRegistrationInfos && i === stringValueEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.stringValue.draft">Draft</Translate>
+          </dt>
+          <dd>
+            {stringValueEntity.drafts
+              ? stringValueEntity.drafts.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {stringValueEntity.drafts && i === stringValueEntity.drafts.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.stringValue.draftType">Draft Type</Translate>
+          </dt>
+          <dd>
+            {stringValueEntity.draftTypes
+              ? stringValueEntity.draftTypes.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {stringValueEntity.draftTypes && i === stringValueEntity.draftTypes.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}

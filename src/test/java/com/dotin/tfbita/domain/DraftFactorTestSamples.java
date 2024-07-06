@@ -16,7 +16,7 @@ public class DraftFactorTestSamples {
             .factorDate("factorDate1")
             .issueDate("issueDate1")
             .serial("serial1")
-            .currencyName("currencyName1");
+            .currencyCode("currencyCode1");
     }
 
     public static DraftFactor getDraftFactorSample2() {
@@ -26,7 +26,7 @@ public class DraftFactorTestSamples {
             .factorDate("factorDate2")
             .issueDate("issueDate2")
             .serial("serial2")
-            .currencyName("currencyName2");
+            .currencyCode("currencyCode2");
     }
 
     public static DraftFactor getDraftFactorRandomSampleGenerator() {
@@ -36,6 +36,6 @@ public class DraftFactorTestSamples {
             .factorDate(UUID.randomUUID().toString())
             .issueDate(UUID.randomUUID().toString())
             .serial(UUID.randomUUID().toString())
-            .currencyName(UUID.randomUUID().toString());
+            .currencyCode(UUID.randomUUID().toString());
     }
 }

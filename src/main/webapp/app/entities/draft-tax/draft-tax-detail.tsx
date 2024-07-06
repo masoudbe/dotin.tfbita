@@ -99,21 +99,17 @@ export const DraftTaxDetail = () => {
           </dt>
           <dd>{draftTaxEntity.mainAccountRate}</dd>
           <dt>
-            <span id="documentTransactionNumber">
-              <Translate contentKey="tfbitaApp.draftTax.documentTransactionNumber">Document Transaction Number</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draftTax.documentTransaction">Document Transaction</Translate>
           </dt>
-          <dd>{draftTaxEntity.documentTransactionNumber}</dd>
+          <dd>{draftTaxEntity.documentTransaction ? draftTaxEntity.documentTransaction.id : ''}</dd>
           <dt>
-            <span id="returnDocumentTransactionNumber">
-              <Translate contentKey="tfbitaApp.draftTax.returnDocumentTransactionNumber">Return Document Transaction Number</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.draftTax.returnDocumentTransaction">Return Document Transaction</Translate>
           </dt>
-          <dd>{draftTaxEntity.returnDocumentTransactionNumber}</dd>
+          <dd>{draftTaxEntity.returnDocumentTransaction ? draftTaxEntity.returnDocumentTransaction.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftTax.taxes">Taxes</Translate>
+            <Translate contentKey="tfbitaApp.draftTax.draft">Draft</Translate>
           </dt>
-          <dd>{draftTaxEntity.taxes ? draftTaxEntity.taxes.id : ''}</dd>
+          <dd>{draftTaxEntity.draft ? draftTaxEntity.draft.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-tax" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

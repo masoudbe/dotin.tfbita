@@ -154,18 +154,6 @@ export const DraftReceiptDetail = () => {
           </dt>
           <dd>{draftReceiptEntity.usable ? 'true' : 'false'}</dd>
           <dt>
-            <span id="paymentCurrencyRateTypeDesc">
-              <Translate contentKey="tfbitaApp.draftReceipt.paymentCurrencyRateTypeDesc">Payment Currency Rate Type Desc</Translate>
-            </span>
-          </dt>
-          <dd>{draftReceiptEntity.paymentCurrencyRateTypeDesc}</dd>
-          <dt>
-            <span id="paymentItemTypeDesc">
-              <Translate contentKey="tfbitaApp.draftReceipt.paymentItemTypeDesc">Payment Item Type Desc</Translate>
-            </span>
-          </dt>
-          <dd>{draftReceiptEntity.paymentItemTypeDesc}</dd>
-          <dt>
             <span id="netWeight">
               <Translate contentKey="tfbitaApp.draftReceipt.netWeight">Net Weight</Translate>
             </span>
@@ -263,9 +251,33 @@ export const DraftReceiptDetail = () => {
           </dt>
           <dd>{draftReceiptEntity.otherCost}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftReceipt.receipts">Receipts</Translate>
+            <Translate contentKey="tfbitaApp.draftReceipt.productDimension">Product Dimension</Translate>
           </dt>
-          <dd>{draftReceiptEntity.receipts ? draftReceiptEntity.receipts.id : ''}</dd>
+          <dd>{draftReceiptEntity.productDimension ? draftReceiptEntity.productDimension.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.stateOfDocuments">State Of Documents</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.stateOfDocuments ? draftReceiptEntity.stateOfDocuments.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.currencyProvisionFileType">Currency Provision File Type</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.currencyProvisionFileType ? draftReceiptEntity.currencyProvisionFileType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.paymentCurrencyRateType">Payment Currency Rate Type</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.paymentCurrencyRateType ? draftReceiptEntity.paymentCurrencyRateType.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.paymentItem">Payment Item</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.paymentItem ? draftReceiptEntity.paymentItem.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.documentTransactionContainer">Document Transaction Container</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.documentTransactionContainer ? draftReceiptEntity.documentTransactionContainer.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.draftReceipt.draft">Draft</Translate>
+          </dt>
+          <dd>{draftReceiptEntity.draft ? draftReceiptEntity.draft.id : ''}</dd>
           <dt>
             <Translate contentKey="tfbitaApp.draftReceipt.draftCustomJustification">Draft Custom Justification</Translate>
           </dt>

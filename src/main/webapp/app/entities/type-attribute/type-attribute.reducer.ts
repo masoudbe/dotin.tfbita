@@ -18,10 +18,14 @@ const apiUrl = 'api/type-attributes';
 
 // Actions
 
-export const getEntities = createAsyncThunk('typeAttribute/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ITypeAttribute[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'typeAttribute/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<ITypeAttribute[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'typeAttribute/fetch_entity',

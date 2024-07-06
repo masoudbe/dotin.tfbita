@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082906"
+    "changelogDate": "20240706105900"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -22,7 +22,8 @@
   "relationships": [
     {
       "otherEntityName": "draft",
-      "relationshipName": "extensions",
+      "otherEntityRelationshipName": "extensions",
+      "relationshipName": "draftField",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

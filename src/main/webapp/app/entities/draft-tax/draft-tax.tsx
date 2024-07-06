@@ -123,16 +123,16 @@ export const DraftTax = () => {
                   <Translate contentKey="tfbitaApp.draftTax.mainAccountRate">Main Account Rate</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('mainAccountRate')} />
                 </th>
-                <th className="hand" onClick={sort('documentTransactionNumber')}>
-                  <Translate contentKey="tfbitaApp.draftTax.documentTransactionNumber">Document Transaction Number</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('documentTransactionNumber')} />
-                </th>
-                <th className="hand" onClick={sort('returnDocumentTransactionNumber')}>
-                  <Translate contentKey="tfbitaApp.draftTax.returnDocumentTransactionNumber">Return Document Transaction Number</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('returnDocumentTransactionNumber')} />
+                <th>
+                  <Translate contentKey="tfbitaApp.draftTax.documentTransaction">Document Transaction</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftTax.taxes">Taxes</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftTax.returnDocumentTransaction">Return Document Transaction</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftTax.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -168,9 +168,23 @@ export const DraftTax = () => {
                   <td>{draftTax.returnTaxesAmount ? 'true' : 'false'}</td>
                   <td>{draftTax.orderRegRate}</td>
                   <td>{draftTax.mainAccountRate}</td>
-                  <td>{draftTax.documentTransactionNumber}</td>
-                  <td>{draftTax.returnDocumentTransactionNumber}</td>
-                  <td>{draftTax.taxes ? <Link to={`/draft/${draftTax.taxes.id}`}>{draftTax.taxes.id}</Link> : ''}</td>
+                  <td>
+                    {draftTax.documentTransaction ? (
+                      <Link to={`/document-transaction/${draftTax.documentTransaction.id}`}>{draftTax.documentTransaction.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftTax.returnDocumentTransaction ? (
+                      <Link to={`/document-transaction/${draftTax.returnDocumentTransaction.id}`}>
+                        {draftTax.returnDocumentTransaction.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{draftTax.draft ? <Link to={`/draft/${draftTax.draft.id}`}>{draftTax.draft.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/draft-tax/${draftTax.id}`} color="info" size="sm" data-cy="entityDetailsButton">

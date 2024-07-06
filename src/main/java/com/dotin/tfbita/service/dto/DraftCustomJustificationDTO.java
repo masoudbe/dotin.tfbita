@@ -15,7 +15,7 @@ public class DraftCustomJustificationDTO implements Serializable {
 
     private Set<DraftReceiptDTO> draftReceipts = new HashSet<>();
 
-    private DraftDTO draftJustifications;
+    private DraftDTO draft;
 
     public Long getId() {
         return id;
@@ -33,12 +33,12 @@ public class DraftCustomJustificationDTO implements Serializable {
         this.draftReceipts = draftReceipts;
     }
 
-    public DraftDTO getDraftJustifications() {
-        return draftJustifications;
+    public DraftDTO getDraft() {
+        return draft;
     }
 
-    public void setDraftJustifications(DraftDTO draftJustifications) {
-        this.draftJustifications = draftJustifications;
+    public void setDraft(DraftDTO draft) {
+        this.draft = draft;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class DraftCustomJustificationDTO implements Serializable {
         return "DraftCustomJustificationDTO{" +
             "id=" + getId() +
             ", draftReceipts=" + getDraftReceipts() +
-            ", draftJustifications=" + getDraftJustifications() +
+            ", draft=" + getDraft() +
             "}";
     }
 }

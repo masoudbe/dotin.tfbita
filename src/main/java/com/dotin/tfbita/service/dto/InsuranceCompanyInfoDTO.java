@@ -15,8 +15,6 @@ public class InsuranceCompanyInfoDTO implements Serializable {
 
     private String name;
 
-    private DraftDTO insuranceCompanyInfo;
-
     public Long getId() {
         return id;
     }
@@ -39,14 +37,6 @@ public class InsuranceCompanyInfoDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public DraftDTO getInsuranceCompanyInfo() {
-        return insuranceCompanyInfo;
-    }
-
-    public void setInsuranceCompanyInfo(DraftDTO insuranceCompanyInfo) {
-        this.insuranceCompanyInfo = insuranceCompanyInfo;
     }
 
     @Override
@@ -77,7 +67,6 @@ public class InsuranceCompanyInfoDTO implements Serializable {
             "id=" + getId() +
             ", modificationDate='" + getModificationDate() + "'" +
             ", name='" + getName() + "'" +
-            ", insuranceCompanyInfo=" + getInsuranceCompanyInfo() +
             "}";
     }
 }

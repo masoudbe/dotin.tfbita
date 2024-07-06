@@ -1,10 +1,7 @@
 package com.dotin.tfbita.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Custom.
@@ -33,29 +30,6 @@ public class Custom implements Serializable {
 
     @Column(name = "temp_id")
     private Long tempId;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_custom__draft",
-        joinColumns = @JoinColumn(name = "custom_id"),
-        inverseJoinColumns = @JoinColumn(name = "draft_id")
-    )
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Set<Draft> drafts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -122,29 +96,6 @@ public class Custom implements Serializable {
 
     public void setTempId(Long tempId) {
         this.tempId = tempId;
-    }
-
-    public Set<Draft> getDrafts() {
-        return this.drafts;
-    }
-
-    public void setDrafts(Set<Draft> drafts) {
-        this.drafts = drafts;
-    }
-
-    public Custom drafts(Set<Draft> drafts) {
-        this.setDrafts(drafts);
-        return this;
-    }
-
-    public Custom addDraft(Draft draft) {
-        this.drafts.add(draft);
-        return this;
-    }
-
-    public Custom removeDraft(Draft draft) {
-        this.drafts.remove(draft);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

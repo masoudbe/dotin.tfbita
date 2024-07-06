@@ -30,7 +30,7 @@ public class DraftStatusInfoDTO implements Serializable {
 
     private Boolean stampCostPaid;
 
-    private DraftDTO statusInfo;
+    private CategoryElementDTO status;
 
     public Long getId() {
         return id;
@@ -112,12 +112,12 @@ public class DraftStatusInfoDTO implements Serializable {
         this.stampCostPaid = stampCostPaid;
     }
 
-    public DraftDTO getStatusInfo() {
-        return statusInfo;
+    public CategoryElementDTO getStatus() {
+        return status;
     }
 
-    public void setStatusInfo(DraftDTO statusInfo) {
-        this.statusInfo = statusInfo;
+    public void setStatus(CategoryElementDTO status) {
+        this.status = status;
     }
 
     @Override
@@ -155,7 +155,7 @@ public class DraftStatusInfoDTO implements Serializable {
             ", rejectDescription='" + getRejectDescription() + "'" +
             ", remainAmount=" + getRemainAmount() +
             ", stampCostPaid='" + getStampCostPaid() + "'" +
-            ", statusInfo=" + getStatusInfo() +
+            ", status=" + getStatus() +
             "}";
     }
 }

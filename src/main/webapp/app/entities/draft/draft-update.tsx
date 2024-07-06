@@ -8,12 +8,38 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICategoryElement } from 'app/shared/model/category-element.model';
+import { getEntities as getCategoryElements } from 'app/entities/category-element/category-element.reducer';
 import { ICustom } from 'app/shared/model/custom.model';
 import { getEntities as getCustoms } from 'app/entities/custom/custom.reducer';
-import { IProduct } from 'app/shared/model/product.model';
-import { getEntities as getProducts } from 'app/entities/product/product.reducer';
+import { IDraftType } from 'app/shared/model/draft-type.model';
+import { getEntities as getDraftTypes } from 'app/entities/draft-type/draft-type.reducer';
+import { IDraftStatusInfo } from 'app/shared/model/draft-status-info.model';
+import { getEntities as getDraftStatusInfos } from 'app/entities/draft-status-info/draft-status-info.reducer';
+import { IInsuranceCompanyInfo } from 'app/shared/model/insurance-company-info.model';
+import { getEntities as getInsuranceCompanyInfos } from 'app/entities/insurance-company-info/insurance-company-info.reducer';
+import { IAdvisorDefinition } from 'app/shared/model/advisor-definition.model';
+import { getEntities as getAdvisorDefinitions } from 'app/entities/advisor-definition/advisor-definition.reducer';
+import { IAuditCompanyInfo } from 'app/shared/model/audit-company-info.model';
+import { getEntities as getAuditCompanyInfos } from 'app/entities/audit-company-info/audit-company-info.reducer';
+import { ITransportationType } from 'app/shared/model/transportation-type.model';
+import { getEntities as getTransportationTypes } from 'app/entities/transportation-type/transportation-type.reducer';
+import { ICurrencyExchangeInfo } from 'app/shared/model/currency-exchange-info.model';
+import { getEntities as getCurrencyExchangeInfos } from 'app/entities/currency-exchange-info/currency-exchange-info.reducer';
+import { IDraftAccountInfo } from 'app/shared/model/draft-account-info.model';
+import { getEntities as getDraftAccountInfos } from 'app/entities/draft-account-info/draft-account-info.reducer';
 import { IServiceTariff } from 'app/shared/model/service-tariff.model';
 import { getEntities as getServiceTariffs } from 'app/entities/service-tariff/service-tariff.reducer';
+import { IProduct } from 'app/shared/model/product.model';
+import { getEntities as getProducts } from 'app/entities/product/product.reducer';
+import { IStringValue } from 'app/shared/model/string-value.model';
+import { getEntities as getStringValues } from 'app/entities/string-value/string-value.reducer';
+import { ILongValue } from 'app/shared/model/long-value.model';
+import { getEntities as getLongValues } from 'app/entities/long-value/long-value.reducer';
+import { ISuggestedSanctionInfo } from 'app/shared/model/suggested-sanction-info.model';
+import { getEntities as getSuggestedSanctionInfos } from 'app/entities/suggested-sanction-info/suggested-sanction-info.reducer';
+import { IDraftDocumentTransactionContainer } from 'app/shared/model/draft-document-transaction-container.model';
+import { getEntities as getDraftDocumentTransactionContainers } from 'app/entities/draft-document-transaction-container/draft-document-transaction-container.reducer';
 import { IDraft } from 'app/shared/model/draft.model';
 import { getEntity, updateEntity, createEntity, reset } from './draft.reducer';
 
@@ -25,9 +51,22 @@ export const DraftUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const categoryElements = useAppSelector(state => state.categoryElement.entities);
   const customs = useAppSelector(state => state.custom.entities);
-  const products = useAppSelector(state => state.product.entities);
+  const draftTypes = useAppSelector(state => state.draftType.entities);
+  const draftStatusInfos = useAppSelector(state => state.draftStatusInfo.entities);
+  const insuranceCompanyInfos = useAppSelector(state => state.insuranceCompanyInfo.entities);
+  const advisorDefinitions = useAppSelector(state => state.advisorDefinition.entities);
+  const auditCompanyInfos = useAppSelector(state => state.auditCompanyInfo.entities);
+  const transportationTypes = useAppSelector(state => state.transportationType.entities);
+  const currencyExchangeInfos = useAppSelector(state => state.currencyExchangeInfo.entities);
+  const draftAccountInfos = useAppSelector(state => state.draftAccountInfo.entities);
   const serviceTariffs = useAppSelector(state => state.serviceTariff.entities);
+  const products = useAppSelector(state => state.product.entities);
+  const stringValues = useAppSelector(state => state.stringValue.entities);
+  const longValues = useAppSelector(state => state.longValue.entities);
+  const suggestedSanctionInfos = useAppSelector(state => state.suggestedSanctionInfo.entities);
+  const draftDocumentTransactionContainers = useAppSelector(state => state.draftDocumentTransactionContainer.entities);
   const draftEntity = useAppSelector(state => state.draft.entity);
   const loading = useAppSelector(state => state.draft.loading);
   const updating = useAppSelector(state => state.draft.updating);
@@ -44,9 +83,22 @@ export const DraftUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getCategoryElements({}));
     dispatch(getCustoms({}));
-    dispatch(getProducts({}));
+    dispatch(getDraftTypes({}));
+    dispatch(getDraftStatusInfos({}));
+    dispatch(getInsuranceCompanyInfos({}));
+    dispatch(getAdvisorDefinitions({}));
+    dispatch(getAuditCompanyInfos({}));
+    dispatch(getTransportationTypes({}));
+    dispatch(getCurrencyExchangeInfos({}));
+    dispatch(getDraftAccountInfos({}));
     dispatch(getServiceTariffs({}));
+    dispatch(getProducts({}));
+    dispatch(getStringValues({}));
+    dispatch(getLongValues({}));
+    dispatch(getSuggestedSanctionInfos({}));
+    dispatch(getDraftDocumentTransactionContainers({}));
   }, []);
 
   useEffect(() => {
@@ -117,16 +169,43 @@ export const DraftUpdate = () => {
     if (values.transferAmount !== undefined && typeof values.transferAmount !== 'number') {
       values.transferAmount = Number(values.transferAmount);
     }
-    if (values.customerNumbers !== undefined && typeof values.customerNumbers !== 'number') {
-      values.customerNumbers = Number(values.customerNumbers);
-    }
 
     const entity = {
       ...draftEntity,
       ...values,
-      customs: mapIdList(values.customs),
-      products: mapIdList(values.products),
+      chargedExchangeBroker: categoryElements.find(it => it.id.toString() === values.chargedExchangeBroker?.toString()),
+      insuranceLetterType: categoryElements.find(it => it.id.toString() === values.insuranceLetterType?.toString()),
+      advisorDepositType: categoryElements.find(it => it.id.toString() === values.advisorDepositType?.toString()),
+      interfaceAdvisorDepositType: categoryElements.find(it => it.id.toString() === values.interfaceAdvisorDepositType?.toString()),
+      coveringAdvisorDepositType: categoryElements.find(it => it.id.toString() === values.coveringAdvisorDepositType?.toString()),
+      impartType: categoryElements.find(it => it.id.toString() === values.impartType?.toString()),
+      dealType: categoryElements.find(it => it.id.toString() === values.dealType?.toString()),
+      transportVehicleType: categoryElements.find(it => it.id.toString() === values.transportVehicleType?.toString()),
+      freightLetterType: categoryElements.find(it => it.id.toString() === values.freightLetterType?.toString()),
+      actionCode: categoryElements.find(it => it.id.toString() === values.actionCode?.toString()),
+      ownershipCode: categoryElements.find(it => it.id.toString() === values.ownershipCode?.toString()),
+      currencyContainerPlace: categoryElements.find(it => it.id.toString() === values.currencyContainerPlace?.toString()),
+      paymentType: categoryElements.find(it => it.id.toString() === values.paymentType?.toString()),
+      draftSource: categoryElements.find(it => it.id.toString() === values.draftSource?.toString()),
+      loadSwitchPlace: customs.find(it => it.id.toString() === values.loadSwitchPlace?.toString()),
+      draftType: draftTypes.find(it => it.id.toString() === values.draftType?.toString()),
+      statusInfo: draftStatusInfos.find(it => it.id.toString() === values.statusInfo?.toString()),
+      insuranceCompanyInfo: insuranceCompanyInfos.find(it => it.id.toString() === values.insuranceCompanyInfo?.toString()),
+      advisingBank: advisorDefinitions.find(it => it.id.toString() === values.advisingBank?.toString()),
+      interfaceAdvisingBank: advisorDefinitions.find(it => it.id.toString() === values.interfaceAdvisingBank?.toString()),
+      coveringBank: advisorDefinitions.find(it => it.id.toString() === values.coveringBank?.toString()),
+      auditCompanyInfo: auditCompanyInfos.find(it => it.id.toString() === values.auditCompanyInfo?.toString()),
+      transportType: transportationTypes.find(it => it.id.toString() === values.transportType?.toString()),
+      currencyExchangeInfo: currencyExchangeInfos.find(it => it.id.toString() === values.currencyExchangeInfo?.toString()),
+      accountInfo: draftAccountInfos.find(it => it.id.toString() === values.accountInfo?.toString()),
+      destinationCustomCompanies: customs.find(it => it.id.toString() === values.destinationCustomCompanies?.toString()),
+      sourceCustomCompanies: customs.find(it => it.id.toString() === values.sourceCustomCompanies?.toString()),
       services: mapIdList(values.services),
+      products: mapIdList(values.products),
+      sanctionSerials: mapIdList(values.sanctionSerials),
+      customerNumbers: mapIdList(values.customerNumbers),
+      suggestedSanctions: mapIdList(values.suggestedSanctions),
+      documentTransactionContainers: mapIdList(values.documentTransactionContainers),
     };
 
     if (isNew) {
@@ -141,9 +220,39 @@ export const DraftUpdate = () => {
       ? {}
       : {
           ...draftEntity,
-          customs: draftEntity?.customs?.map(e => e.id.toString()),
-          products: draftEntity?.products?.map(e => e.id.toString()),
+          chargedExchangeBroker: draftEntity?.chargedExchangeBroker?.id,
+          insuranceLetterType: draftEntity?.insuranceLetterType?.id,
+          advisorDepositType: draftEntity?.advisorDepositType?.id,
+          interfaceAdvisorDepositType: draftEntity?.interfaceAdvisorDepositType?.id,
+          coveringAdvisorDepositType: draftEntity?.coveringAdvisorDepositType?.id,
+          impartType: draftEntity?.impartType?.id,
+          dealType: draftEntity?.dealType?.id,
+          transportVehicleType: draftEntity?.transportVehicleType?.id,
+          freightLetterType: draftEntity?.freightLetterType?.id,
+          actionCode: draftEntity?.actionCode?.id,
+          ownershipCode: draftEntity?.ownershipCode?.id,
+          currencyContainerPlace: draftEntity?.currencyContainerPlace?.id,
+          paymentType: draftEntity?.paymentType?.id,
+          draftSource: draftEntity?.draftSource?.id,
+          loadSwitchPlace: draftEntity?.loadSwitchPlace?.id,
+          draftType: draftEntity?.draftType?.id,
+          statusInfo: draftEntity?.statusInfo?.id,
+          insuranceCompanyInfo: draftEntity?.insuranceCompanyInfo?.id,
+          advisingBank: draftEntity?.advisingBank?.id,
+          interfaceAdvisingBank: draftEntity?.interfaceAdvisingBank?.id,
+          coveringBank: draftEntity?.coveringBank?.id,
+          auditCompanyInfo: draftEntity?.auditCompanyInfo?.id,
+          transportType: draftEntity?.transportType?.id,
+          currencyExchangeInfo: draftEntity?.currencyExchangeInfo?.id,
+          accountInfo: draftEntity?.accountInfo?.id,
+          destinationCustomCompanies: draftEntity?.destinationCustomCompanies?.id,
+          sourceCustomCompanies: draftEntity?.sourceCustomCompanies?.id,
           services: draftEntity?.services?.map(e => e.id.toString()),
+          products: draftEntity?.products?.map(e => e.id.toString()),
+          sanctionSerials: draftEntity?.sanctionSerials?.map(e => e.id.toString()),
+          customerNumbers: draftEntity?.customerNumbers?.map(e => e.id.toString()),
+          suggestedSanctions: draftEntity?.suggestedSanctions?.map(e => e.id.toString()),
+          documentTransactionContainers: draftEntity?.documentTransactionContainers?.map(e => e.id.toString()),
         };
 
   return (
@@ -597,6 +706,27 @@ export const DraftUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
+                label={translate('tfbitaApp.draft.mainAccountCurrencyCode')}
+                id="draft-mainAccountCurrencyCode"
+                name="mainAccountCurrencyCode"
+                data-cy="mainAccountCurrencyCode"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.draft.orderRegCurrencyCode')}
+                id="draft-orderRegCurrencyCode"
+                name="orderRegCurrencyCode"
+                data-cy="orderRegCurrencyCode"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.draft.chargedExchangeBrokerCurrencyCode')}
+                id="draft-chargedExchangeBrokerCurrencyCode"
+                name="chargedExchangeBrokerCurrencyCode"
+                data-cy="chargedExchangeBrokerCurrencyCode"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('tfbitaApp.draft.destinationCountryCode')}
                 id="draft-destinationCountryCode"
                 name="destinationCountryCode"
@@ -615,6 +745,13 @@ export const DraftUpdate = () => {
                 id="draft-producerCountryCode"
                 name="producerCountryCode"
                 data-cy="producerCountryCode"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.draft.registerationJustificationCurrencyCode')}
+                id="draft-registerationJustificationCurrencyCode"
+                name="registerationJustificationCurrencyCode"
+                data-cy="registerationJustificationCurrencyCode"
                 type="text"
               />
               <ValidatedField
@@ -639,79 +776,448 @@ export const DraftUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.draft.mainAccountCurrencyCode')}
-                id="draft-mainAccountCurrencyCode"
-                name="mainAccountCurrencyCode"
-                data-cy="mainAccountCurrencyCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.orderRegCurrencyCode')}
-                id="draft-orderRegCurrencyCode"
-                name="orderRegCurrencyCode"
-                data-cy="orderRegCurrencyCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.chargedExchangeBrokerCurrency')}
-                id="draft-chargedExchangeBrokerCurrency"
-                name="chargedExchangeBrokerCurrency"
-                data-cy="chargedExchangeBrokerCurrency"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.registerationJustificationCurrencyCode')}
-                id="draft-registerationJustificationCurrencyCode"
-                name="registerationJustificationCurrencyCode"
-                data-cy="registerationJustificationCurrencyCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.currencyExchangeInfoTitle')}
-                id="draft-currencyExchangeInfoTitle"
-                name="currencyExchangeInfoTitle"
-                data-cy="currencyExchangeInfoTitle"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.transportationTypeName')}
-                id="draft-transportationTypeName"
-                name="transportationTypeName"
-                data-cy="transportationTypeName"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.accountInfoCode')}
-                id="draft-accountInfoCode"
-                name="accountInfoCode"
-                data-cy="accountInfoCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.customerNumbers')}
-                id="draft-customerNumbers"
-                name="customerNumbers"
-                data-cy="customerNumbers"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.sanctionSerials')}
-                id="draft-sanctionSerials"
-                name="sanctionSerials"
-                data-cy="sanctionSerials"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.draft.custom')}
-                id="draft-custom"
-                data-cy="custom"
+                id="draft-chargedExchangeBroker"
+                name="chargedExchangeBroker"
+                data-cy="chargedExchangeBroker"
+                label={translate('tfbitaApp.draft.chargedExchangeBroker')}
                 type="select"
-                multiple
-                name="customs"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-insuranceLetterType"
+                name="insuranceLetterType"
+                data-cy="insuranceLetterType"
+                label={translate('tfbitaApp.draft.insuranceLetterType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-advisorDepositType"
+                name="advisorDepositType"
+                data-cy="advisorDepositType"
+                label={translate('tfbitaApp.draft.advisorDepositType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-interfaceAdvisorDepositType"
+                name="interfaceAdvisorDepositType"
+                data-cy="interfaceAdvisorDepositType"
+                label={translate('tfbitaApp.draft.interfaceAdvisorDepositType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-coveringAdvisorDepositType"
+                name="coveringAdvisorDepositType"
+                data-cy="coveringAdvisorDepositType"
+                label={translate('tfbitaApp.draft.coveringAdvisorDepositType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-impartType"
+                name="impartType"
+                data-cy="impartType"
+                label={translate('tfbitaApp.draft.impartType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-dealType"
+                name="dealType"
+                data-cy="dealType"
+                label={translate('tfbitaApp.draft.dealType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-transportVehicleType"
+                name="transportVehicleType"
+                data-cy="transportVehicleType"
+                label={translate('tfbitaApp.draft.transportVehicleType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-freightLetterType"
+                name="freightLetterType"
+                data-cy="freightLetterType"
+                label={translate('tfbitaApp.draft.freightLetterType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-actionCode"
+                name="actionCode"
+                data-cy="actionCode"
+                label={translate('tfbitaApp.draft.actionCode')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-ownershipCode"
+                name="ownershipCode"
+                data-cy="ownershipCode"
+                label={translate('tfbitaApp.draft.ownershipCode')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-currencyContainerPlace"
+                name="currencyContainerPlace"
+                data-cy="currencyContainerPlace"
+                label={translate('tfbitaApp.draft.currencyContainerPlace')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-paymentType"
+                name="paymentType"
+                data-cy="paymentType"
+                label={translate('tfbitaApp.draft.paymentType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-draftSource"
+                name="draftSource"
+                data-cy="draftSource"
+                label={translate('tfbitaApp.draft.draftSource')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {categoryElements
+                  ? categoryElements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-loadSwitchPlace"
+                name="loadSwitchPlace"
+                data-cy="loadSwitchPlace"
+                label={translate('tfbitaApp.draft.loadSwitchPlace')}
+                type="select"
               >
                 <option value="" key="0" />
                 {customs
                   ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-draftType"
+                name="draftType"
+                data-cy="draftType"
+                label={translate('tfbitaApp.draft.draftType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftTypes
+                  ? draftTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-statusInfo"
+                name="statusInfo"
+                data-cy="statusInfo"
+                label={translate('tfbitaApp.draft.statusInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftStatusInfos
+                  ? draftStatusInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-insuranceCompanyInfo"
+                name="insuranceCompanyInfo"
+                data-cy="insuranceCompanyInfo"
+                label={translate('tfbitaApp.draft.insuranceCompanyInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {insuranceCompanyInfos
+                  ? insuranceCompanyInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-advisingBank"
+                name="advisingBank"
+                data-cy="advisingBank"
+                label={translate('tfbitaApp.draft.advisingBank')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {advisorDefinitions
+                  ? advisorDefinitions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-interfaceAdvisingBank"
+                name="interfaceAdvisingBank"
+                data-cy="interfaceAdvisingBank"
+                label={translate('tfbitaApp.draft.interfaceAdvisingBank')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {advisorDefinitions
+                  ? advisorDefinitions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-coveringBank"
+                name="coveringBank"
+                data-cy="coveringBank"
+                label={translate('tfbitaApp.draft.coveringBank')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {advisorDefinitions
+                  ? advisorDefinitions.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-auditCompanyInfo"
+                name="auditCompanyInfo"
+                data-cy="auditCompanyInfo"
+                label={translate('tfbitaApp.draft.auditCompanyInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {auditCompanyInfos
+                  ? auditCompanyInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-transportType"
+                name="transportType"
+                data-cy="transportType"
+                label={translate('tfbitaApp.draft.transportType')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {transportationTypes
+                  ? transportationTypes.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-currencyExchangeInfo"
+                name="currencyExchangeInfo"
+                data-cy="currencyExchangeInfo"
+                label={translate('tfbitaApp.draft.currencyExchangeInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {currencyExchangeInfos
+                  ? currencyExchangeInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-accountInfo"
+                name="accountInfo"
+                data-cy="accountInfo"
+                label={translate('tfbitaApp.draft.accountInfo')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {draftAccountInfos
+                  ? draftAccountInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-destinationCustomCompanies"
+                name="destinationCustomCompanies"
+                data-cy="destinationCustomCompanies"
+                label={translate('tfbitaApp.draft.destinationCustomCompanies')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {customs
+                  ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="draft-sourceCustomCompanies"
+                name="sourceCustomCompanies"
+                data-cy="sourceCustomCompanies"
+                label={translate('tfbitaApp.draft.sourceCustomCompanies')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {customs
+                  ? customs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.draft.services')}
+                id="draft-services"
+                data-cy="services"
+                type="select"
+                multiple
+                name="services"
+              >
+                <option value="" key="0" />
+                {serviceTariffs
+                  ? serviceTariffs.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -736,16 +1242,67 @@ export const DraftUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                label={translate('tfbitaApp.draft.services')}
-                id="draft-services"
-                data-cy="services"
+                label={translate('tfbitaApp.draft.sanctionSerials')}
+                id="draft-sanctionSerials"
+                data-cy="sanctionSerials"
                 type="select"
                 multiple
-                name="services"
+                name="sanctionSerials"
               >
                 <option value="" key="0" />
-                {serviceTariffs
-                  ? serviceTariffs.map(otherEntity => (
+                {stringValues
+                  ? stringValues.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.draft.customerNumbers')}
+                id="draft-customerNumbers"
+                data-cy="customerNumbers"
+                type="select"
+                multiple
+                name="customerNumbers"
+              >
+                <option value="" key="0" />
+                {longValues
+                  ? longValues.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.draft.suggestedSanctions')}
+                id="draft-suggestedSanctions"
+                data-cy="suggestedSanctions"
+                type="select"
+                multiple
+                name="suggestedSanctions"
+              >
+                <option value="" key="0" />
+                {suggestedSanctionInfos
+                  ? suggestedSanctionInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.draft.documentTransactionContainer')}
+                id="draft-documentTransactionContainer"
+                data-cy="documentTransactionContainer"
+                type="select"
+                multiple
+                name="documentTransactionContainers"
+              >
+                <option value="" key="0" />
+                {draftDocumentTransactionContainers
+                  ? draftDocumentTransactionContainers.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

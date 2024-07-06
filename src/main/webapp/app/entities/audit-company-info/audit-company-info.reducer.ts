@@ -18,10 +18,14 @@ const apiUrl = 'api/audit-company-infos';
 
 // Actions
 
-export const getEntities = createAsyncThunk('auditCompanyInfo/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IAuditCompanyInfo[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'auditCompanyInfo/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IAuditCompanyInfo[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'auditCompanyInfo/fetch_entity',

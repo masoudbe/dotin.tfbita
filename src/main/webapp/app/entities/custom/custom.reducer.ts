@@ -18,10 +18,14 @@ const apiUrl = 'api/customs';
 
 // Actions
 
-export const getEntities = createAsyncThunk('custom/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ICustom[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'custom/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<ICustom[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'custom/fetch_entity',

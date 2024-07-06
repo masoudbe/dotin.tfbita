@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105904"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "currencySellCommissionTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "documentReceiptDisciplinaryTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "draftMainTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "insuranceCostTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "justificationDisciplinaryTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "openDraftDisciplinaryTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "otherCostsTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "postTelegraphSwiftCostsTopic",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DraftTypeTopicInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

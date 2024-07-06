@@ -1,7 +1,7 @@
 package com.dotin.tfbita.domain;
 
 import static com.dotin.tfbita.domain.AttributeValueTestSamples.*;
-import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
+import static com.dotin.tfbita.domain.CustomJustificationTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
 import static com.dotin.tfbita.domain.OrderRegistrationInfoTestSamples.*;
 import static com.dotin.tfbita.domain.ProductTestSamples.*;
@@ -30,7 +30,7 @@ class ProductTest {
     }
 
     @Test
-    void attributeValuesTest() throws Exception {
+    void attributeValuesTest() {
         Product product = getProductRandomSampleGenerator();
         AttributeValue attributeValueBack = getAttributeValueRandomSampleGenerator();
 
@@ -52,7 +52,7 @@ class ProductTest {
     }
 
     @Test
-    void productTypeTest() throws Exception {
+    void productTypeTest() {
         Product product = getProductRandomSampleGenerator();
         ProductType productTypeBack = getProductTypeRandomSampleGenerator();
 
@@ -64,7 +64,7 @@ class ProductTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() throws Exception {
+    void orderRegistrationInfoTest() {
         Product product = getProductRandomSampleGenerator();
         OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
@@ -86,32 +86,46 @@ class ProductTest {
     }
 
     @Test
-    void draftTest() throws Exception {
+    void draftTest() {
         Product product = getProductRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
         product.addDraft(draftBack);
         assertThat(product.getDrafts()).containsOnly(draftBack);
+        assertThat(draftBack.getProducts()).containsOnly(product);
 
         product.removeDraft(draftBack);
         assertThat(product.getDrafts()).doesNotContain(draftBack);
+        assertThat(draftBack.getProducts()).doesNotContain(product);
 
         product.drafts(new HashSet<>(Set.of(draftBack)));
         assertThat(product.getDrafts()).containsOnly(draftBack);
+        assertThat(draftBack.getProducts()).containsOnly(product);
 
         product.setDrafts(new HashSet<>());
         assertThat(product.getDrafts()).doesNotContain(draftBack);
+        assertThat(draftBack.getProducts()).doesNotContain(product);
     }
 
     @Test
-    void draftProductInfosTest() throws Exception {
+    void customJustificationTest() {
         Product product = getProductRandomSampleGenerator();
-        DraftReceipt draftReceiptBack = getDraftReceiptRandomSampleGenerator();
+        CustomJustification customJustificationBack = getCustomJustificationRandomSampleGenerator();
 
-        product.setDraftProductInfos(draftReceiptBack);
-        assertThat(product.getDraftProductInfos()).isEqualTo(draftReceiptBack);
+        product.addCustomJustification(customJustificationBack);
+        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).containsOnly(product);
 
-        product.draftProductInfos(null);
-        assertThat(product.getDraftProductInfos()).isNull();
+        product.removeCustomJustification(customJustificationBack);
+        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
+
+        product.customJustifications(new HashSet<>(Set.of(customJustificationBack)));
+        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).containsOnly(product);
+
+        product.setCustomJustifications(new HashSet<>());
+        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
     }
 }

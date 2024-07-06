@@ -18,11 +18,10 @@
         "title": "Category Element"
       },
       "id": "ID",
-      "value": "Value",
+      "val": "Val",
       "categoryName": "Category Name",
       "code": "Code",
-      "category": "Category",
-      "orderRegistrationInfo": "Order Registration Info"
+      "category": "Category"
     }
   }
 }

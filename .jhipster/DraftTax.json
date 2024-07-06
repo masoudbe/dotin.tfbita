@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082907"
+    "changelogDate": "20240706105901"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -41,21 +41,26 @@
     {
       "fieldName": "mainAccountRate",
       "fieldType": "BigDecimal"
-    },
-    {
-      "fieldName": "documentTransactionNumber",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "returnDocumentTransactionNumber",
-      "fieldType": "String"
     }
   ],
   "name": "DraftTax",
   "relationships": [
     {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "documentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "returnDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityName": "draft",
-      "relationshipName": "taxes",
+      "otherEntityRelationshipName": "taxes",
+      "relationshipName": "draft",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

@@ -71,8 +71,6 @@ public class DraftCustomJustificationAsserts {
         assertThat(expected)
             .as("Verify DraftCustomJustification relationships")
             .satisfies(e -> assertThat(e.getDraftReceipts()).as("check draftReceipts").isEqualTo(actual.getDraftReceipts()))
-            .satisfies(
-                e -> assertThat(e.getDraftJustifications()).as("check draftJustifications").isEqualTo(actual.getDraftJustifications())
-            );
+            .satisfies(e -> assertThat(e.getDraft()).as("check draft").isEqualTo(actual.getDraft()));
     }
 }

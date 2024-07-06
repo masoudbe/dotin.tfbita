@@ -26,7 +26,7 @@ class ObjectiveCategoryTest {
     }
 
     @Test
-    void possibleValuesTest() throws Exception {
+    void possibleValuesTest() {
         ObjectiveCategory objectiveCategory = getObjectiveCategoryRandomSampleGenerator();
         ObjectiveCategoryElement objectiveCategoryElementBack = getObjectiveCategoryElementRandomSampleGenerator();
 

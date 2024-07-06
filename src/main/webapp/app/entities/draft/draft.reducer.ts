@@ -18,10 +18,14 @@ const apiUrl = 'api/drafts';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draft/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraft[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draft/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraft[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draft/fetch_entity',

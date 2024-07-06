@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,8 @@ class OrderRegServiceResourceIT {
 
     private OrderRegService orderRegService;
 
+    private OrderRegService insertedOrderRegService;
+
     /**
      * Create an entity for this test.
      *
@@ -100,6 +103,14 @@ class OrderRegServiceResourceIT {
         orderRegService = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedOrderRegService != null) {
+            orderRegServiceRepository.delete(insertedOrderRegService);
+            insertedOrderRegService = null;
+        }
+    }
+
     @Test
     @Transactional
     void createOrderRegService() throws Exception {
@@ -120,6 +131,8 @@ class OrderRegServiceResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedOrderRegService = orderRegServiceMapper.toEntity(returnedOrderRegServiceDTO);
         assertOrderRegServiceUpdatableFieldsEquals(returnedOrderRegService, getPersistedOrderRegService(returnedOrderRegService));
+
+        insertedOrderRegService = returnedOrderRegService;
     }
 
     @Test
@@ -144,7 +157,7 @@ class OrderRegServiceResourceIT {
     @Transactional
     void getAllOrderRegServices() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         // Get all the orderRegServiceList
         restOrderRegServiceMockMvc
@@ -161,7 +174,7 @@ class OrderRegServiceResourceIT {
     @Transactional
     void getOrderRegService() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         // Get the orderRegService
         restOrderRegServiceMockMvc
@@ -185,7 +198,7 @@ class OrderRegServiceResourceIT {
     @Transactional
     void putExistingOrderRegService() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -275,13 +288,15 @@ class OrderRegServiceResourceIT {
     @Transactional
     void partialUpdateOrderRegServiceWithPatch() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the orderRegService using partial update
         OrderRegService partialUpdatedOrderRegService = new OrderRegService();
         partialUpdatedOrderRegService.setId(orderRegService.getId());
+
+        partialUpdatedOrderRegService.amount(UPDATED_AMOUNT).unit(UPDATED_UNIT);
 
         restOrderRegServiceMockMvc
             .perform(
@@ -304,7 +319,7 @@ class OrderRegServiceResourceIT {
     @Transactional
     void fullUpdateOrderRegServiceWithPatch() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -397,7 +412,7 @@ class OrderRegServiceResourceIT {
     @Transactional
     void deleteOrderRegService() throws Exception {
         // Initialize the database
-        orderRegServiceRepository.saveAndFlush(orderRegService);
+        insertedOrderRegService = orderRegServiceRepository.saveAndFlush(orderRegService);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

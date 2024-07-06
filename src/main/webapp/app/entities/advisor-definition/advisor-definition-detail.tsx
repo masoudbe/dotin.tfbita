@@ -62,11 +62,23 @@ export const AdvisorDefinitionDetail = () => {
           </dt>
           <dd>{advisorDefinitionEntity.swiftCode}</dd>
           <dt>
-            <span id="creditDate">
-              <Translate contentKey="tfbitaApp.advisorDefinition.creditDate">Credit Date</Translate>
+            <span id="defaultCurrencyCode">
+              <Translate contentKey="tfbitaApp.advisorDefinition.defaultCurrencyCode">Default Currency Code</Translate>
             </span>
           </dt>
-          <dd>{advisorDefinitionEntity.creditDate}</dd>
+          <dd>{advisorDefinitionEntity.defaultCurrencyCode}</dd>
+          <dt>
+            <span id="currenciesCodes">
+              <Translate contentKey="tfbitaApp.advisorDefinition.currenciesCodes">Currencies Codes</Translate>
+            </span>
+          </dt>
+          <dd>{advisorDefinitionEntity.currenciesCodes}</dd>
+          <dt>
+            <span id="countryCode">
+              <Translate contentKey="tfbitaApp.advisorDefinition.countryCode">Country Code</Translate>
+            </span>
+          </dt>
+          <dd>{advisorDefinitionEntity.countryCode}</dd>
           <dt>
             <span id="bankCode">
               <Translate contentKey="tfbitaApp.advisorDefinition.bankCode">Bank Code</Translate>
@@ -80,29 +92,29 @@ export const AdvisorDefinitionDetail = () => {
           </dt>
           <dd>{advisorDefinitionEntity.branchCode}</dd>
           <dt>
-            <span id="defaultCurrencyCode">
-              <Translate contentKey="tfbitaApp.advisorDefinition.defaultCurrencyCode">Default Currency Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.advisorDefinition.additionalBrokerInformation">Additional Broker Information</Translate>
           </dt>
-          <dd>{advisorDefinitionEntity.defaultCurrencyCode}</dd>
+          <dd>{advisorDefinitionEntity.additionalBrokerInformation ? advisorDefinitionEntity.additionalBrokerInformation.id : ''}</dd>
           <dt>
-            <span id="countryCode">
-              <Translate contentKey="tfbitaApp.advisorDefinition.countryCode">Country Code</Translate>
-            </span>
+            <Translate contentKey="tfbitaApp.advisorDefinition.defaultVostroDeposit">Default Vostro Deposit</Translate>
           </dt>
-          <dd>{advisorDefinitionEntity.countryCode}</dd>
+          <dd>{advisorDefinitionEntity.defaultVostroDeposit ? advisorDefinitionEntity.defaultVostroDeposit.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.advisorDefinition.advisingBank">Advising Bank</Translate>
+            <Translate contentKey="tfbitaApp.advisorDefinition.defaultNostroDeposit">Default Nostro Deposit</Translate>
           </dt>
-          <dd>{advisorDefinitionEntity.advisingBank ? advisorDefinitionEntity.advisingBank.id : ''}</dd>
+          <dd>{advisorDefinitionEntity.defaultNostroDeposit ? advisorDefinitionEntity.defaultNostroDeposit.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.advisorDefinition.interfaceAdvisingBank">Interface Advising Bank</Translate>
+            <Translate contentKey="tfbitaApp.advisorDefinition.receiveMethod">Receive Method</Translate>
           </dt>
-          <dd>{advisorDefinitionEntity.interfaceAdvisingBank ? advisorDefinitionEntity.interfaceAdvisingBank.id : ''}</dd>
+          <dd>{advisorDefinitionEntity.receiveMethod ? advisorDefinitionEntity.receiveMethod.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.advisorDefinition.coveringBank">Covering Bank</Translate>
+            <Translate contentKey="tfbitaApp.advisorDefinition.payMethod">Pay Method</Translate>
           </dt>
-          <dd>{advisorDefinitionEntity.coveringBank ? advisorDefinitionEntity.coveringBank.id : ''}</dd>
+          <dd>{advisorDefinitionEntity.payMethod ? advisorDefinitionEntity.payMethod.id : ''}</dd>
+          <dt>
+            <Translate contentKey="tfbitaApp.advisorDefinition.swiftBic">Swift Bic</Translate>
+          </dt>
+          <dd>{advisorDefinitionEntity.swiftBic ? advisorDefinitionEntity.swiftBic.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/advisor-definition" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

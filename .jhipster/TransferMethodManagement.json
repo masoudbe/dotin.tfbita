@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105912"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "desc",
+      "fieldType": "String"
+    }
+  ],
+  "name": "TransferMethodManagement",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "type",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

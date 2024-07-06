@@ -1,9 +1,13 @@
 package com.dotin.tfbita.domain;
 
+import static com.dotin.tfbita.domain.CategoryElementTestSamples.*;
 import static com.dotin.tfbita.domain.DraftCustomJustificationTestSamples.*;
+import static com.dotin.tfbita.domain.DraftProductInfoTestSamples.*;
+import static com.dotin.tfbita.domain.DraftReceiptDocumentTransactionContainerTestSamples.*;
 import static com.dotin.tfbita.domain.DraftReceiptTestSamples.*;
 import static com.dotin.tfbita.domain.DraftTestSamples.*;
-import static com.dotin.tfbita.domain.ProductTestSamples.*;
+import static com.dotin.tfbita.domain.PaymentCurrencyRateTypeTestSamples.*;
+import static com.dotin.tfbita.domain.PaymentItemTypeTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.dotin.tfbita.web.rest.TestUtil;
@@ -28,41 +32,114 @@ class DraftReceiptTest {
     }
 
     @Test
-    void productTest() throws Exception {
+    void draftProductInfosTest() {
         DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
-        Product productBack = getProductRandomSampleGenerator();
+        DraftProductInfo draftProductInfoBack = getDraftProductInfoRandomSampleGenerator();
 
-        draftReceipt.addProduct(productBack);
-        assertThat(draftReceipt.getProducts()).containsOnly(productBack);
-        assertThat(productBack.getDraftProductInfos()).isEqualTo(draftReceipt);
+        draftReceipt.addDraftProductInfos(draftProductInfoBack);
+        assertThat(draftReceipt.getDraftProductInfos()).containsOnly(draftProductInfoBack);
+        assertThat(draftProductInfoBack.getDraftReceipt()).isEqualTo(draftReceipt);
 
-        draftReceipt.removeProduct(productBack);
-        assertThat(draftReceipt.getProducts()).doesNotContain(productBack);
-        assertThat(productBack.getDraftProductInfos()).isNull();
+        draftReceipt.removeDraftProductInfos(draftProductInfoBack);
+        assertThat(draftReceipt.getDraftProductInfos()).doesNotContain(draftProductInfoBack);
+        assertThat(draftProductInfoBack.getDraftReceipt()).isNull();
 
-        draftReceipt.products(new HashSet<>(Set.of(productBack)));
-        assertThat(draftReceipt.getProducts()).containsOnly(productBack);
-        assertThat(productBack.getDraftProductInfos()).isEqualTo(draftReceipt);
+        draftReceipt.draftProductInfos(new HashSet<>(Set.of(draftProductInfoBack)));
+        assertThat(draftReceipt.getDraftProductInfos()).containsOnly(draftProductInfoBack);
+        assertThat(draftProductInfoBack.getDraftReceipt()).isEqualTo(draftReceipt);
 
-        draftReceipt.setProducts(new HashSet<>());
-        assertThat(draftReceipt.getProducts()).doesNotContain(productBack);
-        assertThat(productBack.getDraftProductInfos()).isNull();
+        draftReceipt.setDraftProductInfos(new HashSet<>());
+        assertThat(draftReceipt.getDraftProductInfos()).doesNotContain(draftProductInfoBack);
+        assertThat(draftProductInfoBack.getDraftReceipt()).isNull();
     }
 
     @Test
-    void receiptsTest() throws Exception {
+    void productDimensionTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        draftReceipt.setProductDimension(categoryElementBack);
+        assertThat(draftReceipt.getProductDimension()).isEqualTo(categoryElementBack);
+
+        draftReceipt.productDimension(null);
+        assertThat(draftReceipt.getProductDimension()).isNull();
+    }
+
+    @Test
+    void stateOfDocumentsTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        draftReceipt.setStateOfDocuments(categoryElementBack);
+        assertThat(draftReceipt.getStateOfDocuments()).isEqualTo(categoryElementBack);
+
+        draftReceipt.stateOfDocuments(null);
+        assertThat(draftReceipt.getStateOfDocuments()).isNull();
+    }
+
+    @Test
+    void currencyProvisionFileTypeTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
+
+        draftReceipt.setCurrencyProvisionFileType(categoryElementBack);
+        assertThat(draftReceipt.getCurrencyProvisionFileType()).isEqualTo(categoryElementBack);
+
+        draftReceipt.currencyProvisionFileType(null);
+        assertThat(draftReceipt.getCurrencyProvisionFileType()).isNull();
+    }
+
+    @Test
+    void paymentCurrencyRateTypeTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        PaymentCurrencyRateType paymentCurrencyRateTypeBack = getPaymentCurrencyRateTypeRandomSampleGenerator();
+
+        draftReceipt.setPaymentCurrencyRateType(paymentCurrencyRateTypeBack);
+        assertThat(draftReceipt.getPaymentCurrencyRateType()).isEqualTo(paymentCurrencyRateTypeBack);
+
+        draftReceipt.paymentCurrencyRateType(null);
+        assertThat(draftReceipt.getPaymentCurrencyRateType()).isNull();
+    }
+
+    @Test
+    void paymentItemTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        PaymentItemType paymentItemTypeBack = getPaymentItemTypeRandomSampleGenerator();
+
+        draftReceipt.setPaymentItem(paymentItemTypeBack);
+        assertThat(draftReceipt.getPaymentItem()).isEqualTo(paymentItemTypeBack);
+
+        draftReceipt.paymentItem(null);
+        assertThat(draftReceipt.getPaymentItem()).isNull();
+    }
+
+    @Test
+    void documentTransactionContainerTest() {
+        DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
+        DraftReceiptDocumentTransactionContainer draftReceiptDocumentTransactionContainerBack =
+            getDraftReceiptDocumentTransactionContainerRandomSampleGenerator();
+
+        draftReceipt.setDocumentTransactionContainer(draftReceiptDocumentTransactionContainerBack);
+        assertThat(draftReceipt.getDocumentTransactionContainer()).isEqualTo(draftReceiptDocumentTransactionContainerBack);
+
+        draftReceipt.documentTransactionContainer(null);
+        assertThat(draftReceipt.getDocumentTransactionContainer()).isNull();
+    }
+
+    @Test
+    void draftTest() {
         DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftReceipt.setReceipts(draftBack);
-        assertThat(draftReceipt.getReceipts()).isEqualTo(draftBack);
+        draftReceipt.setDraft(draftBack);
+        assertThat(draftReceipt.getDraft()).isEqualTo(draftBack);
 
-        draftReceipt.receipts(null);
-        assertThat(draftReceipt.getReceipts()).isNull();
+        draftReceipt.draft(null);
+        assertThat(draftReceipt.getDraft()).isNull();
     }
 
     @Test
-    void draftCustomJustificationTest() throws Exception {
+    void draftCustomJustificationTest() {
         DraftReceipt draftReceipt = getDraftReceiptRandomSampleGenerator();
         DraftCustomJustification draftCustomJustificationBack = getDraftCustomJustificationRandomSampleGenerator();
 

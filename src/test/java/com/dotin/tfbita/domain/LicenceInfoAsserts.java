@@ -70,7 +70,6 @@ public class LicenceInfoAsserts {
             .satisfies(e -> assertThat(e.getService()).as("check service").isEqualTo(actual.getService()))
             .satisfies(
                 e -> assertThat(e.getOrderRegistrationInfo()).as("check orderRegistrationInfo").isEqualTo(actual.getOrderRegistrationInfo())
-            )
-            .satisfies(e -> assertThat(e.getOrderRegServ()).as("check orderRegServ").isEqualTo(actual.getOrderRegServ()));
+            );
     }
 }

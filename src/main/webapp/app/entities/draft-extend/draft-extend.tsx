@@ -100,7 +100,7 @@ export const DraftExtend = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('time')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftExtend.extensions">Extensions</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftExtend.draftField">Draft Field</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -117,7 +117,7 @@ export const DraftExtend = () => {
                   <td>{draftExtend.duration}</td>
                   <td>{draftExtend.time}</td>
                   <td>
-                    {draftExtend.extensions ? <Link to={`/draft/${draftExtend.extensions.id}`}>{draftExtend.extensions.id}</Link> : ''}
+                    {draftExtend.draftField ? <Link to={`/draft/${draftExtend.draftField.id}`}>{draftExtend.draftField.id}</Link> : ''}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

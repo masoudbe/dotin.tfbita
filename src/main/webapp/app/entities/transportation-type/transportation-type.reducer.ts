@@ -18,10 +18,14 @@ const apiUrl = 'api/transportation-types';
 
 // Actions
 
-export const getEntities = createAsyncThunk('transportationType/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ITransportationType[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'transportationType/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<ITransportationType[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'transportationType/fetch_entity',

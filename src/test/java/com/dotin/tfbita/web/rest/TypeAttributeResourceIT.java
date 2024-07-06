@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ class TypeAttributeResourceIT {
 
     private TypeAttribute typeAttribute;
 
+    private TypeAttribute insertedTypeAttribute;
+
     /**
      * Create an entity for this test.
      *
@@ -89,6 +92,14 @@ class TypeAttributeResourceIT {
         typeAttribute = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedTypeAttribute != null) {
+            typeAttributeRepository.delete(insertedTypeAttribute);
+            insertedTypeAttribute = null;
+        }
+    }
+
     @Test
     @Transactional
     void createTypeAttribute() throws Exception {
@@ -109,6 +120,8 @@ class TypeAttributeResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedTypeAttribute = typeAttributeMapper.toEntity(returnedTypeAttributeDTO);
         assertTypeAttributeUpdatableFieldsEquals(returnedTypeAttribute, getPersistedTypeAttribute(returnedTypeAttribute));
+
+        insertedTypeAttribute = returnedTypeAttribute;
     }
 
     @Test
@@ -133,7 +146,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void getAllTypeAttributes() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         // Get all the typeAttributeList
         restTypeAttributeMockMvc
@@ -149,7 +162,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void getTypeAttribute() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         // Get the typeAttribute
         restTypeAttributeMockMvc
@@ -172,7 +185,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void putExistingTypeAttribute() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -262,7 +275,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void partialUpdateTypeAttributeWithPatch() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -270,7 +283,7 @@ class TypeAttributeResourceIT {
         TypeAttribute partialUpdatedTypeAttribute = new TypeAttribute();
         partialUpdatedTypeAttribute.setId(typeAttribute.getId());
 
-        partialUpdatedTypeAttribute.necessary(UPDATED_NECESSARY).isUnique(UPDATED_IS_UNIQUE);
+        partialUpdatedTypeAttribute.isUnique(UPDATED_IS_UNIQUE);
 
         restTypeAttributeMockMvc
             .perform(
@@ -293,7 +306,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void fullUpdateTypeAttributeWithPatch() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -383,7 +396,7 @@ class TypeAttributeResourceIT {
     @Transactional
     void deleteTypeAttribute() throws Exception {
         // Initialize the database
-        typeAttributeRepository.saveAndFlush(typeAttribute);
+        insertedTypeAttribute = typeAttributeRepository.saveAndFlush(typeAttribute);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

@@ -1,9 +1,7 @@
 package com.dotin.tfbita.service.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the {@link com.dotin.tfbita.domain.Custom} entity.
@@ -20,8 +18,6 @@ public class CustomDTO implements Serializable {
     private String name;
 
     private Long tempId;
-
-    private Set<DraftDTO> drafts = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,14 +59,6 @@ public class CustomDTO implements Serializable {
         this.tempId = tempId;
     }
 
-    public Set<DraftDTO> getDrafts() {
-        return drafts;
-    }
-
-    public void setDrafts(Set<DraftDTO> drafts) {
-        this.drafts = drafts;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,7 +89,6 @@ public class CustomDTO implements Serializable {
             ", latinName='" + getLatinName() + "'" +
             ", name='" + getName() + "'" +
             ", tempId=" + getTempId() +
-            ", drafts=" + getDrafts() +
             "}";
     }
 }

@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105905"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "durationFrom",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "durationTo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "priceFrom",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "priceTo",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "justificationDisciplinaryTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "openDraftDisciplinaryTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "otherCostsTopic",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "postTelegraphSwiftCostsTopic",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "CreditTypeConditionInfo",
+  "relationships": [
+    {
+      "otherEntityName": "creditTypeCondition",
+      "relationshipName": "conditions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "creditTypeCondition",
+      "relationshipName": "defaultCondition",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

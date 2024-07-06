@@ -127,20 +127,41 @@ export const DraftType = () => {
                   <Translate contentKey="tfbitaApp.draftType.usable">Usable</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('usable')} />
                 </th>
+                <th className="hand" onClick={sort('currenciesCodes')}>
+                  <Translate contentKey="tfbitaApp.draftType.currenciesCodes">Currencies Codes</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('currenciesCodes')} />
+                </th>
                 <th className="hand" onClick={sort('defaultCurrencyCode')}>
                   <Translate contentKey="tfbitaApp.draftType.defaultCurrencyCode">Default Currency Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultCurrencyCode')} />
                 </th>
-                <th className="hand" onClick={sort('accountInfoCode')}>
-                  <Translate contentKey="tfbitaApp.draftType.accountInfoCode">Account Info Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('accountInfoCode')} />
-                </th>
-                <th className="hand" onClick={sort('topicInfoCode')}>
-                  <Translate contentKey="tfbitaApp.draftType.topicInfoCode">Topic Info Code</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('topicInfoCode')} />
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.type">Type</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftType.draftType">Draft Type</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftType.secondaryType">Secondary Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.division">Division</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.topicInfo">Topic Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.conditionInfo">Condition Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.accountInfo">Account Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.requestType">Request Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.acceptableProductTypes">Acceptable Product Types</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="tfbitaApp.draftType.userGroups">User Groups</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -163,10 +184,66 @@ export const DraftType = () => {
                   <td>{draftType.name}</td>
                   <td>{draftType.portal ? 'true' : 'false'}</td>
                   <td>{draftType.usable ? 'true' : 'false'}</td>
+                  <td>{draftType.currenciesCodes}</td>
                   <td>{draftType.defaultCurrencyCode}</td>
-                  <td>{draftType.accountInfoCode}</td>
-                  <td>{draftType.topicInfoCode}</td>
-                  <td>{draftType.draftType ? <Link to={`/draft/${draftType.draftType.id}`}>{draftType.draftType.id}</Link> : ''}</td>
+                  <td>{draftType.type ? <Link to={`/category-element/${draftType.type.id}`}>{draftType.type.id}</Link> : ''}</td>
+                  <td>
+                    {draftType.secondaryType ? (
+                      <Link to={`/category-element/${draftType.secondaryType.id}`}>{draftType.secondaryType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.division ? <Link to={`/category-element/${draftType.division.id}`}>{draftType.division.id}</Link> : ''}
+                  </td>
+                  <td>
+                    {draftType.topicInfo ? (
+                      <Link to={`/draft-type-topic-info/${draftType.topicInfo.id}`}>{draftType.topicInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.conditionInfo ? (
+                      <Link to={`/credit-type-condition-info/${draftType.conditionInfo.id}`}>{draftType.conditionInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.accountInfo ? (
+                      <Link to={`/draft-type-account-info/${draftType.accountInfo.id}`}>{draftType.accountInfo.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.requestType ? (
+                      <Link to={`/draft-request-type/${draftType.requestType.id}`}>{draftType.requestType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.acceptableProductTypes ? (
+                      <Link to={`/objective-category-element/${draftType.acceptableProductTypes.id}`}>
+                        {draftType.acceptableProductTypes.id}
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {draftType.userGroups
+                      ? draftType.userGroups.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/string-value/${val.id}`}>{val.id}</Link>
+                            {j === draftType.userGroups.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/draft-type/${draftType.id}`} color="info" size="sm" data-cy="entityDetailsButton">

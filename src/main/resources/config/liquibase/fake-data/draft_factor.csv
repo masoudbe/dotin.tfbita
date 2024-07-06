@@ -1,11 +1,11 @@
-id;amount;description;eq_amount;factor_date;issue_date;serial;currency_name
-1;5818.53;worsen tan brr;31493.87;hoarse mandate;false failing;statistics psst;Burundi Franc
-2;26490.78;foresee networking woot;10833.88;ack ick modern;excluding pneumonia;prioritize kilt jazz;Serbian Dinar
-3;11545.57;unfolded geez terribly;24975.64;titivate fanny-pack;flimsy;aw solemnly;Danish Krone
-4;5861.2;flippant although bah;28352.66;times as construct;loving phooey;onto intrepid wherever;Tenge
-5;22617.52;whereas bouncy;21953.86;waylay furthermore excepting;likable;questionably spit against;Egyptian Pound
-6;6670.84;solidly;32453.37;instead;snub;inexperienced;Rand
-7;1308.63;sternly lovingly nor;5894.86;clone iris;openly optimistically hybridization;jovially;Liberian Dollar
-8;17599.6;fancy;28448.81;incidentally boo or;quintessential many toughen;blah;Djibouti Franc
-9;26969.57;even;25846.15;emergence;pish;hallucinate enunciate;Convertible Marks
-10;6059.9;and per;16578.43;save congeal um;unaccountably slider furthermore;guilty;Armenian Dram
+id;amount;description;eq_amount;factor_date;issue_date;serial;currency_code
+1;5818.53;worsen tan brr;31493.87;hoarse mandate;false failing;statistics psst;BIF
+2;26490.78;foresee networking woot;10833.88;ack ick modern;excluding pneumonia;prioritize kilt jazz;RSD
+3;11545.57;unfolded geez terribly;24975.64;titivate fanny-pack;flimsy;aw solemnly;DKK
+4;5861.2;flippant although bah;28352.66;times as construct;loving phooey;onto intrepid wherever;KZT
+5;22617.52;whereas bouncy;21953.86;waylay furthermore excepting;likable;questionably spit against;EGP
+6;6670.84;solidly;32453.37;instead;snub;inexperienced;ZAR
+7;1308.63;sternly lovingly nor;5894.86;clone iris;openly optimistically hybridization;jovially;LRD
+8;17599.6;fancy;28448.81;incidentally boo or;quintessential many toughen;blah;DJF
+9;26969.57;even;25846.15;emergence;pish;hallucinate enunciate;BAM
+10;6059.9;and per;16578.43;save congeal um;unaccountably slider furthermore;guilty;AMD

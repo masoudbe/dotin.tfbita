@@ -10,6 +10,10 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
+import { IDraft } from 'app/shared/model/draft.model';
+import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { IDraftType } from 'app/shared/model/draft-type.model';
+import { getEntities as getDraftTypes } from 'app/entities/draft-type/draft-type.reducer';
 import { IStringValue } from 'app/shared/model/string-value.model';
 import { getEntity, updateEntity, createEntity, reset } from './string-value.reducer';
 
@@ -22,6 +26,8 @@ export const StringValueUpdate = () => {
   const isNew = id === undefined;
 
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
+  const drafts = useAppSelector(state => state.draft.entities);
+  const draftTypes = useAppSelector(state => state.draftType.entities);
   const stringValueEntity = useAppSelector(state => state.stringValue.entity);
   const loading = useAppSelector(state => state.stringValue.loading);
   const updating = useAppSelector(state => state.stringValue.updating);
@@ -39,6 +45,8 @@ export const StringValueUpdate = () => {
     }
 
     dispatch(getOrderRegistrationInfos({}));
+    dispatch(getDrafts({}));
+    dispatch(getDraftTypes({}));
   }, []);
 
   useEffect(() => {
@@ -57,6 +65,8 @@ export const StringValueUpdate = () => {
       ...stringValueEntity,
       ...values,
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
+      drafts: mapIdList(values.drafts),
+      draftTypes: mapIdList(values.draftTypes),
     };
 
     if (isNew) {
@@ -72,6 +82,8 @@ export const StringValueUpdate = () => {
       : {
           ...stringValueEntity,
           orderRegistrationInfos: stringValueEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
+          drafts: stringValueEntity?.drafts?.map(e => e.id.toString()),
+          draftTypes: stringValueEntity?.draftTypes?.map(e => e.id.toString()),
         };
 
   return (
@@ -99,13 +111,7 @@ export const StringValueUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField
-                label={translate('tfbitaApp.stringValue.value')}
-                id="string-value-value"
-                name="value"
-                data-cy="value"
-                type="text"
-              />
+              <ValidatedField label={translate('tfbitaApp.stringValue.val')} id="string-value-val" name="val" data-cy="val" type="text" />
               <ValidatedField
                 label={translate('tfbitaApp.stringValue.orderRegistrationInfo')}
                 id="string-value-orderRegistrationInfo"
@@ -117,6 +123,40 @@ export const StringValueUpdate = () => {
                 <option value="" key="0" />
                 {orderRegistrationInfos
                   ? orderRegistrationInfos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.stringValue.draft')}
+                id="string-value-draft"
+                data-cy="draft"
+                type="select"
+                multiple
+                name="drafts"
+              >
+                <option value="" key="0" />
+                {drafts
+                  ? drafts.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('tfbitaApp.stringValue.draftType')}
+                id="string-value-draftType"
+                data-cy="draftType"
+                type="select"
+                multiple
+                name="draftTypes"
+              >
+                <option value="" key="0" />
+                {draftTypes
+                  ? draftTypes.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

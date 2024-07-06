@@ -83,12 +83,6 @@ public class DraftReceipt implements Serializable {
     @Column(name = "usable")
     private Boolean usable;
 
-    @Column(name = "payment_currency_rate_type_desc")
-    private String paymentCurrencyRateTypeDesc;
-
-    @Column(name = "payment_item_type_desc")
-    private String paymentItemTypeDesc;
-
     @Column(name = "net_weight", precision = 21, scale = 2)
     private BigDecimal netWeight;
 
@@ -135,30 +129,92 @@ public class DraftReceipt implements Serializable {
     @Column(name = "other_cost", precision = 21, scale = 2)
     private BigDecimal otherCost;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draftProductInfos")
-    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftProductInfos" }, allowSetters = true)
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "draftReceipt")
+    @JsonIgnoreProperties(value = { "product", "draftReceipt" }, allowSetters = true)
+    private Set<DraftProductInfo> draftProductInfos = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement productDimension;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement stateOfDocuments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
+    private CategoryElement currencyProvisionFileType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PaymentCurrencyRateType paymentCurrencyRateType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PaymentItemType paymentItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
+            "receiptIssueDocumentTransaction",
+            "freightLetterStampCostDocumentTransaction",
+            "deliverDocumentTransaction",
+            "documentTransactionCanceledDeliver",
+            "documentTransactionCanceledReceiptIssue",
+            "receiptCommissionDocumentTransactions",
+            "draftDocumentTransactionContainer",
         },
         allowSetters = true
     )
-    private Draft receipts;
+    private DraftReceiptDocumentTransactionContainer documentTransactionContainer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "receipts",
+            "taxes",
+            "extensions",
+            "draftFactors",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
+            "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
+        },
+        allowSetters = true
+    )
+    private Draft draft;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "draftReceipts")
-    @JsonIgnoreProperties(value = { "draftReceipts", "draftJustifications" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "draftReceipts", "draft" }, allowSetters = true)
     private Set<DraftCustomJustification> draftCustomJustifications = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -436,32 +492,6 @@ public class DraftReceipt implements Serializable {
         this.usable = usable;
     }
 
-    public String getPaymentCurrencyRateTypeDesc() {
-        return this.paymentCurrencyRateTypeDesc;
-    }
-
-    public DraftReceipt paymentCurrencyRateTypeDesc(String paymentCurrencyRateTypeDesc) {
-        this.setPaymentCurrencyRateTypeDesc(paymentCurrencyRateTypeDesc);
-        return this;
-    }
-
-    public void setPaymentCurrencyRateTypeDesc(String paymentCurrencyRateTypeDesc) {
-        this.paymentCurrencyRateTypeDesc = paymentCurrencyRateTypeDesc;
-    }
-
-    public String getPaymentItemTypeDesc() {
-        return this.paymentItemTypeDesc;
-    }
-
-    public DraftReceipt paymentItemTypeDesc(String paymentItemTypeDesc) {
-        this.setPaymentItemTypeDesc(paymentItemTypeDesc);
-        return this;
-    }
-
-    public void setPaymentItemTypeDesc(String paymentItemTypeDesc) {
-        this.paymentItemTypeDesc = paymentItemTypeDesc;
-    }
-
     public BigDecimal getNetWeight() {
         return this.netWeight;
     }
@@ -657,47 +687,125 @@ public class DraftReceipt implements Serializable {
         this.otherCost = otherCost;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
+    public Set<DraftProductInfo> getDraftProductInfos() {
+        return this.draftProductInfos;
     }
 
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.setDraftProductInfos(null));
+    public void setDraftProductInfos(Set<DraftProductInfo> draftProductInfos) {
+        if (this.draftProductInfos != null) {
+            this.draftProductInfos.forEach(i -> i.setDraftReceipt(null));
         }
-        if (products != null) {
-            products.forEach(i -> i.setDraftProductInfos(this));
+        if (draftProductInfos != null) {
+            draftProductInfos.forEach(i -> i.setDraftReceipt(this));
         }
-        this.products = products;
+        this.draftProductInfos = draftProductInfos;
     }
 
-    public DraftReceipt products(Set<Product> products) {
-        this.setProducts(products);
+    public DraftReceipt draftProductInfos(Set<DraftProductInfo> draftProductInfos) {
+        this.setDraftProductInfos(draftProductInfos);
         return this;
     }
 
-    public DraftReceipt addProduct(Product product) {
-        this.products.add(product);
-        product.setDraftProductInfos(this);
+    public DraftReceipt addDraftProductInfos(DraftProductInfo draftProductInfo) {
+        this.draftProductInfos.add(draftProductInfo);
+        draftProductInfo.setDraftReceipt(this);
         return this;
     }
 
-    public DraftReceipt removeProduct(Product product) {
-        this.products.remove(product);
-        product.setDraftProductInfos(null);
+    public DraftReceipt removeDraftProductInfos(DraftProductInfo draftProductInfo) {
+        this.draftProductInfos.remove(draftProductInfo);
+        draftProductInfo.setDraftReceipt(null);
         return this;
     }
 
-    public Draft getReceipts() {
-        return this.receipts;
+    public CategoryElement getProductDimension() {
+        return this.productDimension;
     }
 
-    public void setReceipts(Draft draft) {
-        this.receipts = draft;
+    public void setProductDimension(CategoryElement categoryElement) {
+        this.productDimension = categoryElement;
     }
 
-    public DraftReceipt receipts(Draft draft) {
-        this.setReceipts(draft);
+    public DraftReceipt productDimension(CategoryElement categoryElement) {
+        this.setProductDimension(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getStateOfDocuments() {
+        return this.stateOfDocuments;
+    }
+
+    public void setStateOfDocuments(CategoryElement categoryElement) {
+        this.stateOfDocuments = categoryElement;
+    }
+
+    public DraftReceipt stateOfDocuments(CategoryElement categoryElement) {
+        this.setStateOfDocuments(categoryElement);
+        return this;
+    }
+
+    public CategoryElement getCurrencyProvisionFileType() {
+        return this.currencyProvisionFileType;
+    }
+
+    public void setCurrencyProvisionFileType(CategoryElement categoryElement) {
+        this.currencyProvisionFileType = categoryElement;
+    }
+
+    public DraftReceipt currencyProvisionFileType(CategoryElement categoryElement) {
+        this.setCurrencyProvisionFileType(categoryElement);
+        return this;
+    }
+
+    public PaymentCurrencyRateType getPaymentCurrencyRateType() {
+        return this.paymentCurrencyRateType;
+    }
+
+    public void setPaymentCurrencyRateType(PaymentCurrencyRateType paymentCurrencyRateType) {
+        this.paymentCurrencyRateType = paymentCurrencyRateType;
+    }
+
+    public DraftReceipt paymentCurrencyRateType(PaymentCurrencyRateType paymentCurrencyRateType) {
+        this.setPaymentCurrencyRateType(paymentCurrencyRateType);
+        return this;
+    }
+
+    public PaymentItemType getPaymentItem() {
+        return this.paymentItem;
+    }
+
+    public void setPaymentItem(PaymentItemType paymentItemType) {
+        this.paymentItem = paymentItemType;
+    }
+
+    public DraftReceipt paymentItem(PaymentItemType paymentItemType) {
+        this.setPaymentItem(paymentItemType);
+        return this;
+    }
+
+    public DraftReceiptDocumentTransactionContainer getDocumentTransactionContainer() {
+        return this.documentTransactionContainer;
+    }
+
+    public void setDocumentTransactionContainer(DraftReceiptDocumentTransactionContainer draftReceiptDocumentTransactionContainer) {
+        this.documentTransactionContainer = draftReceiptDocumentTransactionContainer;
+    }
+
+    public DraftReceipt documentTransactionContainer(DraftReceiptDocumentTransactionContainer draftReceiptDocumentTransactionContainer) {
+        this.setDocumentTransactionContainer(draftReceiptDocumentTransactionContainer);
+        return this;
+    }
+
+    public Draft getDraft() {
+        return this.draft;
+    }
+
+    public void setDraft(Draft draft) {
+        this.draft = draft;
+    }
+
+    public DraftReceipt draft(Draft draft) {
+        this.setDraft(draft);
         return this;
     }
 
@@ -776,8 +884,6 @@ public class DraftReceipt implements Serializable {
             ", serial='" + getSerial() + "'" +
             ", transportRow='" + getTransportRow() + "'" +
             ", usable='" + getUsable() + "'" +
-            ", paymentCurrencyRateTypeDesc='" + getPaymentCurrencyRateTypeDesc() + "'" +
-            ", paymentItemTypeDesc='" + getPaymentItemTypeDesc() + "'" +
             ", netWeight=" + getNetWeight() +
             ", grossWeight=" + getGrossWeight() +
             ", totalNetWeight=" + getTotalNetWeight() +

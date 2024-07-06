@@ -1,0 +1,31 @@
+{
+  "tfbitaApp": {
+    "draftAccountInfo": {
+      "home": {
+        "title": "Draft Account Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Account Info",
+        "createOrEditLabel": "Create or edit a Draft Account Info",
+        "notFound": "No Draft Account Infos found"
+      },
+      "created": "A new Draft Account Info is created with identifier {{ param }}",
+      "updated": "A Draft Account Info is updated with identifier {{ param }}",
+      "deleted": "A Draft Account Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Account Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Account Info"
+      },
+      "id": "ID",
+      "documentReceiptDisciplinaryAccountId": "Document Receipt Disciplinary Account Id",
+      "draftMainAccountId": "Draft Main Account Id",
+      "insuranceCostAccountId": "Insurance Cost Account Id",
+      "justificationDisciplinaryAccountId": "Justification Disciplinary Account Id",
+      "openDraftDisciplinaryAccountId": "Open Draft Disciplinary Account Id",
+      "otherCostsAccountId": "Other Costs Account Id",
+      "postSwiftCostsAccountId": "Post Swift Costs Account Id",
+      "amountDeductionAccountId": "Amount Deduction Account Id"
+    }
+  }
+}

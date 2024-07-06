@@ -27,7 +27,7 @@ class AttributeValueGroupTest {
     }
 
     @Test
-    void valuesTest() throws Exception {
+    void valuesTest() {
         AttributeValueGroup attributeValueGroup = getAttributeValueGroupRandomSampleGenerator();
         AttributeValue attributeValueBack = getAttributeValueRandomSampleGenerator();
 
@@ -49,7 +49,7 @@ class AttributeValueGroupTest {
     }
 
     @Test
-    void attributeTest() throws Exception {
+    void attributeTest() {
         AttributeValueGroup attributeValueGroup = getAttributeValueGroupRandomSampleGenerator();
         Attribute attributeBack = getAttributeRandomSampleGenerator();
 

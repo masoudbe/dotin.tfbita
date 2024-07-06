@@ -18,10 +18,14 @@ const apiUrl = 'api/advisor-definitions';
 
 // Actions
 
-export const getEntities = createAsyncThunk('advisorDefinition/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IAdvisorDefinition[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'advisorDefinition/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IAdvisorDefinition[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'advisorDefinition/fetch_entity',

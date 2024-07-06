@@ -18,10 +18,14 @@ const apiUrl = 'api/order-registration-infos';
 
 // Actions
 
-export const getEntities = createAsyncThunk('orderRegistrationInfo/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IOrderRegistrationInfo[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'orderRegistrationInfo/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IOrderRegistrationInfo[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'orderRegistrationInfo/fetch_entity',

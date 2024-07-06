@@ -34,11 +34,11 @@ public class DraftTaxDTO implements Serializable {
 
     private BigDecimal mainAccountRate;
 
-    private String documentTransactionNumber;
+    private DocumentTransactionDTO documentTransaction;
 
-    private String returnDocumentTransactionNumber;
+    private DocumentTransactionDTO returnDocumentTransaction;
 
-    private DraftDTO taxes;
+    private DraftDTO draft;
 
     public Long getId() {
         return id;
@@ -128,28 +128,28 @@ public class DraftTaxDTO implements Serializable {
         this.mainAccountRate = mainAccountRate;
     }
 
-    public String getDocumentTransactionNumber() {
-        return documentTransactionNumber;
+    public DocumentTransactionDTO getDocumentTransaction() {
+        return documentTransaction;
     }
 
-    public void setDocumentTransactionNumber(String documentTransactionNumber) {
-        this.documentTransactionNumber = documentTransactionNumber;
+    public void setDocumentTransaction(DocumentTransactionDTO documentTransaction) {
+        this.documentTransaction = documentTransaction;
     }
 
-    public String getReturnDocumentTransactionNumber() {
-        return returnDocumentTransactionNumber;
+    public DocumentTransactionDTO getReturnDocumentTransaction() {
+        return returnDocumentTransaction;
     }
 
-    public void setReturnDocumentTransactionNumber(String returnDocumentTransactionNumber) {
-        this.returnDocumentTransactionNumber = returnDocumentTransactionNumber;
+    public void setReturnDocumentTransaction(DocumentTransactionDTO returnDocumentTransaction) {
+        this.returnDocumentTransaction = returnDocumentTransaction;
     }
 
-    public DraftDTO getTaxes() {
-        return taxes;
+    public DraftDTO getDraft() {
+        return draft;
     }
 
-    public void setTaxes(DraftDTO taxes) {
-        this.taxes = taxes;
+    public void setDraft(DraftDTO draft) {
+        this.draft = draft;
     }
 
     @Override
@@ -187,9 +187,9 @@ public class DraftTaxDTO implements Serializable {
             ", returnTaxesAmount='" + getReturnTaxesAmount() + "'" +
             ", orderRegRate=" + getOrderRegRate() +
             ", mainAccountRate=" + getMainAccountRate() +
-            ", documentTransactionNumber='" + getDocumentTransactionNumber() + "'" +
-            ", returnDocumentTransactionNumber='" + getReturnDocumentTransactionNumber() + "'" +
-            ", taxes=" + getTaxes() +
+            ", documentTransaction=" + getDocumentTransaction() +
+            ", returnDocumentTransaction=" + getReturnDocumentTransaction() +
+            ", draft=" + getDraft() +
             "}";
     }
 }

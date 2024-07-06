@@ -47,7 +47,7 @@ public class StringValueAsserts {
     public static void assertStringValueUpdatableFieldsEquals(StringValue expected, StringValue actual) {
         assertThat(expected)
             .as("Verify StringValue relevant properties")
-            .satisfies(e -> assertThat(e.getValue()).as("check value").isEqualTo(actual.getValue()));
+            .satisfies(e -> assertThat(e.getVal()).as("check val").isEqualTo(actual.getVal()));
     }
 
     /**
@@ -64,6 +64,8 @@ public class StringValueAsserts {
                     assertThat(e.getOrderRegistrationInfos())
                         .as("check orderRegistrationInfos")
                         .isEqualTo(actual.getOrderRegistrationInfos())
-            );
+            )
+            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
+            .satisfies(e -> assertThat(e.getDraftTypes()).as("check draftTypes").isEqualTo(actual.getDraftTypes()));
     }
 }

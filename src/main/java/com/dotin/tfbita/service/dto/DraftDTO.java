@@ -134,11 +134,19 @@ public class DraftDTO implements Serializable {
 
     private Boolean isWithoutPayment;
 
+    private String mainAccountCurrencyCode;
+
+    private String orderRegCurrencyCode;
+
+    private String chargedExchangeBrokerCurrencyCode;
+
     private String destinationCountryCode;
 
     private String beneficiaryCountryCode;
 
     private String producerCountryCode;
+
+    private String registerationJustificationCurrencyCode;
 
     private String branchCode;
 
@@ -146,29 +154,71 @@ public class DraftDTO implements Serializable {
 
     private String certificateSenderBranchCode;
 
-    private String mainAccountCurrencyCode;
+    private CategoryElementDTO chargedExchangeBroker;
 
-    private String orderRegCurrencyCode;
+    private CategoryElementDTO insuranceLetterType;
 
-    private String chargedExchangeBrokerCurrency;
+    private CategoryElementDTO advisorDepositType;
 
-    private String registerationJustificationCurrencyCode;
+    private CategoryElementDTO interfaceAdvisorDepositType;
 
-    private String currencyExchangeInfoTitle;
+    private CategoryElementDTO coveringAdvisorDepositType;
 
-    private String transportationTypeName;
+    private CategoryElementDTO impartType;
 
-    private String accountInfoCode;
+    private CategoryElementDTO dealType;
 
-    private Long customerNumbers;
+    private CategoryElementDTO transportVehicleType;
 
-    private String sanctionSerials;
+    private CategoryElementDTO freightLetterType;
 
-    private Set<CustomDTO> customs = new HashSet<>();
+    private CategoryElementDTO actionCode;
+
+    private CategoryElementDTO ownershipCode;
+
+    private CategoryElementDTO currencyContainerPlace;
+
+    private CategoryElementDTO paymentType;
+
+    private CategoryElementDTO draftSource;
+
+    private CustomDTO loadSwitchPlace;
+
+    private DraftTypeDTO draftType;
+
+    private DraftStatusInfoDTO statusInfo;
+
+    private InsuranceCompanyInfoDTO insuranceCompanyInfo;
+
+    private AdvisorDefinitionDTO advisingBank;
+
+    private AdvisorDefinitionDTO interfaceAdvisingBank;
+
+    private AdvisorDefinitionDTO coveringBank;
+
+    private AuditCompanyInfoDTO auditCompanyInfo;
+
+    private TransportationTypeDTO transportType;
+
+    private CurrencyExchangeInfoDTO currencyExchangeInfo;
+
+    private DraftAccountInfoDTO accountInfo;
+
+    private CustomDTO destinationCustomCompanies;
+
+    private CustomDTO sourceCustomCompanies;
+
+    private Set<ServiceTariffDTO> services = new HashSet<>();
 
     private Set<ProductDTO> products = new HashSet<>();
 
-    private Set<ServiceTariffDTO> services = new HashSet<>();
+    private Set<StringValueDTO> sanctionSerials = new HashSet<>();
+
+    private Set<LongValueDTO> customerNumbers = new HashSet<>();
+
+    private Set<SuggestedSanctionInfoDTO> suggestedSanctions = new HashSet<>();
+
+    private Set<DraftDocumentTransactionContainerDTO> documentTransactionContainers = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -658,6 +708,30 @@ public class DraftDTO implements Serializable {
         this.isWithoutPayment = isWithoutPayment;
     }
 
+    public String getMainAccountCurrencyCode() {
+        return mainAccountCurrencyCode;
+    }
+
+    public void setMainAccountCurrencyCode(String mainAccountCurrencyCode) {
+        this.mainAccountCurrencyCode = mainAccountCurrencyCode;
+    }
+
+    public String getOrderRegCurrencyCode() {
+        return orderRegCurrencyCode;
+    }
+
+    public void setOrderRegCurrencyCode(String orderRegCurrencyCode) {
+        this.orderRegCurrencyCode = orderRegCurrencyCode;
+    }
+
+    public String getChargedExchangeBrokerCurrencyCode() {
+        return chargedExchangeBrokerCurrencyCode;
+    }
+
+    public void setChargedExchangeBrokerCurrencyCode(String chargedExchangeBrokerCurrencyCode) {
+        this.chargedExchangeBrokerCurrencyCode = chargedExchangeBrokerCurrencyCode;
+    }
+
     public String getDestinationCountryCode() {
         return destinationCountryCode;
     }
@@ -680,6 +754,14 @@ public class DraftDTO implements Serializable {
 
     public void setProducerCountryCode(String producerCountryCode) {
         this.producerCountryCode = producerCountryCode;
+    }
+
+    public String getRegisterationJustificationCurrencyCode() {
+        return registerationJustificationCurrencyCode;
+    }
+
+    public void setRegisterationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
+        this.registerationJustificationCurrencyCode = registerationJustificationCurrencyCode;
     }
 
     public String getBranchCode() {
@@ -706,84 +788,228 @@ public class DraftDTO implements Serializable {
         this.certificateSenderBranchCode = certificateSenderBranchCode;
     }
 
-    public String getMainAccountCurrencyCode() {
-        return mainAccountCurrencyCode;
+    public CategoryElementDTO getChargedExchangeBroker() {
+        return chargedExchangeBroker;
     }
 
-    public void setMainAccountCurrencyCode(String mainAccountCurrencyCode) {
-        this.mainAccountCurrencyCode = mainAccountCurrencyCode;
+    public void setChargedExchangeBroker(CategoryElementDTO chargedExchangeBroker) {
+        this.chargedExchangeBroker = chargedExchangeBroker;
     }
 
-    public String getOrderRegCurrencyCode() {
-        return orderRegCurrencyCode;
+    public CategoryElementDTO getInsuranceLetterType() {
+        return insuranceLetterType;
     }
 
-    public void setOrderRegCurrencyCode(String orderRegCurrencyCode) {
-        this.orderRegCurrencyCode = orderRegCurrencyCode;
+    public void setInsuranceLetterType(CategoryElementDTO insuranceLetterType) {
+        this.insuranceLetterType = insuranceLetterType;
     }
 
-    public String getChargedExchangeBrokerCurrency() {
-        return chargedExchangeBrokerCurrency;
+    public CategoryElementDTO getAdvisorDepositType() {
+        return advisorDepositType;
     }
 
-    public void setChargedExchangeBrokerCurrency(String chargedExchangeBrokerCurrency) {
-        this.chargedExchangeBrokerCurrency = chargedExchangeBrokerCurrency;
+    public void setAdvisorDepositType(CategoryElementDTO advisorDepositType) {
+        this.advisorDepositType = advisorDepositType;
     }
 
-    public String getRegisterationJustificationCurrencyCode() {
-        return registerationJustificationCurrencyCode;
+    public CategoryElementDTO getInterfaceAdvisorDepositType() {
+        return interfaceAdvisorDepositType;
     }
 
-    public void setRegisterationJustificationCurrencyCode(String registerationJustificationCurrencyCode) {
-        this.registerationJustificationCurrencyCode = registerationJustificationCurrencyCode;
+    public void setInterfaceAdvisorDepositType(CategoryElementDTO interfaceAdvisorDepositType) {
+        this.interfaceAdvisorDepositType = interfaceAdvisorDepositType;
     }
 
-    public String getCurrencyExchangeInfoTitle() {
-        return currencyExchangeInfoTitle;
+    public CategoryElementDTO getCoveringAdvisorDepositType() {
+        return coveringAdvisorDepositType;
     }
 
-    public void setCurrencyExchangeInfoTitle(String currencyExchangeInfoTitle) {
-        this.currencyExchangeInfoTitle = currencyExchangeInfoTitle;
+    public void setCoveringAdvisorDepositType(CategoryElementDTO coveringAdvisorDepositType) {
+        this.coveringAdvisorDepositType = coveringAdvisorDepositType;
     }
 
-    public String getTransportationTypeName() {
-        return transportationTypeName;
+    public CategoryElementDTO getImpartType() {
+        return impartType;
     }
 
-    public void setTransportationTypeName(String transportationTypeName) {
-        this.transportationTypeName = transportationTypeName;
+    public void setImpartType(CategoryElementDTO impartType) {
+        this.impartType = impartType;
     }
 
-    public String getAccountInfoCode() {
-        return accountInfoCode;
+    public CategoryElementDTO getDealType() {
+        return dealType;
     }
 
-    public void setAccountInfoCode(String accountInfoCode) {
-        this.accountInfoCode = accountInfoCode;
+    public void setDealType(CategoryElementDTO dealType) {
+        this.dealType = dealType;
     }
 
-    public Long getCustomerNumbers() {
-        return customerNumbers;
+    public CategoryElementDTO getTransportVehicleType() {
+        return transportVehicleType;
     }
 
-    public void setCustomerNumbers(Long customerNumbers) {
-        this.customerNumbers = customerNumbers;
+    public void setTransportVehicleType(CategoryElementDTO transportVehicleType) {
+        this.transportVehicleType = transportVehicleType;
     }
 
-    public String getSanctionSerials() {
-        return sanctionSerials;
+    public CategoryElementDTO getFreightLetterType() {
+        return freightLetterType;
     }
 
-    public void setSanctionSerials(String sanctionSerials) {
-        this.sanctionSerials = sanctionSerials;
+    public void setFreightLetterType(CategoryElementDTO freightLetterType) {
+        this.freightLetterType = freightLetterType;
     }
 
-    public Set<CustomDTO> getCustoms() {
-        return customs;
+    public CategoryElementDTO getActionCode() {
+        return actionCode;
     }
 
-    public void setCustoms(Set<CustomDTO> customs) {
-        this.customs = customs;
+    public void setActionCode(CategoryElementDTO actionCode) {
+        this.actionCode = actionCode;
+    }
+
+    public CategoryElementDTO getOwnershipCode() {
+        return ownershipCode;
+    }
+
+    public void setOwnershipCode(CategoryElementDTO ownershipCode) {
+        this.ownershipCode = ownershipCode;
+    }
+
+    public CategoryElementDTO getCurrencyContainerPlace() {
+        return currencyContainerPlace;
+    }
+
+    public void setCurrencyContainerPlace(CategoryElementDTO currencyContainerPlace) {
+        this.currencyContainerPlace = currencyContainerPlace;
+    }
+
+    public CategoryElementDTO getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(CategoryElementDTO paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public CategoryElementDTO getDraftSource() {
+        return draftSource;
+    }
+
+    public void setDraftSource(CategoryElementDTO draftSource) {
+        this.draftSource = draftSource;
+    }
+
+    public CustomDTO getLoadSwitchPlace() {
+        return loadSwitchPlace;
+    }
+
+    public void setLoadSwitchPlace(CustomDTO loadSwitchPlace) {
+        this.loadSwitchPlace = loadSwitchPlace;
+    }
+
+    public DraftTypeDTO getDraftType() {
+        return draftType;
+    }
+
+    public void setDraftType(DraftTypeDTO draftType) {
+        this.draftType = draftType;
+    }
+
+    public DraftStatusInfoDTO getStatusInfo() {
+        return statusInfo;
+    }
+
+    public void setStatusInfo(DraftStatusInfoDTO statusInfo) {
+        this.statusInfo = statusInfo;
+    }
+
+    public InsuranceCompanyInfoDTO getInsuranceCompanyInfo() {
+        return insuranceCompanyInfo;
+    }
+
+    public void setInsuranceCompanyInfo(InsuranceCompanyInfoDTO insuranceCompanyInfo) {
+        this.insuranceCompanyInfo = insuranceCompanyInfo;
+    }
+
+    public AdvisorDefinitionDTO getAdvisingBank() {
+        return advisingBank;
+    }
+
+    public void setAdvisingBank(AdvisorDefinitionDTO advisingBank) {
+        this.advisingBank = advisingBank;
+    }
+
+    public AdvisorDefinitionDTO getInterfaceAdvisingBank() {
+        return interfaceAdvisingBank;
+    }
+
+    public void setInterfaceAdvisingBank(AdvisorDefinitionDTO interfaceAdvisingBank) {
+        this.interfaceAdvisingBank = interfaceAdvisingBank;
+    }
+
+    public AdvisorDefinitionDTO getCoveringBank() {
+        return coveringBank;
+    }
+
+    public void setCoveringBank(AdvisorDefinitionDTO coveringBank) {
+        this.coveringBank = coveringBank;
+    }
+
+    public AuditCompanyInfoDTO getAuditCompanyInfo() {
+        return auditCompanyInfo;
+    }
+
+    public void setAuditCompanyInfo(AuditCompanyInfoDTO auditCompanyInfo) {
+        this.auditCompanyInfo = auditCompanyInfo;
+    }
+
+    public TransportationTypeDTO getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(TransportationTypeDTO transportType) {
+        this.transportType = transportType;
+    }
+
+    public CurrencyExchangeInfoDTO getCurrencyExchangeInfo() {
+        return currencyExchangeInfo;
+    }
+
+    public void setCurrencyExchangeInfo(CurrencyExchangeInfoDTO currencyExchangeInfo) {
+        this.currencyExchangeInfo = currencyExchangeInfo;
+    }
+
+    public DraftAccountInfoDTO getAccountInfo() {
+        return accountInfo;
+    }
+
+    public void setAccountInfo(DraftAccountInfoDTO accountInfo) {
+        this.accountInfo = accountInfo;
+    }
+
+    public CustomDTO getDestinationCustomCompanies() {
+        return destinationCustomCompanies;
+    }
+
+    public void setDestinationCustomCompanies(CustomDTO destinationCustomCompanies) {
+        this.destinationCustomCompanies = destinationCustomCompanies;
+    }
+
+    public CustomDTO getSourceCustomCompanies() {
+        return sourceCustomCompanies;
+    }
+
+    public void setSourceCustomCompanies(CustomDTO sourceCustomCompanies) {
+        this.sourceCustomCompanies = sourceCustomCompanies;
+    }
+
+    public Set<ServiceTariffDTO> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ServiceTariffDTO> services) {
+        this.services = services;
     }
 
     public Set<ProductDTO> getProducts() {
@@ -794,12 +1020,36 @@ public class DraftDTO implements Serializable {
         this.products = products;
     }
 
-    public Set<ServiceTariffDTO> getServices() {
-        return services;
+    public Set<StringValueDTO> getSanctionSerials() {
+        return sanctionSerials;
     }
 
-    public void setServices(Set<ServiceTariffDTO> services) {
-        this.services = services;
+    public void setSanctionSerials(Set<StringValueDTO> sanctionSerials) {
+        this.sanctionSerials = sanctionSerials;
+    }
+
+    public Set<LongValueDTO> getCustomerNumbers() {
+        return customerNumbers;
+    }
+
+    public void setCustomerNumbers(Set<LongValueDTO> customerNumbers) {
+        this.customerNumbers = customerNumbers;
+    }
+
+    public Set<SuggestedSanctionInfoDTO> getSuggestedSanctions() {
+        return suggestedSanctions;
+    }
+
+    public void setSuggestedSanctions(Set<SuggestedSanctionInfoDTO> suggestedSanctions) {
+        this.suggestedSanctions = suggestedSanctions;
+    }
+
+    public Set<DraftDocumentTransactionContainerDTO> getDocumentTransactionContainers() {
+        return documentTransactionContainers;
+    }
+
+    public void setDocumentTransactionContainers(Set<DraftDocumentTransactionContainerDTO> documentTransactionContainers) {
+        this.documentTransactionContainers = documentTransactionContainers;
     }
 
     @Override
@@ -888,24 +1138,49 @@ public class DraftDTO implements Serializable {
             ", isMigrational='" + getIsMigrational() + "'" +
             ", isNewCertificate='" + getIsNewCertificate() + "'" +
             ", isWithoutPayment='" + getIsWithoutPayment() + "'" +
+            ", mainAccountCurrencyCode='" + getMainAccountCurrencyCode() + "'" +
+            ", orderRegCurrencyCode='" + getOrderRegCurrencyCode() + "'" +
+            ", chargedExchangeBrokerCurrencyCode='" + getChargedExchangeBrokerCurrencyCode() + "'" +
             ", destinationCountryCode='" + getDestinationCountryCode() + "'" +
             ", beneficiaryCountryCode='" + getBeneficiaryCountryCode() + "'" +
             ", producerCountryCode='" + getProducerCountryCode() + "'" +
+            ", registerationJustificationCurrencyCode='" + getRegisterationJustificationCurrencyCode() + "'" +
             ", branchCode='" + getBranchCode() + "'" +
             ", operationalBranchCode='" + getOperationalBranchCode() + "'" +
             ", certificateSenderBranchCode='" + getCertificateSenderBranchCode() + "'" +
-            ", mainAccountCurrencyCode='" + getMainAccountCurrencyCode() + "'" +
-            ", orderRegCurrencyCode='" + getOrderRegCurrencyCode() + "'" +
-            ", chargedExchangeBrokerCurrency='" + getChargedExchangeBrokerCurrency() + "'" +
-            ", registerationJustificationCurrencyCode='" + getRegisterationJustificationCurrencyCode() + "'" +
-            ", currencyExchangeInfoTitle='" + getCurrencyExchangeInfoTitle() + "'" +
-            ", transportationTypeName='" + getTransportationTypeName() + "'" +
-            ", accountInfoCode='" + getAccountInfoCode() + "'" +
-            ", customerNumbers=" + getCustomerNumbers() +
-            ", sanctionSerials='" + getSanctionSerials() + "'" +
-            ", customs=" + getCustoms() +
-            ", products=" + getProducts() +
+            ", chargedExchangeBroker=" + getChargedExchangeBroker() +
+            ", insuranceLetterType=" + getInsuranceLetterType() +
+            ", advisorDepositType=" + getAdvisorDepositType() +
+            ", interfaceAdvisorDepositType=" + getInterfaceAdvisorDepositType() +
+            ", coveringAdvisorDepositType=" + getCoveringAdvisorDepositType() +
+            ", impartType=" + getImpartType() +
+            ", dealType=" + getDealType() +
+            ", transportVehicleType=" + getTransportVehicleType() +
+            ", freightLetterType=" + getFreightLetterType() +
+            ", actionCode=" + getActionCode() +
+            ", ownershipCode=" + getOwnershipCode() +
+            ", currencyContainerPlace=" + getCurrencyContainerPlace() +
+            ", paymentType=" + getPaymentType() +
+            ", draftSource=" + getDraftSource() +
+            ", loadSwitchPlace=" + getLoadSwitchPlace() +
+            ", draftType=" + getDraftType() +
+            ", statusInfo=" + getStatusInfo() +
+            ", insuranceCompanyInfo=" + getInsuranceCompanyInfo() +
+            ", advisingBank=" + getAdvisingBank() +
+            ", interfaceAdvisingBank=" + getInterfaceAdvisingBank() +
+            ", coveringBank=" + getCoveringBank() +
+            ", auditCompanyInfo=" + getAuditCompanyInfo() +
+            ", transportType=" + getTransportType() +
+            ", currencyExchangeInfo=" + getCurrencyExchangeInfo() +
+            ", accountInfo=" + getAccountInfo() +
+            ", destinationCustomCompanies=" + getDestinationCustomCompanies() +
+            ", sourceCustomCompanies=" + getSourceCustomCompanies() +
             ", services=" + getServices() +
+            ", products=" + getProducts() +
+            ", sanctionSerials=" + getSanctionSerials() +
+            ", customerNumbers=" + getCustomerNumbers() +
+            ", suggestedSanctions=" + getSuggestedSanctions() +
+            ", documentTransactionContainers=" + getDocumentTransactionContainers() +
             "}";
     }
 }

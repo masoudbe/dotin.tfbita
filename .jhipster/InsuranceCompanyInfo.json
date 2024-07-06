@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082902"
+    "changelogDate": "20240706105855"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -15,14 +15,7 @@
     }
   ],
   "name": "InsuranceCompanyInfo",
-  "relationships": [
-    {
-      "otherEntityName": "draft",
-      "relationshipName": "insuranceCompanyInfo",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceClass"
 }

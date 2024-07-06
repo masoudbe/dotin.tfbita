@@ -24,14 +24,14 @@ class DraftUsedAssuranceTest {
     }
 
     @Test
-    void usedAssurancesTest() throws Exception {
+    void draftTest() {
         DraftUsedAssurance draftUsedAssurance = getDraftUsedAssuranceRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
-        draftUsedAssurance.setUsedAssurances(draftBack);
-        assertThat(draftUsedAssurance.getUsedAssurances()).isEqualTo(draftBack);
+        draftUsedAssurance.setDraft(draftBack);
+        assertThat(draftUsedAssurance.getDraft()).isEqualTo(draftBack);
 
-        draftUsedAssurance.usedAssurances(null);
-        assertThat(draftUsedAssurance.getUsedAssurances()).isNull();
+        draftUsedAssurance.draft(null);
+        assertThat(draftUsedAssurance.getDraft()).isNull();
     }
 }

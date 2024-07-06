@@ -1,0 +1,25 @@
+{
+  "tfbitaApp": {
+    "draftTypeAccountInfo": {
+      "home": {
+        "title": "Draft Type Account Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Type Account Info",
+        "createOrEditLabel": "Create or edit a Draft Type Account Info",
+        "notFound": "No Draft Type Account Infos found"
+      },
+      "created": "A new Draft Type Account Info is created with identifier {{ param }}",
+      "updated": "A Draft Type Account Info is updated with identifier {{ param }}",
+      "deleted": "A Draft Type Account Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Type Account Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Type Account Info"
+      },
+      "id": "ID",
+      "sellCurrencyCommissionAccount": "Sell Currency Commission Account",
+      "incomeAccountNumber": "Income Account Number"
+    }
+  }
+}

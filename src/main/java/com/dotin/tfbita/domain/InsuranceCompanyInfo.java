@@ -1,6 +1,5 @@
 package com.dotin.tfbita.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -25,24 +24,6 @@ public class InsuranceCompanyInfo implements Serializable {
 
     @Column(name = "name")
     private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft insuranceCompanyInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -83,19 +64,6 @@ public class InsuranceCompanyInfo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Draft getInsuranceCompanyInfo() {
-        return this.insuranceCompanyInfo;
-    }
-
-    public void setInsuranceCompanyInfo(Draft draft) {
-        this.insuranceCompanyInfo = draft;
-    }
-
-    public InsuranceCompanyInfo insuranceCompanyInfo(Draft draft) {
-        this.setInsuranceCompanyInfo(draft);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

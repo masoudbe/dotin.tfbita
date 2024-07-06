@@ -32,20 +32,49 @@ public class DraftExtend implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
-    private Draft extensions;
+    private Draft draftField;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -101,16 +130,16 @@ public class DraftExtend implements Serializable {
         this.time = time;
     }
 
-    public Draft getExtensions() {
-        return this.extensions;
+    public Draft getDraftField() {
+        return this.draftField;
     }
 
-    public void setExtensions(Draft draft) {
-        this.extensions = draft;
+    public void setDraftField(Draft draft) {
+        this.draftField = draft;
     }
 
-    public DraftExtend extensions(Draft draft) {
-        this.setExtensions(draft);
+    public DraftExtend draftField(Draft draft) {
+        this.setDraftField(draft);
         return this;
     }
 

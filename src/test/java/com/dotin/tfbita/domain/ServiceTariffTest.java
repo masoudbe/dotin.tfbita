@@ -26,20 +26,24 @@ class ServiceTariffTest {
     }
 
     @Test
-    void draftTest() throws Exception {
+    void draftTest() {
         ServiceTariff serviceTariff = getServiceTariffRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
 
         serviceTariff.addDraft(draftBack);
         assertThat(serviceTariff.getDrafts()).containsOnly(draftBack);
+        assertThat(draftBack.getServices()).containsOnly(serviceTariff);
 
         serviceTariff.removeDraft(draftBack);
         assertThat(serviceTariff.getDrafts()).doesNotContain(draftBack);
+        assertThat(draftBack.getServices()).doesNotContain(serviceTariff);
 
         serviceTariff.drafts(new HashSet<>(Set.of(draftBack)));
         assertThat(serviceTariff.getDrafts()).containsOnly(draftBack);
+        assertThat(draftBack.getServices()).containsOnly(serviceTariff);
 
         serviceTariff.setDrafts(new HashSet<>());
         assertThat(serviceTariff.getDrafts()).doesNotContain(draftBack);
+        assertThat(draftBack.getServices()).doesNotContain(serviceTariff);
     }
 }

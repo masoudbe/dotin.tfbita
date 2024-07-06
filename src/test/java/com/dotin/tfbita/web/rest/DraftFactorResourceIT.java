@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ class DraftFactorResourceIT {
     private static final String DEFAULT_SERIAL = "AAAAAAAAAA";
     private static final String UPDATED_SERIAL = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CURRENCY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CURRENCY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CURRENCY_CODE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/draft-factors";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -79,6 +80,8 @@ class DraftFactorResourceIT {
 
     private DraftFactor draftFactor;
 
+    private DraftFactor insertedDraftFactor;
+
     /**
      * Create an entity for this test.
      *
@@ -93,7 +96,7 @@ class DraftFactorResourceIT {
             .factorDate(DEFAULT_FACTOR_DATE)
             .issueDate(DEFAULT_ISSUE_DATE)
             .serial(DEFAULT_SERIAL)
-            .currencyName(DEFAULT_CURRENCY_NAME);
+            .currencyCode(DEFAULT_CURRENCY_CODE);
         return draftFactor;
     }
 
@@ -111,13 +114,21 @@ class DraftFactorResourceIT {
             .factorDate(UPDATED_FACTOR_DATE)
             .issueDate(UPDATED_ISSUE_DATE)
             .serial(UPDATED_SERIAL)
-            .currencyName(UPDATED_CURRENCY_NAME);
+            .currencyCode(UPDATED_CURRENCY_CODE);
         return draftFactor;
     }
 
     @BeforeEach
     public void initTest() {
         draftFactor = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedDraftFactor != null) {
+            draftFactorRepository.delete(insertedDraftFactor);
+            insertedDraftFactor = null;
+        }
     }
 
     @Test
@@ -140,6 +151,8 @@ class DraftFactorResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedDraftFactor = draftFactorMapper.toEntity(returnedDraftFactorDTO);
         assertDraftFactorUpdatableFieldsEquals(returnedDraftFactor, getPersistedDraftFactor(returnedDraftFactor));
+
+        insertedDraftFactor = returnedDraftFactor;
     }
 
     @Test
@@ -164,7 +177,7 @@ class DraftFactorResourceIT {
     @Transactional
     void getAllDraftFactors() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         // Get all the draftFactorList
         restDraftFactorMockMvc
@@ -178,14 +191,14 @@ class DraftFactorResourceIT {
             .andExpect(jsonPath("$.[*].factorDate").value(hasItem(DEFAULT_FACTOR_DATE)))
             .andExpect(jsonPath("$.[*].issueDate").value(hasItem(DEFAULT_ISSUE_DATE)))
             .andExpect(jsonPath("$.[*].serial").value(hasItem(DEFAULT_SERIAL)))
-            .andExpect(jsonPath("$.[*].currencyName").value(hasItem(DEFAULT_CURRENCY_NAME)));
+            .andExpect(jsonPath("$.[*].currencyCode").value(hasItem(DEFAULT_CURRENCY_CODE)));
     }
 
     @Test
     @Transactional
     void getDraftFactor() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         // Get the draftFactor
         restDraftFactorMockMvc
@@ -199,7 +212,7 @@ class DraftFactorResourceIT {
             .andExpect(jsonPath("$.factorDate").value(DEFAULT_FACTOR_DATE))
             .andExpect(jsonPath("$.issueDate").value(DEFAULT_ISSUE_DATE))
             .andExpect(jsonPath("$.serial").value(DEFAULT_SERIAL))
-            .andExpect(jsonPath("$.currencyName").value(DEFAULT_CURRENCY_NAME));
+            .andExpect(jsonPath("$.currencyCode").value(DEFAULT_CURRENCY_CODE));
     }
 
     @Test
@@ -213,7 +226,7 @@ class DraftFactorResourceIT {
     @Transactional
     void putExistingDraftFactor() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -228,7 +241,7 @@ class DraftFactorResourceIT {
             .factorDate(UPDATED_FACTOR_DATE)
             .issueDate(UPDATED_ISSUE_DATE)
             .serial(UPDATED_SERIAL)
-            .currencyName(UPDATED_CURRENCY_NAME);
+            .currencyCode(UPDATED_CURRENCY_CODE);
         DraftFactorDTO draftFactorDTO = draftFactorMapper.toDto(updatedDraftFactor);
 
         restDraftFactorMockMvc
@@ -310,7 +323,7 @@ class DraftFactorResourceIT {
     @Transactional
     void partialUpdateDraftFactorWithPatch() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -318,7 +331,12 @@ class DraftFactorResourceIT {
         DraftFactor partialUpdatedDraftFactor = new DraftFactor();
         partialUpdatedDraftFactor.setId(draftFactor.getId());
 
-        partialUpdatedDraftFactor.description(UPDATED_DESCRIPTION).factorDate(UPDATED_FACTOR_DATE);
+        partialUpdatedDraftFactor
+            .amount(UPDATED_AMOUNT)
+            .description(UPDATED_DESCRIPTION)
+            .eqAmount(UPDATED_EQ_AMOUNT)
+            .issueDate(UPDATED_ISSUE_DATE)
+            .currencyCode(UPDATED_CURRENCY_CODE);
 
         restDraftFactorMockMvc
             .perform(
@@ -341,7 +359,7 @@ class DraftFactorResourceIT {
     @Transactional
     void fullUpdateDraftFactorWithPatch() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -356,7 +374,7 @@ class DraftFactorResourceIT {
             .factorDate(UPDATED_FACTOR_DATE)
             .issueDate(UPDATED_ISSUE_DATE)
             .serial(UPDATED_SERIAL)
-            .currencyName(UPDATED_CURRENCY_NAME);
+            .currencyCode(UPDATED_CURRENCY_CODE);
 
         restDraftFactorMockMvc
             .perform(
@@ -438,7 +456,7 @@ class DraftFactorResourceIT {
     @Transactional
     void deleteDraftFactor() throws Exception {
         // Initialize the database
-        draftFactorRepository.saveAndFlush(draftFactor);
+        insertedDraftFactor = draftFactorRepository.saveAndFlush(draftFactor);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +49,20 @@ class AdvisorDefinitionResourceIT {
     private static final String DEFAULT_SWIFT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_SWIFT_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CREDIT_DATE = "AAAAAAAAAA";
-    private static final String UPDATED_CREDIT_DATE = "BBBBBBBBBB";
+    private static final String DEFAULT_DEFAULT_CURRENCY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_DEFAULT_CURRENCY_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CURRENCIES_CODES = "AAAAAAAAAA";
+    private static final String UPDATED_CURRENCIES_CODES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_BANK_CODE = "AAAAAAAAAA";
     private static final String UPDATED_BANK_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_BRANCH_CODE = "AAAAAAAAAA";
     private static final String UPDATED_BRANCH_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DEFAULT_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_DEFAULT_CURRENCY_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_COUNTRY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_COUNTRY_CODE = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/advisor-definitions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -86,6 +87,8 @@ class AdvisorDefinitionResourceIT {
 
     private AdvisorDefinition advisorDefinition;
 
+    private AdvisorDefinition insertedAdvisorDefinition;
+
     /**
      * Create an entity for this test.
      *
@@ -99,11 +102,11 @@ class AdvisorDefinitionResourceIT {
             .countryIsoCode(DEFAULT_COUNTRY_ISO_CODE)
             .depositNum(DEFAULT_DEPOSIT_NUM)
             .swiftCode(DEFAULT_SWIFT_CODE)
-            .creditDate(DEFAULT_CREDIT_DATE)
-            .bankCode(DEFAULT_BANK_CODE)
-            .branchCode(DEFAULT_BRANCH_CODE)
             .defaultCurrencyCode(DEFAULT_DEFAULT_CURRENCY_CODE)
-            .countryCode(DEFAULT_COUNTRY_CODE);
+            .currenciesCodes(DEFAULT_CURRENCIES_CODES)
+            .countryCode(DEFAULT_COUNTRY_CODE)
+            .bankCode(DEFAULT_BANK_CODE)
+            .branchCode(DEFAULT_BRANCH_CODE);
         return advisorDefinition;
     }
 
@@ -120,17 +123,25 @@ class AdvisorDefinitionResourceIT {
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
             .depositNum(UPDATED_DEPOSIT_NUM)
             .swiftCode(UPDATED_SWIFT_CODE)
-            .creditDate(UPDATED_CREDIT_DATE)
-            .bankCode(UPDATED_BANK_CODE)
-            .branchCode(UPDATED_BRANCH_CODE)
             .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .countryCode(UPDATED_COUNTRY_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .bankCode(UPDATED_BANK_CODE)
+            .branchCode(UPDATED_BRANCH_CODE);
         return advisorDefinition;
     }
 
     @BeforeEach
     public void initTest() {
         advisorDefinition = createEntity(em);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (insertedAdvisorDefinition != null) {
+            advisorDefinitionRepository.delete(insertedAdvisorDefinition);
+            insertedAdvisorDefinition = null;
+        }
     }
 
     @Test
@@ -153,6 +164,8 @@ class AdvisorDefinitionResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedAdvisorDefinition = advisorDefinitionMapper.toEntity(returnedAdvisorDefinitionDTO);
         assertAdvisorDefinitionUpdatableFieldsEquals(returnedAdvisorDefinition, getPersistedAdvisorDefinition(returnedAdvisorDefinition));
+
+        insertedAdvisorDefinition = returnedAdvisorDefinition;
     }
 
     @Test
@@ -177,7 +190,7 @@ class AdvisorDefinitionResourceIT {
     @Transactional
     void getAllAdvisorDefinitions() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         // Get all the advisorDefinitionList
         restAdvisorDefinitionMockMvc
@@ -190,18 +203,18 @@ class AdvisorDefinitionResourceIT {
             .andExpect(jsonPath("$.[*].countryIsoCode").value(hasItem(DEFAULT_COUNTRY_ISO_CODE)))
             .andExpect(jsonPath("$.[*].depositNum").value(hasItem(DEFAULT_DEPOSIT_NUM)))
             .andExpect(jsonPath("$.[*].swiftCode").value(hasItem(DEFAULT_SWIFT_CODE)))
-            .andExpect(jsonPath("$.[*].creditDate").value(hasItem(DEFAULT_CREDIT_DATE)))
-            .andExpect(jsonPath("$.[*].bankCode").value(hasItem(DEFAULT_BANK_CODE)))
-            .andExpect(jsonPath("$.[*].branchCode").value(hasItem(DEFAULT_BRANCH_CODE)))
             .andExpect(jsonPath("$.[*].defaultCurrencyCode").value(hasItem(DEFAULT_DEFAULT_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE)));
+            .andExpect(jsonPath("$.[*].currenciesCodes").value(hasItem(DEFAULT_CURRENCIES_CODES)))
+            .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE)))
+            .andExpect(jsonPath("$.[*].bankCode").value(hasItem(DEFAULT_BANK_CODE)))
+            .andExpect(jsonPath("$.[*].branchCode").value(hasItem(DEFAULT_BRANCH_CODE)));
     }
 
     @Test
     @Transactional
     void getAdvisorDefinition() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         // Get the advisorDefinition
         restAdvisorDefinitionMockMvc
@@ -214,11 +227,11 @@ class AdvisorDefinitionResourceIT {
             .andExpect(jsonPath("$.countryIsoCode").value(DEFAULT_COUNTRY_ISO_CODE))
             .andExpect(jsonPath("$.depositNum").value(DEFAULT_DEPOSIT_NUM))
             .andExpect(jsonPath("$.swiftCode").value(DEFAULT_SWIFT_CODE))
-            .andExpect(jsonPath("$.creditDate").value(DEFAULT_CREDIT_DATE))
-            .andExpect(jsonPath("$.bankCode").value(DEFAULT_BANK_CODE))
-            .andExpect(jsonPath("$.branchCode").value(DEFAULT_BRANCH_CODE))
             .andExpect(jsonPath("$.defaultCurrencyCode").value(DEFAULT_DEFAULT_CURRENCY_CODE))
-            .andExpect(jsonPath("$.countryCode").value(DEFAULT_COUNTRY_CODE));
+            .andExpect(jsonPath("$.currenciesCodes").value(DEFAULT_CURRENCIES_CODES))
+            .andExpect(jsonPath("$.countryCode").value(DEFAULT_COUNTRY_CODE))
+            .andExpect(jsonPath("$.bankCode").value(DEFAULT_BANK_CODE))
+            .andExpect(jsonPath("$.branchCode").value(DEFAULT_BRANCH_CODE));
     }
 
     @Test
@@ -232,7 +245,7 @@ class AdvisorDefinitionResourceIT {
     @Transactional
     void putExistingAdvisorDefinition() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -246,11 +259,11 @@ class AdvisorDefinitionResourceIT {
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
             .depositNum(UPDATED_DEPOSIT_NUM)
             .swiftCode(UPDATED_SWIFT_CODE)
-            .creditDate(UPDATED_CREDIT_DATE)
-            .bankCode(UPDATED_BANK_CODE)
-            .branchCode(UPDATED_BRANCH_CODE)
             .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .countryCode(UPDATED_COUNTRY_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .bankCode(UPDATED_BANK_CODE)
+            .branchCode(UPDATED_BRANCH_CODE);
         AdvisorDefinitionDTO advisorDefinitionDTO = advisorDefinitionMapper.toDto(updatedAdvisorDefinition);
 
         restAdvisorDefinitionMockMvc
@@ -332,7 +345,7 @@ class AdvisorDefinitionResourceIT {
     @Transactional
     void partialUpdateAdvisorDefinitionWithPatch() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -341,10 +354,10 @@ class AdvisorDefinitionResourceIT {
         partialUpdatedAdvisorDefinition.setId(advisorDefinition.getId());
 
         partialUpdatedAdvisorDefinition
-            .code(UPDATED_CODE)
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
-            .depositNum(UPDATED_DEPOSIT_NUM)
-            .creditDate(UPDATED_CREDIT_DATE)
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .bankCode(UPDATED_BANK_CODE)
             .branchCode(UPDATED_BRANCH_CODE);
 
         restAdvisorDefinitionMockMvc
@@ -368,7 +381,7 @@ class AdvisorDefinitionResourceIT {
     @Transactional
     void fullUpdateAdvisorDefinitionWithPatch() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -382,11 +395,11 @@ class AdvisorDefinitionResourceIT {
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
             .depositNum(UPDATED_DEPOSIT_NUM)
             .swiftCode(UPDATED_SWIFT_CODE)
-            .creditDate(UPDATED_CREDIT_DATE)
-            .bankCode(UPDATED_BANK_CODE)
-            .branchCode(UPDATED_BRANCH_CODE)
             .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
-            .countryCode(UPDATED_COUNTRY_CODE);
+            .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .bankCode(UPDATED_BANK_CODE)
+            .branchCode(UPDATED_BRANCH_CODE);
 
         restAdvisorDefinitionMockMvc
             .perform(
@@ -471,7 +484,7 @@ class AdvisorDefinitionResourceIT {
     @Transactional
     void deleteAdvisorDefinition() throws Exception {
         // Initialize the database
-        advisorDefinitionRepository.saveAndFlush(advisorDefinition);
+        insertedAdvisorDefinition = advisorDefinitionRepository.saveAndFlush(advisorDefinition);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

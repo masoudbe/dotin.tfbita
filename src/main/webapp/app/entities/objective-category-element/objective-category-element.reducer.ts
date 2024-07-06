@@ -18,10 +18,14 @@ const apiUrl = 'api/objective-category-elements';
 
 // Actions
 
-export const getEntities = createAsyncThunk('objectiveCategoryElement/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IObjectiveCategoryElement[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'objectiveCategoryElement/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IObjectiveCategoryElement[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'objectiveCategoryElement/fetch_entity',

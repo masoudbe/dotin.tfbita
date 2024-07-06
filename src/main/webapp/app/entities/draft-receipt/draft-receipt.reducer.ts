@@ -18,10 +18,14 @@ const apiUrl = 'api/draft-receipts';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draftReceipt/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraftReceipt[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draftReceipt/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraftReceipt[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draftReceipt/fetch_entity',

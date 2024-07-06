@@ -14,8 +14,8 @@ import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
 import { IDraft } from 'app/shared/model/draft.model';
 import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
-import { IDraftReceipt } from 'app/shared/model/draft-receipt.model';
-import { getEntities as getDraftReceipts } from 'app/entities/draft-receipt/draft-receipt.reducer';
+import { ICustomJustification } from 'app/shared/model/custom-justification.model';
+import { getEntities as getCustomJustifications } from 'app/entities/custom-justification/custom-justification.reducer';
 import { IProduct } from 'app/shared/model/product.model';
 import { getEntity, updateEntity, createEntity, reset } from './product.reducer';
 
@@ -30,7 +30,7 @@ export const ProductUpdate = () => {
   const productTypes = useAppSelector(state => state.productType.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
   const drafts = useAppSelector(state => state.draft.entities);
-  const draftReceipts = useAppSelector(state => state.draftReceipt.entities);
+  const customJustifications = useAppSelector(state => state.customJustification.entities);
   const productEntity = useAppSelector(state => state.product.entity);
   const loading = useAppSelector(state => state.product.loading);
   const updating = useAppSelector(state => state.product.updating);
@@ -50,7 +50,7 @@ export const ProductUpdate = () => {
     dispatch(getProductTypes({}));
     dispatch(getOrderRegistrationInfos({}));
     dispatch(getDrafts({}));
-    dispatch(getDraftReceipts({}));
+    dispatch(getCustomJustifications({}));
   }, []);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export const ProductUpdate = () => {
       productType: productTypes.find(it => it.id.toString() === values.productType?.toString()),
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
       drafts: mapIdList(values.drafts),
-      draftProductInfos: draftReceipts.find(it => it.id.toString() === values.draftProductInfos?.toString()),
+      customJustifications: mapIdList(values.customJustifications),
     };
 
     if (isNew) {
@@ -89,7 +89,7 @@ export const ProductUpdate = () => {
           productType: productEntity?.productType?.id,
           orderRegistrationInfos: productEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
           drafts: productEntity?.drafts?.map(e => e.id.toString()),
-          draftProductInfos: productEntity?.draftProductInfos?.id,
+          customJustifications: productEntity?.customJustifications?.map(e => e.id.toString()),
         };
 
   return (
@@ -177,15 +177,16 @@ export const ProductUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="product-draftProductInfos"
-                name="draftProductInfos"
-                data-cy="draftProductInfos"
-                label={translate('tfbitaApp.product.draftProductInfos')}
+                label={translate('tfbitaApp.product.customJustification')}
+                id="product-customJustification"
+                data-cy="customJustification"
                 type="select"
+                multiple
+                name="customJustifications"
               >
                 <option value="" key="0" />
-                {draftReceipts
-                  ? draftReceipts.map(otherEntity => (
+                {customJustifications
+                  ? customJustifications.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

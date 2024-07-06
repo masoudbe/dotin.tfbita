@@ -18,6 +18,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,8 @@ class PurchaseFromOtherResourcesResourceIT {
 
     private PurchaseFromOtherResources purchaseFromOtherResources;
 
+    private PurchaseFromOtherResources insertedPurchaseFromOtherResources;
+
     /**
      * Create an entity for this test.
      *
@@ -135,6 +138,14 @@ class PurchaseFromOtherResourcesResourceIT {
         purchaseFromOtherResources = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedPurchaseFromOtherResources != null) {
+            purchaseFromOtherResourcesRepository.delete(insertedPurchaseFromOtherResources);
+            insertedPurchaseFromOtherResources = null;
+        }
+    }
+
     @Test
     @Transactional
     void createPurchaseFromOtherResources() throws Exception {
@@ -162,6 +173,8 @@ class PurchaseFromOtherResourcesResourceIT {
             returnedPurchaseFromOtherResources,
             getPersistedPurchaseFromOtherResources(returnedPurchaseFromOtherResources)
         );
+
+        insertedPurchaseFromOtherResources = returnedPurchaseFromOtherResources;
     }
 
     @Test
@@ -188,7 +201,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void getAllPurchaseFromOtherResources() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         // Get all the purchaseFromOtherResourcesList
         restPurchaseFromOtherResourcesMockMvc
@@ -212,7 +225,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void getPurchaseFromOtherResources() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         // Get the purchaseFromOtherResources
         restPurchaseFromOtherResourcesMockMvc
@@ -243,7 +256,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void putExistingPurchaseFromOtherResources() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -349,7 +362,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void partialUpdatePurchaseFromOtherResourcesWithPatch() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -358,9 +371,9 @@ class PurchaseFromOtherResourcesResourceIT {
         partialUpdatedPurchaseFromOtherResources.setId(purchaseFromOtherResources.getId());
 
         partialUpdatedPurchaseFromOtherResources
-            .evidenceCode(UPDATED_EVIDENCE_CODE)
             .currencySupplierDescription(UPDATED_CURRENCY_SUPPLIER_DESCRIPTION)
-            .confirmationDate(UPDATED_CONFIRMATION_DATE);
+            .purchaseRate(UPDATED_PURCHASE_RATE)
+            .purchaseCurrencyName(UPDATED_PURCHASE_CURRENCY_NAME);
 
         restPurchaseFromOtherResourcesMockMvc
             .perform(
@@ -383,7 +396,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void fullUpdatePurchaseFromOtherResourcesWithPatch() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -490,7 +503,7 @@ class PurchaseFromOtherResourcesResourceIT {
     @Transactional
     void deletePurchaseFromOtherResources() throws Exception {
         // Initialize the database
-        purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
+        insertedPurchaseFromOtherResources = purchaseFromOtherResourcesRepository.saveAndFlush(purchaseFromOtherResources);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

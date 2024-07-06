@@ -23,7 +23,7 @@
       "exchangeRate": "Exchange Rate",
       "defaultCurrencyUsedCost": "Default Currency Used Cost",
       "usedCost": "Used Cost",
-      "usedAssurances": "Used Assurances"
+      "draft": "Draft"
     }
   }
 }

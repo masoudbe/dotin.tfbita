@@ -27,7 +27,7 @@ class TypeAttributeTest {
     }
 
     @Test
-    void attributeTest() throws Exception {
+    void attributeTest() {
         TypeAttribute typeAttribute = getTypeAttributeRandomSampleGenerator();
         Attribute attributeBack = getAttributeRandomSampleGenerator();
 
@@ -39,7 +39,7 @@ class TypeAttributeTest {
     }
 
     @Test
-    void productTypeTest() throws Exception {
+    void productTypeTest() {
         TypeAttribute typeAttribute = getTypeAttributeRandomSampleGenerator();
         ProductType productTypeBack = getProductTypeRandomSampleGenerator();
 

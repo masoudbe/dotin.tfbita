@@ -25,7 +25,7 @@
       "productType": "Product Type",
       "orderRegistrationInfo": "Order Registration Info",
       "draft": "Draft",
-      "draftProductInfos": "Draft Product Infos"
+      "customJustification": "Custom Justification"
     }
   }
 }

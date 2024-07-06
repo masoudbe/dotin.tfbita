@@ -1,9 +1,7 @@
 package com.dotin.tfbita.service.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A DTO for the {@link com.dotin.tfbita.domain.CategoryElement} entity.
@@ -13,15 +11,13 @@ public class CategoryElementDTO implements Serializable {
 
     private Long id;
 
-    private String value;
+    private String val;
 
     private String categoryName;
 
     private String code;
 
     private CategoryDTO category;
-
-    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -31,12 +27,12 @@ public class CategoryElementDTO implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getVal() {
+        return val;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public String getCategoryName() {
@@ -61,14 +57,6 @@ public class CategoryElementDTO implements Serializable {
 
     public void setCategory(CategoryDTO category) {
         this.category = category;
-    }
-
-    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
-        return orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
-        this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
     @Override
@@ -97,11 +85,10 @@ public class CategoryElementDTO implements Serializable {
     public String toString() {
         return "CategoryElementDTO{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", val='" + getVal() + "'" +
             ", categoryName='" + getCategoryName() + "'" +
             ", code='" + getCode() + "'" +
             ", category=" + getCategory() +
-            ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             "}";
     }
 }

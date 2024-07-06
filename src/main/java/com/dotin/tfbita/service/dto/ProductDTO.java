@@ -25,7 +25,7 @@ public class ProductDTO implements Serializable {
 
     private Set<DraftDTO> drafts = new HashSet<>();
 
-    private DraftReceiptDTO draftProductInfos;
+    private Set<CustomJustificationDTO> customJustifications = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -83,12 +83,12 @@ public class ProductDTO implements Serializable {
         this.drafts = drafts;
     }
 
-    public DraftReceiptDTO getDraftProductInfos() {
-        return draftProductInfos;
+    public Set<CustomJustificationDTO> getCustomJustifications() {
+        return customJustifications;
     }
 
-    public void setDraftProductInfos(DraftReceiptDTO draftProductInfos) {
-        this.draftProductInfos = draftProductInfos;
+    public void setCustomJustifications(Set<CustomJustificationDTO> customJustifications) {
+        this.customJustifications = customJustifications;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ProductDTO implements Serializable {
             ", productType=" + getProductType() +
             ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             ", drafts=" + getDrafts() +
-            ", draftProductInfos=" + getDraftProductInfos() +
+            ", customJustifications=" + getCustomJustifications() +
             "}";
     }
 }

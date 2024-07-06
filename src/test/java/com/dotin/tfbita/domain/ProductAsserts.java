@@ -69,6 +69,8 @@ public class ProductAsserts {
                         .isEqualTo(actual.getOrderRegistrationInfos())
             )
             .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
-            .satisfies(e -> assertThat(e.getDraftProductInfos()).as("check draftProductInfos").isEqualTo(actual.getDraftProductInfos()));
+            .satisfies(
+                e -> assertThat(e.getCustomJustifications()).as("check customJustifications").isEqualTo(actual.getCustomJustifications())
+            );
     }
 }

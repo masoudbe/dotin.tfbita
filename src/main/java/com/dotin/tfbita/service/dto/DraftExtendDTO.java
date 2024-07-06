@@ -17,7 +17,7 @@ public class DraftExtendDTO implements Serializable {
 
     private String time;
 
-    private DraftDTO extensions;
+    private DraftDTO draftField;
 
     public Long getId() {
         return id;
@@ -51,12 +51,12 @@ public class DraftExtendDTO implements Serializable {
         this.time = time;
     }
 
-    public DraftDTO getExtensions() {
-        return extensions;
+    public DraftDTO getDraftField() {
+        return draftField;
     }
 
-    public void setExtensions(DraftDTO extensions) {
-        this.extensions = extensions;
+    public void setDraftField(DraftDTO draftField) {
+        this.draftField = draftField;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class DraftExtendDTO implements Serializable {
             ", date='" + getDate() + "'" +
             ", duration=" + getDuration() +
             ", time='" + getTime() + "'" +
-            ", extensions=" + getExtensions() +
+            ", draftField=" + getDraftField() +
             "}";
     }
 }

@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240616082858"
+    "changelogDate": "20240706105915"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -86,14 +86,6 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "paymentCurrencyRateTypeDesc",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "paymentItemTypeDesc",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "netWeight",
       "fieldType": "BigDecimal"
     },
@@ -154,26 +146,55 @@
   "name": "DraftReceipt",
   "relationships": [
     {
-      "otherEntityName": "product",
-      "otherEntityRelationshipName": "draftProductInfos",
-      "relationshipName": "product",
+      "otherEntityName": "draftProductInfo",
+      "relationshipName": "draftProductInfos",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "draft",
-      "relationshipName": "receipts",
-      "relationshipSide": "right",
+      "otherEntityName": "categoryElement",
+      "relationshipName": "productDimension",
+      "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "draftCustomJustification",
-      "otherEntityRelationshipName": "draftReceipts",
-      "relationshipName": "draftCustomJustification",
+      "otherEntityName": "categoryElement",
+      "relationshipName": "stateOfDocuments",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencyProvisionFileType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paymentCurrencyRateType",
+      "relationshipName": "paymentCurrencyRateType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paymentItemType",
+      "relationshipName": "paymentItem",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftReceiptDocumentTransactionContainer",
+      "relationshipName": "documentTransactionContainer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "receipts",
+      "relationshipName": "draft",
       "relationshipSide": "right",
-      "relationshipType": "many-to-many"
+      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

@@ -1,0 +1,104 @@
+{
+  "annotations": {
+    "changelogDate": "20240706105920"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "DraftDocumentTransactionContainer",
+  "relationships": [
+    {
+      "otherEntityName": "draftReceiptDocumentTransactionContainer",
+      "relationshipName": "receipts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "otherDocumentTransactionsContainer",
+      "relationshipName": "otherDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "canceledJustificationDocumentContainer",
+      "relationshipName": "canceledJustificationDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "justificationDocumentTransactionsContainer",
+      "relationshipName": "justificationDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "receivedCommisionsContainer",
+      "relationshipName": "receivedCommisions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "canceledDocumentTransactionsContainer",
+      "relationshipName": "canceledDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "returnedDefaultCurrencyCostsContainer",
+      "relationshipName": "returnedDefaultCurrencyCostsDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "otherEntityRelationshipName": "defaultCurrencyCostsDocumentContainer",
+      "relationshipName": "defaultCurrencyCostsDocumentTransactions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "issueCommissionDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "paymentDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "settleDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "settleExcessDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "commissionDeleteDraftDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "documentTransaction",
+      "relationshipName": "commissionDraftExtendDocumentTransaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

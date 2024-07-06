@@ -55,10 +55,6 @@ public class DraftReceiptDTO implements Serializable {
 
     private Boolean usable;
 
-    private String paymentCurrencyRateTypeDesc;
-
-    private String paymentItemTypeDesc;
-
     private BigDecimal netWeight;
 
     private BigDecimal grossWeight;
@@ -90,7 +86,19 @@ public class DraftReceiptDTO implements Serializable {
 
     private BigDecimal otherCost;
 
-    private DraftDTO receipts;
+    private CategoryElementDTO productDimension;
+
+    private CategoryElementDTO stateOfDocuments;
+
+    private CategoryElementDTO currencyProvisionFileType;
+
+    private PaymentCurrencyRateTypeDTO paymentCurrencyRateType;
+
+    private PaymentItemTypeDTO paymentItem;
+
+    private DraftReceiptDocumentTransactionContainerDTO documentTransactionContainer;
+
+    private DraftDTO draft;
 
     private Set<DraftCustomJustificationDTO> draftCustomJustifications = new HashSet<>();
 
@@ -262,22 +270,6 @@ public class DraftReceiptDTO implements Serializable {
         this.usable = usable;
     }
 
-    public String getPaymentCurrencyRateTypeDesc() {
-        return paymentCurrencyRateTypeDesc;
-    }
-
-    public void setPaymentCurrencyRateTypeDesc(String paymentCurrencyRateTypeDesc) {
-        this.paymentCurrencyRateTypeDesc = paymentCurrencyRateTypeDesc;
-    }
-
-    public String getPaymentItemTypeDesc() {
-        return paymentItemTypeDesc;
-    }
-
-    public void setPaymentItemTypeDesc(String paymentItemTypeDesc) {
-        this.paymentItemTypeDesc = paymentItemTypeDesc;
-    }
-
     public BigDecimal getNetWeight() {
         return netWeight;
     }
@@ -398,12 +390,60 @@ public class DraftReceiptDTO implements Serializable {
         this.otherCost = otherCost;
     }
 
-    public DraftDTO getReceipts() {
-        return receipts;
+    public CategoryElementDTO getProductDimension() {
+        return productDimension;
     }
 
-    public void setReceipts(DraftDTO receipts) {
-        this.receipts = receipts;
+    public void setProductDimension(CategoryElementDTO productDimension) {
+        this.productDimension = productDimension;
+    }
+
+    public CategoryElementDTO getStateOfDocuments() {
+        return stateOfDocuments;
+    }
+
+    public void setStateOfDocuments(CategoryElementDTO stateOfDocuments) {
+        this.stateOfDocuments = stateOfDocuments;
+    }
+
+    public CategoryElementDTO getCurrencyProvisionFileType() {
+        return currencyProvisionFileType;
+    }
+
+    public void setCurrencyProvisionFileType(CategoryElementDTO currencyProvisionFileType) {
+        this.currencyProvisionFileType = currencyProvisionFileType;
+    }
+
+    public PaymentCurrencyRateTypeDTO getPaymentCurrencyRateType() {
+        return paymentCurrencyRateType;
+    }
+
+    public void setPaymentCurrencyRateType(PaymentCurrencyRateTypeDTO paymentCurrencyRateType) {
+        this.paymentCurrencyRateType = paymentCurrencyRateType;
+    }
+
+    public PaymentItemTypeDTO getPaymentItem() {
+        return paymentItem;
+    }
+
+    public void setPaymentItem(PaymentItemTypeDTO paymentItem) {
+        this.paymentItem = paymentItem;
+    }
+
+    public DraftReceiptDocumentTransactionContainerDTO getDocumentTransactionContainer() {
+        return documentTransactionContainer;
+    }
+
+    public void setDocumentTransactionContainer(DraftReceiptDocumentTransactionContainerDTO documentTransactionContainer) {
+        this.documentTransactionContainer = documentTransactionContainer;
+    }
+
+    public DraftDTO getDraft() {
+        return draft;
+    }
+
+    public void setDraft(DraftDTO draft) {
+        this.draft = draft;
     }
 
     public Set<DraftCustomJustificationDTO> getDraftCustomJustifications() {
@@ -460,8 +500,6 @@ public class DraftReceiptDTO implements Serializable {
             ", serial='" + getSerial() + "'" +
             ", transportRow='" + getTransportRow() + "'" +
             ", usable='" + getUsable() + "'" +
-            ", paymentCurrencyRateTypeDesc='" + getPaymentCurrencyRateTypeDesc() + "'" +
-            ", paymentItemTypeDesc='" + getPaymentItemTypeDesc() + "'" +
             ", netWeight=" + getNetWeight() +
             ", grossWeight=" + getGrossWeight() +
             ", totalNetWeight=" + getTotalNetWeight() +
@@ -476,7 +514,13 @@ public class DraftReceiptDTO implements Serializable {
             ", currencyProvisionFile='" + getCurrencyProvisionFile() + "'" +
             ", isMigrational='" + getIsMigrational() + "'" +
             ", otherCost=" + getOtherCost() +
-            ", receipts=" + getReceipts() +
+            ", productDimension=" + getProductDimension() +
+            ", stateOfDocuments=" + getStateOfDocuments() +
+            ", currencyProvisionFileType=" + getCurrencyProvisionFileType() +
+            ", paymentCurrencyRateType=" + getPaymentCurrencyRateType() +
+            ", paymentItem=" + getPaymentItem() +
+            ", documentTransactionContainer=" + getDocumentTransactionContainer() +
+            ", draft=" + getDraft() +
             ", draftCustomJustifications=" + getDraftCustomJustifications() +
             "}";
     }

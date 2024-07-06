@@ -50,9 +50,9 @@ export const DraftExtendDetail = () => {
           </dt>
           <dd>{draftExtendEntity.time}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.draftExtend.extensions">Extensions</Translate>
+            <Translate contentKey="tfbitaApp.draftExtend.draftField">Draft Field</Translate>
           </dt>
-          <dd>{draftExtendEntity.extensions ? draftExtendEntity.extensions.id : ''}</dd>
+          <dd>{draftExtendEntity.draftField ? draftExtendEntity.draftField.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/draft-extend" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

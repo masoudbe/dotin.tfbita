@@ -47,21 +47,16 @@ public class DraftTestSamples {
             .letterNumberTazirat("letterNumberTazirat1")
             .letterDateTazirat("letterDateTazirat1")
             .loanNumber("loanNumber1")
+            .mainAccountCurrencyCode("mainAccountCurrencyCode1")
+            .orderRegCurrencyCode("orderRegCurrencyCode1")
+            .chargedExchangeBrokerCurrencyCode("chargedExchangeBrokerCurrencyCode1")
             .destinationCountryCode("destinationCountryCode1")
             .beneficiaryCountryCode("beneficiaryCountryCode1")
             .producerCountryCode("producerCountryCode1")
+            .registerationJustificationCurrencyCode("registerationJustificationCurrencyCode1")
             .branchCode("branchCode1")
             .operationalBranchCode("operationalBranchCode1")
-            .certificateSenderBranchCode("certificateSenderBranchCode1")
-            .mainAccountCurrencyCode("mainAccountCurrencyCode1")
-            .orderRegCurrencyCode("orderRegCurrencyCode1")
-            .chargedExchangeBrokerCurrency("chargedExchangeBrokerCurrency1")
-            .registerationJustificationCurrencyCode("registerationJustificationCurrencyCode1")
-            .currencyExchangeInfoTitle("currencyExchangeInfoTitle1")
-            .transportationTypeName("transportationTypeName1")
-            .accountInfoCode("accountInfoCode1")
-            .customerNumbers(1L)
-            .sanctionSerials("sanctionSerials1");
+            .certificateSenderBranchCode("certificateSenderBranchCode1");
     }
 
     public static Draft getDraftSample2() {
@@ -100,21 +95,16 @@ public class DraftTestSamples {
             .letterNumberTazirat("letterNumberTazirat2")
             .letterDateTazirat("letterDateTazirat2")
             .loanNumber("loanNumber2")
+            .mainAccountCurrencyCode("mainAccountCurrencyCode2")
+            .orderRegCurrencyCode("orderRegCurrencyCode2")
+            .chargedExchangeBrokerCurrencyCode("chargedExchangeBrokerCurrencyCode2")
             .destinationCountryCode("destinationCountryCode2")
             .beneficiaryCountryCode("beneficiaryCountryCode2")
             .producerCountryCode("producerCountryCode2")
+            .registerationJustificationCurrencyCode("registerationJustificationCurrencyCode2")
             .branchCode("branchCode2")
             .operationalBranchCode("operationalBranchCode2")
-            .certificateSenderBranchCode("certificateSenderBranchCode2")
-            .mainAccountCurrencyCode("mainAccountCurrencyCode2")
-            .orderRegCurrencyCode("orderRegCurrencyCode2")
-            .chargedExchangeBrokerCurrency("chargedExchangeBrokerCurrency2")
-            .registerationJustificationCurrencyCode("registerationJustificationCurrencyCode2")
-            .currencyExchangeInfoTitle("currencyExchangeInfoTitle2")
-            .transportationTypeName("transportationTypeName2")
-            .accountInfoCode("accountInfoCode2")
-            .customerNumbers(2L)
-            .sanctionSerials("sanctionSerials2");
+            .certificateSenderBranchCode("certificateSenderBranchCode2");
     }
 
     public static Draft getDraftRandomSampleGenerator() {
@@ -153,20 +143,15 @@ public class DraftTestSamples {
             .letterNumberTazirat(UUID.randomUUID().toString())
             .letterDateTazirat(UUID.randomUUID().toString())
             .loanNumber(UUID.randomUUID().toString())
+            .mainAccountCurrencyCode(UUID.randomUUID().toString())
+            .orderRegCurrencyCode(UUID.randomUUID().toString())
+            .chargedExchangeBrokerCurrencyCode(UUID.randomUUID().toString())
             .destinationCountryCode(UUID.randomUUID().toString())
             .beneficiaryCountryCode(UUID.randomUUID().toString())
             .producerCountryCode(UUID.randomUUID().toString())
+            .registerationJustificationCurrencyCode(UUID.randomUUID().toString())
             .branchCode(UUID.randomUUID().toString())
             .operationalBranchCode(UUID.randomUUID().toString())
-            .certificateSenderBranchCode(UUID.randomUUID().toString())
-            .mainAccountCurrencyCode(UUID.randomUUID().toString())
-            .orderRegCurrencyCode(UUID.randomUUID().toString())
-            .chargedExchangeBrokerCurrency(UUID.randomUUID().toString())
-            .registerationJustificationCurrencyCode(UUID.randomUUID().toString())
-            .currencyExchangeInfoTitle(UUID.randomUUID().toString())
-            .transportationTypeName(UUID.randomUUID().toString())
-            .accountInfoCode(UUID.randomUUID().toString())
-            .customerNumbers(longCount.incrementAndGet())
-            .sanctionSerials(UUID.randomUUID().toString());
+            .certificateSenderBranchCode(UUID.randomUUID().toString());
     }
 }

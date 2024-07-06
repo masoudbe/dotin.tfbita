@@ -114,8 +114,7 @@ export const DraftUsedAssurance = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('usedCost')} />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.draftUsedAssurance.usedAssurances">Used Assurances</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="tfbitaApp.draftUsedAssurance.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -134,8 +133,8 @@ export const DraftUsedAssurance = () => {
                   <td>{draftUsedAssurance.defaultCurrencyUsedCost}</td>
                   <td>{draftUsedAssurance.usedCost}</td>
                   <td>
-                    {draftUsedAssurance.usedAssurances ? (
-                      <Link to={`/draft/${draftUsedAssurance.usedAssurances.id}`}>{draftUsedAssurance.usedAssurances.id}</Link>
+                    {draftUsedAssurance.draft ? (
+                      <Link to={`/draft/${draftUsedAssurance.draft.id}`}>{draftUsedAssurance.draft.id}</Link>
                     ) : (
                       ''
                     )}

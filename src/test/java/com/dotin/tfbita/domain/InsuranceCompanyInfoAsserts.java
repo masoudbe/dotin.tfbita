@@ -57,11 +57,5 @@ public class InsuranceCompanyInfoAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertInsuranceCompanyInfoUpdatableRelationshipsEquals(InsuranceCompanyInfo expected, InsuranceCompanyInfo actual) {
-        assertThat(expected)
-            .as("Verify InsuranceCompanyInfo relationships")
-            .satisfies(
-                e -> assertThat(e.getInsuranceCompanyInfo()).as("check insuranceCompanyInfo").isEqualTo(actual.getInsuranceCompanyInfo())
-            );
-    }
+    public static void assertInsuranceCompanyInfoUpdatableRelationshipsEquals(InsuranceCompanyInfo expected, InsuranceCompanyInfo actual) {}
 }

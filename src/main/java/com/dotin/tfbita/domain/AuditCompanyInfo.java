@@ -1,6 +1,5 @@
 package com.dotin.tfbita.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -68,26 +67,8 @@ public class AuditCompanyInfo implements Serializable {
     @Column(name = "unit")
     private String unit;
 
-    @Column(name = "city")
-    private String city;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "draftReceipts",
-            "draftUsedAssurances",
-            "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
-            "services",
-        },
-        allowSetters = true
-    )
-    private Draft auditCompanyInfo;
+    @Column(name = "city_code")
+    private String cityCode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -312,30 +293,17 @@ public class AuditCompanyInfo implements Serializable {
         this.unit = unit;
     }
 
-    public String getCity() {
-        return this.city;
+    public String getCityCode() {
+        return this.cityCode;
     }
 
-    public AuditCompanyInfo city(String city) {
-        this.setCity(city);
+    public AuditCompanyInfo cityCode(String cityCode) {
+        this.setCityCode(cityCode);
         return this;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Draft getAuditCompanyInfo() {
-        return this.auditCompanyInfo;
-    }
-
-    public void setAuditCompanyInfo(Draft draft) {
-        this.auditCompanyInfo = draft;
-    }
-
-    public AuditCompanyInfo auditCompanyInfo(Draft draft) {
-        this.setAuditCompanyInfo(draft);
-        return this;
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -378,7 +346,7 @@ public class AuditCompanyInfo implements Serializable {
             ", theSideStreet='" + getTheSideStreet() + "'" +
             ", title='" + getTitle() + "'" +
             ", unit='" + getUnit() + "'" +
-            ", city='" + getCity() + "'" +
+            ", cityCode='" + getCityCode() + "'" +
             "}";
     }
 }

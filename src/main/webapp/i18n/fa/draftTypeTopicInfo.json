@@ -1,0 +1,31 @@
+{
+  "tfbitaApp": {
+    "draftTypeTopicInfo": {
+      "home": {
+        "title": "Draft Type Topic Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Type Topic Info",
+        "createOrEditLabel": "Create or edit a Draft Type Topic Info",
+        "notFound": "No Draft Type Topic Infos found"
+      },
+      "created": "A new Draft Type Topic Info is created with identifier {{ param }}",
+      "updated": "A Draft Type Topic Info is updated with identifier {{ param }}",
+      "deleted": "A Draft Type Topic Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Type Topic Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Type Topic Info"
+      },
+      "id": "ID",
+      "currencySellCommissionTopic": "Currency Sell Commission Topic",
+      "documentReceiptDisciplinaryTopic": "Document Receipt Disciplinary Topic",
+      "draftMainTopic": "Draft Main Topic",
+      "insuranceCostTopic": "Insurance Cost Topic",
+      "justificationDisciplinaryTopic": "Justification Disciplinary Topic",
+      "openDraftDisciplinaryTopic": "Open Draft Disciplinary Topic",
+      "otherCostsTopic": "Other Costs Topic",
+      "postTelegraphSwiftCostsTopic": "Post Telegraph Swift Costs Topic"
+    }
+  }
+}

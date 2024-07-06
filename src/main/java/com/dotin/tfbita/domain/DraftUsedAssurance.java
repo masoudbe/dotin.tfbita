@@ -39,20 +39,49 @@ public class DraftUsedAssurance implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
-    private Draft usedAssurances;
+    private Draft draft;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -134,16 +163,16 @@ public class DraftUsedAssurance implements Serializable {
         this.usedCost = usedCost;
     }
 
-    public Draft getUsedAssurances() {
-        return this.usedAssurances;
+    public Draft getDraft() {
+        return this.draft;
     }
 
-    public void setUsedAssurances(Draft draft) {
-        this.usedAssurances = draft;
+    public void setDraft(Draft draft) {
+        this.draft = draft;
     }
 
-    public DraftUsedAssurance usedAssurances(Draft draft) {
-        this.setUsedAssurances(draft);
+    public DraftUsedAssurance draft(Draft draft) {
+        this.setDraft(draft);
         return this;
     }
 

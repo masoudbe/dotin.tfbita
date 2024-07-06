@@ -10,8 +10,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,15 +89,6 @@ public class ProductService {
     }
 
     /**
-     * Get all the products with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<ProductDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return productRepository.findAllWithEagerRelationships(pageable).map(productMapper::toDto);
-    }
-
-    /**
      * Get one product by id.
      *
      * @param id the id of the entity.
@@ -108,7 +97,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Optional<ProductDTO> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
-        return productRepository.findOneWithEagerRelationships(id).map(productMapper::toDto);
+        return productRepository.findById(id).map(productMapper::toDto);
     }
 
     /**

@@ -18,10 +18,14 @@ const apiUrl = 'api/draft-taxes';
 
 // Actions
 
-export const getEntities = createAsyncThunk('draftTax/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IDraftTax[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'draftTax/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IDraftTax[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'draftTax/fetch_entity',

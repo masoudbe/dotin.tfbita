@@ -18,10 +18,14 @@ const apiUrl = 'api/purchase-from-other-resources';
 
 // Actions
 
-export const getEntities = createAsyncThunk('purchaseFromOtherResources/fetch_entity_list', async ({ sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<IPurchaseFromOtherResources[]>(requestUrl);
-});
+export const getEntities = createAsyncThunk(
+  'purchaseFromOtherResources/fetch_entity_list',
+  async ({ sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}?${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+    return axios.get<IPurchaseFromOtherResources[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
 
 export const getEntity = createAsyncThunk(
   'purchaseFromOtherResources/fetch_entity',

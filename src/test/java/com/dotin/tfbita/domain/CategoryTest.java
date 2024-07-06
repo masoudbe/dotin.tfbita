@@ -26,7 +26,7 @@ class CategoryTest {
     }
 
     @Test
-    void possibleValuesTest() throws Exception {
+    void possibleValuesTest() {
         Category category = getCategoryRandomSampleGenerator();
         CategoryElement categoryElementBack = getCategoryElementRandomSampleGenerator();
 

@@ -8,8 +8,14 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { IAdditionalBrokerInformation } from 'app/shared/model/additional-broker-information.model';
+import { getEntities as getAdditionalBrokerInformations } from 'app/entities/additional-broker-information/additional-broker-information.reducer';
+import { IAdvisorDefinitionDeposit } from 'app/shared/model/advisor-definition-deposit.model';
+import { getEntities as getAdvisorDefinitionDeposits } from 'app/entities/advisor-definition-deposit/advisor-definition-deposit.reducer';
+import { ITransferMethodManagement } from 'app/shared/model/transfer-method-management.model';
+import { getEntities as getTransferMethodManagements } from 'app/entities/transfer-method-management/transfer-method-management.reducer';
+import { ISwiftBic } from 'app/shared/model/swift-bic.model';
+import { getEntities as getSwiftBics } from 'app/entities/swift-bic/swift-bic.reducer';
 import { IAdvisorDefinition } from 'app/shared/model/advisor-definition.model';
 import { getEntity, updateEntity, createEntity, reset } from './advisor-definition.reducer';
 
@@ -21,7 +27,10 @@ export const AdvisorDefinitionUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
+  const additionalBrokerInformations = useAppSelector(state => state.additionalBrokerInformation.entities);
+  const advisorDefinitionDeposits = useAppSelector(state => state.advisorDefinitionDeposit.entities);
+  const transferMethodManagements = useAppSelector(state => state.transferMethodManagement.entities);
+  const swiftBics = useAppSelector(state => state.swiftBic.entities);
   const advisorDefinitionEntity = useAppSelector(state => state.advisorDefinition.entity);
   const loading = useAppSelector(state => state.advisorDefinition.loading);
   const updating = useAppSelector(state => state.advisorDefinition.updating);
@@ -38,7 +47,10 @@ export const AdvisorDefinitionUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getDrafts({}));
+    dispatch(getAdditionalBrokerInformations({}));
+    dispatch(getAdvisorDefinitionDeposits({}));
+    dispatch(getTransferMethodManagements({}));
+    dispatch(getSwiftBics({}));
   }, []);
 
   useEffect(() => {
@@ -56,9 +68,14 @@ export const AdvisorDefinitionUpdate = () => {
     const entity = {
       ...advisorDefinitionEntity,
       ...values,
-      advisingBank: drafts.find(it => it.id.toString() === values.advisingBank?.toString()),
-      interfaceAdvisingBank: drafts.find(it => it.id.toString() === values.interfaceAdvisingBank?.toString()),
-      coveringBank: drafts.find(it => it.id.toString() === values.coveringBank?.toString()),
+      additionalBrokerInformation: additionalBrokerInformations.find(
+        it => it.id.toString() === values.additionalBrokerInformation?.toString(),
+      ),
+      defaultVostroDeposit: advisorDefinitionDeposits.find(it => it.id.toString() === values.defaultVostroDeposit?.toString()),
+      defaultNostroDeposit: advisorDefinitionDeposits.find(it => it.id.toString() === values.defaultNostroDeposit?.toString()),
+      receiveMethod: transferMethodManagements.find(it => it.id.toString() === values.receiveMethod?.toString()),
+      payMethod: transferMethodManagements.find(it => it.id.toString() === values.payMethod?.toString()),
+      swiftBic: swiftBics.find(it => it.id.toString() === values.swiftBic?.toString()),
     };
 
     if (isNew) {
@@ -73,9 +90,12 @@ export const AdvisorDefinitionUpdate = () => {
       ? {}
       : {
           ...advisorDefinitionEntity,
-          advisingBank: advisorDefinitionEntity?.advisingBank?.id,
-          interfaceAdvisingBank: advisorDefinitionEntity?.interfaceAdvisingBank?.id,
-          coveringBank: advisorDefinitionEntity?.coveringBank?.id,
+          additionalBrokerInformation: advisorDefinitionEntity?.additionalBrokerInformation?.id,
+          defaultVostroDeposit: advisorDefinitionEntity?.defaultVostroDeposit?.id,
+          defaultNostroDeposit: advisorDefinitionEntity?.defaultNostroDeposit?.id,
+          receiveMethod: advisorDefinitionEntity?.receiveMethod?.id,
+          payMethod: advisorDefinitionEntity?.payMethod?.id,
+          swiftBic: advisorDefinitionEntity?.swiftBic?.id,
         };
 
   return (
@@ -139,10 +159,24 @@ export const AdvisorDefinitionUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.advisorDefinition.creditDate')}
-                id="advisor-definition-creditDate"
-                name="creditDate"
-                data-cy="creditDate"
+                label={translate('tfbitaApp.advisorDefinition.defaultCurrencyCode')}
+                id="advisor-definition-defaultCurrencyCode"
+                name="defaultCurrencyCode"
+                data-cy="defaultCurrencyCode"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.advisorDefinition.currenciesCodes')}
+                id="advisor-definition-currenciesCodes"
+                name="currenciesCodes"
+                data-cy="currenciesCodes"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('tfbitaApp.advisorDefinition.countryCode')}
+                id="advisor-definition-countryCode"
+                name="countryCode"
+                data-cy="countryCode"
                 type="text"
               />
               <ValidatedField
@@ -160,29 +194,15 @@ export const AdvisorDefinitionUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                label={translate('tfbitaApp.advisorDefinition.defaultCurrencyCode')}
-                id="advisor-definition-defaultCurrencyCode"
-                name="defaultCurrencyCode"
-                data-cy="defaultCurrencyCode"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('tfbitaApp.advisorDefinition.countryCode')}
-                id="advisor-definition-countryCode"
-                name="countryCode"
-                data-cy="countryCode"
-                type="text"
-              />
-              <ValidatedField
-                id="advisor-definition-advisingBank"
-                name="advisingBank"
-                data-cy="advisingBank"
-                label={translate('tfbitaApp.advisorDefinition.advisingBank')}
+                id="advisor-definition-additionalBrokerInformation"
+                name="additionalBrokerInformation"
+                data-cy="additionalBrokerInformation"
+                label={translate('tfbitaApp.advisorDefinition.additionalBrokerInformation')}
                 type="select"
               >
                 <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
+                {additionalBrokerInformations
+                  ? additionalBrokerInformations.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -190,15 +210,15 @@ export const AdvisorDefinitionUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="advisor-definition-interfaceAdvisingBank"
-                name="interfaceAdvisingBank"
-                data-cy="interfaceAdvisingBank"
-                label={translate('tfbitaApp.advisorDefinition.interfaceAdvisingBank')}
+                id="advisor-definition-defaultVostroDeposit"
+                name="defaultVostroDeposit"
+                data-cy="defaultVostroDeposit"
+                label={translate('tfbitaApp.advisorDefinition.defaultVostroDeposit')}
                 type="select"
               >
                 <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
+                {advisorDefinitionDeposits
+                  ? advisorDefinitionDeposits.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -206,15 +226,63 @@ export const AdvisorDefinitionUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                id="advisor-definition-coveringBank"
-                name="coveringBank"
-                data-cy="coveringBank"
-                label={translate('tfbitaApp.advisorDefinition.coveringBank')}
+                id="advisor-definition-defaultNostroDeposit"
+                name="defaultNostroDeposit"
+                data-cy="defaultNostroDeposit"
+                label={translate('tfbitaApp.advisorDefinition.defaultNostroDeposit')}
                 type="select"
               >
                 <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
+                {advisorDefinitionDeposits
+                  ? advisorDefinitionDeposits.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="advisor-definition-receiveMethod"
+                name="receiveMethod"
+                data-cy="receiveMethod"
+                label={translate('tfbitaApp.advisorDefinition.receiveMethod')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {transferMethodManagements
+                  ? transferMethodManagements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="advisor-definition-payMethod"
+                name="payMethod"
+                data-cy="payMethod"
+                label={translate('tfbitaApp.advisorDefinition.payMethod')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {transferMethodManagements
+                  ? transferMethodManagements.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="advisor-definition-swiftBic"
+                name="swiftBic"
+                data-cy="swiftBic"
+                label={translate('tfbitaApp.advisorDefinition.swiftBic')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {swiftBics
+                  ? swiftBics.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

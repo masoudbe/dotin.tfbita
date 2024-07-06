@@ -22,8 +22,8 @@ public class StringValue implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "val")
+    private String val;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "commissionTransactionNumbers")
     @JsonIgnoreProperties(
@@ -40,11 +40,11 @@ public class StringValue implements Serializable {
             "ownerType",
             "status",
             "externalCustomerType",
+            "transportVehicleType",
             "transportType",
             "destCoustomers",
             "cargoPlaceCustoms",
             "entranceBorders",
-            "transportVehicleTypes",
             "productInfos",
             "commissionTransactionNumbers",
             "licenceInfos",
@@ -52,6 +52,70 @@ public class StringValue implements Serializable {
         allowSetters = true
     )
     private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "sanctionSerials")
+    @JsonIgnoreProperties(
+        value = {
+            "receipts",
+            "taxes",
+            "extensions",
+            "draftFactors",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
+            "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
+        },
+        allowSetters = true
+    )
+    private Set<Draft> drafts = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userGroups")
+    @JsonIgnoreProperties(
+        value = {
+            "type",
+            "secondaryType",
+            "division",
+            "topicInfo",
+            "conditionInfo",
+            "accountInfo",
+            "requestType",
+            "acceptableProductTypes",
+            "userGroups",
+        },
+        allowSetters = true
+    )
+    private Set<DraftType> draftTypes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -68,17 +132,17 @@ public class StringValue implements Serializable {
         this.id = id;
     }
 
-    public String getValue() {
-        return this.value;
+    public String getVal() {
+        return this.val;
     }
 
-    public StringValue value(String value) {
-        this.setValue(value);
+    public StringValue val(String val) {
+        this.setVal(val);
         return this;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
@@ -112,6 +176,68 @@ public class StringValue implements Serializable {
         return this;
     }
 
+    public Set<Draft> getDrafts() {
+        return this.drafts;
+    }
+
+    public void setDrafts(Set<Draft> drafts) {
+        if (this.drafts != null) {
+            this.drafts.forEach(i -> i.removeSanctionSerials(this));
+        }
+        if (drafts != null) {
+            drafts.forEach(i -> i.addSanctionSerials(this));
+        }
+        this.drafts = drafts;
+    }
+
+    public StringValue drafts(Set<Draft> drafts) {
+        this.setDrafts(drafts);
+        return this;
+    }
+
+    public StringValue addDraft(Draft draft) {
+        this.drafts.add(draft);
+        draft.getSanctionSerials().add(this);
+        return this;
+    }
+
+    public StringValue removeDraft(Draft draft) {
+        this.drafts.remove(draft);
+        draft.getSanctionSerials().remove(this);
+        return this;
+    }
+
+    public Set<DraftType> getDraftTypes() {
+        return this.draftTypes;
+    }
+
+    public void setDraftTypes(Set<DraftType> draftTypes) {
+        if (this.draftTypes != null) {
+            this.draftTypes.forEach(i -> i.removeUserGroups(this));
+        }
+        if (draftTypes != null) {
+            draftTypes.forEach(i -> i.addUserGroups(this));
+        }
+        this.draftTypes = draftTypes;
+    }
+
+    public StringValue draftTypes(Set<DraftType> draftTypes) {
+        this.setDraftTypes(draftTypes);
+        return this;
+    }
+
+    public StringValue addDraftType(DraftType draftType) {
+        this.draftTypes.add(draftType);
+        draftType.getUserGroups().add(this);
+        return this;
+    }
+
+    public StringValue removeDraftType(DraftType draftType) {
+        this.draftTypes.remove(draftType);
+        draftType.getUserGroups().remove(this);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -136,7 +262,7 @@ public class StringValue implements Serializable {
     public String toString() {
         return "StringValue{" +
             "id=" + getId() +
-            ", value='" + getValue() + "'" +
+            ", val='" + getVal() + "'" +
             "}";
     }
 }

@@ -26,7 +26,7 @@ class AttributeValueTest {
     }
 
     @Test
-    void typeAttributeTest() throws Exception {
+    void typeAttributeTest() {
         AttributeValue attributeValue = getAttributeValueRandomSampleGenerator();
         TypeAttribute typeAttributeBack = getTypeAttributeRandomSampleGenerator();
 
@@ -38,7 +38,7 @@ class AttributeValueTest {
     }
 
     @Test
-    void attributeValueGroupTest() throws Exception {
+    void attributeValueGroupTest() {
         AttributeValue attributeValue = getAttributeValueRandomSampleGenerator();
         AttributeValueGroup attributeValueGroupBack = getAttributeValueGroupRandomSampleGenerator();
 
@@ -50,7 +50,7 @@ class AttributeValueTest {
     }
 
     @Test
-    void productTest() throws Exception {
+    void productTest() {
         AttributeValue attributeValue = getAttributeValueRandomSampleGenerator();
         Product productBack = getProductRandomSampleGenerator();
 

@@ -7,7 +7,7 @@ export interface IDraftUsedAssurance {
   exchangeRate?: number | null;
   defaultCurrencyUsedCost?: number | null;
   usedCost?: number | null;
-  usedAssurances?: IDraft | null;
+  draft?: IDraft | null;
 }
 
 export const defaultValue: Readonly<IDraftUsedAssurance> = {};

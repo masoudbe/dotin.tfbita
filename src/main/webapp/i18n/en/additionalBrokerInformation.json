@@ -1,0 +1,36 @@
+{
+  "tfbitaApp": {
+    "additionalBrokerInformation": {
+      "home": {
+        "title": "Additional Broker Informations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Additional Broker Information",
+        "createOrEditLabel": "Create or edit a Additional Broker Information",
+        "notFound": "No Additional Broker Informations found"
+      },
+      "created": "A new Additional Broker Information is created with identifier {{ param }}",
+      "updated": "A Additional Broker Information is updated with identifier {{ param }}",
+      "deleted": "A Additional Broker Information is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Additional Broker Information {{ id }}?"
+      },
+      "detail": {
+        "title": "Additional Broker Information"
+      },
+      "id": "ID",
+      "dateOfStartRelation": "Date Of Start Relation",
+      "creditLimit": "Credit Limit",
+      "revokedDate": "Revoked Date",
+      "revokedNote": "Revoked Note",
+      "confidential": "Confidential",
+      "otherBrokerServices": "Other Broker Services",
+      "sanctionedStatus": "Sanctioned Status",
+      "considerations": "Considerations",
+      "description": "Description",
+      "waysOfCommunication": "Ways Of Communication",
+      "servicesAvailable": "Services Available",
+      "customerAcceptancePolicy": "Customer Acceptance Policy",
+      "advisorDefinition": "Advisor Definition"
+    }
+  }
+}

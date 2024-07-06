@@ -363,6 +363,10 @@ export const OrderRegistrationInfoDetail = () => {
           </dt>
           <dd>{orderRegistrationInfoEntity.externalCustomerType ? orderRegistrationInfoEntity.externalCustomerType.id : ''}</dd>
           <dt>
+            <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>
+          </dt>
+          <dd>{orderRegistrationInfoEntity.transportVehicleType ? orderRegistrationInfoEntity.transportVehicleType.id : ''}</dd>
+          <dt>
             <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportType">Transport Type</Translate>
           </dt>
           <dd>{orderRegistrationInfoEntity.transportType ? orderRegistrationInfoEntity.transportType.id : ''}</dd>
@@ -378,21 +382,6 @@ export const OrderRegistrationInfoDetail = () => {
             <Translate contentKey="tfbitaApp.orderRegistrationInfo.entranceBorders">Entrance Borders</Translate>
           </dt>
           <dd>{orderRegistrationInfoEntity.entranceBorders ? orderRegistrationInfoEntity.entranceBorders.id : ''}</dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.orderRegistrationInfo.transportVehicleType">Transport Vehicle Type</Translate>
-          </dt>
-          <dd>
-            {orderRegistrationInfoEntity.transportVehicleTypes
-              ? orderRegistrationInfoEntity.transportVehicleTypes.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {orderRegistrationInfoEntity.transportVehicleTypes && i === orderRegistrationInfoEntity.transportVehicleTypes.length - 1
-                      ? ''
-                      : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
           <dt>
             <Translate contentKey="tfbitaApp.orderRegistrationInfo.productInfo">Product Info</Translate>
           </dt>

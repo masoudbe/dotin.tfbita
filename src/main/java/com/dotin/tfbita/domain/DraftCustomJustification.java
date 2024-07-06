@@ -28,26 +28,68 @@ public class DraftCustomJustification implements Serializable {
         joinColumns = @JoinColumn(name = "draft_custom_justification_id"),
         inverseJoinColumns = @JoinColumn(name = "draft_receipts_id")
     )
-    @JsonIgnoreProperties(value = { "products", "receipts", "draftCustomJustifications" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = {
+            "draftProductInfos",
+            "productDimension",
+            "stateOfDocuments",
+            "currencyProvisionFileType",
+            "paymentCurrencyRateType",
+            "paymentItem",
+            "documentTransactionContainer",
+            "draft",
+            "draftCustomJustifications",
+        },
+        allowSetters = true
+    )
     private Set<DraftReceipt> draftReceipts = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "draftReceipts",
-            "draftUsedAssurances",
+            "receipts",
+            "taxes",
+            "extensions",
             "draftFactors",
-            "draftCustomJustifications",
-            "draftExtends",
-            "draftTaxes",
-            "draftStatusInfos",
-            "customs",
-            "products",
+            "usedAssurances",
+            "draftJustifications",
+            "chargedExchangeBroker",
+            "insuranceLetterType",
+            "advisorDepositType",
+            "interfaceAdvisorDepositType",
+            "coveringAdvisorDepositType",
+            "impartType",
+            "dealType",
+            "transportVehicleType",
+            "freightLetterType",
+            "actionCode",
+            "ownershipCode",
+            "currencyContainerPlace",
+            "paymentType",
+            "draftSource",
+            "loadSwitchPlace",
+            "draftType",
+            "statusInfo",
+            "insuranceCompanyInfo",
+            "advisingBank",
+            "interfaceAdvisingBank",
+            "coveringBank",
+            "auditCompanyInfo",
+            "transportType",
+            "currencyExchangeInfo",
+            "accountInfo",
+            "destinationCustomCompanies",
+            "sourceCustomCompanies",
             "services",
+            "products",
+            "sanctionSerials",
+            "customerNumbers",
+            "suggestedSanctions",
+            "documentTransactionContainers",
         },
         allowSetters = true
     )
-    private Draft draftJustifications;
+    private Draft draft;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -87,16 +129,16 @@ public class DraftCustomJustification implements Serializable {
         return this;
     }
 
-    public Draft getDraftJustifications() {
-        return this.draftJustifications;
+    public Draft getDraft() {
+        return this.draft;
     }
 
-    public void setDraftJustifications(Draft draft) {
-        this.draftJustifications = draft;
+    public void setDraft(Draft draft) {
+        this.draft = draft;
     }
 
-    public DraftCustomJustification draftJustifications(Draft draft) {
-        this.setDraftJustifications(draft);
+    public DraftCustomJustification draft(Draft draft) {
+        this.setDraft(draft);
         return this;
     }
 

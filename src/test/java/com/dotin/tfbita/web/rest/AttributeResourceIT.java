@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ class AttributeResourceIT {
 
     private Attribute attribute;
 
+    private Attribute insertedAttribute;
+
     /**
      * Create an entity for this test.
      *
@@ -89,6 +92,14 @@ class AttributeResourceIT {
         attribute = createEntity(em);
     }
 
+    @AfterEach
+    public void cleanup() {
+        if (insertedAttribute != null) {
+            attributeRepository.delete(insertedAttribute);
+            insertedAttribute = null;
+        }
+    }
+
     @Test
     @Transactional
     void createAttribute() throws Exception {
@@ -109,6 +120,8 @@ class AttributeResourceIT {
         assertIncrementedRepositoryCount(databaseSizeBeforeCreate);
         var returnedAttribute = attributeMapper.toEntity(returnedAttributeDTO);
         assertAttributeUpdatableFieldsEquals(returnedAttribute, getPersistedAttribute(returnedAttribute));
+
+        insertedAttribute = returnedAttribute;
     }
 
     @Test
@@ -133,7 +146,7 @@ class AttributeResourceIT {
     @Transactional
     void getAllAttributes() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         // Get all the attributeList
         restAttributeMockMvc
@@ -149,7 +162,7 @@ class AttributeResourceIT {
     @Transactional
     void getAttribute() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         // Get the attribute
         restAttributeMockMvc
@@ -172,7 +185,7 @@ class AttributeResourceIT {
     @Transactional
     void putExistingAttribute() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -262,15 +275,13 @@ class AttributeResourceIT {
     @Transactional
     void partialUpdateAttributeWithPatch() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
         // Update the attribute using partial update
         Attribute partialUpdatedAttribute = new Attribute();
         partialUpdatedAttribute.setId(attribute.getId());
-
-        partialUpdatedAttribute.modificationDate(UPDATED_MODIFICATION_DATE);
 
         restAttributeMockMvc
             .perform(
@@ -293,7 +304,7 @@ class AttributeResourceIT {
     @Transactional
     void fullUpdateAttributeWithPatch() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         long databaseSizeBeforeUpdate = getRepositoryCount();
 
@@ -383,7 +394,7 @@ class AttributeResourceIT {
     @Transactional
     void deleteAttribute() throws Exception {
         // Initialize the database
-        attributeRepository.saveAndFlush(attribute);
+        insertedAttribute = attributeRepository.saveAndFlush(attribute);
 
         long databaseSizeBeforeDelete = getRepositoryCount();
 

@@ -8,8 +8,6 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { ICustom } from 'app/shared/model/custom.model';
 import { getEntity, updateEntity, createEntity, reset } from './custom.reducer';
 
@@ -21,7 +19,6 @@ export const CustomUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const drafts = useAppSelector(state => state.draft.entities);
   const customEntity = useAppSelector(state => state.custom.entity);
   const loading = useAppSelector(state => state.custom.loading);
   const updating = useAppSelector(state => state.custom.updating);
@@ -37,8 +34,6 @@ export const CustomUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getDrafts({}));
   }, []);
 
   useEffect(() => {
@@ -59,7 +54,6 @@ export const CustomUpdate = () => {
     const entity = {
       ...customEntity,
       ...values,
-      drafts: mapIdList(values.drafts),
     };
 
     if (isNew) {
@@ -74,7 +68,6 @@ export const CustomUpdate = () => {
       ? {}
       : {
           ...customEntity,
-          drafts: customEntity?.drafts?.map(e => e.id.toString()),
         };
 
   return (
@@ -118,23 +111,6 @@ export const CustomUpdate = () => {
               />
               <ValidatedField label={translate('tfbitaApp.custom.name')} id="custom-name" name="name" data-cy="name" type="text" />
               <ValidatedField label={translate('tfbitaApp.custom.tempId')} id="custom-tempId" name="tempId" data-cy="tempId" type="text" />
-              <ValidatedField
-                label={translate('tfbitaApp.custom.draft')}
-                id="custom-draft"
-                data-cy="draft"
-                type="select"
-                multiple
-                name="drafts"
-              >
-                <option value="" key="0" />
-                {drafts
-                  ? drafts.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/custom" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

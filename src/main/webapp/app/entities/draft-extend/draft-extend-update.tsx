@@ -59,7 +59,7 @@ export const DraftExtendUpdate = () => {
     const entity = {
       ...draftExtendEntity,
       ...values,
-      extensions: drafts.find(it => it.id.toString() === values.extensions?.toString()),
+      draftField: drafts.find(it => it.id.toString() === values.draftField?.toString()),
     };
 
     if (isNew) {
@@ -74,7 +74,7 @@ export const DraftExtendUpdate = () => {
       ? {}
       : {
           ...draftExtendEntity,
-          extensions: draftExtendEntity?.extensions?.id,
+          draftField: draftExtendEntity?.draftField?.id,
         };
 
   return (
@@ -124,10 +124,10 @@ export const DraftExtendUpdate = () => {
                 type="text"
               />
               <ValidatedField
-                id="draft-extend-extensions"
-                name="extensions"
-                data-cy="extensions"
-                label={translate('tfbitaApp.draftExtend.extensions')}
+                id="draft-extend-draftField"
+                name="draftField"
+                data-cy="draftField"
+                label={translate('tfbitaApp.draftExtend.draftField')}
                 type="select"
               >
                 <option value="" key="0" />

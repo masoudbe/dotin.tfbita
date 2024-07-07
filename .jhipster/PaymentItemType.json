@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240706105917"
+    "changelogDate": "20240707055938"
   },
   "applications": "*",
   "dto": "mapstruct",

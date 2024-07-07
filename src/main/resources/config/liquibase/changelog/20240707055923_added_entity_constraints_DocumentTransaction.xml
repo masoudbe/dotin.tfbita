@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DocumentTransaction.
+    -->
+    <changeSet id="20240707055923-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="other_document_transactions_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__other_document_transactions_cont_64_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="canceled_justification_document_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__canceled_justification_document__56_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="justification_document_transactions_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__justification_document_transacti_c3_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="received_commisions_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__received_commisions_container_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="canceled_document_transactions_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__canceled_document_transactions_c_74_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="returned_default_currency_costs_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__returned_default_currency_costs__19_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="default_currency_costs_document_container_id"
+                                 baseTableName="document_transaction"
+                                 constraintName="fk_document_transaction__default_currency_costs_document__90_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071028"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "deductionAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "equivalentDeductionAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receiveCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "name": "JustificationDeductionDetail",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "deductionReason",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

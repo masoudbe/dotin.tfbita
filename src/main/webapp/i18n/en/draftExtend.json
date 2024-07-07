@@ -1,0 +1,27 @@
+{
+  "tfbitaApp": {
+    "draftExtend": {
+      "home": {
+        "title": "Draft Extends",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Extend",
+        "createOrEditLabel": "Create or edit a Draft Extend",
+        "notFound": "No Draft Extends found"
+      },
+      "created": "A new Draft Extend is created with identifier {{ param }}",
+      "updated": "A Draft Extend is updated with identifier {{ param }}",
+      "deleted": "A Draft Extend is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Extend {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Extend"
+      },
+      "id": "ID",
+      "date": "Date",
+      "duration": "Duration",
+      "time": "Time",
+      "draftField": "Draft Field"
+    }
+  }
+}

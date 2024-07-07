@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Draft.
+    -->
+    <changeSet id="20240707071008-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="charged_exchange_broker_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__charged_exchange_broker_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="insurance_letter_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__insurance_letter_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="advisor_deposit_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__advisor_deposit_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="interface_advisor_deposit_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__interface_advisor_deposit_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="covering_advisor_deposit_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__covering_advisor_deposit_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="impart_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__impart_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="deal_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__deal_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_vehicle_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__transport_vehicle_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="freight_letter_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__freight_letter_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="action_code_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__action_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="ownership_code_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__ownership_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_container_place_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__currency_container_place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__payment_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_source_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__draft_source_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="load_switch_place_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__load_switch_place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__draft_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_info_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__status_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_status_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="insurance_company_info_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__insurance_company_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="insurance_company_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="advising_bank_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__advising_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="interface_advising_bank_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__interface_advising_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="covering_bank_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__covering_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="audit_company_info_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__audit_company_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="audit_company_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_type_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__transport_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transportation_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_exchange_info_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__currency_exchange_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="currency_exchange_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="account_info_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__account_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_account_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="destination_custom_companies_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__destination_custom_companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="source_custom_companies_id"
+                                 baseTableName="draft"
+                                 constraintName="fk_draft__source_custom_companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__services"
+                                 constraintName="fk_rel_draft__services__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="services_id"
+                                 baseTableName="rel_draft__services"
+                                 constraintName="fk_rel_draft__services__services_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_tariff"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__products"
+                                 constraintName="fk_rel_draft__products__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="products_id"
+                                 baseTableName="rel_draft__products"
+                                 constraintName="fk_rel_draft__products__products_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__sanction_serials"
+                                 constraintName="fk_rel_draft__sanction_serials__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sanction_serials_id"
+                                 baseTableName="rel_draft__sanction_serials"
+                                 constraintName="fk_rel_draft__sanction_serials__sanction_serials_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="string_value"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__customer_numbers"
+                                 constraintName="fk_rel_draft__customer_numbers__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="customer_numbers_id"
+                                 baseTableName="rel_draft__customer_numbers"
+                                 constraintName="fk_rel_draft__customer_numbers__customer_numbers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="long_value"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__suggested_sanctions"
+                                 constraintName="fk_rel_draft__suggested_sanctions__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="suggested_sanctions_id"
+                                 baseTableName="rel_draft__suggested_sanctions"
+                                 constraintName="fk_rel_draft__suggested_sanctions__suggested_sanctions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="suggested_sanction_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="rel_draft__document_transaction_container"
+                                 constraintName="fk_rel_draft__document_transaction_container__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_transaction_container_id"
+                                 baseTableName="rel_draft__document_transaction_container"
+                                 constraintName="fk_rel_draft__document_transact__document_transaction_con_9c_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+    </changeSet>
+</databaseChangeLog>

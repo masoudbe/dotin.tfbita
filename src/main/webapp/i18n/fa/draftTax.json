@@ -1,0 +1,35 @@
+{
+  "tfbitaApp": {
+    "draftTax": {
+      "home": {
+        "title": "Draft Taxes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Tax",
+        "createOrEditLabel": "Create or edit a Draft Tax",
+        "notFound": "No Draft Taxes found"
+      },
+      "created": "A new Draft Tax is created with identifier {{ param }}",
+      "updated": "A Draft Tax is updated with identifier {{ param }}",
+      "deleted": "A Draft Tax is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Tax {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Tax"
+      },
+      "id": "ID",
+      "orderRegCurrencyAmount": "Order Reg Currency Amount",
+      "mainAccountCurrencyAmount": "Main Account Currency Amount",
+      "letterNumber": "Letter Number",
+      "letterImage": "Letter Image",
+      "description": "Description",
+      "registrationDate": "Registration Date",
+      "returnTaxesAmount": "Return Taxes Amount",
+      "orderRegRate": "Order Reg Rate",
+      "mainAccountRate": "Main Account Rate",
+      "documentTransaction": "Document Transaction",
+      "returnDocumentTransaction": "Return Document Transaction",
+      "draft": "Draft"
+    }
+  }
+}

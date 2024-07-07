@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071019"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "approved",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "draftRequestAccepted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "insuranceCostPaid",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "issued",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "otherCostsPaid",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "postSwiftCostPaied",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "rejectDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remainAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "stampCostPaid",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "DraftStatusInfo",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "status",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

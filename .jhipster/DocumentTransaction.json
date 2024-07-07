@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071007"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "currencyExchangeCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transactionCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DocumentTransaction",
+  "relationships": [
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "otherDocumentTransactions",
+      "relationshipName": "otherDocumentTransactionsContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "canceledJustificationDocumentTransactions",
+      "relationshipName": "canceledJustificationDocumentContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "justificationDocumentTransactions",
+      "relationshipName": "justificationDocumentTransactionsContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "receivedCommisions",
+      "relationshipName": "receivedCommisionsContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "canceledDocumentTransactions",
+      "relationshipName": "canceledDocumentTransactionsContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "returnedDefaultCurrencyCostsDocumentTransactions",
+      "relationshipName": "returnedDefaultCurrencyCostsContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "otherEntityRelationshipName": "defaultCurrencyCostsDocumentTransactions",
+      "relationshipName": "defaultCurrencyCostsDocumentContainer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071013"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "time",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftExtend",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "extensions",
+      "relationshipName": "draftField",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

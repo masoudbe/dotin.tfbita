@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070953"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "advisorDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "defaultAdvisorDeposit",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "depositNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "swiftCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AdvisorDefinitionDeposit",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "depositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "otherEntityRelationshipName": "advisorDeposit",
+      "relationshipName": "advisorDefinition",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

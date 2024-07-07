@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070958"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "applyDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disabled",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "BasicInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

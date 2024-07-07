@@ -1,0 +1,26 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071011"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "DraftCustomJustification",
+  "relationships": [
+    {
+      "otherEntityName": "draftReceipt",
+      "relationshipName": "draftReceipts",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "draftJustifications",
+      "relationshipName": "draft",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

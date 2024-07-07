@@ -1,0 +1,29 @@
+{
+  "tfbitaApp": {
+    "attributeValue": {
+      "home": {
+        "title": "Attribute Values",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Attribute Value",
+        "createOrEditLabel": "Create or edit a Attribute Value",
+        "notFound": "No Attribute Values found"
+      },
+      "created": "A new Attribute Value is created with identifier {{ param }}",
+      "updated": "A Attribute Value is updated with identifier {{ param }}",
+      "deleted": "A Attribute Value is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Attribute Value {{ id }}?"
+      },
+      "detail": {
+        "title": "Attribute Value"
+      },
+      "id": "ID",
+      "val": "Val",
+      "customValue": "Custom Value",
+      "attributeValueGroupName": "Attribute Value Group Name",
+      "typeAttribute": "Type Attribute",
+      "attributeValueGroup": "Attribute Value Group",
+      "product": "Product"
+    }
+  }
+}

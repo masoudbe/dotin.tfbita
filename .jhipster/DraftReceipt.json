@@ -1,0 +1,200 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071016"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerDeliverDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deleteDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverDuration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "delivered",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "documentTransactionEffectiveDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freightLetterStampCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "issueDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issueDocument",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "productAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receiptAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "receiptDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "row",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "serial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transportRow",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "usable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "netWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "grossWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalNetWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalGrossWeight",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "letterNumberTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterDateTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fobAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "shippingFare",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "inspectionCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "deadlineSubmitDocumentDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyProvisionFile",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "isMigrational",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "otherCost",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "DraftReceipt",
+  "relationships": [
+    {
+      "otherEntityName": "draftProductInfo",
+      "relationshipName": "draftProductInfos",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "productDimension",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "stateOfDocuments",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencyProvisionFileType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paymentCurrencyRateType",
+      "relationshipName": "paymentCurrencyRateType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paymentItemType",
+      "relationshipName": "paymentItem",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftReceiptDocumentTransactionContainer",
+      "relationshipName": "documentTransactionContainer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "receipts",
+      "relationshipName": "draft",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

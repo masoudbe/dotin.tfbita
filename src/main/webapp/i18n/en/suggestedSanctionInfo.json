@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "suggestedSanctionInfo": {
+      "home": {
+        "title": "Suggested Sanction Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Suggested Sanction Info",
+        "createOrEditLabel": "Create or edit a Suggested Sanction Info",
+        "notFound": "No Suggested Sanction Infos found"
+      },
+      "created": "A new Suggested Sanction Info is created with identifier {{ param }}",
+      "updated": "A Suggested Sanction Info is updated with identifier {{ param }}",
+      "deleted": "A Suggested Sanction Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Suggested Sanction Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Suggested Sanction Info"
+      },
+      "id": "ID",
+      "sanctionSerial": "Sanction Serial",
+      "personnelCode": "Personnel Code",
+      "draft": "Draft"
+    }
+  }
+}

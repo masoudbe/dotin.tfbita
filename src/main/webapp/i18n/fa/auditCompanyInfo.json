@@ -1,0 +1,40 @@
+{
+  "tfbitaApp": {
+    "auditCompanyInfo": {
+      "home": {
+        "title": "Audit Company Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Audit Company Info",
+        "createOrEditLabel": "Create or edit a Audit Company Info",
+        "notFound": "No Audit Company Infos found"
+      },
+      "created": "A new Audit Company Info is created with identifier {{ param }}",
+      "updated": "A Audit Company Info is updated with identifier {{ param }}",
+      "deleted": "A Audit Company Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Audit Company Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Audit Company Info"
+      },
+      "id": "ID",
+      "address": "Address",
+      "barCodes": "Bar Codes",
+      "dateOfRegistration": "Date Of Registration",
+      "fax": "Fax",
+      "floor": "Floor",
+      "inernationalobserviation": "Inernationalobserviation",
+      "mainStreet": "Main Street",
+      "mobile": "Mobile",
+      "plaque": "Plaque",
+      "postalCode": "Postal Code",
+      "registrationNumber": "Registration Number",
+      "telephone": "Telephone",
+      "tempId": "Temp Id",
+      "theSideStreet": "The Side Street",
+      "title": "Title",
+      "unit": "Unit",
+      "cityCode": "City Code"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "tfbitaApp": {
+    "attributeValueGroup": {
+      "home": {
+        "title": "Attribute Value Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Attribute Value Group",
+        "createOrEditLabel": "Create or edit a Attribute Value Group",
+        "notFound": "No Attribute Value Groups found"
+      },
+      "created": "A new Attribute Value Group is created with identifier {{ param }}",
+      "updated": "A Attribute Value Group is updated with identifier {{ param }}",
+      "deleted": "A Attribute Value Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Attribute Value Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Attribute Value Group"
+      },
+      "id": "ID",
+      "mandatory": "Mandatory",
+      "name": "Name",
+      "values": "Values",
+      "attribute": "Attribute"
+    }
+  }
+}

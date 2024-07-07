@@ -1,0 +1,102 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071001"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "assurancePercentage",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "commissionRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "customerPrepaymentRateFrom",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "customerPrepaymentRateTo",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "durationFrom",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "durationTo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "orderRegistrationRightFrom",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "orderRegistrationRightTo",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "postSuspensionPeriodPenaltyRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "priceFrom",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "priceTo",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "suspensionDurationFrom",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "suspensionDurationTo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "suspensionPeriodInterestRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "updateCommissionRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currencyCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CreditTypeCondition",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "serviceOrProduct",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "objectiveCategoryElement",
+      "relationshipName": "neededIdentificationDocTypes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "objectiveCategoryElement",
+      "relationshipName": "productTypes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "objectiveCategoryElement",
+      "relationshipName": "assuranceTypes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

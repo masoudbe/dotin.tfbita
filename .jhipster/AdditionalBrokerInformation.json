@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070951"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateOfStartRelation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditLimit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "revokedDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "revokedNote",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "confidential",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "otherBrokerServices",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sanctionedStatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "considerations",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "waysOfCommunication",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "servicesAvailable",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerAcceptancePolicy",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AdditionalBrokerInformation",
+  "relationships": [
+    {
+      "otherEntityName": "advisorDefinition",
+      "otherEntityRelationshipName": "additionalBrokerInformation",
+      "relationshipName": "advisorDefinition",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071024"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "assuranceRateId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "assuranceSerial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exchangeRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "defaultCurrencyUsedCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "usedCost",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "DraftUsedAssurance",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

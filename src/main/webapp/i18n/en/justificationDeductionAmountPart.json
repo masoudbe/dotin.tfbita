@@ -1,0 +1,35 @@
+{
+  "tfbitaApp": {
+    "justificationDeductionAmountPart": {
+      "home": {
+        "title": "Justification Deduction Amount Parts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Justification Deduction Amount Part",
+        "createOrEditLabel": "Create or edit a Justification Deduction Amount Part",
+        "notFound": "No Justification Deduction Amount Parts found"
+      },
+      "created": "A new Justification Deduction Amount Part is created with identifier {{ param }}",
+      "updated": "A Justification Deduction Amount Part is updated with identifier {{ param }}",
+      "deleted": "A Justification Deduction Amount Part is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Justification Deduction Amount Part {{ id }}?"
+      },
+      "detail": {
+        "title": "Justification Deduction Amount Part"
+      },
+      "id": "ID",
+      "receiveTransactionCode": "Receive Transaction Code",
+      "returnTransactionCode": "Return Transaction Code",
+      "date": "Date",
+      "amount": "Amount",
+      "amountBasedOnRial": "Amount Based On Rial",
+      "depositNumber": "Deposit Number",
+      "receiveCurrencyCode": "Receive Currency Code",
+      "currencyRateDate": "Currency Rate Date",
+      "sellRate": "Sell Rate",
+      "buyRate": "Buy Rate",
+      "comment": "Comment",
+      "justificationDeductionAmount": "Justification Deduction Amount"
+    }
+  }
+}

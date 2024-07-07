@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071014"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eqAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "factorDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issueDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "serial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftFactor",
+  "relationships": [
+    {
+      "otherEntityName": "draft",
+      "otherEntityRelationshipName": "draftFactors",
+      "relationshipName": "draft",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

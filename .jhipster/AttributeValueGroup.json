@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070956"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "mandatory",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AttributeValueGroup",
+  "relationships": [
+    {
+      "otherEntityName": "attributeValue",
+      "otherEntityRelationshipName": "attributeValueGroup",
+      "relationshipName": "values",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "attribute",
+      "relationshipName": "attribute",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

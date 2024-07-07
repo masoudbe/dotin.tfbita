@@ -1,0 +1,33 @@
+{
+  "tfbitaApp": {
+    "draftStatusInfo": {
+      "home": {
+        "title": "Draft Status Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Status Info",
+        "createOrEditLabel": "Create or edit a Draft Status Info",
+        "notFound": "No Draft Status Infos found"
+      },
+      "created": "A new Draft Status Info is created with identifier {{ param }}",
+      "updated": "A Draft Status Info is updated with identifier {{ param }}",
+      "deleted": "A Draft Status Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Status Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Status Info"
+      },
+      "id": "ID",
+      "approved": "Approved",
+      "draftRequestAccepted": "Draft Request Accepted",
+      "insuranceCostPaid": "Insurance Cost Paid",
+      "issued": "Issued",
+      "otherCostsPaid": "Other Costs Paid",
+      "postSwiftCostPaied": "Post Swift Cost Paied",
+      "rejectDescription": "Reject Description",
+      "remainAmount": "Remain Amount",
+      "stampCostPaid": "Stamp Cost Paid",
+      "status": "Status"
+    }
+  }
+}

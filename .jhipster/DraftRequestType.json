@@ -1,0 +1,19 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071018"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "DraftRequestType",
+  "relationships": [
+    {
+      "otherEntityName": "draftCertificateType",
+      "relationshipName": "certificateTypeList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

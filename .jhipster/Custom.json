@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071004"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latinName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tempId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Custom",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

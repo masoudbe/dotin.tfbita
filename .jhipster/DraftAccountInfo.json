@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071009"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentReceiptDisciplinaryAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "draftMainAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "insuranceCostAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "justificationDisciplinaryAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "openDraftDisciplinaryAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "otherCostsAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "postSwiftCostsAccountId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "amountDeductionAccountId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "DraftAccountInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

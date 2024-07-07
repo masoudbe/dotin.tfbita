@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070955"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "val",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attributeValueGroupName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AttributeValue",
+  "relationships": [
+    {
+      "otherEntityName": "typeAttribute",
+      "relationshipName": "typeAttribute",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "attributeValueGroup",
+      "otherEntityRelationshipName": "values",
+      "relationshipName": "attributeValueGroup",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

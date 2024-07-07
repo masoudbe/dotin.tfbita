@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071022"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sellCurrencyCommissionAccount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "incomeAccountNumber",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftTypeAccountInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

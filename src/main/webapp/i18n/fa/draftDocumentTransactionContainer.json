@@ -1,0 +1,38 @@
+{
+  "tfbitaApp": {
+    "draftDocumentTransactionContainer": {
+      "home": {
+        "title": "Draft Document Transaction Containers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Document Transaction Container",
+        "createOrEditLabel": "Create or edit a Draft Document Transaction Container",
+        "notFound": "No Draft Document Transaction Containers found"
+      },
+      "created": "A new Draft Document Transaction Container is created with identifier {{ param }}",
+      "updated": "A Draft Document Transaction Container is updated with identifier {{ param }}",
+      "deleted": "A Draft Document Transaction Container is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Document Transaction Container {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Document Transaction Container"
+      },
+      "id": "ID",
+      "receipts": "Receipts",
+      "otherDocumentTransactions": "Other Document Transactions",
+      "canceledJustificationDocumentTransactions": "Canceled Justification Document Transactions",
+      "justificationDocumentTransactions": "Justification Document Transactions",
+      "receivedCommisions": "Received Commisions",
+      "canceledDocumentTransactions": "Canceled Document Transactions",
+      "returnedDefaultCurrencyCostsDocumentTransactions": "Returned Default Currency Costs Document Transactions",
+      "defaultCurrencyCostsDocumentTransactions": "Default Currency Costs Document Transactions",
+      "issueCommissionDocumentTransaction": "Issue Commission Document Transaction",
+      "paymentDocumentTransaction": "Payment Document Transaction",
+      "settleDocumentTransaction": "Settle Document Transaction",
+      "settleExcessDocumentTransaction": "Settle Excess Document Transaction",
+      "commissionDeleteDraftDocumentTransaction": "Commission Delete Draft Document Transaction",
+      "commissionDraftExtendDocumentTransaction": "Commission Draft Extend Document Transaction",
+      "draft": "Draft"
+    }
+  }
+}

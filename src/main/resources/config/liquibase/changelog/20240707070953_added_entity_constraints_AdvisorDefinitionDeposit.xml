@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AdvisorDefinitionDeposit.
+    -->
+    <changeSet id="20240707070953-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="deposit_type_id"
+                                 baseTableName="advisor_definition_deposit"
+                                 constraintName="fk_advisor_definition_deposit__deposit_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="advisor_definition_id"
+                                 baseTableName="advisor_definition_deposit"
+                                 constraintName="fk_advisor_definition_deposit__advisor_definition_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+{
+  "tfbitaApp": {
+    "documentTransaction": {
+      "home": {
+        "title": "Document Transactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Transaction",
+        "createOrEditLabel": "Create or edit a Document Transaction",
+        "notFound": "No Document Transactions found"
+      },
+      "created": "A new Document Transaction is created with identifier {{ param }}",
+      "updated": "A Document Transaction is updated with identifier {{ param }}",
+      "deleted": "A Document Transaction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document Transaction {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Transaction"
+      },
+      "id": "ID",
+      "currencyExchangeCode": "Currency Exchange Code",
+      "transactionCode": "Transaction Code",
+      "otherDocumentTransactionsContainer": "Other Document Transactions Container",
+      "canceledJustificationDocumentContainer": "Canceled Justification Document Container",
+      "justificationDocumentTransactionsContainer": "Justification Document Transactions Container",
+      "receivedCommisionsContainer": "Received Commisions Container",
+      "canceledDocumentTransactionsContainer": "Canceled Document Transactions Container",
+      "returnedDefaultCurrencyCostsContainer": "Returned Default Currency Costs Container",
+      "defaultCurrencyCostsDocumentContainer": "Default Currency Costs Document Container",
+      "customJustification": "Custom Justification"
+    }
+  }
+}

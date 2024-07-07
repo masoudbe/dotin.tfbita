@@ -1,0 +1,39 @@
+{
+  "tfbitaApp": {
+    "swiftBic": {
+      "home": {
+        "title": "Swift Bics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Swift Bic",
+        "createOrEditLabel": "Create or edit a Swift Bic",
+        "notFound": "No Swift Bics found"
+      },
+      "created": "A new Swift Bic is created with identifier {{ param }}",
+      "updated": "A Swift Bic is updated with identifier {{ param }}",
+      "deleted": "A Swift Bic is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Swift Bic {{ id }}?"
+      },
+      "detail": {
+        "title": "Swift Bic"
+      },
+      "id": "ID",
+      "address": "Address",
+      "address2": "Address 2",
+      "address3": "Address 3",
+      "address4": "Address 4",
+      "bank": "Bank",
+      "bankName": "Bank Name",
+      "bankName2": "Bank Name 2",
+      "bankName3": "Bank Name 3",
+      "branch": "Branch",
+      "branchName": "Branch Name",
+      "branchName2": "Branch Name 2",
+      "city": "City",
+      "country": "Country",
+      "location": "Location",
+      "subTypeIndicator": "Sub Type Indicator",
+      "zip": "Zip"
+    }
+  }
+}

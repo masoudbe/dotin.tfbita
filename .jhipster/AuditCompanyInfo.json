@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20240707070957"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "barCodes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOfRegistration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "floor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "inernationalobserviation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mainStreet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plaque",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tempId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "theSideStreet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cityCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AuditCompanyInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

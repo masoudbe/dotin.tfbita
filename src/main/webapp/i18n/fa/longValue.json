@@ -1,0 +1,25 @@
+{
+  "tfbitaApp": {
+    "longValue": {
+      "home": {
+        "title": "Long Values",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Long Value",
+        "createOrEditLabel": "Create or edit a Long Value",
+        "notFound": "No Long Values found"
+      },
+      "created": "A new Long Value is created with identifier {{ param }}",
+      "updated": "A Long Value is updated with identifier {{ param }}",
+      "deleted": "A Long Value is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Long Value {{ id }}?"
+      },
+      "detail": {
+        "title": "Long Value"
+      },
+      "id": "ID",
+      "val": "Val",
+      "draft": "Draft"
+    }
+  }
+}

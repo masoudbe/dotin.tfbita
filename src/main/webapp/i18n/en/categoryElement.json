@@ -1,0 +1,27 @@
+{
+  "tfbitaApp": {
+    "categoryElement": {
+      "home": {
+        "title": "Category Elements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Category Element",
+        "createOrEditLabel": "Create or edit a Category Element",
+        "notFound": "No Category Elements found"
+      },
+      "created": "A new Category Element is created with identifier {{ param }}",
+      "updated": "A Category Element is updated with identifier {{ param }}",
+      "deleted": "A Category Element is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Category Element {{ id }}?"
+      },
+      "detail": {
+        "title": "Category Element"
+      },
+      "id": "ID",
+      "val": "Val",
+      "categoryName": "Category Name",
+      "code": "Code",
+      "category": "Category"
+    }
+  }
+}

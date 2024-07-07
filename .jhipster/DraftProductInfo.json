@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071015"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "productAmount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productDimension",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftProductInfo",
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "relationshipName": "product",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

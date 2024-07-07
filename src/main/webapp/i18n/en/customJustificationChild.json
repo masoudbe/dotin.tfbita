@@ -1,0 +1,33 @@
+{
+  "tfbitaApp": {
+    "customJustificationChild": {
+      "home": {
+        "title": "Custom Justification Children",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Custom Justification Child",
+        "createOrEditLabel": "Create or edit a Custom Justification Child",
+        "notFound": "No Custom Justification Children found"
+      },
+      "created": "A new Custom Justification Child is created with identifier {{ param }}",
+      "updated": "A Custom Justification Child is updated with identifier {{ param }}",
+      "deleted": "A Custom Justification Child is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Custom Justification Child {{ id }}?"
+      },
+      "detail": {
+        "title": "Custom Justification Child"
+      },
+      "id": "ID",
+      "item": "Item",
+      "tariffCode": "Tariff Code",
+      "productName": "Product Name",
+      "productId": "Product Id",
+      "boxCount": "Box Count",
+      "boxType": "Box Type",
+      "pureWeight": "Pure Weight",
+      "impureWeight": "Impure Weight",
+      "amountCurrency": "Amount Currency",
+      "customJustification": "Custom Justification"
+    }
+  }
+}

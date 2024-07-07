@@ -1,0 +1,25 @@
+{
+  "tfbitaApp": {
+    "tradeTypeCode": {
+      "home": {
+        "title": "Trade Type Codes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Trade Type Code",
+        "createOrEditLabel": "Create or edit a Trade Type Code",
+        "notFound": "No Trade Type Codes found"
+      },
+      "created": "A new Trade Type Code is created with identifier {{ param }}",
+      "updated": "A Trade Type Code is updated with identifier {{ param }}",
+      "deleted": "A Trade Type Code is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Trade Type Code {{ id }}?"
+      },
+      "detail": {
+        "title": "Trade Type Code"
+      },
+      "id": "ID",
+      "latinName": "Latin Name",
+      "name": "Name"
+    }
+  }
+}

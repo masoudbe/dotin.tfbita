@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "serviceTariff": {
+      "home": {
+        "title": "Service Tariffs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Service Tariff",
+        "createOrEditLabel": "Create or edit a Service Tariff",
+        "notFound": "No Service Tariffs found"
+      },
+      "created": "A new Service Tariff is created with identifier {{ param }}",
+      "updated": "A Service Tariff is updated with identifier {{ param }}",
+      "deleted": "A Service Tariff is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Service Tariff {{ id }}?"
+      },
+      "detail": {
+        "title": "Service Tariff"
+      },
+      "id": "ID",
+      "code": "Code",
+      "title": "Title",
+      "draft": "Draft"
+    }
+  }
+}

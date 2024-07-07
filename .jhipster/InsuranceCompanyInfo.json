@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071025"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "modificationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "InsuranceCompanyInfo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

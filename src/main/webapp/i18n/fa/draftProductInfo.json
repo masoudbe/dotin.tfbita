@@ -1,0 +1,27 @@
+{
+  "tfbitaApp": {
+    "draftProductInfo": {
+      "home": {
+        "title": "Draft Product Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Product Info",
+        "createOrEditLabel": "Create or edit a Draft Product Info",
+        "notFound": "No Draft Product Infos found"
+      },
+      "created": "A new Draft Product Info is created with identifier {{ param }}",
+      "updated": "A Draft Product Info is updated with identifier {{ param }}",
+      "deleted": "A Draft Product Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Product Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Product Info"
+      },
+      "id": "ID",
+      "productAmount": "Product Amount",
+      "productDimension": "Product Dimension",
+      "product": "Product",
+      "draftReceipt": "Draft Receipt"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "objectiveCategoryElement": {
+      "home": {
+        "title": "Objective Category Elements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Objective Category Element",
+        "createOrEditLabel": "Create or edit a Objective Category Element",
+        "notFound": "No Objective Category Elements found"
+      },
+      "created": "A new Objective Category Element is created with identifier {{ param }}",
+      "updated": "A Objective Category Element is updated with identifier {{ param }}",
+      "deleted": "A Objective Category Element is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Objective Category Element {{ id }}?"
+      },
+      "detail": {
+        "title": "Objective Category Element"
+      },
+      "id": "ID",
+      "entityClass": "Entity Class",
+      "entityId": "Entity Id",
+      "objectiveCategory": "Objective Category"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DraftReceipt.
+    -->
+    <changeSet id="20240707071016-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_dimension_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__product_dimension_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="state_of_documents_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__state_of_documents_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_provision_file_type_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__currency_provision_file_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_currency_rate_type_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__payment_currency_rate_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_currency_rate_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_item_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__payment_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_item_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_transaction_container_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__document_transaction_container_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_receipt_document_transaction_container"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_id"
+                                 baseTableName="draft_receipt"
+                                 constraintName="fk_draft_receipt__draft_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+    </changeSet>
+</databaseChangeLog>

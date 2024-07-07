@@ -1,0 +1,24 @@
+{
+  "tfbitaApp": {
+    "currencyExchangeInfo": {
+      "home": {
+        "title": "Currency Exchange Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Currency Exchange Info",
+        "createOrEditLabel": "Create or edit a Currency Exchange Info",
+        "notFound": "No Currency Exchange Infos found"
+      },
+      "created": "A new Currency Exchange Info is created with identifier {{ param }}",
+      "updated": "A Currency Exchange Info is updated with identifier {{ param }}",
+      "deleted": "A Currency Exchange Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Currency Exchange Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Currency Exchange Info"
+      },
+      "id": "ID",
+      "title": "Title"
+    }
+  }
+}

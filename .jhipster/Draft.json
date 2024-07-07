@@ -1,0 +1,533 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071008"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "advisorDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "advisorRequestDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "auditCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "beneficiaryInfo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchStampCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "centralBankCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "centralBankCodeReference",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chargedExchangeBrokerAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "charterAcceptable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "completionDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "coveringBankDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currencyExchangeDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "customerDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverDuration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "draftNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "draftOrderRegProductWorth",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "draftOrderRegServiceWorth",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "draftOrderRegTotalWorth",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "draftOtherCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "hasTransportJustification",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "insuranceCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "insuranceDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "insuranceExpiryDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "insuranceNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "interfaceAdvisorDepositNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issueDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issueDraftCommission",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "lastShipmentDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mainCustomerNumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "makeCertification",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "multipleTransportable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "orderRegistrationDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderRegistrationExpiryDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderRegistrationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "otherCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "paymentAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "performaDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaExpiryDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "performaNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postSwiftCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "productSourceChangeable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "receiveAllCommission",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "registerationJustificationAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "requestDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sanctionSerial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "serial",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "shipmentCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "sourceTransportPlace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "swiftComment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "transferAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "transportVehicleChangeable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "paymentTool",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterNumberTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterDateTazirat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "loanNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isMigrational",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isNewCertificate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isWithoutPayment",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "mainAccountCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderRegCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chargedExchangeBrokerCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destinationCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "beneficiaryCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "producerCountryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registerationJustificationCurrencyCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "branchCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationalBranchCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "certificateSenderBranchCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Draft",
+  "relationships": [
+    {
+      "otherEntityName": "draftReceipt",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "receipts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftTax",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "taxes",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftExtend",
+      "otherEntityRelationshipName": "draftField",
+      "relationshipName": "extensions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftFactor",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "draftFactors",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftUsedAssurance",
+      "relationshipName": "usedAssurances",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "draftCustomJustification",
+      "otherEntityRelationshipName": "draft",
+      "relationshipName": "draftJustifications",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "chargedExchangeBroker",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "insuranceLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "advisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "interfaceAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "coveringAdvisorDepositType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "impartType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "dealType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "transportVehicleType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "freightLetterType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "actionCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "ownershipCode",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "currencyContainerPlace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "paymentType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "draftSource",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "loadSwitchPlace",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftType",
+      "relationshipName": "draftType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftStatusInfo",
+      "relationshipName": "statusInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "insuranceCompanyInfo",
+      "relationshipName": "insuranceCompanyInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "advisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "interfaceAdvisingBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "advisorDefinition",
+      "relationshipName": "coveringBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "auditCompanyInfo",
+      "relationshipName": "auditCompanyInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "transportationType",
+      "relationshipName": "transportType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "currencyExchangeInfo",
+      "relationshipName": "currencyExchangeInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftAccountInfo",
+      "relationshipName": "accountInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "destinationCustomCompanies",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "custom",
+      "relationshipName": "sourceCustomCompanies",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "serviceTariff",
+      "relationshipName": "services",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "product",
+      "relationshipName": "products",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "stringValue",
+      "relationshipName": "sanctionSerials",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "longValue",
+      "relationshipName": "customerNumbers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "suggestedSanctionInfo",
+      "relationshipName": "suggestedSanctions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "draftDocumentTransactionContainer",
+      "relationshipName": "documentTransactionContainer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

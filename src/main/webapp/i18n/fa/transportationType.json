@@ -1,0 +1,26 @@
+{
+  "tfbitaApp": {
+    "transportationType": {
+      "home": {
+        "title": "Transportation Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transportation Type",
+        "createOrEditLabel": "Create or edit a Transportation Type",
+        "notFound": "No Transportation Types found"
+      },
+      "created": "A new Transportation Type is created with identifier {{ param }}",
+      "updated": "A Transportation Type is updated with identifier {{ param }}",
+      "deleted": "A Transportation Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Transportation Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Transportation Type"
+      },
+      "id": "ID",
+      "latinName": "Latin Name",
+      "modificationDate": "Modification Date",
+      "name": "Name"
+    }
+  }
+}

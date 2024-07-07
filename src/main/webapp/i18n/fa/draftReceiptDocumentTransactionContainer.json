@@ -1,0 +1,31 @@
+{
+  "tfbitaApp": {
+    "draftReceiptDocumentTransactionContainer": {
+      "home": {
+        "title": "Draft Receipt Document Transaction Containers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Receipt Document Transaction Container",
+        "createOrEditLabel": "Create or edit a Draft Receipt Document Transaction Container",
+        "notFound": "No Draft Receipt Document Transaction Containers found"
+      },
+      "created": "A new Draft Receipt Document Transaction Container is created with identifier {{ param }}",
+      "updated": "A Draft Receipt Document Transaction Container is updated with identifier {{ param }}",
+      "deleted": "A Draft Receipt Document Transaction Container is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Receipt Document Transaction Container {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Receipt Document Transaction Container"
+      },
+      "id": "ID",
+      "receiveReceiptCommission": "Receive Receipt Commission",
+      "receiptIssueDocumentTransaction": "Receipt Issue Document Transaction",
+      "freightLetterStampCostDocumentTransaction": "Freight Letter Stamp Cost Document Transaction",
+      "deliverDocumentTransaction": "Deliver Document Transaction",
+      "documentTransactionCanceledDeliver": "Document Transaction Canceled Deliver",
+      "documentTransactionCanceledReceiptIssue": "Document Transaction Canceled Receipt Issue",
+      "receiptCommissionDocumentTransactions": "Receipt Commission Document Transactions",
+      "draftDocumentTransactionContainer": "Draft Document Transaction Container"
+    }
+  }
+}

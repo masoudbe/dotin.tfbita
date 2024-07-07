@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071000"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "val",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categoryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CategoryElement",
+  "relationships": [
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "possibleValues",
+      "relationshipName": "category",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

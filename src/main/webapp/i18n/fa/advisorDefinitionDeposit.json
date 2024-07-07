@@ -1,0 +1,30 @@
+{
+  "tfbitaApp": {
+    "advisorDefinitionDeposit": {
+      "home": {
+        "title": "Advisor Definition Deposits",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Advisor Definition Deposit",
+        "createOrEditLabel": "Create or edit a Advisor Definition Deposit",
+        "notFound": "No Advisor Definition Deposits found"
+      },
+      "created": "A new Advisor Definition Deposit is created with identifier {{ param }}",
+      "updated": "A Advisor Definition Deposit is updated with identifier {{ param }}",
+      "deleted": "A Advisor Definition Deposit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Advisor Definition Deposit {{ id }}?"
+      },
+      "detail": {
+        "title": "Advisor Definition Deposit"
+      },
+      "id": "ID",
+      "advisorDepositNumber": "Advisor Deposit Number",
+      "defaultAdvisorDeposit": "Default Advisor Deposit",
+      "depositNum": "Deposit Num",
+      "swiftCode": "Swift Code",
+      "currencyCode": "Currency Code",
+      "depositType": "Deposit Type",
+      "advisorDefinition": "Advisor Definition"
+    }
+  }
+}

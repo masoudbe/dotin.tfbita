@@ -1,0 +1,116 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071021"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "alarmTime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disableDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hasAssurance",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasSanction",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "latestCreditSerial",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "portal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "usable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "currenciesCodes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "defaultCurrencyCode",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DraftType",
+  "relationships": [
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "type",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "secondaryType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categoryElement",
+      "relationshipName": "division",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftTypeTopicInfo",
+      "relationshipName": "topicInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "creditTypeConditionInfo",
+      "relationshipName": "conditionInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftTypeAccountInfo",
+      "relationshipName": "accountInfo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "draftRequestType",
+      "relationshipName": "requestType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "objectiveCategoryElement",
+      "relationshipName": "acceptableProductTypes",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "stringValue",
+      "relationshipName": "userGroups",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

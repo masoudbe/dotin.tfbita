@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20240707071045"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "latinName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "TradeTypeCode",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

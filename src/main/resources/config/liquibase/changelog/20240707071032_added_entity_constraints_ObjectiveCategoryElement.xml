@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ObjectiveCategoryElement.
+    -->
+    <changeSet id="20240707071032-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="objective_category_id"
+                                 baseTableName="objective_category_element"
+                                 constraintName="fk_objective_category_element__objective_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="objective_category"
+                                 />
+    </changeSet>
+</databaseChangeLog>

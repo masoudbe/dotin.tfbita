@@ -1,0 +1,66 @@
+{
+  "tfbitaApp": {
+    "draftReceipt": {
+      "home": {
+        "title": "Draft Receipts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Draft Receipt",
+        "createOrEditLabel": "Create or edit a Draft Receipt",
+        "notFound": "No Draft Receipts found"
+      },
+      "created": "A new Draft Receipt is created with identifier {{ param }}",
+      "updated": "A Draft Receipt is updated with identifier {{ param }}",
+      "deleted": "A Draft Receipt is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Draft Receipt {{ id }}?"
+      },
+      "detail": {
+        "title": "Draft Receipt"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "customerDeliverDate": "Customer Deliver Date",
+      "date": "Date",
+      "deleteDate": "Delete Date",
+      "deliverDate": "Deliver Date",
+      "deliverDuration": "Deliver Duration",
+      "delivered": "Delivered",
+      "documentTransactionEffectiveDate": "Document Transaction Effective Date",
+      "freightLetterDate": "Freight Letter Date",
+      "freightLetterNumber": "Freight Letter Number",
+      "freightLetterStampCost": "Freight Letter Stamp Cost",
+      "issueDate": "Issue Date",
+      "issueDocument": "Issue Document",
+      "productAmount": "Product Amount",
+      "receiptAmount": "Receipt Amount",
+      "receiptDate": "Receipt Date",
+      "row": "Row",
+      "serial": "Serial",
+      "transportRow": "Transport Row",
+      "usable": "Usable",
+      "netWeight": "Net Weight",
+      "grossWeight": "Gross Weight",
+      "totalNetWeight": "Total Net Weight",
+      "totalGrossWeight": "Total Gross Weight",
+      "letterNumberTazirat": "Letter Number Tazirat",
+      "letterDateTazirat": "Letter Date Tazirat",
+      "fobAmount": "Fob Amount",
+      "shippingFare": "Shipping Fare",
+      "inspectionCost": "Inspection Cost",
+      "discount": "Discount",
+      "deadlineSubmitDocumentDate": "Deadline Submit Document Date",
+      "currencyProvisionFile": "Currency Provision File",
+      "isMigrational": "Is Migrational",
+      "otherCost": "Other Cost",
+      "draftProductInfos": "Draft Product Infos",
+      "productDimension": "Product Dimension",
+      "stateOfDocuments": "State Of Documents",
+      "currencyProvisionFileType": "Currency Provision File Type",
+      "paymentCurrencyRateType": "Payment Currency Rate Type",
+      "paymentItem": "Payment Item",
+      "documentTransactionContainer": "Document Transaction Container",
+      "draft": "Draft",
+      "draftCustomJustification": "Draft Custom Justification"
+    }
+  }
+}

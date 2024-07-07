@@ -294,7 +294,7 @@ class SuggestedSanctionInfoResourceIT {
         SuggestedSanctionInfo partialUpdatedSuggestedSanctionInfo = new SuggestedSanctionInfo();
         partialUpdatedSuggestedSanctionInfo.setId(suggestedSanctionInfo.getId());
 
-        partialUpdatedSuggestedSanctionInfo.personnelCode(UPDATED_PERSONNEL_CODE);
+        partialUpdatedSuggestedSanctionInfo.sanctionSerial(UPDATED_SANCTION_SERIAL).personnelCode(UPDATED_PERSONNEL_CODE);
 
         restSuggestedSanctionInfoMockMvc
             .perform(

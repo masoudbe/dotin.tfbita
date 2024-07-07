@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/currency-exchange-infos")
 public class CurrencyExchangeInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(CurrencyExchangeInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(CurrencyExchangeInfoResource.class);
 
     private static final String ENTITY_NAME = "currencyExchangeInfo";
 

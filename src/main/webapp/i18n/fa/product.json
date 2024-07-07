@@ -23,9 +23,9 @@
       "name": "Name",
       "attributeValues": "Attribute Values",
       "productType": "Product Type",
-      "customJustification": "Custom Justification",
+      "orderRegistrationInfo": "Order Registration Info",
       "draft": "Draft",
-      "orderRegistrationInfo": "Order Registration Info"
+      "customJustification": "Custom Justification"
     }
   }
 }

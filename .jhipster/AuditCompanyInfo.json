@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240707070957"
+    "changelogDate": "20240707093913"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -77,5 +77,5 @@
   "name": "AuditCompanyInfo",
   "relationships": [],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

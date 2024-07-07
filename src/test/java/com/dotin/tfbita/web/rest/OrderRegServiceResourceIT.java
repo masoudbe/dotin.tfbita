@@ -296,7 +296,7 @@ class OrderRegServiceResourceIT {
         OrderRegService partialUpdatedOrderRegService = new OrderRegService();
         partialUpdatedOrderRegService.setId(orderRegService.getId());
 
-        partialUpdatedOrderRegService.currencyAmount(UPDATED_CURRENCY_AMOUNT).unit(UPDATED_UNIT);
+        partialUpdatedOrderRegService.amount(UPDATED_AMOUNT).unit(UPDATED_UNIT);
 
         restOrderRegServiceMockMvc
             .perform(

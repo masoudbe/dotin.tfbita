@@ -409,11 +409,15 @@ class CreditTypeConditionResourceIT {
         partialUpdatedCreditTypeCondition.setId(creditTypeCondition.getId());
 
         partialUpdatedCreditTypeCondition
-            .customerPrepaymentRateFrom(UPDATED_CUSTOMER_PREPAYMENT_RATE_FROM)
-            .orderRegistrationRightFrom(UPDATED_ORDER_REGISTRATION_RIGHT_FROM)
+            .commissionRate(UPDATED_COMMISSION_RATE)
+            .customerPrepaymentRateTo(UPDATED_CUSTOMER_PREPAYMENT_RATE_TO)
+            .durationFrom(UPDATED_DURATION_FROM)
+            .durationTo(UPDATED_DURATION_TO)
+            .postSuspensionPeriodPenaltyRate(UPDATED_POST_SUSPENSION_PERIOD_PENALTY_RATE)
             .priceTo(UPDATED_PRICE_TO)
-            .suspensionPeriodInterestRate(UPDATED_SUSPENSION_PERIOD_INTEREST_RATE)
-            .updateCommissionRate(UPDATED_UPDATE_COMMISSION_RATE);
+            .suspensionDurationFrom(UPDATED_SUSPENSION_DURATION_FROM)
+            .suspensionDurationTo(UPDATED_SUSPENSION_DURATION_TO)
+            .suspensionPeriodInterestRate(UPDATED_SUSPENSION_PERIOD_INTEREST_RATE);
 
         restCreditTypeConditionMockMvc
             .perform(

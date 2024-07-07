@@ -335,7 +335,8 @@ class DraftFactorResourceIT {
             .amount(UPDATED_AMOUNT)
             .description(UPDATED_DESCRIPTION)
             .eqAmount(UPDATED_EQ_AMOUNT)
-            .factorDate(UPDATED_FACTOR_DATE);
+            .issueDate(UPDATED_ISSUE_DATE)
+            .currencyCode(UPDATED_CURRENCY_CODE);
 
         restDraftFactorMockMvc
             .perform(

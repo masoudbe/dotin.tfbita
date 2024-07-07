@@ -347,10 +347,12 @@ class CreditTypeConditionInfoResourceIT {
         partialUpdatedCreditTypeConditionInfo.setId(creditTypeConditionInfo.getId());
 
         partialUpdatedCreditTypeConditionInfo
+            .durationTo(UPDATED_DURATION_TO)
             .priceFrom(UPDATED_PRICE_FROM)
             .priceTo(UPDATED_PRICE_TO)
             .justificationDisciplinaryTopic(UPDATED_JUSTIFICATION_DISCIPLINARY_TOPIC)
-            .postTelegraphSwiftCostsTopic(UPDATED_POST_TELEGRAPH_SWIFT_COSTS_TOPIC);
+            .openDraftDisciplinaryTopic(UPDATED_OPEN_DRAFT_DISCIPLINARY_TOPIC)
+            .otherCostsTopic(UPDATED_OTHER_COSTS_TOPIC);
 
         restCreditTypeConditionInfoMockMvc
             .perform(

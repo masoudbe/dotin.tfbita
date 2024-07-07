@@ -20,17 +20,17 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
     @Mapping(target = "productType", source = "productType", qualifiedByName = "productTypeId")
-    @Mapping(target = "customJustifications", source = "customJustifications", qualifiedByName = "customJustificationIdSet")
-    @Mapping(target = "drafts", source = "drafts", qualifiedByName = "draftIdSet")
     @Mapping(target = "orderRegistrationInfos", source = "orderRegistrationInfos", qualifiedByName = "orderRegistrationInfoIdSet")
+    @Mapping(target = "drafts", source = "drafts", qualifiedByName = "draftIdSet")
+    @Mapping(target = "customJustifications", source = "customJustifications", qualifiedByName = "customJustificationIdSet")
     ProductDTO toDto(Product s);
 
-    @Mapping(target = "customJustifications", ignore = true)
-    @Mapping(target = "removeCustomJustification", ignore = true)
-    @Mapping(target = "drafts", ignore = true)
-    @Mapping(target = "removeDraft", ignore = true)
     @Mapping(target = "orderRegistrationInfos", ignore = true)
     @Mapping(target = "removeOrderRegistrationInfo", ignore = true)
+    @Mapping(target = "drafts", ignore = true)
+    @Mapping(target = "removeDraft", ignore = true)
+    @Mapping(target = "customJustifications", ignore = true)
+    @Mapping(target = "removeCustomJustification", ignore = true)
     Product toEntity(ProductDTO productDTO);
 
     @Named("productTypeId")
@@ -38,14 +38,14 @@ public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
     @Mapping(target = "id", source = "id")
     ProductTypeDTO toDtoProductTypeId(ProductType productType);
 
-    @Named("customJustificationId")
+    @Named("orderRegistrationInfoId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    CustomJustificationDTO toDtoCustomJustificationId(CustomJustification customJustification);
+    OrderRegistrationInfoDTO toDtoOrderRegistrationInfoId(OrderRegistrationInfo orderRegistrationInfo);
 
-    @Named("customJustificationIdSet")
-    default Set<CustomJustificationDTO> toDtoCustomJustificationIdSet(Set<CustomJustification> customJustification) {
-        return customJustification.stream().map(this::toDtoCustomJustificationId).collect(Collectors.toSet());
+    @Named("orderRegistrationInfoIdSet")
+    default Set<OrderRegistrationInfoDTO> toDtoOrderRegistrationInfoIdSet(Set<OrderRegistrationInfo> orderRegistrationInfo) {
+        return orderRegistrationInfo.stream().map(this::toDtoOrderRegistrationInfoId).collect(Collectors.toSet());
     }
 
     @Named("draftId")
@@ -58,13 +58,13 @@ public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
         return draft.stream().map(this::toDtoDraftId).collect(Collectors.toSet());
     }
 
-    @Named("orderRegistrationInfoId")
+    @Named("customJustificationId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    OrderRegistrationInfoDTO toDtoOrderRegistrationInfoId(OrderRegistrationInfo orderRegistrationInfo);
+    CustomJustificationDTO toDtoCustomJustificationId(CustomJustification customJustification);
 
-    @Named("orderRegistrationInfoIdSet")
-    default Set<OrderRegistrationInfoDTO> toDtoOrderRegistrationInfoIdSet(Set<OrderRegistrationInfo> orderRegistrationInfo) {
-        return orderRegistrationInfo.stream().map(this::toDtoOrderRegistrationInfoId).collect(Collectors.toSet());
+    @Named("customJustificationIdSet")
+    default Set<CustomJustificationDTO> toDtoCustomJustificationIdSet(Set<CustomJustification> customJustification) {
+        return customJustification.stream().map(this::toDtoCustomJustificationId).collect(Collectors.toSet());
     }
 }

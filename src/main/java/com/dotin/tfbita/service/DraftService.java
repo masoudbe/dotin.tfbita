@@ -1,66 +1,123 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.Draft;
+import com.dotin.tfbita.repository.DraftRepository;
 import com.dotin.tfbita.service.dto.DraftDTO;
+import com.dotin.tfbita.service.mapper.DraftMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.Draft}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.Draft}.
  */
-public interface DraftService {
+@Service
+@Transactional
+public class DraftService {
+
+    private final Logger log = LoggerFactory.getLogger(DraftService.class);
+
+    private final DraftRepository draftRepository;
+
+    private final DraftMapper draftMapper;
+
+    public DraftService(DraftRepository draftRepository, DraftMapper draftMapper) {
+        this.draftRepository = draftRepository;
+        this.draftMapper = draftMapper;
+    }
+
     /**
      * Save a draft.
      *
      * @param draftDTO the entity to save.
      * @return the persisted entity.
      */
-    DraftDTO save(DraftDTO draftDTO);
+    public DraftDTO save(DraftDTO draftDTO) {
+        log.debug("Request to save Draft : {}", draftDTO);
+        Draft draft = draftMapper.toEntity(draftDTO);
+        draft = draftRepository.save(draft);
+        return draftMapper.toDto(draft);
+    }
 
     /**
-     * Updates a draft.
+     * Update a draft.
      *
-     * @param draftDTO the entity to update.
+     * @param draftDTO the entity to save.
      * @return the persisted entity.
      */
-    DraftDTO update(DraftDTO draftDTO);
+    public DraftDTO update(DraftDTO draftDTO) {
+        log.debug("Request to update Draft : {}", draftDTO);
+        Draft draft = draftMapper.toEntity(draftDTO);
+        draft = draftRepository.save(draft);
+        return draftMapper.toDto(draft);
+    }
 
     /**
-     * Partially updates a draft.
+     * Partially update a draft.
      *
      * @param draftDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<DraftDTO> partialUpdate(DraftDTO draftDTO);
+    public Optional<DraftDTO> partialUpdate(DraftDTO draftDTO) {
+        log.debug("Request to partially update Draft : {}", draftDTO);
+
+        return draftRepository
+            .findById(draftDTO.getId())
+            .map(existingDraft -> {
+                draftMapper.partialUpdate(existingDraft, draftDTO);
+
+                return existingDraft;
+            })
+            .map(draftRepository::save)
+            .map(draftMapper::toDto);
+    }
 
     /**
      * Get all the drafts.
      *
      * @return the list of entities.
      */
-    List<DraftDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<DraftDTO> findAll() {
+        log.debug("Request to get all Drafts");
+        return draftRepository.findAll().stream().map(draftMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get all the drafts with eager load of many-to-many relationships.
      *
-     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<DraftDTO> findAllWithEagerRelationships(Pageable pageable);
+    public Page<DraftDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return draftRepository.findAllWithEagerRelationships(pageable).map(draftMapper::toDto);
+    }
 
     /**
-     * Get the "id" draft.
+     * Get one draft by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<DraftDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<DraftDTO> findOne(Long id) {
+        log.debug("Request to get Draft : {}", id);
+        return draftRepository.findOneWithEagerRelationships(id).map(draftMapper::toDto);
+    }
 
     /**
-     * Delete the "id" draft.
+     * Delete the draft by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Draft : {}", id);
+        draftRepository.deleteById(id);
+    }
 }

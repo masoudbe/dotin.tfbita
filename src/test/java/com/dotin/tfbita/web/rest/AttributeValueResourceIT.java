@@ -34,8 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class AttributeValueResourceIT {
 
-    private static final String DEFAULT_VAL = "AAAAAAAAAA";
-    private static final String UPDATED_VAL = "BBBBBBBBBB";
+    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CUSTOM_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_CUSTOM_VALUE = "BBBBBBBBBB";
@@ -76,7 +76,7 @@ class AttributeValueResourceIT {
      */
     public static AttributeValue createEntity(EntityManager em) {
         AttributeValue attributeValue = new AttributeValue()
-            .val(DEFAULT_VAL)
+            .value(DEFAULT_VALUE)
             .customValue(DEFAULT_CUSTOM_VALUE)
             .attributeValueGroupName(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME);
         return attributeValue;
@@ -90,7 +90,7 @@ class AttributeValueResourceIT {
      */
     public static AttributeValue createUpdatedEntity(EntityManager em) {
         AttributeValue attributeValue = new AttributeValue()
-            .val(UPDATED_VAL)
+            .value(UPDATED_VALUE)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
         return attributeValue;
@@ -163,7 +163,7 @@ class AttributeValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(attributeValue.getId().intValue())))
-            .andExpect(jsonPath("$.[*].val").value(hasItem(DEFAULT_VAL)))
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].customValue").value(hasItem(DEFAULT_CUSTOM_VALUE)))
             .andExpect(jsonPath("$.[*].attributeValueGroupName").value(hasItem(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME)));
     }
@@ -180,7 +180,7 @@ class AttributeValueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(attributeValue.getId().intValue()))
-            .andExpect(jsonPath("$.val").value(DEFAULT_VAL))
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
             .andExpect(jsonPath("$.customValue").value(DEFAULT_CUSTOM_VALUE))
             .andExpect(jsonPath("$.attributeValueGroupName").value(DEFAULT_ATTRIBUTE_VALUE_GROUP_NAME));
     }
@@ -205,7 +205,7 @@ class AttributeValueResourceIT {
         // Disconnect from session so that the updates on updatedAttributeValue are not directly saved in db
         em.detach(updatedAttributeValue);
         updatedAttributeValue
-            .val(UPDATED_VAL)
+            .value(UPDATED_VALUE)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
         AttributeValueDTO attributeValueDTO = attributeValueMapper.toDto(updatedAttributeValue);
@@ -297,6 +297,8 @@ class AttributeValueResourceIT {
         AttributeValue partialUpdatedAttributeValue = new AttributeValue();
         partialUpdatedAttributeValue.setId(attributeValue.getId());
 
+        partialUpdatedAttributeValue.value(UPDATED_VALUE);
+
         restAttributeValueMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedAttributeValue.getId())
@@ -327,7 +329,7 @@ class AttributeValueResourceIT {
         partialUpdatedAttributeValue.setId(attributeValue.getId());
 
         partialUpdatedAttributeValue
-            .val(UPDATED_VAL)
+            .value(UPDATED_VALUE)
             .customValue(UPDATED_CUSTOM_VALUE)
             .attributeValueGroupName(UPDATED_ATTRIBUTE_VALUE_GROUP_NAME);
 

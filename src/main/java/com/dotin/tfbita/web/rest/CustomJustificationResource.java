@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/custom-justifications")
 public class CustomJustificationResource {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomJustificationResource.class);
+    private final Logger log = LoggerFactory.getLogger(CustomJustificationResource.class);
 
     private static final String ENTITY_NAME = "customJustification";
 

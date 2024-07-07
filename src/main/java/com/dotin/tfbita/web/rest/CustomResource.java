@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/customs")
 public class CustomResource {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomResource.class);
+    private final Logger log = LoggerFactory.getLogger(CustomResource.class);
 
     private static final String ENTITY_NAME = "custom";
 

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/long-values")
 public class LongValueResource {
 
-    private static final Logger log = LoggerFactory.getLogger(LongValueResource.class);
+    private final Logger log = LoggerFactory.getLogger(LongValueResource.class);
 
     private static final String ENTITY_NAME = "longValue";
 

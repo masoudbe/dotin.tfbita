@@ -283,7 +283,7 @@ class TradeTypeCodeResourceIT {
         TradeTypeCode partialUpdatedTradeTypeCode = new TradeTypeCode();
         partialUpdatedTradeTypeCode.setId(tradeTypeCode.getId());
 
-        partialUpdatedTradeTypeCode.latinName(UPDATED_LATIN_NAME).name(UPDATED_NAME);
+        partialUpdatedTradeTypeCode.latinName(UPDATED_LATIN_NAME);
 
         restTradeTypeCodeMockMvc
             .perform(

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-custom-justifications")
 public class DraftCustomJustificationResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftCustomJustificationResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftCustomJustificationResource.class);
 
     private static final String ENTITY_NAME = "draftCustomJustification";
 

@@ -355,7 +355,7 @@ public class CustomJustification implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "products_id")
     )
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "customJustifications", "drafts", "orderRegistrationInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Set<Product> products = new HashSet<>();

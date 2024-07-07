@@ -10,12 +10,12 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IProductType } from 'app/shared/model/product-type.model';
 import { getEntities as getProductTypes } from 'app/entities/product-type/product-type.reducer';
-import { ICustomJustification } from 'app/shared/model/custom-justification.model';
-import { getEntities as getCustomJustifications } from 'app/entities/custom-justification/custom-justification.reducer';
-import { IDraft } from 'app/shared/model/draft.model';
-import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
 import { IOrderRegistrationInfo } from 'app/shared/model/order-registration-info.model';
 import { getEntities as getOrderRegistrationInfos } from 'app/entities/order-registration-info/order-registration-info.reducer';
+import { IDraft } from 'app/shared/model/draft.model';
+import { getEntities as getDrafts } from 'app/entities/draft/draft.reducer';
+import { ICustomJustification } from 'app/shared/model/custom-justification.model';
+import { getEntities as getCustomJustifications } from 'app/entities/custom-justification/custom-justification.reducer';
 import { IProduct } from 'app/shared/model/product.model';
 import { getEntity, updateEntity, createEntity, reset } from './product.reducer';
 
@@ -28,9 +28,9 @@ export const ProductUpdate = () => {
   const isNew = id === undefined;
 
   const productTypes = useAppSelector(state => state.productType.entities);
-  const customJustifications = useAppSelector(state => state.customJustification.entities);
-  const drafts = useAppSelector(state => state.draft.entities);
   const orderRegistrationInfos = useAppSelector(state => state.orderRegistrationInfo.entities);
+  const drafts = useAppSelector(state => state.draft.entities);
+  const customJustifications = useAppSelector(state => state.customJustification.entities);
   const productEntity = useAppSelector(state => state.product.entity);
   const loading = useAppSelector(state => state.product.loading);
   const updating = useAppSelector(state => state.product.updating);
@@ -48,9 +48,9 @@ export const ProductUpdate = () => {
     }
 
     dispatch(getProductTypes({}));
-    dispatch(getCustomJustifications({}));
-    dispatch(getDrafts({}));
     dispatch(getOrderRegistrationInfos({}));
+    dispatch(getDrafts({}));
+    dispatch(getCustomJustifications({}));
   }, []);
 
   useEffect(() => {
@@ -69,9 +69,9 @@ export const ProductUpdate = () => {
       ...productEntity,
       ...values,
       productType: productTypes.find(it => it.id.toString() === values.productType?.toString()),
-      customJustifications: mapIdList(values.customJustifications),
-      drafts: mapIdList(values.drafts),
       orderRegistrationInfos: mapIdList(values.orderRegistrationInfos),
+      drafts: mapIdList(values.drafts),
+      customJustifications: mapIdList(values.customJustifications),
     };
 
     if (isNew) {
@@ -87,9 +87,9 @@ export const ProductUpdate = () => {
       : {
           ...productEntity,
           productType: productEntity?.productType?.id,
-          customJustifications: productEntity?.customJustifications?.map(e => e.id.toString()),
-          drafts: productEntity?.drafts?.map(e => e.id.toString()),
           orderRegistrationInfos: productEntity?.orderRegistrationInfos?.map(e => e.id.toString()),
+          drafts: productEntity?.drafts?.map(e => e.id.toString()),
+          customJustifications: productEntity?.customJustifications?.map(e => e.id.toString()),
         };
 
   return (
@@ -143,16 +143,16 @@ export const ProductUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                label={translate('tfbitaApp.product.customJustification')}
-                id="product-customJustification"
-                data-cy="customJustification"
+                label={translate('tfbitaApp.product.orderRegistrationInfo')}
+                id="product-orderRegistrationInfo"
+                data-cy="orderRegistrationInfo"
                 type="select"
                 multiple
-                name="customJustifications"
+                name="orderRegistrationInfos"
               >
                 <option value="" key="0" />
-                {customJustifications
-                  ? customJustifications.map(otherEntity => (
+                {orderRegistrationInfos
+                  ? orderRegistrationInfos.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
@@ -177,16 +177,16 @@ export const ProductUpdate = () => {
                   : null}
               </ValidatedField>
               <ValidatedField
-                label={translate('tfbitaApp.product.orderRegistrationInfo')}
-                id="product-orderRegistrationInfo"
-                data-cy="orderRegistrationInfo"
+                label={translate('tfbitaApp.product.customJustification')}
+                id="product-customJustification"
+                data-cy="customJustification"
                 type="select"
                 multiple
-                name="orderRegistrationInfos"
+                name="customJustifications"
               >
                 <option value="" key="0" />
-                {orderRegistrationInfos
-                  ? orderRegistrationInfos.map(otherEntity => (
+                {customJustifications
+                  ? customJustifications.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

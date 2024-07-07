@@ -401,13 +401,7 @@ class DraftTypeResourceIT {
         DraftType partialUpdatedDraftType = new DraftType();
         partialUpdatedDraftType.setId(draftType.getId());
 
-        partialUpdatedDraftType
-            .disableDate(UPDATED_DISABLE_DATE)
-            .hasAssurance(UPDATED_HAS_ASSURANCE)
-            .hasSanction(UPDATED_HAS_SANCTION)
-            .name(UPDATED_NAME)
-            .portal(UPDATED_PORTAL)
-            .usable(UPDATED_USABLE);
+        partialUpdatedDraftType.code(UPDATED_CODE).duration(UPDATED_DURATION).hasSanction(UPDATED_HAS_SANCTION).name(UPDATED_NAME);
 
         restDraftTypeMockMvc
             .perform(

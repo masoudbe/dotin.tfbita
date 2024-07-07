@@ -101,14 +101,14 @@ export const Product = () => {
                   <Translate contentKey="tfbitaApp.product.productType">Product Type</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.product.customJustification">Custom Justification</Translate>{' '}
+                  <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.product.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>{' '}
+                  <Translate contentKey="tfbitaApp.product.customJustification">Custom Justification</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -127,11 +127,11 @@ export const Product = () => {
                   <td>{product.name}</td>
                   <td>{product.productType ? <Link to={`/product-type/${product.productType.id}`}>{product.productType.id}</Link> : ''}</td>
                   <td>
-                    {product.customJustifications
-                      ? product.customJustifications.map((val, j) => (
+                    {product.orderRegistrationInfos
+                      ? product.orderRegistrationInfos.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/custom-justification/${val.id}`}>{val.id}</Link>
-                            {j === product.customJustifications.length - 1 ? '' : ', '}
+                            <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
+                            {j === product.orderRegistrationInfos.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}
@@ -147,11 +147,11 @@ export const Product = () => {
                       : null}
                   </td>
                   <td>
-                    {product.orderRegistrationInfos
-                      ? product.orderRegistrationInfos.map((val, j) => (
+                    {product.customJustifications
+                      ? product.customJustifications.map((val, j) => (
                           <span key={j}>
-                            <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
-                            {j === product.orderRegistrationInfos.length - 1 ? '' : ', '}
+                            <Link to={`/custom-justification/${val.id}`}>{val.id}</Link>
+                            {j === product.customJustifications.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

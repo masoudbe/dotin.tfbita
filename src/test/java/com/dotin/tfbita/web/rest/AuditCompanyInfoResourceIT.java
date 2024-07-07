@@ -410,15 +410,17 @@ class AuditCompanyInfoResourceIT {
         partialUpdatedAuditCompanyInfo.setId(auditCompanyInfo.getId());
 
         partialUpdatedAuditCompanyInfo
-            .barCodes(UPDATED_BAR_CODES)
+            .address(UPDATED_ADDRESS)
+            .fax(UPDATED_FAX)
+            .floor(UPDATED_FLOOR)
+            .inernationalobserviation(UPDATED_INERNATIONALOBSERVIATION)
+            .mainStreet(UPDATED_MAIN_STREET)
             .mobile(UPDATED_MOBILE)
-            .plaque(UPDATED_PLAQUE)
-            .postalCode(UPDATED_POSTAL_CODE)
-            .registrationNumber(UPDATED_REGISTRATION_NUMBER)
-            .telephone(UPDATED_TELEPHONE)
+            .tempId(UPDATED_TEMP_ID)
             .theSideStreet(UPDATED_THE_SIDE_STREET)
             .title(UPDATED_TITLE)
-            .unit(UPDATED_UNIT);
+            .unit(UPDATED_UNIT)
+            .cityCode(UPDATED_CITY_CODE);
 
         restAuditCompanyInfoMockMvc
             .perform(

@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240707071027"
+    "changelogDate": "20240707093940"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -53,5 +53,5 @@
   "name": "JustificationDeductionAmountPart",
   "relationships": [],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

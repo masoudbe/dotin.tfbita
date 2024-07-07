@@ -59,13 +59,13 @@ public class StringValueAsserts {
     public static void assertStringValueUpdatableRelationshipsEquals(StringValue expected, StringValue actual) {
         assertThat(expected)
             .as("Verify StringValue relationships")
-            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
-            .satisfies(e -> assertThat(e.getDraftTypes()).as("check draftTypes").isEqualTo(actual.getDraftTypes()))
             .satisfies(
                 e ->
                     assertThat(e.getOrderRegistrationInfos())
                         .as("check orderRegistrationInfos")
                         .isEqualTo(actual.getOrderRegistrationInfos())
-            );
+            )
+            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
+            .satisfies(e -> assertThat(e.getDraftTypes()).as("check draftTypes").isEqualTo(actual.getDraftTypes()));
     }
 }

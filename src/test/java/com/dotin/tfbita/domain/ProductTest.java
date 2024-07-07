@@ -64,25 +64,25 @@ class ProductTest {
     }
 
     @Test
-    void customJustificationTest() {
+    void orderRegistrationInfoTest() {
         Product product = getProductRandomSampleGenerator();
-        CustomJustification customJustificationBack = getCustomJustificationRandomSampleGenerator();
+        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
 
-        product.addCustomJustification(customJustificationBack);
-        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
-        assertThat(customJustificationBack.getProducts()).containsOnly(product);
+        product.addOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(product.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getProductInfos()).containsOnly(product);
 
-        product.removeCustomJustification(customJustificationBack);
-        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
-        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
+        product.removeOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(product.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getProductInfos()).doesNotContain(product);
 
-        product.customJustifications(new HashSet<>(Set.of(customJustificationBack)));
-        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
-        assertThat(customJustificationBack.getProducts()).containsOnly(product);
+        product.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
+        assertThat(product.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getProductInfos()).containsOnly(product);
 
-        product.setCustomJustifications(new HashSet<>());
-        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
-        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
+        product.setOrderRegistrationInfos(new HashSet<>());
+        assertThat(product.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getProductInfos()).doesNotContain(product);
     }
 
     @Test
@@ -108,24 +108,24 @@ class ProductTest {
     }
 
     @Test
-    void orderRegistrationInfoTest() {
+    void customJustificationTest() {
         Product product = getProductRandomSampleGenerator();
-        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
+        CustomJustification customJustificationBack = getCustomJustificationRandomSampleGenerator();
 
-        product.addOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(product.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getProductInfos()).containsOnly(product);
+        product.addCustomJustification(customJustificationBack);
+        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).containsOnly(product);
 
-        product.removeOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(product.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getProductInfos()).doesNotContain(product);
+        product.removeCustomJustification(customJustificationBack);
+        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
 
-        product.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
-        assertThat(product.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getProductInfos()).containsOnly(product);
+        product.customJustifications(new HashSet<>(Set.of(customJustificationBack)));
+        assertThat(product.getCustomJustifications()).containsOnly(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).containsOnly(product);
 
-        product.setOrderRegistrationInfos(new HashSet<>());
-        assertThat(product.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getProductInfos()).doesNotContain(product);
+        product.setCustomJustifications(new HashSet<>());
+        assertThat(product.getCustomJustifications()).doesNotContain(customJustificationBack);
+        assertThat(customJustificationBack.getProducts()).doesNotContain(product);
     }
 }

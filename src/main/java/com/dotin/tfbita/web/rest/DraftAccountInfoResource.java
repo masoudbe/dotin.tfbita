@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-account-infos")
 public class DraftAccountInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftAccountInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftAccountInfoResource.class);
 
     private static final String ENTITY_NAME = "draftAccountInfo";
 

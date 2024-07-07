@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/advisor-definition-deposits")
 public class AdvisorDefinitionDepositResource {
 
-    private static final Logger log = LoggerFactory.getLogger(AdvisorDefinitionDepositResource.class);
+    private final Logger log = LoggerFactory.getLogger(AdvisorDefinitionDepositResource.class);
 
     private static final String ENTITY_NAME = "advisorDefinitionDeposit";
 

@@ -324,9 +324,9 @@ class LicenceInfoResourceIT {
         partialUpdatedLicenceInfo
             .organizationLicence(UPDATED_ORGANIZATION_LICENCE)
             .licenceNumber(UPDATED_LICENCE_NUMBER)
-            .licenceDate(UPDATED_LICENCE_DATE)
             .havingProduct(UPDATED_HAVING_PRODUCT)
-            .havingService(UPDATED_HAVING_SERVICE);
+            .havingService(UPDATED_HAVING_SERVICE)
+            .creditDate(UPDATED_CREDIT_DATE);
 
         restLicenceInfoMockMvc
             .perform(

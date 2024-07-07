@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/justification-deduction-amounts")
 public class JustificationDeductionAmountResource {
 
-    private static final Logger log = LoggerFactory.getLogger(JustificationDeductionAmountResource.class);
+    private final Logger log = LoggerFactory.getLogger(JustificationDeductionAmountResource.class);
 
     private static final String ENTITY_NAME = "justificationDeductionAmount";
 

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/insurance-company-infos")
 public class InsuranceCompanyInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(InsuranceCompanyInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(InsuranceCompanyInfoResource.class);
 
     private static final String ENTITY_NAME = "insuranceCompanyInfo";
 

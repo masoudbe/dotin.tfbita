@@ -1,56 +1,119 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.PaymentCurrencyRateType;
+import com.dotin.tfbita.repository.PaymentCurrencyRateTypeRepository;
 import com.dotin.tfbita.service.dto.PaymentCurrencyRateTypeDTO;
+import com.dotin.tfbita.service.mapper.PaymentCurrencyRateTypeMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.PaymentCurrencyRateType}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.PaymentCurrencyRateType}.
  */
-public interface PaymentCurrencyRateTypeService {
+@Service
+@Transactional
+public class PaymentCurrencyRateTypeService {
+
+    private final Logger log = LoggerFactory.getLogger(PaymentCurrencyRateTypeService.class);
+
+    private final PaymentCurrencyRateTypeRepository paymentCurrencyRateTypeRepository;
+
+    private final PaymentCurrencyRateTypeMapper paymentCurrencyRateTypeMapper;
+
+    public PaymentCurrencyRateTypeService(
+        PaymentCurrencyRateTypeRepository paymentCurrencyRateTypeRepository,
+        PaymentCurrencyRateTypeMapper paymentCurrencyRateTypeMapper
+    ) {
+        this.paymentCurrencyRateTypeRepository = paymentCurrencyRateTypeRepository;
+        this.paymentCurrencyRateTypeMapper = paymentCurrencyRateTypeMapper;
+    }
+
     /**
      * Save a paymentCurrencyRateType.
      *
      * @param paymentCurrencyRateTypeDTO the entity to save.
      * @return the persisted entity.
      */
-    PaymentCurrencyRateTypeDTO save(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO);
+    public PaymentCurrencyRateTypeDTO save(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO) {
+        log.debug("Request to save PaymentCurrencyRateType : {}", paymentCurrencyRateTypeDTO);
+        PaymentCurrencyRateType paymentCurrencyRateType = paymentCurrencyRateTypeMapper.toEntity(paymentCurrencyRateTypeDTO);
+        paymentCurrencyRateType = paymentCurrencyRateTypeRepository.save(paymentCurrencyRateType);
+        return paymentCurrencyRateTypeMapper.toDto(paymentCurrencyRateType);
+    }
 
     /**
-     * Updates a paymentCurrencyRateType.
+     * Update a paymentCurrencyRateType.
      *
-     * @param paymentCurrencyRateTypeDTO the entity to update.
+     * @param paymentCurrencyRateTypeDTO the entity to save.
      * @return the persisted entity.
      */
-    PaymentCurrencyRateTypeDTO update(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO);
+    public PaymentCurrencyRateTypeDTO update(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO) {
+        log.debug("Request to update PaymentCurrencyRateType : {}", paymentCurrencyRateTypeDTO);
+        PaymentCurrencyRateType paymentCurrencyRateType = paymentCurrencyRateTypeMapper.toEntity(paymentCurrencyRateTypeDTO);
+        paymentCurrencyRateType = paymentCurrencyRateTypeRepository.save(paymentCurrencyRateType);
+        return paymentCurrencyRateTypeMapper.toDto(paymentCurrencyRateType);
+    }
 
     /**
-     * Partially updates a paymentCurrencyRateType.
+     * Partially update a paymentCurrencyRateType.
      *
      * @param paymentCurrencyRateTypeDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<PaymentCurrencyRateTypeDTO> partialUpdate(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO);
+    public Optional<PaymentCurrencyRateTypeDTO> partialUpdate(PaymentCurrencyRateTypeDTO paymentCurrencyRateTypeDTO) {
+        log.debug("Request to partially update PaymentCurrencyRateType : {}", paymentCurrencyRateTypeDTO);
+
+        return paymentCurrencyRateTypeRepository
+            .findById(paymentCurrencyRateTypeDTO.getId())
+            .map(existingPaymentCurrencyRateType -> {
+                paymentCurrencyRateTypeMapper.partialUpdate(existingPaymentCurrencyRateType, paymentCurrencyRateTypeDTO);
+
+                return existingPaymentCurrencyRateType;
+            })
+            .map(paymentCurrencyRateTypeRepository::save)
+            .map(paymentCurrencyRateTypeMapper::toDto);
+    }
 
     /**
      * Get all the paymentCurrencyRateTypes.
      *
      * @return the list of entities.
      */
-    List<PaymentCurrencyRateTypeDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<PaymentCurrencyRateTypeDTO> findAll() {
+        log.debug("Request to get all PaymentCurrencyRateTypes");
+        return paymentCurrencyRateTypeRepository
+            .findAll()
+            .stream()
+            .map(paymentCurrencyRateTypeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
-     * Get the "id" paymentCurrencyRateType.
+     * Get one paymentCurrencyRateType by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<PaymentCurrencyRateTypeDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<PaymentCurrencyRateTypeDTO> findOne(Long id) {
+        log.debug("Request to get PaymentCurrencyRateType : {}", id);
+        return paymentCurrencyRateTypeRepository.findById(id).map(paymentCurrencyRateTypeMapper::toDto);
+    }
 
     /**
-     * Delete the "id" paymentCurrencyRateType.
+     * Delete the paymentCurrencyRateType by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete PaymentCurrencyRateType : {}", id);
+        paymentCurrencyRateTypeRepository.deleteById(id);
+    }
 }

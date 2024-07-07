@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity OrderRegistrationInfo.
+    -->
+    <changeSet id="20240707093901-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="order_reg_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__order_reg_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="request_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__request_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="import_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__import_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="operation_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__operation_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="currency_provision_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__currency_provision_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_tool_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__payment_tool_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="activity_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__activity_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="owner_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__owner_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="external_customer_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__external_customer_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_vehicle_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__transport_vehicle_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_type_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__transport_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transportation_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="dest_coustomers_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__dest_coustomers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cargo_place_customs_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__cargo_place_customs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="entrance_borders_id"
+                                 baseTableName="order_registration_info"
+                                 constraintName="fk_order_registration_info__entrance_borders_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="rel_order_registration_info__product_info"
+                                 constraintName="fk_rel_order_registration_info___order_registration_info_32_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_info_id"
+                                 baseTableName="rel_order_registration_info__product_info"
+                                 constraintName="fk_rel_order_registration_info__product_info__product_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="rel_order_registration_info__commission_transaction_number"
+                                 constraintName="fk_rel_order_registration_info___order_registration_info_8d_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="commission_transaction_number_id"
+                                 baseTableName="rel_order_registration_info__commission_transaction_number"
+                                 constraintName="fk_rel_order_registration_info___commission_transaction_n_b6_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="string_value"
+                                 />
+    </changeSet>
+</databaseChangeLog>

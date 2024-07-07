@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-type-topic-infos")
 public class DraftTypeTopicInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftTypeTopicInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftTypeTopicInfoResource.class);
 
     private static final String ENTITY_NAME = "draftTypeTopicInfo";
 

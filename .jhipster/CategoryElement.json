@@ -1,12 +1,12 @@
 {
   "annotations": {
-    "changelogDate": "20240707071000"
+    "changelogDate": "20240707093847"
   },
   "applications": "*",
   "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "val",
+      "fieldName": "value",
       "fieldType": "String"
     },
     {
@@ -29,5 +29,5 @@
     }
   ],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

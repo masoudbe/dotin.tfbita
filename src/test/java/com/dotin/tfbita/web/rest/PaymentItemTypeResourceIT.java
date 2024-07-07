@@ -278,8 +278,6 @@ class PaymentItemTypeResourceIT {
         PaymentItemType partialUpdatedPaymentItemType = new PaymentItemType();
         partialUpdatedPaymentItemType.setId(paymentItemType.getId());
 
-        partialUpdatedPaymentItemType.description(UPDATED_DESCRIPTION);
-
         restPaymentItemTypeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedPaymentItemType.getId())

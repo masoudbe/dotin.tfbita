@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/product-types")
 public class ProductTypeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(ProductTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(ProductTypeResource.class);
 
     private static final String ENTITY_NAME = "productType";
 

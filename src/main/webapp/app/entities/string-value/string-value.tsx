@@ -91,14 +91,14 @@ export const StringValue = () => {
                   <Translate contentKey="tfbitaApp.stringValue.val">Val</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('val')} />
                 </th>
                 <th>
+                  <Translate contentKey="tfbitaApp.stringValue.orderRegistrationInfo">Order Registration Info</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="tfbitaApp.stringValue.draft">Draft</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="tfbitaApp.stringValue.draftType">Draft Type</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="tfbitaApp.stringValue.orderRegistrationInfo">Order Registration Info</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -112,6 +112,16 @@ export const StringValue = () => {
                     </Button>
                   </td>
                   <td>{stringValue.val}</td>
+                  <td>
+                    {stringValue.orderRegistrationInfos
+                      ? stringValue.orderRegistrationInfos.map((val, j) => (
+                          <span key={j}>
+                            <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
+                            {j === stringValue.orderRegistrationInfos.length - 1 ? '' : ', '}
+                          </span>
+                        ))
+                      : null}
+                  </td>
                   <td>
                     {stringValue.drafts
                       ? stringValue.drafts.map((val, j) => (
@@ -128,16 +138,6 @@ export const StringValue = () => {
                           <span key={j}>
                             <Link to={`/draft-type/${val.id}`}>{val.id}</Link>
                             {j === stringValue.draftTypes.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
-                  <td>
-                    {stringValue.orderRegistrationInfos
-                      ? stringValue.orderRegistrationInfos.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/order-registration-info/${val.id}`}>{val.id}</Link>
-                            {j === stringValue.orderRegistrationInfos.length - 1 ? '' : ', '}
                           </span>
                         ))
                       : null}

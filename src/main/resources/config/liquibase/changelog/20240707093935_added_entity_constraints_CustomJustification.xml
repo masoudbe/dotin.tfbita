@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CustomJustification.
+    -->
+    <changeSet id="20240707093935-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_enter_nationality_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__vehicle_enter_nationality_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="container_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__container_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_cross_nationality_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__vehicle_cross_nationality_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="export_custom_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__export_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="entrance_custom_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__entrance_custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="transport_conditions_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__transport_conditions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transportation_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="trade_type_code_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__trade_type_code_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="trade_type_code"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="new_payment_conditions_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__new_payment_conditions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_condition"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="justification_deduction_amount_id"
+                                 baseTableName="custom_justification"
+                                 constraintName="fk_custom_justification__justification_deduction_amount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="justification_deduction_amount"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="custom_justification_id"
+                                 baseTableName="rel_custom_justification__products"
+                                 constraintName="fk_rel_custom_justification__products__custom_justification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom_justification"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="products_id"
+                                 baseTableName="rel_custom_justification__products"
+                                 constraintName="fk_rel_custom_justification__products__products_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="custom_justification_id"
+                                 baseTableName="rel_custom_justification__reverse_of_justification_document__84"
+                                 constraintName="fk_rel_custom_justification__re__custom_justification_1d_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom_justification"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="reverse_of_justification_document_transactions_id"
+                                 baseTableName="rel_custom_justification__reverse_of_justification_document__84"
+                                 constraintName="fk_rel_custom_justification__re__reverse_of_justification_5a_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+    </changeSet>
+</databaseChangeLog>

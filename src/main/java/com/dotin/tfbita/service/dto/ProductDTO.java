@@ -21,11 +21,11 @@ public class ProductDTO implements Serializable {
 
     private ProductTypeDTO productType;
 
-    private Set<CustomJustificationDTO> customJustifications = new HashSet<>();
+    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
 
     private Set<DraftDTO> drafts = new HashSet<>();
 
-    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
+    private Set<CustomJustificationDTO> customJustifications = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -67,12 +67,12 @@ public class ProductDTO implements Serializable {
         this.productType = productType;
     }
 
-    public Set<CustomJustificationDTO> getCustomJustifications() {
-        return customJustifications;
+    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
+        return orderRegistrationInfos;
     }
 
-    public void setCustomJustifications(Set<CustomJustificationDTO> customJustifications) {
-        this.customJustifications = customJustifications;
+    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
+        this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
     public Set<DraftDTO> getDrafts() {
@@ -83,12 +83,12 @@ public class ProductDTO implements Serializable {
         this.drafts = drafts;
     }
 
-    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
-        return orderRegistrationInfos;
+    public Set<CustomJustificationDTO> getCustomJustifications() {
+        return customJustifications;
     }
 
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
-        this.orderRegistrationInfos = orderRegistrationInfos;
+    public void setCustomJustifications(Set<CustomJustificationDTO> customJustifications) {
+        this.customJustifications = customJustifications;
     }
 
     @Override
@@ -121,9 +121,9 @@ public class ProductDTO implements Serializable {
             ", modificationDate='" + getModificationDate() + "'" +
             ", name='" + getName() + "'" +
             ", productType=" + getProductType() +
-            ", customJustifications=" + getCustomJustifications() +
-            ", drafts=" + getDrafts() +
             ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
+            ", drafts=" + getDrafts() +
+            ", customJustifications=" + getCustomJustifications() +
             "}";
     }
 }

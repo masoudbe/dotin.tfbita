@@ -18,7 +18,7 @@
         "title": "Category Element"
       },
       "id": "ID",
-      "val": "Val",
+      "value": "Value",
       "categoryName": "Category Name",
       "code": "Code",
       "category": "Category"

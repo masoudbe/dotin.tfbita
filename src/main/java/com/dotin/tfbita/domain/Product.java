@@ -39,25 +39,33 @@ public class Product implements Serializable {
     @JsonIgnoreProperties(value = { "productTypeAttributes" }, allowSetters = true)
     private ProductType productType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productInfos")
     @JsonIgnoreProperties(
         value = {
-            "customJustificationChildLists",
-            "vehicleEnterNationality",
-            "container",
-            "vehicleCrossNationality",
-            "exportCustom",
-            "entranceCustom",
-            "transportConditions",
-            "tradeTypeCode",
-            "newPaymentConditions",
-            "justificationDeductionAmount",
-            "products",
-            "reverseOfJustificationDocumentTransactions",
+            "serviceInfos",
+            "purchaseFromOtherResourcesLists",
+            "orderRegType",
+            "requestType",
+            "importType",
+            "operationType",
+            "currencyProvisionType",
+            "paymentTool",
+            "activityType",
+            "ownerType",
+            "status",
+            "externalCustomerType",
+            "transportVehicleType",
+            "transportType",
+            "destCoustomers",
+            "cargoPlaceCustoms",
+            "entranceBorders",
+            "productInfos",
+            "commissionTransactionNumbers",
+            "licenceInfos",
         },
         allowSetters = true
     )
-    private Set<CustomJustification> customJustifications = new HashSet<>();
+    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     @JsonIgnoreProperties(
@@ -106,33 +114,25 @@ public class Product implements Serializable {
     )
     private Set<Draft> drafts = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productInfos")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     @JsonIgnoreProperties(
         value = {
-            "serviceInfos",
-            "purchaseFromOtherResourcesLists",
-            "orderRegType",
-            "requestType",
-            "importType",
-            "operationType",
-            "currencyProvisionType",
-            "paymentTool",
-            "activityType",
-            "ownerType",
-            "status",
-            "externalCustomerType",
-            "transportVehicleType",
-            "transportType",
-            "destCoustomers",
-            "cargoPlaceCustoms",
-            "entranceBorders",
-            "productInfos",
-            "commissionTransactionNumbers",
-            "licenceInfos",
+            "customJustificationChildLists",
+            "vehicleEnterNationality",
+            "container",
+            "vehicleCrossNationality",
+            "exportCustom",
+            "entranceCustom",
+            "transportConditions",
+            "tradeTypeCode",
+            "newPaymentConditions",
+            "justificationDeductionAmount",
+            "products",
+            "reverseOfJustificationDocumentTransactions",
         },
         allowSetters = true
     )
-    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
+    private Set<CustomJustification> customJustifications = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -232,34 +232,34 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Set<CustomJustification> getCustomJustifications() {
-        return this.customJustifications;
+    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
+        return this.orderRegistrationInfos;
     }
 
-    public void setCustomJustifications(Set<CustomJustification> customJustifications) {
-        if (this.customJustifications != null) {
-            this.customJustifications.forEach(i -> i.removeProducts(this));
+    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
+        if (this.orderRegistrationInfos != null) {
+            this.orderRegistrationInfos.forEach(i -> i.removeProductInfo(this));
         }
-        if (customJustifications != null) {
-            customJustifications.forEach(i -> i.addProducts(this));
+        if (orderRegistrationInfos != null) {
+            orderRegistrationInfos.forEach(i -> i.addProductInfo(this));
         }
-        this.customJustifications = customJustifications;
+        this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
-    public Product customJustifications(Set<CustomJustification> customJustifications) {
-        this.setCustomJustifications(customJustifications);
+    public Product orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
+        this.setOrderRegistrationInfos(orderRegistrationInfos);
         return this;
     }
 
-    public Product addCustomJustification(CustomJustification customJustification) {
-        this.customJustifications.add(customJustification);
-        customJustification.getProducts().add(this);
+    public Product addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfos.add(orderRegistrationInfo);
+        orderRegistrationInfo.getProductInfos().add(this);
         return this;
     }
 
-    public Product removeCustomJustification(CustomJustification customJustification) {
-        this.customJustifications.remove(customJustification);
-        customJustification.getProducts().remove(this);
+    public Product removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfos.remove(orderRegistrationInfo);
+        orderRegistrationInfo.getProductInfos().remove(this);
         return this;
     }
 
@@ -294,34 +294,34 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
-        return this.orderRegistrationInfos;
+    public Set<CustomJustification> getCustomJustifications() {
+        return this.customJustifications;
     }
 
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        if (this.orderRegistrationInfos != null) {
-            this.orderRegistrationInfos.forEach(i -> i.removeProductInfo(this));
+    public void setCustomJustifications(Set<CustomJustification> customJustifications) {
+        if (this.customJustifications != null) {
+            this.customJustifications.forEach(i -> i.removeProducts(this));
         }
-        if (orderRegistrationInfos != null) {
-            orderRegistrationInfos.forEach(i -> i.addProductInfo(this));
+        if (customJustifications != null) {
+            customJustifications.forEach(i -> i.addProducts(this));
         }
-        this.orderRegistrationInfos = orderRegistrationInfos;
+        this.customJustifications = customJustifications;
     }
 
-    public Product orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        this.setOrderRegistrationInfos(orderRegistrationInfos);
+    public Product customJustifications(Set<CustomJustification> customJustifications) {
+        this.setCustomJustifications(customJustifications);
         return this;
     }
 
-    public Product addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.add(orderRegistrationInfo);
-        orderRegistrationInfo.getProductInfos().add(this);
+    public Product addCustomJustification(CustomJustification customJustification) {
+        this.customJustifications.add(customJustification);
+        customJustification.getProducts().add(this);
         return this;
     }
 
-    public Product removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.remove(orderRegistrationInfo);
-        orderRegistrationInfo.getProductInfos().remove(this);
+    public Product removeCustomJustification(CustomJustification customJustification) {
+        this.customJustifications.remove(customJustification);
+        customJustification.getProducts().remove(this);
         return this;
     }
 

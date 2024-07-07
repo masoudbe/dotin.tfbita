@@ -1,66 +1,130 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.CustomJustification;
+import com.dotin.tfbita.repository.CustomJustificationRepository;
 import com.dotin.tfbita.service.dto.CustomJustificationDTO;
+import com.dotin.tfbita.service.mapper.CustomJustificationMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.CustomJustification}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.CustomJustification}.
  */
-public interface CustomJustificationService {
+@Service
+@Transactional
+public class CustomJustificationService {
+
+    private final Logger log = LoggerFactory.getLogger(CustomJustificationService.class);
+
+    private final CustomJustificationRepository customJustificationRepository;
+
+    private final CustomJustificationMapper customJustificationMapper;
+
+    public CustomJustificationService(
+        CustomJustificationRepository customJustificationRepository,
+        CustomJustificationMapper customJustificationMapper
+    ) {
+        this.customJustificationRepository = customJustificationRepository;
+        this.customJustificationMapper = customJustificationMapper;
+    }
+
     /**
      * Save a customJustification.
      *
      * @param customJustificationDTO the entity to save.
      * @return the persisted entity.
      */
-    CustomJustificationDTO save(CustomJustificationDTO customJustificationDTO);
+    public CustomJustificationDTO save(CustomJustificationDTO customJustificationDTO) {
+        log.debug("Request to save CustomJustification : {}", customJustificationDTO);
+        CustomJustification customJustification = customJustificationMapper.toEntity(customJustificationDTO);
+        customJustification = customJustificationRepository.save(customJustification);
+        return customJustificationMapper.toDto(customJustification);
+    }
 
     /**
-     * Updates a customJustification.
+     * Update a customJustification.
      *
-     * @param customJustificationDTO the entity to update.
+     * @param customJustificationDTO the entity to save.
      * @return the persisted entity.
      */
-    CustomJustificationDTO update(CustomJustificationDTO customJustificationDTO);
+    public CustomJustificationDTO update(CustomJustificationDTO customJustificationDTO) {
+        log.debug("Request to update CustomJustification : {}", customJustificationDTO);
+        CustomJustification customJustification = customJustificationMapper.toEntity(customJustificationDTO);
+        customJustification = customJustificationRepository.save(customJustification);
+        return customJustificationMapper.toDto(customJustification);
+    }
 
     /**
-     * Partially updates a customJustification.
+     * Partially update a customJustification.
      *
      * @param customJustificationDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<CustomJustificationDTO> partialUpdate(CustomJustificationDTO customJustificationDTO);
+    public Optional<CustomJustificationDTO> partialUpdate(CustomJustificationDTO customJustificationDTO) {
+        log.debug("Request to partially update CustomJustification : {}", customJustificationDTO);
+
+        return customJustificationRepository
+            .findById(customJustificationDTO.getId())
+            .map(existingCustomJustification -> {
+                customJustificationMapper.partialUpdate(existingCustomJustification, customJustificationDTO);
+
+                return existingCustomJustification;
+            })
+            .map(customJustificationRepository::save)
+            .map(customJustificationMapper::toDto);
+    }
 
     /**
      * Get all the customJustifications.
      *
      * @return the list of entities.
      */
-    List<CustomJustificationDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<CustomJustificationDTO> findAll() {
+        log.debug("Request to get all CustomJustifications");
+        return customJustificationRepository
+            .findAll()
+            .stream()
+            .map(customJustificationMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get all the customJustifications with eager load of many-to-many relationships.
      *
-     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<CustomJustificationDTO> findAllWithEagerRelationships(Pageable pageable);
+    public Page<CustomJustificationDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return customJustificationRepository.findAllWithEagerRelationships(pageable).map(customJustificationMapper::toDto);
+    }
 
     /**
-     * Get the "id" customJustification.
+     * Get one customJustification by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<CustomJustificationDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<CustomJustificationDTO> findOne(Long id) {
+        log.debug("Request to get CustomJustification : {}", id);
+        return customJustificationRepository.findOneWithEagerRelationships(id).map(customJustificationMapper::toDto);
+    }
 
     /**
-     * Delete the "id" customJustification.
+     * Delete the customJustification by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete CustomJustification : {}", id);
+        customJustificationRepository.deleteById(id);
+    }
 }

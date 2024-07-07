@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/suggested-sanction-infos")
 public class SuggestedSanctionInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(SuggestedSanctionInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(SuggestedSanctionInfoResource.class);
 
     private static final String ENTITY_NAME = "suggestedSanctionInfo";
 

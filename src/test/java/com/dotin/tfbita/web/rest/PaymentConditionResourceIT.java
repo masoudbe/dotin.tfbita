@@ -283,6 +283,8 @@ class PaymentConditionResourceIT {
         PaymentCondition partialUpdatedPaymentCondition = new PaymentCondition();
         partialUpdatedPaymentCondition.setId(paymentCondition.getId());
 
+        partialUpdatedPaymentCondition.latinName(UPDATED_LATIN_NAME);
+
         restPaymentConditionMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedPaymentCondition.getId())

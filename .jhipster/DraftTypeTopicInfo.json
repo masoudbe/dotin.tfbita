@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240707071023"
+    "changelogDate": "20240707093918"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -41,5 +41,5 @@
   "name": "DraftTypeTopicInfo",
   "relationships": [],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

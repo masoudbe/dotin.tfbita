@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240707071003"
+    "changelogDate": "20240707093910"
   },
   "applications": "*",
   "dto": "mapstruct",
@@ -13,5 +13,5 @@
   "name": "CurrencyExchangeInfo",
   "relationships": [],
   "searchEngine": "no",
-  "service": "serviceImpl"
+  "service": "serviceClass"
 }

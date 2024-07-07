@@ -236,7 +236,7 @@ public class OrderRegistrationInfo implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "product_info_id")
     )
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "customJustifications", "drafts", "orderRegistrationInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Set<Product> productInfos = new HashSet<>();
@@ -247,7 +247,7 @@ public class OrderRegistrationInfo implements Serializable {
         joinColumns = @JoinColumn(name = "order_registration_info_id"),
         inverseJoinColumns = @JoinColumn(name = "commission_transaction_number_id")
     )
-    @JsonIgnoreProperties(value = { "drafts", "draftTypes", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
     private Set<StringValue> commissionTransactionNumbers = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderRegistrationInfo")

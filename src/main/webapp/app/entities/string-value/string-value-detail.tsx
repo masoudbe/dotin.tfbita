@@ -38,6 +38,19 @@ export const StringValueDetail = () => {
           </dt>
           <dd>{stringValueEntity.val}</dd>
           <dt>
+            <Translate contentKey="tfbitaApp.stringValue.orderRegistrationInfo">Order Registration Info</Translate>
+          </dt>
+          <dd>
+            {stringValueEntity.orderRegistrationInfos
+              ? stringValueEntity.orderRegistrationInfos.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {stringValueEntity.orderRegistrationInfos && i === stringValueEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
             <Translate contentKey="tfbitaApp.stringValue.draft">Draft</Translate>
           </dt>
           <dd>
@@ -59,19 +72,6 @@ export const StringValueDetail = () => {
                   <span key={val.id}>
                     <a>{val.id}</a>
                     {stringValueEntity.draftTypes && i === stringValueEntity.draftTypes.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
-          <dt>
-            <Translate contentKey="tfbitaApp.stringValue.orderRegistrationInfo">Order Registration Info</Translate>
-          </dt>
-          <dd>
-            {stringValueEntity.orderRegistrationInfos
-              ? stringValueEntity.orderRegistrationInfos.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.id}</a>
-                    {stringValueEntity.orderRegistrationInfos && i === stringValueEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}

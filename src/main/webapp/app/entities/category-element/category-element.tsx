@@ -88,9 +88,9 @@ export const CategoryElement = () => {
                   <Translate contentKey="tfbitaApp.categoryElement.id">ID</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('val')}>
-                  <Translate contentKey="tfbitaApp.categoryElement.val">Val</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('val')} />
+                <th className="hand" onClick={sort('value')}>
+                  <Translate contentKey="tfbitaApp.categoryElement.value">Value</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('value')} />
                 </th>
                 <th className="hand" onClick={sort('categoryName')}>
                   <Translate contentKey="tfbitaApp.categoryElement.categoryName">Category Name</Translate>{' '}
@@ -114,7 +114,7 @@ export const CategoryElement = () => {
                       {categoryElement.id}
                     </Button>
                   </td>
-                  <td>{categoryElement.val}</td>
+                  <td>{categoryElement.value}</td>
                   <td>{categoryElement.categoryName}</td>
                   <td>{categoryElement.code}</td>
                   <td>

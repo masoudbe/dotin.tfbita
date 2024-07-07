@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/trade-type-codes")
 public class TradeTypeCodeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(TradeTypeCodeResource.class);
+    private final Logger log = LoggerFactory.getLogger(TradeTypeCodeResource.class);
 
     private static final String ENTITY_NAME = "tradeTypeCode";
 

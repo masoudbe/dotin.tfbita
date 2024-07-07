@@ -332,7 +332,7 @@ class JustificationDeductionDetailResourceIT {
         JustificationDeductionDetail partialUpdatedJustificationDeductionDetail = new JustificationDeductionDetail();
         partialUpdatedJustificationDeductionDetail.setId(justificationDeductionDetail.getId());
 
-        partialUpdatedJustificationDeductionDetail.deductionAmount(UPDATED_DEDUCTION_AMOUNT).comment(UPDATED_COMMENT);
+        partialUpdatedJustificationDeductionDetail.equivalentDeductionAmount(UPDATED_EQUIVALENT_DEDUCTION_AMOUNT);
 
         restJustificationDeductionDetailMockMvc
             .perform(

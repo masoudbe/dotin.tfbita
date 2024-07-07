@@ -287,8 +287,6 @@ class DraftProductInfoResourceIT {
         DraftProductInfo partialUpdatedDraftProductInfo = new DraftProductInfo();
         partialUpdatedDraftProductInfo.setId(draftProductInfo.getId());
 
-        partialUpdatedDraftProductInfo.productAmount(UPDATED_PRODUCT_AMOUNT).productDimension(UPDATED_PRODUCT_DIMENSION);
-
         restDraftProductInfoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDraftProductInfo.getId())

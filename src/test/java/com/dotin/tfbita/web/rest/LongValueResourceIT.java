@@ -278,8 +278,6 @@ class LongValueResourceIT {
         LongValue partialUpdatedLongValue = new LongValue();
         partialUpdatedLongValue.setId(longValue.getId());
 
-        partialUpdatedLongValue.val(UPDATED_VAL);
-
         restLongValueMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLongValue.getId())

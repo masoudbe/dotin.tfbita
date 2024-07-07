@@ -296,8 +296,6 @@ class ObjectiveCategoryElementResourceIT {
         ObjectiveCategoryElement partialUpdatedObjectiveCategoryElement = new ObjectiveCategoryElement();
         partialUpdatedObjectiveCategoryElement.setId(objectiveCategoryElement.getId());
 
-        partialUpdatedObjectiveCategoryElement.entityId(UPDATED_ENTITY_ID);
-
         restObjectiveCategoryElementMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedObjectiveCategoryElement.getId())

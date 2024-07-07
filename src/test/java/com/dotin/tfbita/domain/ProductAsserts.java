@@ -63,14 +63,14 @@ public class ProductAsserts {
             .as("Verify Product relationships")
             .satisfies(e -> assertThat(e.getProductType()).as("check productType").isEqualTo(actual.getProductType()))
             .satisfies(
-                e -> assertThat(e.getCustomJustifications()).as("check customJustifications").isEqualTo(actual.getCustomJustifications())
-            )
-            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
-            .satisfies(
                 e ->
                     assertThat(e.getOrderRegistrationInfos())
                         .as("check orderRegistrationInfos")
                         .isEqualTo(actual.getOrderRegistrationInfos())
+            )
+            .satisfies(e -> assertThat(e.getDrafts()).as("check drafts").isEqualTo(actual.getDrafts()))
+            .satisfies(
+                e -> assertThat(e.getCustomJustifications()).as("check customJustifications").isEqualTo(actual.getCustomJustifications())
             );
     }
 }

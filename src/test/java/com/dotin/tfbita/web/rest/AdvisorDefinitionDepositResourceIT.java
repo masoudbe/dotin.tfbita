@@ -323,9 +323,9 @@ class AdvisorDefinitionDepositResourceIT {
         partialUpdatedAdvisorDefinitionDeposit.setId(advisorDefinitionDeposit.getId());
 
         partialUpdatedAdvisorDefinitionDeposit
+            .advisorDepositNumber(UPDATED_ADVISOR_DEPOSIT_NUMBER)
             .depositNum(UPDATED_DEPOSIT_NUM)
-            .swiftCode(UPDATED_SWIFT_CODE)
-            .currencyCode(UPDATED_CURRENCY_CODE);
+            .swiftCode(UPDATED_SWIFT_CODE);
 
         restAdvisorDefinitionDepositMockMvc
             .perform(

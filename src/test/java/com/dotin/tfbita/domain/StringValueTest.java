@@ -28,6 +28,28 @@ class StringValueTest {
     }
 
     @Test
+    void orderRegistrationInfoTest() {
+        StringValue stringValue = getStringValueRandomSampleGenerator();
+        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
+
+        stringValue.addOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(stringValue.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).containsOnly(stringValue);
+
+        stringValue.removeOrderRegistrationInfo(orderRegistrationInfoBack);
+        assertThat(stringValue.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).doesNotContain(stringValue);
+
+        stringValue.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
+        assertThat(stringValue.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).containsOnly(stringValue);
+
+        stringValue.setOrderRegistrationInfos(new HashSet<>());
+        assertThat(stringValue.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
+        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).doesNotContain(stringValue);
+    }
+
+    @Test
     void draftTest() {
         StringValue stringValue = getStringValueRandomSampleGenerator();
         Draft draftBack = getDraftRandomSampleGenerator();
@@ -69,27 +91,5 @@ class StringValueTest {
         stringValue.setDraftTypes(new HashSet<>());
         assertThat(stringValue.getDraftTypes()).doesNotContain(draftTypeBack);
         assertThat(draftTypeBack.getUserGroups()).doesNotContain(stringValue);
-    }
-
-    @Test
-    void orderRegistrationInfoTest() {
-        StringValue stringValue = getStringValueRandomSampleGenerator();
-        OrderRegistrationInfo orderRegistrationInfoBack = getOrderRegistrationInfoRandomSampleGenerator();
-
-        stringValue.addOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(stringValue.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).containsOnly(stringValue);
-
-        stringValue.removeOrderRegistrationInfo(orderRegistrationInfoBack);
-        assertThat(stringValue.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).doesNotContain(stringValue);
-
-        stringValue.orderRegistrationInfos(new HashSet<>(Set.of(orderRegistrationInfoBack)));
-        assertThat(stringValue.getOrderRegistrationInfos()).containsOnly(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).containsOnly(stringValue);
-
-        stringValue.setOrderRegistrationInfos(new HashSet<>());
-        assertThat(stringValue.getOrderRegistrationInfos()).doesNotContain(orderRegistrationInfoBack);
-        assertThat(orderRegistrationInfoBack.getCommissionTransactionNumbers()).doesNotContain(stringValue);
     }
 }

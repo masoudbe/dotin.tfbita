@@ -283,6 +283,8 @@ class ServiceTariffResourceIT {
         ServiceTariff partialUpdatedServiceTariff = new ServiceTariff();
         partialUpdatedServiceTariff.setId(serviceTariff.getId());
 
+        partialUpdatedServiceTariff.code(UPDATED_CODE).title(UPDATED_TITLE);
+
         restServiceTariffMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedServiceTariff.getId())

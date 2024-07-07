@@ -297,8 +297,6 @@ class CustomResourceIT {
         Custom partialUpdatedCustom = new Custom();
         partialUpdatedCustom.setId(custom.getId());
 
-        partialUpdatedCustom.name(UPDATED_NAME);
-
         restCustomMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedCustom.getId())

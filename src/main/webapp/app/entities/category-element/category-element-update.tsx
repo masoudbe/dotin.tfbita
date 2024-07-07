@@ -100,10 +100,10 @@ export const CategoryElementUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('tfbitaApp.categoryElement.val')}
-                id="category-element-val"
-                name="val"
-                data-cy="val"
+                label={translate('tfbitaApp.categoryElement.value')}
+                id="category-element-value"
+                name="value"
+                data-cy="value"
                 type="text"
               />
               <ValidatedField

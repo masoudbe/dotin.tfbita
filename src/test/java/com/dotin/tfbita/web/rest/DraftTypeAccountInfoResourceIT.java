@@ -296,8 +296,6 @@ class DraftTypeAccountInfoResourceIT {
         DraftTypeAccountInfo partialUpdatedDraftTypeAccountInfo = new DraftTypeAccountInfo();
         partialUpdatedDraftTypeAccountInfo.setId(draftTypeAccountInfo.getId());
 
-        partialUpdatedDraftTypeAccountInfo.sellCurrencyCommissionAccount(UPDATED_SELL_CURRENCY_COMMISSION_ACCOUNT);
-
         restDraftTypeAccountInfoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDraftTypeAccountInfo.getId())

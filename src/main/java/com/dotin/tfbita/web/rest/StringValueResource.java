@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/string-values")
 public class StringValueResource {
 
-    private static final Logger log = LoggerFactory.getLogger(StringValueResource.class);
+    private final Logger log = LoggerFactory.getLogger(StringValueResource.class);
 
     private static final String ENTITY_NAME = "stringValue";
 

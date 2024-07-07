@@ -20,8 +20,8 @@ public class CategoryElement implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "val")
-    private String val;
+    @Column(name = "value")
+    private String value;
 
     @Column(name = "category_name")
     private String categoryName;
@@ -48,17 +48,17 @@ public class CategoryElement implements Serializable {
         this.id = id;
     }
 
-    public String getVal() {
-        return this.val;
+    public String getValue() {
+        return this.value;
     }
 
-    public CategoryElement val(String val) {
-        this.setVal(val);
+    public CategoryElement value(String value) {
+        this.setValue(value);
         return this;
     }
 
-    public void setVal(String val) {
-        this.val = val;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getCategoryName() {
@@ -124,7 +124,7 @@ public class CategoryElement implements Serializable {
     public String toString() {
         return "CategoryElement{" +
             "id=" + getId() +
-            ", val='" + getVal() + "'" +
+            ", value='" + getValue() + "'" +
             ", categoryName='" + getCategoryName() + "'" +
             ", code='" + getCode() + "'" +
             "}";

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/objective-categories")
 public class ObjectiveCategoryResource {
 
-    private static final Logger log = LoggerFactory.getLogger(ObjectiveCategoryResource.class);
+    private final Logger log = LoggerFactory.getLogger(ObjectiveCategoryResource.class);
 
     private static final String ENTITY_NAME = "objectiveCategory";
 

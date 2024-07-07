@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/transportation-types")
 public class TransportationTypeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(TransportationTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(TransportationTypeResource.class);
 
     private static final String ENTITY_NAME = "transportationType";
 

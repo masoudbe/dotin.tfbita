@@ -11,7 +11,7 @@ public class CategoryElementDTO implements Serializable {
 
     private Long id;
 
-    private String val;
+    private String value;
 
     private String categoryName;
 
@@ -27,12 +27,12 @@ public class CategoryElementDTO implements Serializable {
         this.id = id;
     }
 
-    public String getVal() {
-        return val;
+    public String getValue() {
+        return value;
     }
 
-    public void setVal(String val) {
-        this.val = val;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getCategoryName() {
@@ -85,7 +85,7 @@ public class CategoryElementDTO implements Serializable {
     public String toString() {
         return "CategoryElementDTO{" +
             "id=" + getId() +
-            ", val='" + getVal() + "'" +
+            ", value='" + getValue() + "'" +
             ", categoryName='" + getCategoryName() + "'" +
             ", code='" + getCode() + "'" +
             ", category=" + getCategory() +

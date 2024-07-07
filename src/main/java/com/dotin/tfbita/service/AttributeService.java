@@ -1,56 +1,112 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.Attribute;
+import com.dotin.tfbita.repository.AttributeRepository;
 import com.dotin.tfbita.service.dto.AttributeDTO;
+import com.dotin.tfbita.service.mapper.AttributeMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.Attribute}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.Attribute}.
  */
-public interface AttributeService {
+@Service
+@Transactional
+public class AttributeService {
+
+    private final Logger log = LoggerFactory.getLogger(AttributeService.class);
+
+    private final AttributeRepository attributeRepository;
+
+    private final AttributeMapper attributeMapper;
+
+    public AttributeService(AttributeRepository attributeRepository, AttributeMapper attributeMapper) {
+        this.attributeRepository = attributeRepository;
+        this.attributeMapper = attributeMapper;
+    }
+
     /**
      * Save a attribute.
      *
      * @param attributeDTO the entity to save.
      * @return the persisted entity.
      */
-    AttributeDTO save(AttributeDTO attributeDTO);
+    public AttributeDTO save(AttributeDTO attributeDTO) {
+        log.debug("Request to save Attribute : {}", attributeDTO);
+        Attribute attribute = attributeMapper.toEntity(attributeDTO);
+        attribute = attributeRepository.save(attribute);
+        return attributeMapper.toDto(attribute);
+    }
 
     /**
-     * Updates a attribute.
+     * Update a attribute.
      *
-     * @param attributeDTO the entity to update.
+     * @param attributeDTO the entity to save.
      * @return the persisted entity.
      */
-    AttributeDTO update(AttributeDTO attributeDTO);
+    public AttributeDTO update(AttributeDTO attributeDTO) {
+        log.debug("Request to update Attribute : {}", attributeDTO);
+        Attribute attribute = attributeMapper.toEntity(attributeDTO);
+        attribute = attributeRepository.save(attribute);
+        return attributeMapper.toDto(attribute);
+    }
 
     /**
-     * Partially updates a attribute.
+     * Partially update a attribute.
      *
      * @param attributeDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<AttributeDTO> partialUpdate(AttributeDTO attributeDTO);
+    public Optional<AttributeDTO> partialUpdate(AttributeDTO attributeDTO) {
+        log.debug("Request to partially update Attribute : {}", attributeDTO);
+
+        return attributeRepository
+            .findById(attributeDTO.getId())
+            .map(existingAttribute -> {
+                attributeMapper.partialUpdate(existingAttribute, attributeDTO);
+
+                return existingAttribute;
+            })
+            .map(attributeRepository::save)
+            .map(attributeMapper::toDto);
+    }
 
     /**
      * Get all the attributes.
      *
      * @return the list of entities.
      */
-    List<AttributeDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<AttributeDTO> findAll() {
+        log.debug("Request to get all Attributes");
+        return attributeRepository.findAll().stream().map(attributeMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
-     * Get the "id" attribute.
+     * Get one attribute by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<AttributeDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<AttributeDTO> findOne(Long id) {
+        log.debug("Request to get Attribute : {}", id);
+        return attributeRepository.findById(id).map(attributeMapper::toDto);
+    }
 
     /**
-     * Delete the "id" attribute.
+     * Delete the attribute by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Attribute : {}", id);
+        attributeRepository.deleteById(id);
+    }
 }

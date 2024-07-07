@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/licence-infos")
 public class LicenceInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(LicenceInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(LicenceInfoResource.class);
 
     private static final String ENTITY_NAME = "licenceInfo";
 

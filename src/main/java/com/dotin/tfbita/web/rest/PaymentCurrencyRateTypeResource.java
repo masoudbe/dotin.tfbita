@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/payment-currency-rate-types")
 public class PaymentCurrencyRateTypeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentCurrencyRateTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(PaymentCurrencyRateTypeResource.class);
 
     private static final String ENTITY_NAME = "paymentCurrencyRateType";
 

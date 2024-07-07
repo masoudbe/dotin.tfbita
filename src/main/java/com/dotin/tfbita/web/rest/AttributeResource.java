@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/attributes")
 public class AttributeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(AttributeResource.class);
+    private final Logger log = LoggerFactory.getLogger(AttributeResource.class);
 
     private static final String ENTITY_NAME = "attribute";
 

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/swift-bics")
 public class SwiftBicResource {
 
-    private static final Logger log = LoggerFactory.getLogger(SwiftBicResource.class);
+    private final Logger log = LoggerFactory.getLogger(SwiftBicResource.class);
 
     private static final String ENTITY_NAME = "swiftBic";
 

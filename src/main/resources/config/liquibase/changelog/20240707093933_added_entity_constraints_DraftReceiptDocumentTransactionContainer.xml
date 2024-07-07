@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DraftReceiptDocumentTransactionContainer.
+    -->
+    <changeSet id="20240707093933-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="receipt_issue_document_transaction_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__receipt_issue_document_t_31_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="freight_letter_stamp_cost_document_transaction_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__freight_letter_stamp_cos_e7_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="deliver_document_transaction_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__deliver_document_transac_e8_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_transaction_canceled_deliver_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__document_transaction_can_0b_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_transaction_canceled_receipt_issue_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__document_transaction_can_4e_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="receipt_commission_document_transactions_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__receipt_commission_docum_e3_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_document_transaction_container_id"
+                                 baseTableName="draft_receipt_document_transaction_container"
+                                 constraintName="fk_draft_receipt_document_trans__draft_document_transacti_01_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_document_transaction_container"
+                                 />
+    </changeSet>
+</databaseChangeLog>

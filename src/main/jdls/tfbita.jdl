@@ -4,7 +4,7 @@ entity Category {
 }
 
 entity CategoryElement {
-    val String
+    value String
     categoryName String
     code String
 }
@@ -58,7 +58,7 @@ entity ProductType {
 }
 
 entity AttributeValue {
-    val String
+    value String
     customValue String
     attributeValueGroupName String
 }
@@ -835,4 +835,4 @@ relationship OneToOne {
     AdvisorDefinition{additionalBrokerInformation} to AdditionalBrokerInformation{advisorDefinition}
 }
 
-use paginate, serviceImpl, mapstruct  for *
+use paginate, serviceImpl, mapstruct, serviceClass  for *

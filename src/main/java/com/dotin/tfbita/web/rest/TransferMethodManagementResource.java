@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/transfer-method-managements")
 public class TransferMethodManagementResource {
 
-    private static final Logger log = LoggerFactory.getLogger(TransferMethodManagementResource.class);
+    private final Logger log = LoggerFactory.getLogger(TransferMethodManagementResource.class);
 
     private static final String ENTITY_NAME = "transferMethodManagement";
 

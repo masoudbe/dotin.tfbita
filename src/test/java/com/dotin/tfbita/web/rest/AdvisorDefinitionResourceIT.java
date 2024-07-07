@@ -354,12 +354,10 @@ class AdvisorDefinitionResourceIT {
         partialUpdatedAdvisorDefinition.setId(advisorDefinition.getId());
 
         partialUpdatedAdvisorDefinition
-            .code(UPDATED_CODE)
             .countryIsoCode(UPDATED_COUNTRY_ISO_CODE)
-            .depositNum(UPDATED_DEPOSIT_NUM)
-            .swiftCode(UPDATED_SWIFT_CODE)
-            .defaultCurrencyCode(UPDATED_DEFAULT_CURRENCY_CODE)
             .currenciesCodes(UPDATED_CURRENCIES_CODES)
+            .countryCode(UPDATED_COUNTRY_CODE)
+            .bankCode(UPDATED_BANK_CODE)
             .branchCode(UPDATED_BRANCH_CODE);
 
         restAdvisorDefinitionMockMvc

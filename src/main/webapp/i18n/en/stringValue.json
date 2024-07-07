@@ -19,9 +19,9 @@
       },
       "id": "ID",
       "val": "Val",
+      "orderRegistrationInfo": "Order Registration Info",
       "draft": "Draft",
-      "draftType": "Draft Type",
-      "orderRegistrationInfo": "Order Registration Info"
+      "draftType": "Draft Type"
     }
   }
 }

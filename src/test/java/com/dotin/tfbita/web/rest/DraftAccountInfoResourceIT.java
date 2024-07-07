@@ -351,9 +351,9 @@ class DraftAccountInfoResourceIT {
 
         partialUpdatedDraftAccountInfo
             .documentReceiptDisciplinaryAccountId(UPDATED_DOCUMENT_RECEIPT_DISCIPLINARY_ACCOUNT_ID)
-            .insuranceCostAccountId(UPDATED_INSURANCE_COST_ACCOUNT_ID)
-            .postSwiftCostsAccountId(UPDATED_POST_SWIFT_COSTS_ACCOUNT_ID)
-            .amountDeductionAccountId(UPDATED_AMOUNT_DEDUCTION_ACCOUNT_ID);
+            .draftMainAccountId(UPDATED_DRAFT_MAIN_ACCOUNT_ID)
+            .justificationDisciplinaryAccountId(UPDATED_JUSTIFICATION_DISCIPLINARY_ACCOUNT_ID)
+            .postSwiftCostsAccountId(UPDATED_POST_SWIFT_COSTS_ACCOUNT_ID);
 
         restDraftAccountInfoMockMvc
             .perform(

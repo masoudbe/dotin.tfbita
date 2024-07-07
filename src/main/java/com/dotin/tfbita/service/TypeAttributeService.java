@@ -1,56 +1,112 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.TypeAttribute;
+import com.dotin.tfbita.repository.TypeAttributeRepository;
 import com.dotin.tfbita.service.dto.TypeAttributeDTO;
+import com.dotin.tfbita.service.mapper.TypeAttributeMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.TypeAttribute}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.TypeAttribute}.
  */
-public interface TypeAttributeService {
+@Service
+@Transactional
+public class TypeAttributeService {
+
+    private final Logger log = LoggerFactory.getLogger(TypeAttributeService.class);
+
+    private final TypeAttributeRepository typeAttributeRepository;
+
+    private final TypeAttributeMapper typeAttributeMapper;
+
+    public TypeAttributeService(TypeAttributeRepository typeAttributeRepository, TypeAttributeMapper typeAttributeMapper) {
+        this.typeAttributeRepository = typeAttributeRepository;
+        this.typeAttributeMapper = typeAttributeMapper;
+    }
+
     /**
      * Save a typeAttribute.
      *
      * @param typeAttributeDTO the entity to save.
      * @return the persisted entity.
      */
-    TypeAttributeDTO save(TypeAttributeDTO typeAttributeDTO);
+    public TypeAttributeDTO save(TypeAttributeDTO typeAttributeDTO) {
+        log.debug("Request to save TypeAttribute : {}", typeAttributeDTO);
+        TypeAttribute typeAttribute = typeAttributeMapper.toEntity(typeAttributeDTO);
+        typeAttribute = typeAttributeRepository.save(typeAttribute);
+        return typeAttributeMapper.toDto(typeAttribute);
+    }
 
     /**
-     * Updates a typeAttribute.
+     * Update a typeAttribute.
      *
-     * @param typeAttributeDTO the entity to update.
+     * @param typeAttributeDTO the entity to save.
      * @return the persisted entity.
      */
-    TypeAttributeDTO update(TypeAttributeDTO typeAttributeDTO);
+    public TypeAttributeDTO update(TypeAttributeDTO typeAttributeDTO) {
+        log.debug("Request to update TypeAttribute : {}", typeAttributeDTO);
+        TypeAttribute typeAttribute = typeAttributeMapper.toEntity(typeAttributeDTO);
+        typeAttribute = typeAttributeRepository.save(typeAttribute);
+        return typeAttributeMapper.toDto(typeAttribute);
+    }
 
     /**
-     * Partially updates a typeAttribute.
+     * Partially update a typeAttribute.
      *
      * @param typeAttributeDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<TypeAttributeDTO> partialUpdate(TypeAttributeDTO typeAttributeDTO);
+    public Optional<TypeAttributeDTO> partialUpdate(TypeAttributeDTO typeAttributeDTO) {
+        log.debug("Request to partially update TypeAttribute : {}", typeAttributeDTO);
+
+        return typeAttributeRepository
+            .findById(typeAttributeDTO.getId())
+            .map(existingTypeAttribute -> {
+                typeAttributeMapper.partialUpdate(existingTypeAttribute, typeAttributeDTO);
+
+                return existingTypeAttribute;
+            })
+            .map(typeAttributeRepository::save)
+            .map(typeAttributeMapper::toDto);
+    }
 
     /**
      * Get all the typeAttributes.
      *
      * @return the list of entities.
      */
-    List<TypeAttributeDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<TypeAttributeDTO> findAll() {
+        log.debug("Request to get all TypeAttributes");
+        return typeAttributeRepository.findAll().stream().map(typeAttributeMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
-     * Get the "id" typeAttribute.
+     * Get one typeAttribute by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<TypeAttributeDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<TypeAttributeDTO> findOne(Long id) {
+        log.debug("Request to get TypeAttribute : {}", id);
+        return typeAttributeRepository.findById(id).map(typeAttributeMapper::toDto);
+    }
 
     /**
-     * Delete the "id" typeAttribute.
+     * Delete the typeAttribute by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete TypeAttribute : {}", id);
+        typeAttributeRepository.deleteById(id);
+    }
 }

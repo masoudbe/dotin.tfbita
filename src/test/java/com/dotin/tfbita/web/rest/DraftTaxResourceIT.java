@@ -355,7 +355,11 @@ class DraftTaxResourceIT {
         DraftTax partialUpdatedDraftTax = new DraftTax();
         partialUpdatedDraftTax.setId(draftTax.getId());
 
-        partialUpdatedDraftTax.orderRegCurrencyAmount(UPDATED_ORDER_REG_CURRENCY_AMOUNT).mainAccountRate(UPDATED_MAIN_ACCOUNT_RATE);
+        partialUpdatedDraftTax
+            .letterImage(UPDATED_LETTER_IMAGE)
+            .letterImageContentType(UPDATED_LETTER_IMAGE_CONTENT_TYPE)
+            .registrationDate(UPDATED_REGISTRATION_DATE)
+            .returnTaxesAmount(UPDATED_RETURN_TAXES_AMOUNT);
 
         restDraftTaxMockMvc
             .perform(

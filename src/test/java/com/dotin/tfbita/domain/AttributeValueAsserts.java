@@ -47,7 +47,7 @@ public class AttributeValueAsserts {
     public static void assertAttributeValueUpdatableFieldsEquals(AttributeValue expected, AttributeValue actual) {
         assertThat(expected)
             .as("Verify AttributeValue relevant properties")
-            .satisfies(e -> assertThat(e.getVal()).as("check val").isEqualTo(actual.getVal()))
+            .satisfies(e -> assertThat(e.getValue()).as("check value").isEqualTo(actual.getValue()))
             .satisfies(e -> assertThat(e.getCustomValue()).as("check customValue").isEqualTo(actual.getCustomValue()))
             .satisfies(
                 e ->

@@ -28,7 +28,7 @@ public class DraftProductInfo implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "customJustifications", "drafts", "orderRegistrationInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Product product;

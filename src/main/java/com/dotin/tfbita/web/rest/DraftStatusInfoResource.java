@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-status-infos")
 public class DraftStatusInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftStatusInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftStatusInfoResource.class);
 
     private static final String ENTITY_NAME = "draftStatusInfo";
 

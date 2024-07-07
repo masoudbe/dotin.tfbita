@@ -432,7 +432,7 @@ public class Draft implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "products_id")
     )
     @JsonIgnoreProperties(
-        value = { "attributeValues", "productType", "customJustifications", "drafts", "orderRegistrationInfos" },
+        value = { "attributeValues", "productType", "orderRegistrationInfos", "drafts", "customJustifications" },
         allowSetters = true
     )
     private Set<Product> products = new HashSet<>();
@@ -443,7 +443,7 @@ public class Draft implements Serializable {
         joinColumns = @JoinColumn(name = "draft_id"),
         inverseJoinColumns = @JoinColumn(name = "sanction_serials_id")
     )
-    @JsonIgnoreProperties(value = { "drafts", "draftTypes", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
     private Set<StringValue> sanctionSerials = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/attribute-value-groups")
 public class AttributeValueGroupResource {
 
-    private static final Logger log = LoggerFactory.getLogger(AttributeValueGroupResource.class);
+    private final Logger log = LoggerFactory.getLogger(AttributeValueGroupResource.class);
 
     private static final String ENTITY_NAME = "attributeValueGroup";
 

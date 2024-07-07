@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-extends")
 public class DraftExtendResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftExtendResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftExtendResource.class);
 
     private static final String ENTITY_NAME = "draftExtend";
 

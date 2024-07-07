@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/type-attributes")
 public class TypeAttributeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(TypeAttributeResource.class);
+    private final Logger log = LoggerFactory.getLogger(TypeAttributeResource.class);
 
     private static final String ENTITY_NAME = "typeAttribute";
 

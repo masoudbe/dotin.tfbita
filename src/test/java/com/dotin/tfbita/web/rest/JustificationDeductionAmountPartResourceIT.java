@@ -403,10 +403,12 @@ class JustificationDeductionAmountPartResourceIT {
         partialUpdatedJustificationDeductionAmountPart.setId(justificationDeductionAmountPart.getId());
 
         partialUpdatedJustificationDeductionAmountPart
-            .returnTransactionCode(UPDATED_RETURN_TRANSACTION_CODE)
-            .date(UPDATED_DATE)
+            .receiveTransactionCode(UPDATED_RECEIVE_TRANSACTION_CODE)
+            .amount(UPDATED_AMOUNT)
+            .amountBasedOnRial(UPDATED_AMOUNT_BASED_ON_RIAL)
             .receiveCurrencyCode(UPDATED_RECEIVE_CURRENCY_CODE)
             .currencyRateDate(UPDATED_CURRENCY_RATE_DATE)
+            .buyRate(UPDATED_BUY_RATE)
             .comment(UPDATED_COMMENT);
 
         restJustificationDeductionAmountPartMockMvc

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/purchase-from-other-resources")
 public class PurchaseFromOtherResourcesResource {
 
-    private static final Logger log = LoggerFactory.getLogger(PurchaseFromOtherResourcesResource.class);
+    private final Logger log = LoggerFactory.getLogger(PurchaseFromOtherResourcesResource.class);
 
     private static final String ENTITY_NAME = "purchaseFromOtherResources";
 

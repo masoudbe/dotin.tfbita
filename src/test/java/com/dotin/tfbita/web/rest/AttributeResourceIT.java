@@ -283,8 +283,6 @@ class AttributeResourceIT {
         Attribute partialUpdatedAttribute = new Attribute();
         partialUpdatedAttribute.setId(attribute.getId());
 
-        partialUpdatedAttribute.modificationDate(UPDATED_MODIFICATION_DATE);
-
         restAttributeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedAttribute.getId())

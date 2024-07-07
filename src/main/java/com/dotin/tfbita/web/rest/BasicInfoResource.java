@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/basic-infos")
 public class BasicInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(BasicInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(BasicInfoResource.class);
 
     private static final String ENTITY_NAME = "basicInfo";
 

@@ -343,8 +343,8 @@ class DraftTypeTopicInfoResourceIT {
         partialUpdatedDraftTypeTopicInfo.setId(draftTypeTopicInfo.getId());
 
         partialUpdatedDraftTypeTopicInfo
-            .draftMainTopic(UPDATED_DRAFT_MAIN_TOPIC)
-            .insuranceCostTopic(UPDATED_INSURANCE_COST_TOPIC)
+            .currencySellCommissionTopic(UPDATED_CURRENCY_SELL_COMMISSION_TOPIC)
+            .documentReceiptDisciplinaryTopic(UPDATED_DOCUMENT_RECEIPT_DISCIPLINARY_TOPIC)
             .justificationDisciplinaryTopic(UPDATED_JUSTIFICATION_DISCIPLINARY_TOPIC)
             .openDraftDisciplinaryTopic(UPDATED_OPEN_DRAFT_DISCIPLINARY_TOPIC)
             .otherCostsTopic(UPDATED_OTHER_COSTS_TOPIC);

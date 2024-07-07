@@ -32,11 +32,11 @@ export const CategoryElementDetail = () => {
           </dt>
           <dd>{categoryElementEntity.id}</dd>
           <dt>
-            <span id="val">
-              <Translate contentKey="tfbitaApp.categoryElement.val">Val</Translate>
+            <span id="value">
+              <Translate contentKey="tfbitaApp.categoryElement.value">Value</Translate>
             </span>
           </dt>
-          <dd>{categoryElementEntity.val}</dd>
+          <dd>{categoryElementEntity.value}</dd>
           <dt>
             <span id="categoryName">
               <Translate contentKey="tfbitaApp.categoryElement.categoryName">Category Name</Translate>

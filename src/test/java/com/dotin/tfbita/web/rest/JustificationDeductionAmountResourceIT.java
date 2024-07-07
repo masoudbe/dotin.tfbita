@@ -326,8 +326,7 @@ class JustificationDeductionAmountResourceIT {
 
         partialUpdatedJustificationDeductionAmount
             .deductionAmount(UPDATED_DEDUCTION_AMOUNT)
-            .remainingDeductionAmount(UPDATED_REMAINING_DEDUCTION_AMOUNT)
-            .receivedDeductionAmount(UPDATED_RECEIVED_DEDUCTION_AMOUNT);
+            .remainingDeductionAmount(UPDATED_REMAINING_DEDUCTION_AMOUNT);
 
         restJustificationDeductionAmountMockMvc
             .perform(

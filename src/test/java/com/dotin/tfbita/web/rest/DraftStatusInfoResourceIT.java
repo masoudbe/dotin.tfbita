@@ -347,7 +347,12 @@ class DraftStatusInfoResourceIT {
         DraftStatusInfo partialUpdatedDraftStatusInfo = new DraftStatusInfo();
         partialUpdatedDraftStatusInfo.setId(draftStatusInfo.getId());
 
-        partialUpdatedDraftStatusInfo.draftRequestAccepted(UPDATED_DRAFT_REQUEST_ACCEPTED).issued(UPDATED_ISSUED);
+        partialUpdatedDraftStatusInfo
+            .draftRequestAccepted(UPDATED_DRAFT_REQUEST_ACCEPTED)
+            .issued(UPDATED_ISSUED)
+            .otherCostsPaid(UPDATED_OTHER_COSTS_PAID)
+            .postSwiftCostPaied(UPDATED_POST_SWIFT_COST_PAIED)
+            .stampCostPaid(UPDATED_STAMP_COST_PAID);
 
         restDraftStatusInfoMockMvc
             .perform(

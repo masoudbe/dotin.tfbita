@@ -94,7 +94,7 @@ public class DraftType implements Serializable {
         joinColumns = @JoinColumn(name = "draft_type_id"),
         inverseJoinColumns = @JoinColumn(name = "user_groups_id")
     )
-    @JsonIgnoreProperties(value = { "drafts", "draftTypes", "orderRegistrationInfos" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "orderRegistrationInfos", "drafts", "draftTypes" }, allowSetters = true)
     private Set<StringValue> userGroups = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

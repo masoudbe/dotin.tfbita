@@ -17,18 +17,28 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface StringValueMapper extends EntityMapper<StringValueDTO, StringValue> {
+    @Mapping(target = "orderRegistrationInfos", source = "orderRegistrationInfos", qualifiedByName = "orderRegistrationInfoIdSet")
     @Mapping(target = "drafts", source = "drafts", qualifiedByName = "draftIdSet")
     @Mapping(target = "draftTypes", source = "draftTypes", qualifiedByName = "draftTypeIdSet")
-    @Mapping(target = "orderRegistrationInfos", source = "orderRegistrationInfos", qualifiedByName = "orderRegistrationInfoIdSet")
     StringValueDTO toDto(StringValue s);
 
+    @Mapping(target = "orderRegistrationInfos", ignore = true)
+    @Mapping(target = "removeOrderRegistrationInfo", ignore = true)
     @Mapping(target = "drafts", ignore = true)
     @Mapping(target = "removeDraft", ignore = true)
     @Mapping(target = "draftTypes", ignore = true)
     @Mapping(target = "removeDraftType", ignore = true)
-    @Mapping(target = "orderRegistrationInfos", ignore = true)
-    @Mapping(target = "removeOrderRegistrationInfo", ignore = true)
     StringValue toEntity(StringValueDTO stringValueDTO);
+
+    @Named("orderRegistrationInfoId")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    OrderRegistrationInfoDTO toDtoOrderRegistrationInfoId(OrderRegistrationInfo orderRegistrationInfo);
+
+    @Named("orderRegistrationInfoIdSet")
+    default Set<OrderRegistrationInfoDTO> toDtoOrderRegistrationInfoIdSet(Set<OrderRegistrationInfo> orderRegistrationInfo) {
+        return orderRegistrationInfo.stream().map(this::toDtoOrderRegistrationInfoId).collect(Collectors.toSet());
+    }
 
     @Named("draftId")
     @BeanMapping(ignoreByDefault = true)
@@ -48,15 +58,5 @@ public interface StringValueMapper extends EntityMapper<StringValueDTO, StringVa
     @Named("draftTypeIdSet")
     default Set<DraftTypeDTO> toDtoDraftTypeIdSet(Set<DraftType> draftType) {
         return draftType.stream().map(this::toDtoDraftTypeId).collect(Collectors.toSet());
-    }
-
-    @Named("orderRegistrationInfoId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    OrderRegistrationInfoDTO toDtoOrderRegistrationInfoId(OrderRegistrationInfo orderRegistrationInfo);
-
-    @Named("orderRegistrationInfoIdSet")
-    default Set<OrderRegistrationInfoDTO> toDtoOrderRegistrationInfoIdSet(Set<OrderRegistrationInfo> orderRegistrationInfo) {
-        return orderRegistrationInfo.stream().map(this::toDtoOrderRegistrationInfoId).collect(Collectors.toSet());
     }
 }

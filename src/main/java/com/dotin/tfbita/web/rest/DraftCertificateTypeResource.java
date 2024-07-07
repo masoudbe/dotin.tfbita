@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-certificate-types")
 public class DraftCertificateTypeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftCertificateTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftCertificateTypeResource.class);
 
     private static final String ENTITY_NAME = "draftCertificateType";
 

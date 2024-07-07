@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/additional-broker-informations")
 public class AdditionalBrokerInformationResource {
 
-    private static final Logger log = LoggerFactory.getLogger(AdditionalBrokerInformationResource.class);
+    private final Logger log = LoggerFactory.getLogger(AdditionalBrokerInformationResource.class);
 
     private static final String ENTITY_NAME = "additionalBrokerInformation";
 

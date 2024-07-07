@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/service-tariffs")
 public class ServiceTariffResource {
 
-    private static final Logger log = LoggerFactory.getLogger(ServiceTariffResource.class);
+    private final Logger log = LoggerFactory.getLogger(ServiceTariffResource.class);
 
     private static final String ENTITY_NAME = "serviceTariff";
 

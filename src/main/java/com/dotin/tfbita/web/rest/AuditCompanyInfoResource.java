@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/audit-company-infos")
 public class AuditCompanyInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(AuditCompanyInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(AuditCompanyInfoResource.class);
 
     private static final String ENTITY_NAME = "auditCompanyInfo";
 

@@ -34,8 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class CategoryElementResourceIT {
 
-    private static final String DEFAULT_VAL = "AAAAAAAAAA";
-    private static final String UPDATED_VAL = "BBBBBBBBBB";
+    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CATEGORY_NAME = "AAAAAAAAAA";
     private static final String UPDATED_CATEGORY_NAME = "BBBBBBBBBB";
@@ -75,7 +75,7 @@ class CategoryElementResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static CategoryElement createEntity(EntityManager em) {
-        CategoryElement categoryElement = new CategoryElement().val(DEFAULT_VAL).categoryName(DEFAULT_CATEGORY_NAME).code(DEFAULT_CODE);
+        CategoryElement categoryElement = new CategoryElement().value(DEFAULT_VALUE).categoryName(DEFAULT_CATEGORY_NAME).code(DEFAULT_CODE);
         return categoryElement;
     }
 
@@ -86,7 +86,7 @@ class CategoryElementResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static CategoryElement createUpdatedEntity(EntityManager em) {
-        CategoryElement categoryElement = new CategoryElement().val(UPDATED_VAL).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
+        CategoryElement categoryElement = new CategoryElement().value(UPDATED_VALUE).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
         return categoryElement;
     }
 
@@ -157,7 +157,7 @@ class CategoryElementResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(categoryElement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].val").value(hasItem(DEFAULT_VAL)))
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].categoryName").value(hasItem(DEFAULT_CATEGORY_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)));
     }
@@ -174,7 +174,7 @@ class CategoryElementResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(categoryElement.getId().intValue()))
-            .andExpect(jsonPath("$.val").value(DEFAULT_VAL))
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
             .andExpect(jsonPath("$.categoryName").value(DEFAULT_CATEGORY_NAME))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE));
     }
@@ -198,7 +198,7 @@ class CategoryElementResourceIT {
         CategoryElement updatedCategoryElement = categoryElementRepository.findById(categoryElement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedCategoryElement are not directly saved in db
         em.detach(updatedCategoryElement);
-        updatedCategoryElement.val(UPDATED_VAL).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
+        updatedCategoryElement.value(UPDATED_VALUE).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
         CategoryElementDTO categoryElementDTO = categoryElementMapper.toDto(updatedCategoryElement);
 
         restCategoryElementMockMvc
@@ -288,7 +288,7 @@ class CategoryElementResourceIT {
         CategoryElement partialUpdatedCategoryElement = new CategoryElement();
         partialUpdatedCategoryElement.setId(categoryElement.getId());
 
-        partialUpdatedCategoryElement.val(UPDATED_VAL).code(UPDATED_CODE);
+        partialUpdatedCategoryElement.value(UPDATED_VALUE).code(UPDATED_CODE);
 
         restCategoryElementMockMvc
             .perform(
@@ -319,7 +319,7 @@ class CategoryElementResourceIT {
         CategoryElement partialUpdatedCategoryElement = new CategoryElement();
         partialUpdatedCategoryElement.setId(categoryElement.getId());
 
-        partialUpdatedCategoryElement.val(UPDATED_VAL).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
+        partialUpdatedCategoryElement.value(UPDATED_VALUE).categoryName(UPDATED_CATEGORY_NAME).code(UPDATED_CODE);
 
         restCategoryElementMockMvc
             .perform(

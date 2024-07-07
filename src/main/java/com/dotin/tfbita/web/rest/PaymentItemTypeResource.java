@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/payment-item-types")
 public class PaymentItemTypeResource {
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentItemTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(PaymentItemTypeResource.class);
 
     private static final String ENTITY_NAME = "paymentItemType";
 

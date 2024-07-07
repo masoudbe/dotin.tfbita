@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-receipts")
 public class DraftReceiptResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftReceiptResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftReceiptResource.class);
 
     private static final String ENTITY_NAME = "draftReceipt";
 

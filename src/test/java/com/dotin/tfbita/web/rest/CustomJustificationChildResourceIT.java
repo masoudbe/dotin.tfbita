@@ -358,11 +358,9 @@ class CustomJustificationChildResourceIT {
 
         partialUpdatedCustomJustificationChild
             .item(UPDATED_ITEM)
-            .productName(UPDATED_PRODUCT_NAME)
+            .tariffCode(UPDATED_TARIFF_CODE)
             .productId(UPDATED_PRODUCT_ID)
-            .boxCount(UPDATED_BOX_COUNT)
-            .pureWeight(UPDATED_PURE_WEIGHT)
-            .amountCurrency(UPDATED_AMOUNT_CURRENCY);
+            .impureWeight(UPDATED_IMPURE_WEIGHT);
 
         restCustomJustificationChildMockMvc
             .perform(

@@ -1,56 +1,112 @@
 package com.dotin.tfbita.service;
 
+import com.dotin.tfbita.domain.Category;
+import com.dotin.tfbita.repository.CategoryRepository;
 import com.dotin.tfbita.service.dto.CategoryDTO;
+import com.dotin.tfbita.service.mapper.CategoryMapper;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.dotin.tfbita.domain.Category}.
+ * Service Implementation for managing {@link com.dotin.tfbita.domain.Category}.
  */
-public interface CategoryService {
+@Service
+@Transactional
+public class CategoryService {
+
+    private final Logger log = LoggerFactory.getLogger(CategoryService.class);
+
+    private final CategoryRepository categoryRepository;
+
+    private final CategoryMapper categoryMapper;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+        this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
+    }
+
     /**
      * Save a category.
      *
      * @param categoryDTO the entity to save.
      * @return the persisted entity.
      */
-    CategoryDTO save(CategoryDTO categoryDTO);
+    public CategoryDTO save(CategoryDTO categoryDTO) {
+        log.debug("Request to save Category : {}", categoryDTO);
+        Category category = categoryMapper.toEntity(categoryDTO);
+        category = categoryRepository.save(category);
+        return categoryMapper.toDto(category);
+    }
 
     /**
-     * Updates a category.
+     * Update a category.
      *
-     * @param categoryDTO the entity to update.
+     * @param categoryDTO the entity to save.
      * @return the persisted entity.
      */
-    CategoryDTO update(CategoryDTO categoryDTO);
+    public CategoryDTO update(CategoryDTO categoryDTO) {
+        log.debug("Request to update Category : {}", categoryDTO);
+        Category category = categoryMapper.toEntity(categoryDTO);
+        category = categoryRepository.save(category);
+        return categoryMapper.toDto(category);
+    }
 
     /**
-     * Partially updates a category.
+     * Partially update a category.
      *
      * @param categoryDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<CategoryDTO> partialUpdate(CategoryDTO categoryDTO);
+    public Optional<CategoryDTO> partialUpdate(CategoryDTO categoryDTO) {
+        log.debug("Request to partially update Category : {}", categoryDTO);
+
+        return categoryRepository
+            .findById(categoryDTO.getId())
+            .map(existingCategory -> {
+                categoryMapper.partialUpdate(existingCategory, categoryDTO);
+
+                return existingCategory;
+            })
+            .map(categoryRepository::save)
+            .map(categoryMapper::toDto);
+    }
 
     /**
      * Get all the categories.
      *
      * @return the list of entities.
      */
-    List<CategoryDTO> findAll();
+    @Transactional(readOnly = true)
+    public List<CategoryDTO> findAll() {
+        log.debug("Request to get all Categories");
+        return categoryRepository.findAll().stream().map(categoryMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
-     * Get the "id" category.
+     * Get one category by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<CategoryDTO> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<CategoryDTO> findOne(Long id) {
+        log.debug("Request to get Category : {}", id);
+        return categoryRepository.findById(id).map(categoryMapper::toDto);
+    }
 
     /**
-     * Delete the "id" category.
+     * Delete the category by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Category : {}", id);
+        categoryRepository.deleteById(id);
+    }
 }

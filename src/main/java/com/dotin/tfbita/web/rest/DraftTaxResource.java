@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/draft-taxes")
 public class DraftTaxResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DraftTaxResource.class);
+    private final Logger log = LoggerFactory.getLogger(DraftTaxResource.class);
 
     private static final String ENTITY_NAME = "draftTax";
 

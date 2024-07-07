@@ -25,6 +25,34 @@ public class StringValue implements Serializable {
     @Column(name = "val")
     private String val;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "commissionTransactionNumbers")
+    @JsonIgnoreProperties(
+        value = {
+            "serviceInfos",
+            "purchaseFromOtherResourcesLists",
+            "orderRegType",
+            "requestType",
+            "importType",
+            "operationType",
+            "currencyProvisionType",
+            "paymentTool",
+            "activityType",
+            "ownerType",
+            "status",
+            "externalCustomerType",
+            "transportVehicleType",
+            "transportType",
+            "destCoustomers",
+            "cargoPlaceCustoms",
+            "entranceBorders",
+            "productInfos",
+            "commissionTransactionNumbers",
+            "licenceInfos",
+        },
+        allowSetters = true
+    )
+    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "sanctionSerials")
     @JsonIgnoreProperties(
         value = {
@@ -89,34 +117,6 @@ public class StringValue implements Serializable {
     )
     private Set<DraftType> draftTypes = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "commissionTransactionNumbers")
-    @JsonIgnoreProperties(
-        value = {
-            "serviceInfos",
-            "purchaseFromOtherResourcesLists",
-            "orderRegType",
-            "requestType",
-            "importType",
-            "operationType",
-            "currencyProvisionType",
-            "paymentTool",
-            "activityType",
-            "ownerType",
-            "status",
-            "externalCustomerType",
-            "transportVehicleType",
-            "transportType",
-            "destCoustomers",
-            "cargoPlaceCustoms",
-            "entranceBorders",
-            "productInfos",
-            "commissionTransactionNumbers",
-            "licenceInfos",
-        },
-        allowSetters = true
-    )
-    private Set<OrderRegistrationInfo> orderRegistrationInfos = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -143,6 +143,37 @@ public class StringValue implements Serializable {
 
     public void setVal(String val) {
         this.val = val;
+    }
+
+    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
+        return this.orderRegistrationInfos;
+    }
+
+    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
+        if (this.orderRegistrationInfos != null) {
+            this.orderRegistrationInfos.forEach(i -> i.removeCommissionTransactionNumber(this));
+        }
+        if (orderRegistrationInfos != null) {
+            orderRegistrationInfos.forEach(i -> i.addCommissionTransactionNumber(this));
+        }
+        this.orderRegistrationInfos = orderRegistrationInfos;
+    }
+
+    public StringValue orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
+        this.setOrderRegistrationInfos(orderRegistrationInfos);
+        return this;
+    }
+
+    public StringValue addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfos.add(orderRegistrationInfo);
+        orderRegistrationInfo.getCommissionTransactionNumbers().add(this);
+        return this;
+    }
+
+    public StringValue removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
+        this.orderRegistrationInfos.remove(orderRegistrationInfo);
+        orderRegistrationInfo.getCommissionTransactionNumbers().remove(this);
+        return this;
     }
 
     public Set<Draft> getDrafts() {
@@ -204,37 +235,6 @@ public class StringValue implements Serializable {
     public StringValue removeDraftType(DraftType draftType) {
         this.draftTypes.remove(draftType);
         draftType.getUserGroups().remove(this);
-        return this;
-    }
-
-    public Set<OrderRegistrationInfo> getOrderRegistrationInfos() {
-        return this.orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        if (this.orderRegistrationInfos != null) {
-            this.orderRegistrationInfos.forEach(i -> i.removeCommissionTransactionNumber(this));
-        }
-        if (orderRegistrationInfos != null) {
-            orderRegistrationInfos.forEach(i -> i.addCommissionTransactionNumber(this));
-        }
-        this.orderRegistrationInfos = orderRegistrationInfos;
-    }
-
-    public StringValue orderRegistrationInfos(Set<OrderRegistrationInfo> orderRegistrationInfos) {
-        this.setOrderRegistrationInfos(orderRegistrationInfos);
-        return this;
-    }
-
-    public StringValue addOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.add(orderRegistrationInfo);
-        orderRegistrationInfo.getCommissionTransactionNumbers().add(this);
-        return this;
-    }
-
-    public StringValue removeOrderRegistrationInfo(OrderRegistrationInfo orderRegistrationInfo) {
-        this.orderRegistrationInfos.remove(orderRegistrationInfo);
-        orderRegistrationInfo.getCommissionTransactionNumbers().remove(this);
         return this;
     }
 

@@ -290,8 +290,6 @@ class DocumentTransactionResourceIT {
         DocumentTransaction partialUpdatedDocumentTransaction = new DocumentTransaction();
         partialUpdatedDocumentTransaction.setId(documentTransaction.getId());
 
-        partialUpdatedDocumentTransaction.currencyExchangeCode(UPDATED_CURRENCY_EXCHANGE_CODE).transactionCode(UPDATED_TRANSACTION_CODE);
-
         restDocumentTransactionMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDocumentTransaction.getId())

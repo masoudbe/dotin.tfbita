@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity OrderRegistrationInfo.
+    -->
+    <changeSet id="20240707093901-1" author="jhipster">
+        <createTable tableName="order_registration_info">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_reg_num" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="start_order_reg_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="end_order_reg_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="request_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="bank_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="branch_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="customer_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="applicant_nationalcode" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="performa_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="performa_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="performa_expiry_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="performa_date_persian" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="performa_expiry_date_persian" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="info_submission_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="seller_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="beneficiary_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="producer_countries_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="source_country" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="multiple_transportable" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="delivery_time_of_goods" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_weight_in_kg" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="possibility_carrying" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="possibility_clearance" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="able_add_service_in_product_order" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="free_zone" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fob_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="shipment_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="othr_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_file" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="file_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="extended" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="updated" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="generate_from_service" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="certificate_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="central_bank_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_migrational" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="external_customer" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="sum_redemption_duration" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="extended_day_number" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="main_group_product_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="producer_countries" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="excel_file" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="excel_file_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="commission_transaction_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_reg_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="request_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="import_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="operation_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_provision_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_tool_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="activity_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="owner_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="status_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="external_customer_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="transport_vehicle_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="transport_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="dest_coustomers_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="cargo_place_customs_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="entrance_borders_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240707093901-1-relations" author="jhipster">
+
+        <createTable tableName="rel_order_registration_info__product_info">
+            <column name="product_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_registration_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="order_registration_info_id, product_info_id" tableName="rel_order_registration_info__product_info"/>
+
+        <createTable tableName="rel_order_registration_info__commission_transaction_number">
+            <column name="commission_transaction_number_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_registration_info_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="order_registration_info_id, commission_transaction_number_id" tableName="rel_order_registration_info__commission_transaction_number"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240707093901-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/order_registration_info.csv"
+                  separator=";"
+                  tableName="order_registration_info"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="order_reg_num" type="string"/>
+            <column name="start_order_reg_date" type="string"/>
+            <column name="end_order_reg_date" type="string"/>
+            <column name="request_number" type="string"/>
+            <column name="bank_code" type="string"/>
+            <column name="branch_code" type="string"/>
+            <column name="customer_number" type="string"/>
+            <column name="applicant_nationalcode" type="string"/>
+            <column name="performa_number" type="string"/>
+            <column name="performa_date" type="string"/>
+            <column name="performa_expiry_date" type="string"/>
+            <column name="performa_date_persian" type="string"/>
+            <column name="performa_expiry_date_persian" type="string"/>
+            <column name="info_submission_date" type="string"/>
+            <column name="seller_name" type="string"/>
+            <column name="beneficiary_country_code" type="string"/>
+            <column name="producer_countries_code" type="string"/>
+            <column name="source_country" type="string"/>
+            <column name="multiple_transportable" type="boolean"/>
+            <column name="delivery_time_of_goods" type="string"/>
+            <column name="total_weight_in_kg" type="numeric"/>
+            <column name="possibility_carrying" type="boolean"/>
+            <column name="possibility_clearance" type="boolean"/>
+            <column name="able_add_service_in_product_order" type="boolean"/>
+            <column name="free_zone" type="boolean"/>
+            <column name="currency_code" type="string"/>
+            <column name="fob_amount" type="numeric"/>
+            <column name="discount" type="numeric"/>
+            <column name="shipment_cost" type="numeric"/>
+            <column name="othr_cost" type="numeric"/>
+            <column name="total_amount" type="numeric"/>
+            <column name="is_file" type="boolean"/>
+            <column name="file_number" type="string"/>
+            <column name="extended" type="boolean"/>
+            <column name="updated" type="boolean"/>
+            <column name="generate_from_service" type="boolean"/>
+            <column name="certificate_number" type="string"/>
+            <column name="central_bank_code" type="string"/>
+            <column name="is_migrational" type="boolean"/>
+            <column name="external_customer" type="numeric"/>
+            <column name="sum_redemption_duration" type="numeric"/>
+            <column name="extended_day_number" type="numeric"/>
+            <column name="main_group_product_code" type="string"/>
+            <column name="producer_countries" type="string"/>
+            <column name="excel_file" type="blob"/>
+            <column name="excel_file_content_type" type="string"/>
+            <column name="commission_transaction_number" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/document-transactions")
 public class DocumentTransactionResource {
 
-    private static final Logger log = LoggerFactory.getLogger(DocumentTransactionResource.class);
+    private final Logger log = LoggerFactory.getLogger(DocumentTransactionResource.class);
 
     private static final String ENTITY_NAME = "documentTransaction";
 

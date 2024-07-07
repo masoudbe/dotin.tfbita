@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/category-elements")
 public class CategoryElementResource {
 
-    private static final Logger log = LoggerFactory.getLogger(CategoryElementResource.class);
+    private final Logger log = LoggerFactory.getLogger(CategoryElementResource.class);
 
     private static final String ENTITY_NAME = "categoryElement";
 

@@ -15,11 +15,11 @@ public class StringValueDTO implements Serializable {
 
     private String val;
 
+    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
+
     private Set<DraftDTO> drafts = new HashSet<>();
 
     private Set<DraftTypeDTO> draftTypes = new HashSet<>();
-
-    private Set<OrderRegistrationInfoDTO> orderRegistrationInfos = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -37,6 +37,14 @@ public class StringValueDTO implements Serializable {
         this.val = val;
     }
 
+    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
+        return orderRegistrationInfos;
+    }
+
+    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
+        this.orderRegistrationInfos = orderRegistrationInfos;
+    }
+
     public Set<DraftDTO> getDrafts() {
         return drafts;
     }
@@ -51,14 +59,6 @@ public class StringValueDTO implements Serializable {
 
     public void setDraftTypes(Set<DraftTypeDTO> draftTypes) {
         this.draftTypes = draftTypes;
-    }
-
-    public Set<OrderRegistrationInfoDTO> getOrderRegistrationInfos() {
-        return orderRegistrationInfos;
-    }
-
-    public void setOrderRegistrationInfos(Set<OrderRegistrationInfoDTO> orderRegistrationInfos) {
-        this.orderRegistrationInfos = orderRegistrationInfos;
     }
 
     @Override
@@ -88,9 +88,9 @@ public class StringValueDTO implements Serializable {
         return "StringValueDTO{" +
             "id=" + getId() +
             ", val='" + getVal() + "'" +
+            ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             ", drafts=" + getDrafts() +
             ", draftTypes=" + getDraftTypes() +
-            ", orderRegistrationInfos=" + getOrderRegistrationInfos() +
             "}";
     }
 }

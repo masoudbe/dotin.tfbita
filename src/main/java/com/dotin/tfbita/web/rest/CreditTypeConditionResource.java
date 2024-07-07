@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/credit-type-conditions")
 public class CreditTypeConditionResource {
 
-    private static final Logger log = LoggerFactory.getLogger(CreditTypeConditionResource.class);
+    private final Logger log = LoggerFactory.getLogger(CreditTypeConditionResource.class);
 
     private static final String ENTITY_NAME = "creditTypeCondition";
 

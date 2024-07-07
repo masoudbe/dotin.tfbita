@@ -288,7 +288,7 @@ class BasicInfoResourceIT {
         BasicInfo partialUpdatedBasicInfo = new BasicInfo();
         partialUpdatedBasicInfo.setId(basicInfo.getId());
 
-        partialUpdatedBasicInfo.code(UPDATED_CODE);
+        partialUpdatedBasicInfo.disabled(UPDATED_DISABLED);
 
         restBasicInfoMockMvc
             .perform(

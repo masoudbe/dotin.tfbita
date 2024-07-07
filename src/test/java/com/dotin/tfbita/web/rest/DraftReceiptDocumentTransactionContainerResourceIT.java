@@ -315,8 +315,6 @@ class DraftReceiptDocumentTransactionContainerResourceIT {
             new DraftReceiptDocumentTransactionContainer();
         partialUpdatedDraftReceiptDocumentTransactionContainer.setId(draftReceiptDocumentTransactionContainer.getId());
 
-        partialUpdatedDraftReceiptDocumentTransactionContainer.receiveReceiptCommission(UPDATED_RECEIVE_RECEIPT_COMMISSION);
-
         restDraftReceiptDocumentTransactionContainerMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDraftReceiptDocumentTransactionContainer.getId())

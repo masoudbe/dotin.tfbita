@@ -54,14 +54,14 @@ export const ProductDetail = () => {
           </dt>
           <dd>{productEntity.productType ? productEntity.productType.id : ''}</dd>
           <dt>
-            <Translate contentKey="tfbitaApp.product.customJustification">Custom Justification</Translate>
+            <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>
           </dt>
           <dd>
-            {productEntity.customJustifications
-              ? productEntity.customJustifications.map((val, i) => (
+            {productEntity.orderRegistrationInfos
+              ? productEntity.orderRegistrationInfos.map((val, i) => (
                   <span key={val.id}>
                     <a>{val.id}</a>
-                    {productEntity.customJustifications && i === productEntity.customJustifications.length - 1 ? '' : ', '}
+                    {productEntity.orderRegistrationInfos && i === productEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}
@@ -80,14 +80,14 @@ export const ProductDetail = () => {
               : null}
           </dd>
           <dt>
-            <Translate contentKey="tfbitaApp.product.orderRegistrationInfo">Order Registration Info</Translate>
+            <Translate contentKey="tfbitaApp.product.customJustification">Custom Justification</Translate>
           </dt>
           <dd>
-            {productEntity.orderRegistrationInfos
-              ? productEntity.orderRegistrationInfos.map((val, i) => (
+            {productEntity.customJustifications
+              ? productEntity.customJustifications.map((val, i) => (
                   <span key={val.id}>
                     <a>{val.id}</a>
-                    {productEntity.orderRegistrationInfos && i === productEntity.orderRegistrationInfos.length - 1 ? '' : ', '}
+                    {productEntity.customJustifications && i === productEntity.customJustifications.length - 1 ? '' : ', '}
                   </span>
                 ))
               : null}

@@ -286,6 +286,8 @@ class AttributeValueGroupResourceIT {
         AttributeValueGroup partialUpdatedAttributeValueGroup = new AttributeValueGroup();
         partialUpdatedAttributeValueGroup.setId(attributeValueGroup.getId());
 
+        partialUpdatedAttributeValueGroup.name(UPDATED_NAME);
+
         restAttributeValueGroupMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedAttributeValueGroup.getId())

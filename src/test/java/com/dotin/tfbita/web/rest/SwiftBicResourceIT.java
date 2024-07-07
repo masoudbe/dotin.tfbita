@@ -404,14 +404,13 @@ class SwiftBicResourceIT {
         partialUpdatedSwiftBic
             .address(UPDATED_ADDRESS)
             .address3(UPDATED_ADDRESS_3)
-            .address4(UPDATED_ADDRESS_4)
             .bankName(UPDATED_BANK_NAME)
             .bankName2(UPDATED_BANK_NAME_2)
-            .bankName3(UPDATED_BANK_NAME_3)
+            .branch(UPDATED_BRANCH)
             .branchName2(UPDATED_BRANCH_NAME_2)
-            .country(UPDATED_COUNTRY)
-            .subTypeIndicator(UPDATED_SUB_TYPE_INDICATOR)
-            .zip(UPDATED_ZIP);
+            .city(UPDATED_CITY)
+            .location(UPDATED_LOCATION)
+            .subTypeIndicator(UPDATED_SUB_TYPE_INDICATOR);
 
         restSwiftBicMockMvc
             .perform(

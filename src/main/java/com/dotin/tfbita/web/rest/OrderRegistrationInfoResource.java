@@ -24,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/order-registration-infos")
 public class OrderRegistrationInfoResource {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderRegistrationInfoResource.class);
+    private final Logger log = LoggerFactory.getLogger(OrderRegistrationInfoResource.class);
 
     private static final String ENTITY_NAME = "orderRegistrationInfo";
 

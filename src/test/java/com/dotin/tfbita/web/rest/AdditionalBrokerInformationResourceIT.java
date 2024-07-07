@@ -396,10 +396,12 @@ class AdditionalBrokerInformationResourceIT {
 
         partialUpdatedAdditionalBrokerInformation
             .dateOfStartRelation(UPDATED_DATE_OF_START_RELATION)
-            .revokedDate(UPDATED_REVOKED_DATE)
             .revokedNote(UPDATED_REVOKED_NOTE)
             .otherBrokerServices(UPDATED_OTHER_BROKER_SERVICES)
+            .sanctionedStatus(UPDATED_SANCTIONED_STATUS)
+            .considerations(UPDATED_CONSIDERATIONS)
             .description(UPDATED_DESCRIPTION)
+            .servicesAvailable(UPDATED_SERVICES_AVAILABLE)
             .customerAcceptancePolicy(UPDATED_CUSTOMER_ACCEPTANCE_POLICY);
 
         restAdditionalBrokerInformationMockMvc

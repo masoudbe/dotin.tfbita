@@ -1,0 +1,82 @@
+
+entity AdvisorDefinition {
+	caption String
+    code String
+    countryIsoCode String
+    depositNum String
+    swiftCode String
+    defaultCurrencyCode String
+	currenciesCodes String
+    countryCode String
+    bankCode String
+    branchCode String
+}
+
+
+entity AdvisorDefinitionDeposit {
+    advisorDepositNumber String
+    defaultAdvisorDeposit Boolean
+    depositNum String
+    swiftCode String
+    currencyCode String
+}
+
+entity TransferMethodManagement {
+    code String
+    desc String
+}
+
+entity AdditionalBrokerInformation {
+	dateOfStartRelation String
+    creditLimit String
+    revokedDate String
+  	revokedNote String
+    confidential String
+    otherBrokerServices String
+    sanctionedStatus String
+    considerations String
+    description String
+    waysOfCommunication String
+    servicesAvailable String
+    customerAcceptancePolicy String
+}
+
+entity SwiftBic {
+   address String
+   address2 String
+   address3 String
+   address4 String
+   bank String
+   bankName String
+   bankName2 String
+   bankName3 String
+   branch String
+   branchName String
+   branchName2 String
+   city String
+   country String
+   location String
+   subTypeIndicator String
+   zip String
+}
+
+
+relationship ManyToOne {
+      AdvisorDefinitionDeposit{depositType} to CategoryElement 
+      AdvisorDefinition{defaultVostroDeposit} to AdvisorDefinitionDeposit 
+      AdvisorDefinition{defaultNostroDeposit} to AdvisorDefinitionDeposit 
+      TransferMethodManagement{type} to CategoryElement 
+      AdvisorDefinition{receiveMethod} to TransferMethodManagement 
+      AdvisorDefinition{payMethod} to TransferMethodManagement 
+      AdvisorDefinition{swiftBic} to SwiftBic 
+}
+
+relationship OneToMany{
+      AdvisorDefinition{advisorDeposit} to AdvisorDefinitionDeposit{advisorDefinition} 
+}
+
+relationship OneToOne{
+      AdvisorDefinition{additionalBrokerInformation} to AdditionalBrokerInformation{advisorDefinition} 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for *

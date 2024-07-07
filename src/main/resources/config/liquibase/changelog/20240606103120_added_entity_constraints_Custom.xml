@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Custom.
+    -->
+    <changeSet id="20240606103120-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="custom_id"
+                                 baseTableName="rel_custom__order_registration_info"
+                                 constraintName="fk_rel_custom__order_registration_info__custom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="custom"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="rel_custom__order_registration_info"
+                                 constraintName="fk_rel_custom__order_registrati__order_registration_info_42_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 />
+    </changeSet>
+</databaseChangeLog>

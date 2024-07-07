@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240606191119"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "currencyAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OrderRegServ",
+  "relationships": [
+    {
+      "otherEntityName": "orderRegistrationInfo",
+      "relationshipName": "orderRegService",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "licenceInfo",
+      "otherEntityRelationshipName": "orderRegServ",
+      "relationshipName": "licenceInfo",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

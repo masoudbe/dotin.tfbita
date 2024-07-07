@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DraftCustomJustification.
+    -->
+    <changeSet id="20240616082859-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="draft_custom_justification_id"
+                                 baseTableName="rel_draft_custom_justification__draft_receipts"
+                                 constraintName="fk_rel_draft_custom_justificati__draft_custom_justificati_4d_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_custom_justification"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_receipts_id"
+                                 baseTableName="rel_draft_custom_justification__draft_receipts"
+                                 constraintName="fk_rel_draft_custom_justificati__draft_receipts_ea_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_receipt"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_justifications_id"
+                                 baseTableName="draft_custom_justification"
+                                 constraintName="fk_draft_custom_justification__draft_justifications_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+    </changeSet>
+</databaseChangeLog>

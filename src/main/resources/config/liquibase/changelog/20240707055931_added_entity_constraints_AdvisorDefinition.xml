@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AdvisorDefinition.
+    -->
+    <changeSet id="20240707055931-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="additional_broker_information_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__additional_broker_information_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="additional_broker_information"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="default_vostro_deposit_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__default_vostro_deposit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition_deposit"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="default_nostro_deposit_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__default_nostro_deposit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="advisor_definition_deposit"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="receive_method_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__receive_method_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transfer_method_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pay_method_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__pay_method_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transfer_method_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="swift_bic_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__swift_bic_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="swift_bic"
+                                 />
+    </changeSet>
+</databaseChangeLog>

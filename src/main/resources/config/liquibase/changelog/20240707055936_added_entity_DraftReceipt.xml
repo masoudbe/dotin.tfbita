@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity DraftReceipt.
+    -->
+    <changeSet id="20240707055936-1" author="jhipster">
+        <createTable tableName="draft_receipt">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="customer_deliver_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="delete_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="deliver_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="deliver_duration" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="delivered" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="document_transaction_effective_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="freight_letter_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="freight_letter_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="freight_letter_stamp_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="issue_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="issue_document" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="receipt_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="receipt_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="row" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="serial" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="transport_row" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="usable" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="net_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="gross_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_net_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_gross_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="letter_number_tazirat" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="letter_date_tazirat" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fob_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="shipping_fare" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="inspection_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="deadline_submit_document_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_provision_file" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_provision_file_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_migrational" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="other_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_dimension_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="state_of_documents_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_provision_file_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_currency_rate_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_item_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="document_transaction_container_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="draft_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240707055936-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/draft_receipt.csv"
+                  separator=";"
+                  tableName="draft_receipt"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="comment" type="string"/>
+            <column name="customer_deliver_date" type="string"/>
+            <column name="date" type="string"/>
+            <column name="delete_date" type="string"/>
+            <column name="deliver_date" type="string"/>
+            <column name="deliver_duration" type="numeric"/>
+            <column name="delivered" type="boolean"/>
+            <column name="document_transaction_effective_date" type="string"/>
+            <column name="freight_letter_date" type="string"/>
+            <column name="freight_letter_number" type="string"/>
+            <column name="freight_letter_stamp_cost" type="numeric"/>
+            <column name="issue_date" type="string"/>
+            <column name="issue_document" type="boolean"/>
+            <column name="product_amount" type="numeric"/>
+            <column name="receipt_amount" type="numeric"/>
+            <column name="receipt_date" type="string"/>
+            <column name="row" type="numeric"/>
+            <column name="serial" type="string"/>
+            <column name="transport_row" type="string"/>
+            <column name="usable" type="boolean"/>
+            <column name="net_weight" type="numeric"/>
+            <column name="gross_weight" type="numeric"/>
+            <column name="total_net_weight" type="numeric"/>
+            <column name="total_gross_weight" type="numeric"/>
+            <column name="letter_number_tazirat" type="string"/>
+            <column name="letter_date_tazirat" type="string"/>
+            <column name="fob_amount" type="numeric"/>
+            <column name="shipping_fare" type="numeric"/>
+            <column name="inspection_cost" type="numeric"/>
+            <column name="discount" type="numeric"/>
+            <column name="deadline_submit_document_date" type="string"/>
+            <column name="currency_provision_file" type="blob"/>
+            <column name="currency_provision_file_content_type" type="string"/>
+            <column name="is_migrational" type="boolean"/>
+            <column name="other_cost" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

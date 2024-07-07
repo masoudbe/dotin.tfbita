@@ -1,0 +1,22 @@
+
+ entity AuditCompanyInfo  {
+    address String
+    barCodes String
+    dateOfRegistration String
+    fax String
+    floor String
+    inernationalobserviation String
+    mainStreet String
+    mobile String
+    plaque String
+    postalCode String
+    registrationNumber String
+    telephone String
+    tempId Long
+    theSideStreet String
+    title String
+    unit String
+    cityCode String
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for AuditCompanyInfo

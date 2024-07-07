@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CreditTypeCondition.
+    -->
+    <changeSet id="20240706105906-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="service_or_product_id"
+                                 baseTableName="credit_type_condition"
+                                 constraintName="fk_credit_type_condition__service_or_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="needed_identification_doc_types_id"
+                                 baseTableName="credit_type_condition"
+                                 constraintName="fk_credit_type_condition__needed_identification_doc_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="objective_category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_types_id"
+                                 baseTableName="credit_type_condition"
+                                 constraintName="fk_credit_type_condition__product_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="objective_category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="assurance_types_id"
+                                 baseTableName="credit_type_condition"
+                                 constraintName="fk_credit_type_condition__assurance_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="objective_category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="credit_type_condition_info_id"
+                                 baseTableName="credit_type_condition"
+                                 constraintName="fk_credit_type_condition__credit_type_condition_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_type_condition_info"
+                                 />
+    </changeSet>
+</databaseChangeLog>

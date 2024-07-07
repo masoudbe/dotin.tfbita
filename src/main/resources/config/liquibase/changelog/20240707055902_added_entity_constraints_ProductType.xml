@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProductType.
+    -->
+    <changeSet id="20240707055902-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_type_id"
+                                 baseTableName="rel_product_type__product_type_attributes"
+                                 constraintName="fk_rel_product_type__product_type_attributes__product_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_type_attributes_id"
+                                 baseTableName="rel_product_type__product_type_attributes"
+                                 constraintName="fk_rel_product_type__product_ty__product_type_attributes_2f_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_attribute"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity CustomJustification.
+    -->
+    <changeSet id="20240706105921-1" author="jhipster">
+        <createTable tableName="custom_justification">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="agent_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="agricultural_public_policies" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="assessment_place" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="attached_documents" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="balance_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="bank_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="border_transport_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="box_count_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="box_marks" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cargo_index_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="central_bank_credit_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="comments" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="constructor_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cost_details" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cottage_number" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="credit_equivalent_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="currency_swift_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="custom_company_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dest_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dest_custom" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dest_custom_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="disciplinary_documents_issued" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount_percent" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="eight_digit_order_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="entrance_custom_company" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="entrance_custom_company_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="evacuation_place" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_method_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="export_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="exporter" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="exporter_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="extension_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="factor_total_amount" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="freight_index_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fright_letter" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="import_licence" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="import_license" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="impure_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="indices" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="internal_transport_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="issuance_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="item_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="items" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="justification_agent" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="justification_currency_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="licence_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="make_certificate_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_border_transport_type" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_evacuation_place" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_internal_transport_type" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_product_item_custom_value" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_registration_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_registration_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="papers" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_conditions" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="preferences" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="procedure" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_box_count" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_item_cost" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_item_count" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_item_custom_value" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_item_value" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_measure" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_owner" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_release_date" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="product_worth" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="profit_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pure_weight" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="quota" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="receiver" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reference_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="registration_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reverse_of_justification_disciplinary_document_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reverse_of_justification_documents_issued" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="rights_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="trading_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="transaction_type_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="warehouse_factor_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="constructor_country_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_country_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="branch_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="justification_currency_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="credit_currency_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_migrational" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="original_letter_image" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="original_letter_image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="letter_image" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="letter_image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="source_country_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="vehicle_enter_nationality_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="container_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="vehicle_cross_nationality_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="export_custom_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="entrance_custom_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="transport_conditions_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="trade_type_code_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="new_payment_conditions_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="justification_deduction_amount_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240706105921-1-relations" author="jhipster">
+
+        <createTable tableName="rel_custom_justification__products">
+            <column name="products_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="custom_justification_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="custom_justification_id, products_id" tableName="rel_custom_justification__products"/>
+
+        <createTable tableName="rel_custom_justification__reverse_of_justification_document__84">
+            <column name="reverse_of_justification_document_transactions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="custom_justification_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="custom_justification_id, reverse_of_justification_document_transactions_id" tableName="rel_custom_justification__reverse_of_justification_document__84"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240706105921-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/custom_justification.csv"
+                  separator=";"
+                  tableName="custom_justification"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="agent_id" type="numeric"/>
+            <column name="agricultural_public_policies" type="string"/>
+            <column name="assessment_place" type="string"/>
+            <column name="attached_documents" type="string"/>
+            <column name="balance_rate" type="numeric"/>
+            <column name="bank_code" type="string"/>
+            <column name="border_transport_type" type="string"/>
+            <column name="box_count_type" type="string"/>
+            <column name="box_marks" type="string"/>
+            <column name="cargo_index_number" type="string"/>
+            <column name="central_bank_credit_code" type="string"/>
+            <column name="comments" type="string"/>
+            <column name="constructor_country_code" type="string"/>
+            <column name="cost_details" type="string"/>
+            <column name="cottage_number" type="numeric"/>
+            <column name="credit_equivalent_amount" type="numeric"/>
+            <column name="currency" type="string"/>
+            <column name="currency_amount" type="numeric"/>
+            <column name="currency_rate" type="numeric"/>
+            <column name="currency_swift_code" type="string"/>
+            <column name="custom_company_code" type="string"/>
+            <column name="customer_id" type="numeric"/>
+            <column name="date" type="string"/>
+            <column name="dest_country_code" type="string"/>
+            <column name="dest_custom" type="string"/>
+            <column name="dest_custom_code" type="string"/>
+            <column name="disciplinary_documents_issued" type="boolean"/>
+            <column name="discount_percent" type="numeric"/>
+            <column name="eight_digit_order_code" type="string"/>
+            <column name="entrance_custom_company" type="numeric"/>
+            <column name="entrance_custom_company_id" type="numeric"/>
+            <column name="evacuation_place" type="string"/>
+            <column name="evaluation_method_code" type="string"/>
+            <column name="export_date" type="string"/>
+            <column name="exporter" type="string"/>
+            <column name="exporter_country_code" type="string"/>
+            <column name="extension_date" type="string"/>
+            <column name="factor_total_amount" type="string"/>
+            <column name="freight_index_number" type="string"/>
+            <column name="fright_letter" type="string"/>
+            <column name="import_licence" type="string"/>
+            <column name="import_license" type="string"/>
+            <column name="impure_weight" type="numeric"/>
+            <column name="indices" type="string"/>
+            <column name="internal_transport_type" type="string"/>
+            <column name="issuance_date" type="string"/>
+            <column name="item_number" type="string"/>
+            <column name="items" type="numeric"/>
+            <column name="justification_agent" type="string"/>
+            <column name="justification_currency_rate" type="numeric"/>
+            <column name="licence_number" type="string"/>
+            <column name="make_certificate_number" type="string"/>
+            <column name="new_border_transport_type" type="numeric"/>
+            <column name="new_evacuation_place" type="numeric"/>
+            <column name="new_internal_transport_type" type="numeric"/>
+            <column name="new_product_item_custom_value" type="numeric"/>
+            <column name="order_registration_date" type="string"/>
+            <column name="order_registration_number" type="string"/>
+            <column name="papers" type="numeric"/>
+            <column name="payment_conditions" type="string"/>
+            <column name="preferences" type="string"/>
+            <column name="procedure" type="string"/>
+            <column name="product_box_count" type="numeric"/>
+            <column name="product_code" type="string"/>
+            <column name="product_item_cost" type="numeric"/>
+            <column name="product_item_count" type="string"/>
+            <column name="product_item_custom_value" type="string"/>
+            <column name="product_item_value" type="string"/>
+            <column name="product_measure" type="string"/>
+            <column name="product_owner" type="string"/>
+            <column name="product_release_date" type="string"/>
+            <column name="product_type" type="string"/>
+            <column name="product_worth" type="numeric"/>
+            <column name="profit_rate" type="numeric"/>
+            <column name="pure_weight" type="numeric"/>
+            <column name="quota" type="string"/>
+            <column name="receiver" type="string"/>
+            <column name="reference_number" type="numeric"/>
+            <column name="registration_number" type="string"/>
+            <column name="reverse_of_justification_disciplinary_document_number" type="string"/>
+            <column name="reverse_of_justification_documents_issued" type="boolean"/>
+            <column name="rights_rate" type="numeric"/>
+            <column name="trading_country_code" type="string"/>
+            <column name="transaction_type_code" type="string"/>
+            <column name="warehouse_factor_number" type="string"/>
+            <column name="constructor_country_name" type="string"/>
+            <column name="last_country_name" type="string"/>
+            <column name="branch_code" type="string"/>
+            <column name="justification_currency_code" type="string"/>
+            <column name="credit_currency_code" type="string"/>
+            <column name="is_migrational" type="boolean"/>
+            <column name="original_letter_image" type="blob"/>
+            <column name="original_letter_image_content_type" type="string"/>
+            <column name="letter_image" type="blob"/>
+            <column name="letter_image_content_type" type="string"/>
+            <column name="source_country_code" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

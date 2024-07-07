@@ -1,0 +1,194 @@
+
+entity CustomJustification {
+	agentId Long
+    agriculturalPublicPolicies String
+    assessmentPlace String
+    attachedDocuments String
+    balanceRate BigDecimal
+    bankCode String
+    borderTransportType String
+    boxCountType String
+    boxMarks String
+    cargoIndexNumber String
+  	centralBankCreditCode String
+    comments String
+    constructorCountryCode String
+    costDetails String
+    cottageNumber BigDecimal
+    creditEquivalentAmount BigDecimal
+    currency String
+    currencyAmount BigDecimal
+    currencyRate BigDecimal
+    currencySwiftCode String
+    customCompanyCode String
+    customerId Long
+    date String
+    destCountryCode String
+    destCustom String
+    destCustomCode String
+    disciplinaryDocumentsIssued Boolean
+    discountPercent BigDecimal
+    eightDigitOrderCode String
+    entranceCustomCompany Long
+    entranceCustomCompanyId Long
+    evacuationPlace String
+    evaluationMethodCode String
+    exportDate String
+    exporter String
+    exporterCountryCode String
+    extensionDate String
+    factorTotalAmount String
+    freightIndexNumber String
+    frightLetter String
+    importLicence String
+    importLicense String
+    impureWeight BigDecimal
+    indices String
+    internalTransportType String
+    issuanceDate String
+    itemNumber String
+    items Integer
+    justificationAgent String
+    justificationCurrencyRate BigDecimal
+    licenceNumber String
+    makeCertificateNumber String
+    newBorderTransportType Long
+    newEvacuationPlace Long
+    newInternalTransportType Long
+    newProductItemCustomValue BigDecimal
+    orderRegistrationDate String
+    orderRegistrationNumber String
+    papers Integer
+    paymentConditions String
+    preferences String
+    procedure String
+    productBoxCount Integer
+    productCode String
+    productItemCost BigDecimal
+    productItemCount String
+    productItemCustomValue String
+    productItemValue String
+    productMeasure String
+    productOwner String
+    productReleaseDate String
+    productType String
+    productWorth BigDecimal
+    profitRate BigDecimal
+    pureWeight BigDecimal
+    quota String
+    receiver String
+    referenceNumber Integer
+    registrationNumber String
+    reverseOfJustificationDisciplinaryDocumentNumber String
+    reverseOfJustificationDocumentsIssued Boolean
+    rightsRate BigDecimal
+    tradingCountryCode String
+    transactionTypeCode String
+    warehouseFactorNumber String
+    constructorCountryName String
+    lastCountryName String
+    bankCode String
+    branchCode String
+    justificationCurrencyCode String
+    creditCurrencyCode String
+    isMigrational Boolean
+    originalLetterImage Blob
+    letterImage Blob
+    sourceCountryCode String
+    destCountryCode String
+    exporterCountryCode String
+}
+  
+entity TransportationType {
+    latinName String
+    modificationDate String
+    name String
+}  
+
+entity DocumentTransaction {
+	currencyExchangeCode String
+    transactionCode String
+}
+
+entity TradeTypeCode {
+	latinName String
+    name String
+}
+
+ entity PaymentCondition {
+    latinName String
+    name String
+}
+
+entity  CustomJustificationChild {
+    item String
+    tariffCode String
+    productName BigDecimal
+    productId Long
+    boxCount BigDecimal
+    boxType String
+    pureWeight BigDecimal
+    impureWeight BigDecimal
+    amountCurrency BigDecimal
+}
+
+entity JustificationDeductionAmount {
+    deductionAmount BigDecimal
+    remainingDeductionAmount BigDecimal
+    receivedDeductionAmount BigDecimal
+}
+
+entity JustificationDeductionAmountPart {
+    receiveTransactionCode String
+    returnTransactionCode String
+    date String
+    amount BigDecimal
+    amountBasedOnRial BigDecimal
+    depositNumber String
+    receiveCurrencyCode String
+    currencyRateDate String
+    sellRate BigDecimal
+    buyRate BigDecimal
+    comment String
+}
+  
+entity JustificationDeductionDetail {
+    deductionAmount BigDecimal
+    equivalentDeductionAmount BigDecimal
+    receiveCurrencyCode String
+    comment String
+}
+ 
+entity DraftCustomJustification {
+}
+
+
+relationship ManyToOne {
+    CustomJustification{vehicleEnterNationality} to CategoryElement 
+    CustomJustification{container} to CategoryElement
+    CustomJustification{vehicleCrossNationality} to CategoryElement
+    CustomJustification{exportCustom} to Custom
+    CustomJustification{entranceCustom} to Custom
+    CustomJustification{transportConditions} to TransportationType
+    CustomJustification{tradeTypeCode} to TradeTypeCode
+    CustomJustification{newPaymentConditions} to PaymentCondition
+    JustificationDeductionDetail{deductionReason} to CategoryElement
+    CustomJustification{justificationDeductionAmount} to JustificationDeductionAmount
+    DraftCustomJustification{draft} to Draft{draftJustifications}
+}
+
+relationship ManyToMany {
+   CustomJustification{products} to Product
+   CustomJustification{reverseOfJustificationDocumentTransactions} to DocumentTransaction
+   CustomJustification{documentReceiptInfos} to DocumentReceiptInfo
+   DraftCustomJustification{draftReceipts} to DraftReceipt
+}
+
+relationship OneToMany {
+   CustomJustification{customJustificationChildList} to CustomJustificationChild{customJustification}
+   JustificationDeductionAmount{justificationDeductionAmountParts} to JustificationDeductionAmountPart
+   JustificationDeductionAmount{justificationDeductionDetails} to JustificationDeductionDetail
+}
+
+
+use paginate,serviceImpl,mapstruct,serviceClass for *

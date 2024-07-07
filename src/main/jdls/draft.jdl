@@ -1,0 +1,200 @@
+
+entity Draft {
+	advisorDepositNumber String
+    advisorRequestDeleted Boolean
+    auditCost BigDecimal
+    beneficiaryInfo String
+    branchStampCost BigDecimal
+    centralBankCode String
+    centralBankCodeReference String
+    chargedExchangeBrokerAmount BigDecimal
+    charterAcceptable Boolean
+    comment String
+    completionDate String
+    coveringBankDepositNumber String
+    currencyExchangeDepositNumber String
+    customerDepositNumber String
+    deliverDuration Integer
+    discount BigDecimal
+    draftNumber String
+    draftOrderRegProductWorth BigDecimal
+    draftOrderRegServiceWorth BigDecimal
+    draftOrderRegTotalWorth BigDecimal
+    draftOtherCost BigDecimal
+    hasTransportJustification Boolean
+    insuranceCost BigDecimal
+    insuranceDate String
+    insuranceExpiryDate String
+    insuranceNumber String
+    interfaceAdvisorDepositNumber String
+    issueDate String
+    issueDraftCommission BigDecimal
+    lastShipmentDate String
+    mainCustomerNumber Long
+    makeCertification Boolean
+    multipleTransportable Boolean
+    orderRegistrationDate String
+    orderRegistrationExpiryDate String
+    orderRegistrationNumber String
+    otherCost BigDecimal
+    paymentAmount BigDecimal
+    performaDate String
+    performaExpiryDate String
+    performaNumber String
+    postSwiftCost BigDecimal
+    productSourceChangeable Boolean
+    receiveAllCommission Boolean
+    registerationJustificationAmount BigDecimal
+    requestDate String
+    sanctionSerial String
+    serial Long
+    shipmentCost BigDecimal
+    sourceTransportPlace String
+    swiftComment String
+    transferAmount BigDecimal
+    transportVehicleChangeable Boolean
+    paymentTool String
+    letterNumberTazirat String
+    letterDateTazirat String
+    loanNumber String
+    isMigrational Boolean
+    isNewCertificate Boolean
+    isWithoutPayment Boolean
+    mainAccountCurrencyCode String
+    orderRegCurrencyCode String 
+    chargedExchangeBrokerCurrencyCode String  
+	destinationCountryCode String
+    beneficiaryCountryCode String
+	producerCountryCode String
+    registerationJustificationCurrencyCode String
+	branchCode String
+    operationalBranchCode String
+    certificateSenderBranchCode String
+}
+  
+entity ServiceTariff {
+    code String
+    title String
+}  
+  
+entity StringValue {
+	value String
+}
+
+entity LongValue {
+	value Long
+}
+
+ entity DraftStatusInfo {
+    approved Boolean
+    draftRequestAccepted Boolean
+    insuranceCostPaid Boolean
+    issued Boolean
+    otherCostsPaid Boolean
+    postSwiftCostPaied Boolean
+    rejectDescription String
+    remainAmount BigDecimal
+    stampCostPaid Boolean
+}
+
+entity  DraftFactor {
+    amount BigDecimal
+    description String
+    eqAmount BigDecimal
+    factorDate String
+    issueDate String
+    serial String
+    currencyCode String
+}
+
+entity DraftUsedAssurance {
+    assuranceRateId String
+    assuranceSerial String
+    exchangeRate BigDecimal
+    defaultCurrencyUsedCost BigDecimal
+    usedCost BigDecimal
+}
+  
+entity InsuranceCompanyInfo {
+    modificationDate String
+    name String
+}
+
+entity TransportationType {
+    latinName String
+    modificationDate String
+    name String
+}
+
+entity CurrencyExchangeInfo {
+    title String
+}
+
+entity SuggestedSanctionInfo{
+   sanctionSerial String
+   personnelCode String
+}
+
+entity DraftAccountInfo{
+   documentReceiptDisciplinaryAccountId Long
+   draftMainAccountId Long
+   insuranceCostAccountId Long
+   justificationDisciplinaryAccountId Long
+   openDraftDisciplinaryAccountId Long
+   otherCostsAccountId Long
+   postSwiftCostsAccountId Long
+   amountDeductionAccountId Long
+}
+
+relationship ManyToOne {
+    Draft{chargedExchangeBroker} to CategoryElement 
+    Draft{insuranceLetterType} to CategoryElement
+    Draft{advisorDepositType} to CategoryElement
+    Draft{interfaceAdvisorDepositType} to CategoryElement
+    Draft{coveringAdvisorDepositType} to CategoryElement
+    Draft{impartType} to CategoryElement
+    Draft{dealType} to CategoryElement 
+    Draft{transportVehicleType} to CategoryElement
+    Draft{freightLetterType} to CategoryElement
+    Draft{actionCode} to CategoryElement
+    Draft{ownershipCode} to CategoryElement
+    Draft{currencyContainerPlace} to CategoryElement
+    Draft{paymentType} to CategoryElement
+    Draft{draftSource} to CategoryElement
+    Draft{loadSwitchPlace} to Custom
+    Draft{draftType} to DraftType
+    DraftStatusInfo{status} to CategoryElement
+    Draft{statusInfo} to DraftStatusInfo
+    Draft{insuranceCompanyInfo} to InsuranceCompanyInfo
+    Draft{advisingBank} to AdvisorDefinition
+    Draft{interfaceAdvisingBank} to AdvisorDefinition
+    Draft{coveringBank} to AdvisorDefinition
+    Draft{auditCompanyInfo} to AuditCompanyInfo
+    Draft{transportType} to TransportationType
+    Draft{currencyExchangeInfo} to CurrencyExchangeInfo
+    Draft{accountInfo} to DraftAccountInfo
+}
+
+relationship ManyToMany {
+    Draft{services} to ServiceTariff
+    Draft{products} to Product
+    Draft{destinationCustomCompanies} to Custom
+    Draft{sourceCustomCompanies} to Custom
+    Draft{sanctionSerials} to StringValue
+    Draft{customerNumbers} to LongValue
+    Draft{suggestedSanctions} to SuggestedSanctionInfo
+    Draft{paymentContainer} to DraftPaymentsContainer
+    Draft{request} to DraftRequest
+    Draft{documentTransactionContainer} to DraftDocumentTransactionContainer
+}
+
+relationship OneToMany {
+    Draft{receipts} to DraftReceipt{draft}
+    Draft{taxes} to DraftTax{draft}
+    Draft{extensions} to DraftExtend{draftField}
+    Draft{draftFactors} to DraftFactor{draft}
+    Draft{usedAssurances} to DraftUsedAssurance
+    Draft{draftJustifications} to DraftCustomJustification{draft}
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for *

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DraftType.
+    -->
+    <changeSet id="20240707055924-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="secondary_type_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__secondary_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="division_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__division_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="topic_info_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__topic_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_type_topic_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="condition_info_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__condition_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credit_type_condition_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="account_info_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__account_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_type_account_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="request_type_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__request_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_request_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="acceptable_product_types_id"
+                                 baseTableName="draft_type"
+                                 constraintName="fk_draft_type__acceptable_product_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="objective_category_element"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="draft_type_id"
+                                 baseTableName="rel_draft_type__user_groups"
+                                 constraintName="fk_rel_draft_type__user_groups__draft_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_groups_id"
+                                 baseTableName="rel_draft_type__user_groups"
+                                 constraintName="fk_rel_draft_type__user_groups__user_groups_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="string_value"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,99 @@
+
+entity DraftType {
+    alarmTime Integer
+    code String
+    disableDate String
+    duration Integer
+    hasAssurance Boolean
+    hasSanction Boolean
+    latestCreditSerial Long
+    name String
+    portal Boolean
+    usable Boolean
+    currenciesCodes String
+	defaultCurrencyCode String
+}
+
+entity DraftTypeTopicInfo {
+    currencySellCommissionTopic Long
+    documentReceiptDisciplinaryTopic Long
+    draftMainTopic Long
+    insuranceCostTopic Long
+    justificationDisciplinaryTopic Long
+    openDraftDisciplinaryTopic Long
+    otherCostsTopic Long
+    postTelegraphSwiftCostsTopic Long
+}
+
+entity CreditTypeConditionInfo {
+    durationFrom Integer
+    durationTo Integer
+    priceFrom BigDecimal
+    priceTo BigDecimal
+    justificationDisciplinaryTopic Long
+    openDraftDisciplinaryTopic Long
+    otherCostsTopic Long
+    postTelegraphSwiftCostsTopic Long
+}
+
+entity StringValue {
+	value String
+}
+
+entity CreditTypeCondition {
+	assurancePercentage BigDecimal
+    commissionRate BigDecimal
+    customerPrepaymentRateFrom BigDecimal
+    customerPrepaymentRateTo BigDecimal
+    durationFrom Integer
+    durationTo Integer
+    orderRegistrationRightFrom BigDecimal
+    orderRegistrationRightTo BigDecimal
+    postSuspensionPeriodPenaltyRate BigDecimal
+    priceFrom BigDecimal
+    priceTo BigDecimal
+    suspensionDurationFrom Integer
+    suspensionDurationTo Integer
+    suspensionPeriodInterestRate BigDecimal
+    updateCommissionRate BigDecimal
+    currencyCode String
+}
+
+entity DraftTypeAccountInfo {
+   sellCurrencyCommissionAccount String
+   incomeAccountNumber String
+}
+
+entity DraftCertificateType {
+	mandatory Boolean
+}
+
+entity DraftRequestType {
+}
+
+relationship ManyToOne {
+      DraftType{type} to CategoryElement 
+      DraftType{secondaryType} to CategoryElement
+      DraftType{division} to CategoryElement
+      DraftType{topicInfo} to DraftTypeTopicInfo
+      CreditTypeCondition{serviceOrProduct} to CategoryElement
+      CreditTypeConditionInfo{defaultCondition} to CreditTypeCondition
+      DraftType{conditionInfo} to CreditTypeConditionInfo
+      DraftType{accountInfo} to DraftTypeAccountInfo
+      DraftType{requestType} to DraftRequestType
+}
+
+relationship ManyToMany {
+      DraftType{acceptableProductTypes} to ObjectiveCategoryElement 
+      DraftType{userGroups} to StringValue 
+      CreditTypeCondition{neededIdentificationDocTypes} to ObjectiveCategoryElement 
+      CreditTypeCondition{productTypes} to ObjectiveCategoryElement 
+      CreditTypeCondition{assuranceTypes} to ObjectiveCategoryElement 
+}
+
+relationship OneToMany{
+      CreditTypeConditionInfo{conditions} to CreditTypeCondition 
+      DraftRequestType{certificateTypeList} to DraftCertificateType 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for *

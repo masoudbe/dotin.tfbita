@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity LicenceInfo.
+    -->
+    <changeSet id="20240606191121-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_tariff"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_registration_info_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__order_registration_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_registration_info"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="order_reg_serv_id"
+                                 baseTableName="licence_info"
+                                 constraintName="fk_licence_info__order_reg_serv_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_reg_serv"
+                                 />
+    </changeSet>
+</databaseChangeLog>

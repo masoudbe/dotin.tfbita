@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DraftDocumentTransactionContainer.
+    -->
+    <changeSet id="20240707055941-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="issue_commission_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__issue_commission_documen_f3_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__payment_document_transac_3c_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="settle_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__settle_document_transact_d1_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="settle_excess_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__settle_excess_document_t_fc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="commission_delete_draft_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__commission_delete_draft__12_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="commission_draft_extend_document_transaction_id"
+                                 baseTableName="draft_document_transaction_container"
+                                 constraintName="fk_draft_document_transaction_c__commission_draft_extend__ac_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document_transaction"
+                                 />
+    </changeSet>
+</databaseChangeLog>

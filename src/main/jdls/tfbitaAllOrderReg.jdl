@@ -1,0 +1,198 @@
+entity Category {
+    name String
+    code String
+}
+
+entity CategoryElement{
+    value String
+    categoryName String
+    code String
+}
+
+entity Custom {
+    modificationDate String
+    latinName String
+    name String
+    tempId Long
+}
+
+entity LicenceInfo {
+    organizationLicence String
+    licenceNumber String
+    licenceDate String
+    havingProduct Boolean
+    havingService Boolean
+    creditDate String
+}
+
+entity ServiceTariff {
+    code String
+    title String
+}
+
+entity OrderRegService {
+    amount BigDecimal
+    currencyAmount BigDecimal
+    unit String
+}
+
+entity ObjectiveCategory {
+    name String
+}
+
+entity ObjectiveCategoryElement{
+    entityClass String
+    entityId Long
+}
+
+entity Product {
+    code String
+    modificationDate String
+    name String
+}
+
+entity ProductType {
+    description String
+    modificationDate String
+    topicCode String
+}
+
+entity AttributeValue {
+    value String
+    customValue String
+    attributeValueGroupName String
+}
+
+entity TypeAttribute {
+    necessary Boolean
+    isUnique Boolean
+}
+
+entity AttributeValueGroup {
+    mandatory Boolean
+    name String
+}
+
+entity Attribute {
+    modificationDate String
+    name String
+}
+
+entity PurchaseFromOtherResources {
+    evidenceCode String
+    currencySupplierDescription String
+    amount BigDecimal
+    purchaseRate BigDecimal
+    orderRegistrationAmount BigDecimal
+    requestDate String
+    confirmationDate String
+    description String
+    purchaseNumber String
+    purchaseCurrencyName String
+}
+
+entity OrderRegistrationInfo {
+    orderRegNum  String
+    startOrderRegDate String
+    endOrderRegDate String
+    requestNumber String
+    bankCode  String
+    branchCode  String
+    customerNumber  String
+    applicantNationalcode String
+    performaNumber String
+    performaDate String
+    performaExpiryDate String
+    performaDatePersian String
+    performaExpiryDatePersian String
+    infoSubmissionDate String
+    sellerName String
+    beneficiaryCountryCode String
+    producerCountriesCode String
+    sourceCountry String
+    multipleTransportable Boolean
+    deliveryTimeOfGoods String
+    totalWeightInKg Double
+    possibilityCarrying Boolean
+    possibilityClearance Boolean
+    ableAddServiceInProductOrder Boolean
+    freeZone Boolean
+    currencyCode String
+    fobAmount BigDecimal
+    discount BigDecimal
+    shipmentCost BigDecimal
+    othrCost BigDecimal
+    totalAmount BigDecimal
+    isFile Boolean
+    fileNumber String
+    extended Boolean
+    updated Boolean
+    generateFromService Boolean
+    certificateNumber String
+    centralBankCode String
+    isMigrational Boolean
+    externalCustomer Long
+    sumRedemptionDuration Long
+    extendedDayNumber Long
+    mainGroupProductCode String
+    producerCountries String
+    excelFile AnyBlob
+    commissionTransactionNumber String
+}
+
+entity TransportationType {
+    latinName String
+    modificationDate String
+    name String
+}
+
+entity StringValue {
+    value String
+}
+
+relationship OneToMany {
+    Category{possibleValues} to CategoryElement{category}
+    ObjectiveCategory{possibleValues} to ObjectiveCategoryElement{objectiveCategory}
+    Product{attributeValues} to AttributeValue
+    AttributeValueGroup{values} to AttributeValue{attributeValueGroup}
+    OrderRegistrationInfo{serviceInfo} to OrderRegService
+    OrderRegistrationInfo{purchaseFromOtherResourcesList} to PurchaseFromOtherResources
+}
+
+relationship ManyToOne {
+    LicenceInfo{product} to Product
+    LicenceInfo{service} to ServiceTariff
+    LicenceInfo{orderRegistrationInfo} to OrderRegistrationInfo{licenceInfo}
+    OrderRegService{serviceTariff} to ServiceTariff
+    Product{productType} to ProductType
+    AttributeValue{typeAttribute} to TypeAttribute
+    TypeAttribute{attribute} to Attribute
+    AttributeValueGroup{attribute} to Attribute
+    Attribute{format} to CategoryElement
+    Attribute{type} to CategoryElement
+    PurchaseFromOtherResources{currencySupplier} to CategoryElement
+    PurchaseFromOtherResources{status} to CategoryElement
+    OrderRegistrationInfo{orderRegType} to CategoryElement
+    OrderRegistrationInfo{requestType} to CategoryElement
+    OrderRegistrationInfo{importType} to CategoryElement
+    OrderRegistrationInfo{operationType} to CategoryElement
+    OrderRegistrationInfo{currencyProvisionType} to CategoryElement
+    OrderRegistrationInfo{paymentTool} to CategoryElement
+    OrderRegistrationInfo{activityType} to CategoryElement
+    OrderRegistrationInfo{ownerType} to CategoryElement
+    OrderRegistrationInfo{status} to CategoryElement
+    OrderRegistrationInfo{externalCustomerType} to CategoryElement
+    OrderRegistrationInfo{transportType} to TransportationType
+    OrderRegistrationInfo{destCoustomers} to Custom
+    OrderRegistrationInfo{cargoPlaceCustoms} to Custom
+    OrderRegistrationInfo{entranceBorders} to Custom
+}
+
+relationship ManyToMany {
+    ProductType{productTypeAttributes} to TypeAttribute
+    OrderRegistrationInfo{transportVehicleType} to CategoryElement
+    OrderRegistrationInfo{productInfo} to Product
+    OrderRegistrationInfo{commissionTransactionNumber} to StringValue
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass  for *

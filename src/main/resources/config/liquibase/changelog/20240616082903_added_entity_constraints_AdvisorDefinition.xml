@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AdvisorDefinition.
+    -->
+    <changeSet id="20240616082903-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="advising_bank_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__advising_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="interface_advising_bank_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__interface_advising_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="covering_bank_id"
+                                 baseTableName="advisor_definition"
+                                 constraintName="fk_advisor_definition__covering_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="draft"
+                                 />
+    </changeSet>
+</databaseChangeLog>

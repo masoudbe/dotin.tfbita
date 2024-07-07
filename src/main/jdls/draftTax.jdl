@@ -1,0 +1,24 @@
+
+entity DraftTax	{
+	orderRegCurrencyAmount BigDecimal
+    mainAccountCurrencyAmount BigDecimal
+    letterNumber String
+    letterImage AnyBlob
+    description String
+    registrationDate String
+    returnTaxesAmount Boolean
+    orderRegRate BigDecimal
+    mainAccountRate BigDecimal
+}
+
+entity DocumentTransaction	{
+    currencyExchangeCode String
+    transactionCode String
+}
+
+relationship ManyToOne {
+          DraftTax{documentTransaction} to DocumentTransaction 
+          DraftTax{returnDocumentTransaction} to DocumentTransaction 
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass for DraftTax

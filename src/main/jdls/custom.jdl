@@ -1,0 +1,8 @@
+entity Custom {
+	modificationDate String
+    latinName String
+    name String
+    tempId Long
+}
+
+use paginate,serviceImpl,mapstruct,serviceClass  for *
